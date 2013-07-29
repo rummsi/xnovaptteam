@@ -135,20 +135,20 @@ require_once dirname(__FILE__) .'/common.php';
     $planetcount = 0;
     $lunacount   = 0;
 
-    $page = InsertGalaxyScripts($CurrentPlanet);
+    $page = Galaxy::InsertGalaxyScripts($CurrentPlanet);
 
     $page .= "<body style=\"overflow: hidden;\" onUnload=\"\"><br><br>";
-    $page .= ShowGalaxySelector ( $galaxy, $system );
+    $page .= Galaxy::ShowGalaxySelector ($galaxy, $system);
 
     if ($mode == 2) {
-        $page .= ShowGalaxyMISelector($galaxy, $system, $planet, $CurrentPlanet['id'], $CurrentMIP);
+        $page .= Galaxy::ShowGalaxyMISelector($galaxy, $system, $planet, $CurrentPlanet['id'], $CurrentMIP);
     }
 
     $page .= "<table width=569><tbody>";
 
-    $page .= ShowGalaxyTitles($galaxy, $system);
-    $page .= ShowGalaxyRows($galaxy, $system);
-    $page .= ShowGalaxyFooter($galaxy, $system,  $CurrentMIP, $CurrentRC, $CurrentSP);
+    $page .= Galaxy::ShowGalaxyTitles($galaxy, $system);
+    $page .= Galaxy::ShowGalaxyRows($galaxy, $system);
+    $page .= Galaxy::ShowGalaxyFooter($galaxy, $system,  $CurrentMIP, $CurrentRC, $CurrentSP);
 
     $page .= "</tbody></table></div>";
 
