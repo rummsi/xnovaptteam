@@ -137,7 +137,7 @@ require_once dirname(__FILE__) .'/common.php';
 
     $page = Galaxy::InsertGalaxyScripts($CurrentPlanet);
 
-    $page .= "<body style=\"overflow: hidden;\" onUnload=\"\"><br><br>";
+    $page .= "<body style=\"overflow: auto;\" onUnload=\"\"><br><br>";
     $page .= Galaxy::ShowGalaxySelector ($galaxy, $system);
 
     if ($mode == 2) {
