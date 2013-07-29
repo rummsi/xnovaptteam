@@ -934,7 +934,7 @@ class Galaxy
 	$Result .= "<td width=220>Admin</td><td><font color=lime><blink>A</blink></font></td>";
 	$Result .= "</tr>";
 	$Result .= "</table>";
-	$Result .= "\");' onmouseout='return nd();'>";
+	$Result .= "\",STICKY, MOUSEOFF, OFFSETY, -100);' onmouseout='return nd();'>";
 	$Result .= $lang['Legend']."</a>";
 
 	return $Result;
