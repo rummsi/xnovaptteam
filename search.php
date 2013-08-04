@@ -130,5 +130,5 @@ $lang['searchtext'] = $searchtext;
 $lang['search_results'] = $search_results;
 //esto es algo repetitivo ... w
 $page = parsetemplate(gettemplate('search_body'), $lang);
-display($page,$lang['Search']);
+Game::display($page,$lang['Search']);
 ?>

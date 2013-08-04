@@ -129,7 +129,7 @@ if(!file_exists($cacheFile) || (time() - filemtime($cacheFile)) > $timeDelay)
     }
 
     $page = parsetemplate($recordTpl, $parse);
-    display($page, $lang['rec_title']);
+    Game::display($page, $lang['rec_title']);
 
     $data = ob_get_contents();
     ob_end_flush();

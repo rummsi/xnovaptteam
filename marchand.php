@@ -147,7 +147,7 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 }
 
 	$Page = ModuleMarchand ( $user, $planetrow );
-	display ( $Page, $lang['mod_marchand'], true, '', false );
+	Game::display ( $Page, $lang['mod_marchand'], true, '', false );
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

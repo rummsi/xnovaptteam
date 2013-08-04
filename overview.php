@@ -73,7 +73,7 @@ switch ($mode) {
 
             $page .= parsetemplate(gettemplate('overview_deleteplanet'), $parse);
             // On affiche la forme pour l'abandon de la colonie
-            display($page, $lang['rename_and_abandon_planet']);
+            Game::display($page, $lang['rename_and_abandon_planet']);
         } elseif ($_POST['kolonieloeschen'] == 1 && $_POST['deleteid'] == $user['current_planet']) {
                 // Controle du mot de passe pour abandon de colonie
                 if (md5($_POST['pw']) == $user["password"] && $user['id_planet'] != $user['current_planet']) {
@@ -116,7 +116,7 @@ switch ($mode) {
 
         $page .= parsetemplate(gettemplate('overview_renameplanet'), $parse);
         // On affiche la page permettant d'abandonner OU de renomme une Colonie / Planete
-        display($page, $lang['rename_and_abandon_planet']);
+        Game::display($page, $lang['rename_and_abandon_planet']);
         break;
 
     default:
@@ -477,7 +477,7 @@ switch ($mode) {
 
             $page = parsetemplate(gettemplate('overview_body'), $parse);
 
-            display($page, $lang['Overview']);
+            Game::display($page, $lang['Overview']);
             break;
         }
 }

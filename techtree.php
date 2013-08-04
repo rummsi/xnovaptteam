@@ -68,7 +68,7 @@ require_once dirname(__FILE__) .'/common.php';
 	$parse['techtree_list'] = $page;
 	$page                   = parsetemplate(gettemplate('techtree_body'), $parse);
 
-	display($page, $lang['Tech']);
+	Game::display($page, $lang['Tech']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

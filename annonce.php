@@ -69,7 +69,7 @@ deuts='{$deutsouhait}'" , "annonce");
 
 HTML;
 
-	display($page2);
+	Game::display($page2);
 }
 
 if ($action != 5) {
@@ -116,7 +116,7 @@ if ($action != 5) {
 </table>
 </HTML>";
 
-	display($page2);
+	Game::display($page2);
 }
 
 // Créer par Tom1991 Copyright 2008

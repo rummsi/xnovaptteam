@@ -33,9 +33,6 @@ define('INSTALL' , false);
 define('DISABLE_IDENTITY_CHECK', true);
 require_once dirname(__FILE__) .'/common.php';
 
-//on demarre la session qui ne sers ici que pour le code de secu
-session_start();
-
 includeLang('reg');
 
 function sendpassemail($emailaddress, $password)
@@ -274,7 +271,7 @@ $_SESSION['secu'] = $_SESSION['nombre1'] + $_SESSION['nombre2'];
     $parse['servername'] = '<img src="images/xnova.png" align="top" border="0" >';
     $page = parsetemplate(gettemplate('registry_form'), $parse);
 }
-    display ($page, $lang['registry'], false);
+Display::login2($page, $lang['registry']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

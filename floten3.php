@@ -528,7 +528,7 @@ require_once dirname(__FILE__) .'/common.php';
 
 	$planetrow = doquery ("SELECT * FROM {{table}} WHERE `id` = '". $CurrentPlanet['id'] ."';", 'planets', true);
 
-	display($page, $lang['fl_title']);
+	Game::display($page, $lang['fl_title']);
 
 // Updated by Chlorel. 16 Jan 2008 (String extraction, bug corrections, code uniformisation
 // Updated by -= MoF =- for Deutsches Ugamela Forum

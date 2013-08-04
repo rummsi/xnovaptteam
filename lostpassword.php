@@ -112,4 +112,4 @@ EOF;
 
 $parse = $lang;
 $page = parsetemplate(gettemplate('lostpassword'), $parse);
-display($page, $lang['registry']);
+Display::login2($page, $lang['registry']);

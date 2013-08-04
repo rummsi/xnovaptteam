@@ -351,7 +351,7 @@ function ShowBuildingInfoPage ($CurrentUser, $CurrentPlanet, $BuildID) {
 	$gid  = $_GET['gid'];
 	$page = ShowBuildingInfoPage ($user, $planetrow, $gid);
 
-	display ($page, $lang['nfo_page_title']);
+	Game::display ($page, $lang['nfo_page_title']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

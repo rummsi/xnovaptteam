@@ -109,7 +109,7 @@ function ShowOfficierPage ( &$CurrentUser ) {
 }
 
 	$page = ShowOfficierPage ( $user );
-	display($page, $lang['officier']);
+	Game::display($page, $lang['officier']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

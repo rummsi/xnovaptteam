@@ -159,7 +159,7 @@ else{
 
 	$page .= '<tr><td colspan=2 class=c><a href=fleet.php>Retour</a></td></tr></tr></table>';
 }
-display($page,"Shortcutmanager");
+Game::display($page,"Shortcutmanager");
 
 // Created by Perberos. All rights reversed (C) 2006
 ?>
