@@ -52,10 +52,9 @@ require_once dirname(__FILE__) .'/common.php';
 	}
 
 	$page = parsetemplate($BodyTPL, $parse);
-	display($page, $lang['ctc_title'], false);
+	Display::login2($page, $lang['ctc_title'], false);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version
 // 1.0 - Mise au propre (Virer tout ce qui ne sert pas a une prise de contact en fait)
 ?>
-

@@ -95,3 +95,5 @@ include(ROOT_PATH . 'includes/functions/IsVacationMode.'.PHPEXT);
 
 
 include(ROOT_PATH . 'APP/CLASSES/Galaxy.php');
+include(ROOT_PATH . 'APP/CLASSES/Display.php');
+include(ROOT_PATH . 'APP/CLASSES/Game.php');

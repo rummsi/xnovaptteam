@@ -333,7 +333,7 @@ $Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
 			break;
 	}
 
-	display($page, $lang['mess_pagetitle']);
+	Game::display($page, $lang['mess_pagetitle']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

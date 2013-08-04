@@ -270,7 +270,7 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 }
 
 	$Page = BuildRessourcePage ( $user, $planetrow );
-	display( $Page, $lang['Resources'] );
+	Game::display( $Page, $lang['Resources'] );
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

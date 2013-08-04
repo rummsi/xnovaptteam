@@ -57,6 +57,6 @@ $page .=<<<HTML
 </table>
 HTML;
 
-display($page);
+Game::display($page);
 }
 ?>

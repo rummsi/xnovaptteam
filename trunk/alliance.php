@@ -206,7 +206,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 			$page .= parsetemplate(gettemplate('alliance_make'), $lang);
 		}
 
-		display($page, $lang['make_alliance']);
+		Game::display($page, $lang['make_alliance']);
 	}
 
 	if ($mode == 'search' && $user['ally_request'] == 0) { // search one
@@ -235,7 +235,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 			}
 		}
 
-		display($page, $lang['search_alliance']);
+		Game::display($page, $lang['search_alliance']);
 	}
 
 	if ($mode == 'apply' && $user['ally_request'] == 0) { // solicitudes
@@ -269,7 +269,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 
 		$page = parsetemplate(gettemplate('alliance_applyform'), $parse);
 
-		display($page, $lang['Write_to_alliance']);
+		Game::display($page, $lang['Write_to_alliance']);
 	}
 
 	if ($user['ally_request'] != 0) { // Esperando una respuesta
@@ -289,13 +289,13 @@ if ($user['ally_id'] == 0) { // Sin alianza
 			$page = parsetemplate(gettemplate('alliance_apply_waitform'), $lang);
 		}
 		// mysql_escape_string(strip_tags());
-		display($page, "Deine Anfrage");
+		Game::display($page, "Deine Anfrage");
 	} else { // Vista sin allianza
 		/*
 	  Vista normal de cuando no se tiene ni solicitud ni alianza
 	*/
 		$page .= parsetemplate(gettemplate('alliance_defaultmenu'), $lang);
-		display($page, $lang['alliance']);
+		Game::display($page, $lang['alliance']);
 	}
 }
 
@@ -379,7 +379,7 @@ elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
 			$lang['Want_go_out'] = str_replace("%s", $ally_name, $lang['Want_go_out']);
 			$page = MessageForm($lang['Want_go_out'], "<br>", "?mode=exit&yes=1", "Oui");
 		}
-		display($page);
+		Game::display($page);
 	}
 
 	if ($mode == 'memberslist') { // Lista de miembros.
@@ -480,7 +480,7 @@ elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
 
 		$page .= parsetemplate(gettemplate('alliance_memberslist_table'), $parse);
 
-		display($page, $lang['Members_list']);
+		Game::display($page, $lang['Members_list']);
 	}
 
 	if ($mode == 'circular') { // Correo circular
@@ -525,7 +525,7 @@ elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
 		  Aca un mensajito diciendo que a quien se mando.
 		*/
 			$page = MessageForm($lang['Circular_sended'], "Les membres suivants ont re�u un message:" . $list, "alliance.php", $lang['Ok'], true);
-			display($page, $lang['Send_circular_mail']);
+			Game::display($page, $lang['Send_circular_mail']);
 		}
 
 		$lang['r_list'] = "<option value=\"0\">{$lang['All_players']}</option>";
@@ -537,7 +537,7 @@ elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
 
 		$page .= parsetemplate(gettemplate('alliance_circular'), $lang);
 
-		display($page, $lang['Send_circular_mail']);
+		Game::display($page, $lang['Send_circular_mail']);
 	}
 
 	if ($mode == 'admin' && $edit == 'rights') { // Administrar leyes
@@ -703,7 +703,7 @@ elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
 		$lang['dpath'] = $dpath;
 		$page .= parsetemplate(gettemplate('alliance_admin_laws'), $lang);
 
-		display($page, $lang['Law_settings']);
+		Game::display($page, $lang['Law_settings']);
 	}
 
 	if ($mode == 'admin' && $edit == 'ally') { // Administrar la alianza *pendiente urgente*
@@ -793,7 +793,7 @@ elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
 		$lang['Disolve_alliance'] = MessageForm("Dissoudre L'alliance", "", "?mode=admin&edit=exit", $lang['Continue']);
 
 		$page .= parsetemplate(gettemplate('alliance_admin'), $lang);
-		display($page, $lang['Alliance_admin']);
+		Game::display($page, $lang['Alliance_admin']);
 	}
 
 	if ($mode == 'admin' && $edit == 'give') {
@@ -953,7 +953,7 @@ while($data=mysql_fetch_array($selection)){
 		$lang['s'] = $s;
 		$page .= parsetemplate(gettemplate('alliance_admin_members_table'), $lang);
 
-		display($page, $lang['Members_administrate']);
+		Game::display($page, $lang['Members_administrate']);
 		// a=9 es para cambiar la etiqueta de la etiqueta.
 		// a=10 es para cambiarle el nombre de la alianza
 	}
@@ -1049,7 +1049,7 @@ while($data=mysql_fetch_array($selection)){
 		$parse['There_is_hanging_request'] = str_replace('%n', $i, $lang['There_is_hanging_request']);
 		// $parse['list'] = $lang['Return_to_overview'];
 		$page = parsetemplate(gettemplate('alliance_admin_request_table'), $parse);
-		display($page, $lang['Check_the_requests']);
+		Game::display($page, $lang['Check_the_requests']);
 	}
 
 	if ($mode == 'admin' && $edit == 'name') {
@@ -1074,7 +1074,7 @@ while($data=mysql_fetch_array($selection)){
 		$parse['name']               = 'newname';
 		$parse['Return_to_overview'] = $lang['Return_to_overview'];
 		$page .= parsetemplate(gettemplate('alliance_admin_rename'), $parse);
-		display($page, $lang['Alliance_admin']);
+		Game::display($page, $lang['Alliance_admin']);
 
 	}
 
@@ -1099,7 +1099,7 @@ while($data=mysql_fetch_array($selection)){
 		$parse['name']               = 'newtag';
 		$parse['Return_to_overview'] = $lang['Return_to_overview'];
 		$page .= parsetemplate(gettemplate('alliance_admin_rename'), $parse);
-		display($page, $lang['Alliance_admin']);
+		Game::display($page, $lang['Alliance_admin']);
 	}
 
 	if ($mode == 'admin' && $edit == 'exit') { // disolver una alianza
@@ -1192,7 +1192,7 @@ while($data=mysql_fetch_array($selection)){
 		$lang['ally_name'] = $ally['ally_name'];
 
 		$page .= parsetemplate(gettemplate('alliance_frontpage'), $lang);
-		display($page, $lang['your_alliance']);
+		Game::display($page, $lang['your_alliance']);
 	}
 }
 

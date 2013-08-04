@@ -208,7 +208,7 @@ require_once dirname(__FILE__) .'/common.php';
 
 	$page = parsetemplate( gettemplate('stat_body'), $parse );
 
-	display($page, $lang['stat_title']);
+	Game::display($page, $lang['stat_title']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

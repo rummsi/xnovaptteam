@@ -163,7 +163,7 @@ includeLang('fleet');
 
 
 
-	display ( $page, "QuickFleet" );
+	Game::display( $page, "QuickFleet" );
 
 // Updated by Chlorel Jan 22 2008 (all code just hold the table and the idea)
 // Created by Perberos. All rights reversed (C) 2006

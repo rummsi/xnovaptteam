@@ -131,16 +131,9 @@ function StdUserHeader ($title = '', $metatags = '') {
 
 	$parse             = $langInfos;
 	$parse['title']    = $title;
-	if ( defined('LOGIN') ) {
-		$parse['dpath']    = "skins/xnova/";
-		$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
-		$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/about.css\">\n";
-	} else {
-		$parse['dpath']    = DEFAULT_SKINPATH;
-		$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"". DEFAULT_SKINPATH ."/default.css\" />";
-		$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"". DEFAULT_SKINPATH ."/formate.css\" />";
-	}
-
+	$parse['dpath']    = DEFAULT_SKINPATH;
+	$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"". DEFAULT_SKINPATH ."/default.css\" />";
+	$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"". DEFAULT_SKINPATH ."/formate.css\" />";
 	$parse['-meta-']  = ($metatags) ? $metatags : "";
 	$parse['-body-']  = "<body>"; //  class=\"style\" topmargin=\"0\" leftmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">";
 	return parsetemplate(gettemplate('simple_header'), $parse);

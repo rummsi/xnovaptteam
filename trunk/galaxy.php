@@ -152,7 +152,7 @@ require_once dirname(__FILE__) .'/common.php';
 
     $page .= "</tbody></table></div>";
 
-    display ($page, $lang[''], false, '', false);
+    Game::display ($page, $lang[''], false, '', false);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version
