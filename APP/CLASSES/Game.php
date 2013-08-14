@@ -36,7 +36,7 @@ class Game
         
         $DisplayPage  = self::gameHeader($title, $metatags);
         $DisplayPage .= ShowTopNavigationBar( $user, $planetrow );
-        $DisplayPage .= self::ShowLeftMenu($Level);
+        $DisplayPage .= self::ShowLeftMenu();
         $DisplayPage .= "<center>\n". $page ."\n</center>\n";
         if (isset($user['authlevel']) && in_array($user['authlevel'], array(LEVEL_ADMIN, LEVEL_OPERATOR)))
         {
@@ -54,11 +54,13 @@ class Game
 	die();
     }
     
-    static function ShowLeftMenu ($Level)
+    static function ShowLeftMenu ()
     {
 	global $lang, $user, $dpath, $game_config;
 
 	includeLang('leftmenu');
+includeLang('system');
+includeLang('tech');
 	$parse                    = $lang;
 	$parse['lm_tx_serv']      = $game_config['resource_multiplier'];
 	$parse['lm_tx_game']      = $game_config['game_speed'] / 2500;
@@ -72,10 +74,10 @@ class Game
 	$parse['mf']              = "_self";
 	$rank                     = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_code` = '1' AND `stat_type` = '1' AND `id_owner` = '". $user['id'] ."';",'statpoints',true);
 	$parse['user_rank']       = $rank['total_rank'];
-	if ($Level > 0) {
+	if ($user['authlevel'] > 0) {
 		$parse['ADMIN_LINK']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"admin/leftmenu.php\"><font color=\"lime\">".$lang['user_level'][$Level]."</font></a></div></td>
+			<td colspan=\"2\"><div><a href=\"admin/leftmenu.php\"><font color=\"lime\">".$lang['user_level'][$user['authlevel']]."</font></a></div></td>
 		</tr>";
 	} else {
 		$parse['ADMIN_LINK']  = "";
