@@ -59,8 +59,6 @@ class Game
 	global $lang, $user, $dpath, $game_config;
 
 	includeLang('leftmenu');
-includeLang('system');
-includeLang('tech');
 	$parse                    = $lang;
 	$parse['lm_tx_serv']      = $game_config['resource_multiplier'];
 	$parse['lm_tx_game']      = $game_config['game_speed'] / 2500;
