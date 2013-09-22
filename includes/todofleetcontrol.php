@@ -98,3 +98,4 @@ include(ROOT_PATH . 'APP/CLASSES/Galaxy.php');
 include(ROOT_PATH . 'APP/CLASSES/Display.php');
 include(ROOT_PATH . 'APP/CLASSES/Game.php');
 include(ROOT_PATH . 'APP/CLASSES/Templates.php');
+include(ROOT_PATH . 'APP/CLASSES/HTTP.php');
