@@ -50,7 +50,7 @@ class ShowContactPage extends AbstractPage
             $bloc['ctc_data_name']    = $Ops['username'];
             $bloc['ctc_data_auth']    = $lang['user_level'][$Ops['authlevel']];
             $bloc['ctc_data_mail']    = "<a href=mailto:".$Ops['email'].">".$Ops['email']."</a>";
-            @$parse['ctc_admin_list'] .= parsetemplate($this->gettemplate('contact_body_rows.tpl'), $bloc);
+            @$parse['ctc_admin_list'] .= parsetemplate($this->gettemplate('INDEX/contact_body_rows.tpl'), $bloc);
 	}
         
         $this->tplObj->assign(array(
