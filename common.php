@@ -55,7 +55,7 @@ $IsUserChecked = false;
 define('DEFAULT_SKINPATH', 'skins/xnova/');
 define('TEMPLATE_DIR', realpath(ROOT_PATH . '/templates/'));
 define('TEMPLATE_NAME', 'OpenGame');
-define('DEFAULT_LANG', 'en');
+define('DEFAULT_LANG', 'fr');
 
 include(ROOT_PATH . 'includes/debug.class.'.PHPEXT);
 $debug = new Debug();
