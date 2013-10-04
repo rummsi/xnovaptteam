@@ -6,7 +6,7 @@
             <table width="519">
                 <tr>
                     <td class="c" colspan="4">
-                        <a href="overview.php?mode=renameplanet" title="{$lang['Planet_menu']}">{$lang['Planet']} "{$planet_name}"</a> ({$user_username})
+                        <a href="game.php?page=renameplanet" title="{$lang['Planet_menu']}">{$lang['Planet']} "{$planet_name}"</a> ({$user_username})
                     </td>
 		</tr>
                 {if $user['id'] != ''}
