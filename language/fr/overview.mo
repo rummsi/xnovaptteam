@@ -127,6 +127,7 @@ $lang['ov_back_moon']        = " &agrave; la lune ";
 $lang['ov_une_hostile']      = "Une ";
 $lang['ov_hostile']          = " hostile de ";
 $lang['ov_message']          = "Envoyer un message";
+$lang['rename_and_abandon_planet'] = 'Renommer / Abandonner la colonie';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
