@@ -25,16 +25,6 @@
 
 define('INSIDE' , true);
 define('INSTALL' , false);
-
-$XNova_Host    = $_SERVER['HTTP_HOST'];
-$XNova_Script  = $_SERVER['SCRIPT_NAME'];
-$Uri_Array     = explode ('/', $XNova_Script);
-// On vire le script
-array_pop($Uri_Array);
-$XNova_URI     = implode ('/', $Uri_Array);
-
-$XNovaRootURL  = "http://". $XNova_Host ."/". $XNova_URI ."/";
-
 require_once dirname(__FILE__) .'/common.php';
 include 'APP/CLASSES/AbstractGamePage.php';
 include 'APP/PAGES/ERROR/ShowErrorPage.php';
