@@ -22,6 +22,7 @@ class ShowBuildingsPage extends AbstractGamePage
     {
         global $lang, $resource, $reslist, $dpath, $game_config, $_GET, $planetrow, $user ;
 	includeLang('buildings');
+	includeLang('leftmenu');
 	CheckPlanetUsedFields($planetrow);
 	// Tables des batiments possibles par type de planete
 	$Allowed['1'] = array(  1,  2,  3,  4, 12, 14, 15, 21, 22, 23, 24, 31, 33, 34, 44);
@@ -33,8 +34,8 @@ class ShowBuildingsPage extends AbstractGamePage
             $bThisIsCheated = false;
             $bDoItNow       = false;
             $TheCommand     = $_GET['cmd'];
-            $Element        = @$_GET['building'];
-            $ListID         = @$_GET['listid'];
+            $Element        = $_GET['building'];
+            $ListID         = $_GET['listid'];
             if (isset($Element))
             {
 		if (!strchr($Element, " "))
@@ -206,7 +207,7 @@ class ShowBuildingsPage extends AbstractGamePage
 	$parse                         = $lang;
         
         $this->tplObj->assign(array(
-            'title' => $lang['b_Buildings'],
+            'title' => $lang['Buildings'],
             'bld_usedcells' => $lang['bld_usedcells'],
             'bld_theyare' => $lang['bld_theyare'],
             'bld_cellfree' => $lang['bld_cellfree'],
