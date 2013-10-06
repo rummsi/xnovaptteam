@@ -28,6 +28,7 @@
  *
  */
 
+$lang['title_changelog']= 'Change Log';
 $lang['Version']     = 'Version';
 $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
