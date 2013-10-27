@@ -14,7 +14,7 @@
                             <tr>
                                 <td colspan="2" style="border-top: 1px #545454 solid">
                                     <div>
-                                        <center>{$game_config['game_name']}<br>(<a href="changelog.php" target=_self>
+                                        <center>{$game_config['game_name']}<br>(<a href="game.php?page=changelog" target=_self>
                                                 <font color=red>{$XNovaRelease}</font></a>)
                                         </center>
                                     </div>
@@ -24,13 +24,13 @@
                                 <td colspan="2" background="{$dpath}img/bg1.gif"><center>{$devlp}</center></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="overview.php" accesskey="g" target="_self">{$Overview}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=overview" accesskey="g" target="_self">{$Overview}</a></div></td>
                             </tr>
                             <tr>
                                 <td height="1px" colspan="2" style="background-color:#FFFFFF"></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="buildings.php" accesskey="b" target="_self">{$Buildings}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=buildings" accesskey="b" target="_self">{$Buildings}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="buildings.php?mode=research" accesskey="r" target="_self">{$Research}</a></div></td>
