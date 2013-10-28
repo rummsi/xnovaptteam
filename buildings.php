@@ -44,19 +44,9 @@ require_once dirname(__FILE__) .'/common.php';
 			FleetBuildingPage ( $planetrow, $user );
 			break;
 
-		case 'research':
-			// --------------------------------------------------------------------------------------------------
-			ResearchBuildingPage ( $planetrow, $user, $IsWorking['OnWork'], $IsWorking['WorkOn'] );
-			break;
-
 		case 'defense':
 			// --------------------------------------------------------------------------------------------------
 			DefensesBuildingPage ( $planetrow, $user );
-			break;
-
-		default:
-			// --------------------------------------------------------------------------------------------------
-			BatimentBuildingPage ( $planetrow, $user );
 			break;
 	}
 
