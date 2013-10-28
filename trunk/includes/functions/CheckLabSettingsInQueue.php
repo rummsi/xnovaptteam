@@ -28,11 +28,11 @@
  *
  */
 
-function CheckLabSettingsInQueue ( $CurrentPlanet ) {
+function CheckLabSettingsInQueue ( $planetrow ) {
 	global $lang, $game_config;
 
-	if ($CurrentPlanet['b_building_id'] != "0") {
-		$BuildQueue = $CurrentPlanet['b_building_id'];
+	if ($planetrow['b_building_id'] != "0") {
+		$BuildQueue = $planetrow['b_building_id'];
 		if (strpos ($BuildQueue, ";")) {
 			$Queue = explode (";", $BuildQueue);
 			$CurrentBuilding = $Queue[0];
