@@ -22,7 +22,7 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="game.php?page=buildings" accesskey="b" target="{mf}">{Buildings}</a></div></td>
 </tr><tr>
-	<td colspan="2"><div><a href="buildings.php?mode=research" accesskey="r" target="{mf}">{Research}</a></div></td>
+	<td colspan="2"><div><a href="game.php?page=research" accesskey="r" target="{mf}">{Research}</a></div></td>
 </tr><tr>
 	<td colspan="2"><div><a href="buildings.php?mode=fleet" accesskey="f" target="{mf}">{Shipyard}</a></div></td>
 </tr><tr>

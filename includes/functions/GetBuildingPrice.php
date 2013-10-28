@@ -28,11 +28,11 @@
  *
  */
 
-function GetBuildingPrice ($CurrentUser, $CurrentPlanet, $Element, $Incremental = true, $ForDestroy = false) {
+function GetBuildingPrice ($user, $planetrow, $Element, $Incremental = true, $ForDestroy = false) {
 	global $pricelist, $resource;
 
 	if ($Incremental) {
-		$level = ($CurrentPlanet[$resource[$Element]]) ? $CurrentPlanet[$resource[$Element]] : $CurrentUser[$resource[$Element]];
+		$level = ($planetrow[$resource[$Element]]) ? $planetrow[$resource[$Element]] : $user[$resource[$Element]];
 	}
 
 	$array = array('metal', 'crystal', 'deuterium', 'energy_max');
