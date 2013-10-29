@@ -3,18 +3,18 @@
         <center>
             <br/>
             {if $Queue_lenght > 0}
-                {$BuildListScript}
+                {InsertBuildListScript ("buildings")}
             {/if}
             <table width=530>
             {if $Queue_lenght > 0}
-                {$BuildList}
+                {$Queue['buildlist']}
             {/if}
                 <tr>
-                    <th >{$bld_usedcells}</th>
+                    <th >{$lang['bld_usedcells']}</th>
                     <th colspan="2">
-                        <font color="#00FF00">{$planet_field_current}</font> / 
-                        <font color="#FF0000">{$planet_field_max}</font> 
-                        {$bld_theyare} {$field_libre} {$bld_cellfree}
+                        <font color="#00FF00">{$planetrow["field_current"]}</font> / 
+                        <font color="#FF0000">{$planetrow['field_max'] + ($planetrow[$resource[33]] * 5)}</font> 
+                        {$lang['bld_theyare']} {($planetrow['field_max'] + ($planetrow[$resource[33]] * 5)) - $planetrow['field_current']} {$lang['bld_cellfree']}
                     </th >
                 </tr>
                 {foreach $lang['tech'] as $Element => $ElementName}
@@ -41,8 +41,8 @@
                             {/if}
                             {if $RoomIsOk && $CanBuildElement}
                                 {if $Queue['lenght'] == 0}
-                                    {if $NextBuildLevel == 1}
-                                        {if $HaveRessources == true}
+                                    {if $planetrow[$resource[$Element]] + 1 == 1}
+                                        {if IsElementBuyable($user, $planetrow, $Element, true, false) == true}
                                             <a href="game.php?page=buildings&cmd=insert&building={$Element}">
                                                 <font color=#00FF00>{$lang['BuildFirstLevel']}</font>
                                             </a>
@@ -50,20 +50,20 @@
                                             <font color=#FF0000>{$lang['BuildFirstLevel']}</font>
                                         {/if}
                                     {else}
-                                        {if $HaveRessources == true}
-                                            <a href="game.php?page=buildings&cmd=insert&building={$Element}"><font color=#00FF00>{$lang['BuildNextLevel']} {$NextBuildLevel}</font></a>
+                                        {if IsElementBuyable($user, $planetrow, $Element, true, false) == true}
+                                            <a href="game.php?page=buildings&cmd=insert&building={$Element}"><font color=#00FF00>{$lang['BuildNextLevel']} {$planetrow[$resource[$Element]] + 1}</font></a>
                                         {else}
-                                            <font color=#FF0000>{$lang['BuildNextLevel']} {$NextBuildLevel}</font>
+                                            <font color=#FF0000>{$lang['BuildNextLevel']} {$planetrow[$resource[$Element]] + 1}</font>
                                         {/if}
                                     {/if}
                                 {else}
                                     <a href="game.php?page=buildings&cmd=insert&building={$Element}"><font color=#00FF00>{$lang['InBuildQueue']}</font></a>
                                 {/if}
                             {elseif $RoomIsOk && !$CanBuildElement}
-                                {if $NextBuildLevel == 1}
+                                {if $planetrow[$resource[$Element]] + 1 == 1}
                                     <font color=#FF0000>{$lang['BuildFirstLevel']}</font>
                                 {else}
-                                    <font color=#FF0000>{$lang['BuildNextLevel']} {$NextBuildLevel}</font>
+                                    <font color=#FF0000>{$lang['BuildNextLevel']} {$planetrow[$resource[$Element]] + 1}</font>
                                 {/if}
                             {else}
                                 <font color=#FF0000>{$lang['NoMoreSpace']}</font>
