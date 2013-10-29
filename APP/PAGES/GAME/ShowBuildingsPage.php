@@ -150,23 +150,12 @@ class ShowBuildingsPage extends AbstractGamePage
         
         $this->tplObj->assign(array(
             'title'                 => $lang['Buildings'],
-            'bld_usedcells'         => $lang['bld_usedcells'],
-            'bld_theyare'           => $lang['bld_theyare'],
-            'bld_cellfree'          => $lang['bld_cellfree'],
             'Queue_lenght'          => $Queue['lenght'],
-            'BuildListScript'       => InsertBuildListScript ("buildings"),
-            'BuildList'             => $Queue['buildlist'],
-            'planet_field_current'  => $planetrow["field_current"],
-            'planet_field_max'      => $planetrow['field_max'] + ($planetrow[$resource[33]] * 5),
-            'field_libre'           => ($planetrow['field_max'] + ($planetrow[$resource[33]] * 5)) - $planetrow['field_current'],
             'RoomIsOk'              => $RoomIsOk,
             'Allowed'               => $Allowed,
-            'BuildingLevel'         => @$planetrow[$resource[$Element]],
             'resource'              => $resource,
             'CanBuildElement'       => $CanBuildElement,
             'Queue'                 => ShowBuildingQueue ($planetrow, $user),
-            'NextBuildLevel'        => @$planetrow[$resource[$Element]] + 1,
-            'HaveRessources'        => $HaveRessources,
         ));
         $this->render('buildings.default.tpl');
     }
