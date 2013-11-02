@@ -42,7 +42,7 @@
                                 <td colspan="2"><div><a href="buildings.php?mode=defense" accesskey="d" target="_self">{$Defense}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="officier.php" accesskey="o" target="_self">{$Officiers}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=officier" accesskey="o" target="_self">{$Officiers}</a></div></td>
                             </tr>
                             {if ($game_config['enable_marchand'] == 1)}
                                 <tr>
