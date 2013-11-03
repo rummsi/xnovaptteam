@@ -45,7 +45,7 @@ class ShowResearchPage extends AbstractGamePage
 	$bContinue         = true;
 	// Deja est qu'il y a un laboratoire sur la planete ???
 	if ($planetrow[$resource[31]] == 0) {
-		message($lang['no_laboratory'], $lang['Research']);
+            ShowErrorPage::message($lang['no_laboratory'], $lang['Research']);
 	}
 	// Ensuite ... Est ce que la labo est en cours d'upgrade ?
 	if (!CheckLabSettingsInQueue ($planetrow)) {

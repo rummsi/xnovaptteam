@@ -93,7 +93,7 @@ class ShowRenameplanetPage extends AbstractGamePage
                 if (CheckFleets($planetrow))
                 {
                    $strMessage = "Vous ne pouvez pas abandonner la colonie, il y a de la flotte en vol !";
-                   self::message($strMessage, $lang['colony_abandon'], 'game.php?page=renameplanet',3);
+                   ShowErrorPage::message($strMessage, $lang['colony_abandon'], 'game.php?page=renameplanet',3);
                 }
                 AbandonColony($user,$planetrow);
 
@@ -103,14 +103,14 @@ class ShowRenameplanetPage extends AbstractGamePage
                 $QryUpdateUser .= "`id` = '" . $user['id'] . "' LIMIT 1";
                 doquery($QryUpdateUser, "users");
                 // Tout s'est bien pass� ! La colo a �t� effac�e !!
-                self::message($lang['deletemessage_ok'] , $lang['colony_abandon'], 'game.php?page=overview',3);
+                ShowErrorPage::message($lang['deletemessage_ok'] , $lang['colony_abandon'], 'game.php?page=overview',3);
             } elseif ($user['id_planet'] == $user["current_planet"]) {
                 // Et puis quoi encore ??? On ne peut pas effacer la planete mere ..
                 // Uniquement les colonies cr�es apres coup !!!
-                self::message($lang['deletemessage_wrong'], $lang['colony_abandon'], 'game.php?page=renameplanet');
+                ShowErrorPage::message($lang['deletemessage_wrong'], $lang['colony_abandon'], 'game.php?page=renameplanet');
             } else {
                 // Erreur de saisie du mot de passe je n'efface pas !!!
-                self::message($lang['deletemessage_fail'] , $lang['colony_abandon'], 'game.php?page=renameplanet');
+                ShowErrorPage::message($lang['deletemessage_fail'] , $lang['colony_abandon'], 'game.php?page=renameplanet');
             }
         }
         $parse = $lang;
@@ -135,15 +135,4 @@ class ShowRenameplanetPage extends AbstractGamePage
         
         $this->render('renameplanet.default.tpl');
     }
-    
-    function message($mes, $title = 'Error', $dest = "", $time = "5", $color = 'orange')
-    {
-        $parse['color'] = $color;
-        $parse['title'] = $title;
-        $parse['mes']   = $mes;
-        $page = parsetemplate(gettemplate('admin/message_body'), $parse);
-        display ($page, $title, true, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"$time;URL={$dest}\">" : ""), false);
-    }
 }
-
-?>
