@@ -101,12 +101,30 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 		$DisplayPage  = StdUserHeader ($title, $metatags);
 	} else {
 		$DisplayPage  = AdminUserHeader ($title, $metatags);
+		include(ROOT_PATH . 'admin/leftmenu.' . PHPEXT);
+		$AdminMenu = ShowAdminLeftMenu ( $user['authlevel'] );
 	}
 
 	if ($topnav) {
 		$DisplayPage .= ShowTopNavigationBar( $user, $planetrow );
 	}
-	$DisplayPage .= "<center>\n". $page ."\n</center>\n";
+        
+	if(!$AdminPage && !$InLogin && !defined("NO_MENU") && ($_GET['menu'] != 'no')){
+            $DisplayPage .= "<center>\n". $page ."\n</center>\n";
+        }elseif($AdminPage && !defined("NO_MENU") && ($_GET['menu'] != 'no')){
+            $DisplayPage .='
+            <br />
+            <center>
+            <div style="width:90%;">
+                <div style="float:left; margin-right:25px; position:\'fixed\';" class=\'style\'>' . $AdminMenu . '</div>
+                <div style="float:center; margin-left:150px; width: 100%px;">' . $page . '</div>
+            </div>
+            </center>
+            ';
+        }else{
+            $DisplayPage .= "<center>\n". $page ."\n</center>\n";
+        }
+        
 	// Affichage du Debug si necessaire
 	if (isset($user['authlevel']) && in_array($user['authlevel'], array(LEVEL_ADMIN, LEVEL_OPERATOR))) {
 		if ($game_config['debug'] == 1) $debug->echo_log();

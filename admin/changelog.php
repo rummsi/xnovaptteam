@@ -33,7 +33,7 @@ define('INSTALL' , false);
 define('IN_ADMIN', true);
 require_once dirname(dirname(__FILE__)) .'/common.php';
 includeLang('changelog');
-$template = gettemplate('changelog_table');
+$template = gettemplate('admin/changelog_table');
 
 $parse = $lang;
 
@@ -49,7 +49,7 @@ foreach($lang['changelog'] as $a => $b)
 
 $parse['body'] = $body;
 
-$page .= parsetemplate(gettemplate('changelog_body'), $parse);
+$page .= parsetemplate(gettemplate('admin/changelog_body'), $parse);
 
 display( $page, "Changelog", false, '', true);
 
