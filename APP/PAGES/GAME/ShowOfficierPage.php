@@ -111,15 +111,6 @@ class ShowOfficierPage extends AbstractGamePage
             'mes'   => $Message,
         ));
             
-        message($Message, $lang['Officier']/*, 'game.php?page=officier'*/);
-    }
-    
-    function message($mes, $title = 'Error', $dest = "", $time = "5", $color = 'orange')
-    {
-        $parse['color'] = $color;
-        $parse['title'] = $title;
-        $parse['mes']   = $mes;
-        $page = parsetemplate(gettemplate('admin/message_body'), $parse);
-        display ($page, $title, true, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"$time;URL={$dest}\">" : ""), false);
+        ShowErrorPage::message($Message, $lang['Officier']/*, 'game.php?page=officier'*/);
     }
 }
