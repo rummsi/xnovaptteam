@@ -23,7 +23,7 @@
  * @version 0.01  24/Ago/2013 21:01:46
  */
 
-require('APP/Smarty/libs/Smarty.class.php');
+require realpath(ROOT_PATH . 'APP/Smarty/libs/Smarty.class.php');
 
 /**
  * Description of Template
