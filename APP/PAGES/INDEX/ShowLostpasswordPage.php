@@ -28,7 +28,7 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowLostpasswordPage extends AbstractPage
+class ShowLostpasswordPage extends AbstractIndexPage
 {
     function __construct()
     {

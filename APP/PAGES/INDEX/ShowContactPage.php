@@ -28,7 +28,7 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowContactPage extends AbstractPage
+class ShowContactPage extends AbstractIndexPage
 {
     function __construct()
     {
