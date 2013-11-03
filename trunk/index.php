@@ -27,7 +27,7 @@ define('INSIDE' , true);
 define('INSTALL' , false);
 define('DISABLE_IDENTITY_CHECK', true);
 require_once dirname(__FILE__) .'/common.php';
-include 'APP/CLASSES/AbstractPage.php';
+include 'APP/CLASSES/AbstractIndexPage.php';
 include 'APP/PAGES/ERROR/ShowErrorPage.php';
 
 $page 		= HTTP::_GP('page', 'index');

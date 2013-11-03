@@ -24,11 +24,11 @@
  */
 
 /**
- * Description of AbstractPage
+ * Description of AbstractIndexPage
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-abstract class AbstractPage
+abstract class AbstractIndexPage
 {
     protected $tplObj;
     protected $window;
