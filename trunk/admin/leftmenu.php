@@ -28,23 +28,22 @@
  *
  */
 
-define('INSIDE' , true);
-define('INSTALL' , false);
-define('IN_ADMIN', true);
-require_once dirname(dirname(__FILE__)) .'/common.php';
+function ShowAdminLeftMenu ( $Level , $Template = 'admin/left_menu') {
+	global $lang, $user, $dpath, $game_config;
 
 includeLang('leftmenu');
 
 	if (in_array($user['authlevel'], array(LEVEL_ADMIN, LEVEL_OPERATOR, LEVEL_MODERATOR))) {
 		$parse                 = $lang;
-		$parse['mf']           = "Hauptframe";
+		$parse['mf']           = "_self";
 		$parse['dpath']        = $dpath;
 		$parse['XNovaRelease'] = VERSION;
-		$parse['servername']   = XNova;
-		$Page                  = parsetemplate(gettemplate('admin/left_menu'), $parse);
-		display( $Page, "", false, '', true);
+		$parse['servername']   = $game_config['game_name'];
+		$AdminMenu             = parsetemplate(gettemplate( $Template ), $parse);
+		
+		return $AdminMenu;
 	} else {
 		message( $lang['sys_noalloaw'], $lang['sys_noaccess'] );
 	}
-
+}
 ?>
