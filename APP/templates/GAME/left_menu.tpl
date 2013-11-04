@@ -71,7 +71,7 @@
                                 <td colspan="2"><div><a href="imperium.php" accesskey="i" target="_self">{$Imperium}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="resources.php" accesskey="r" target="_self">{$Resources}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=resources" accesskey="r" target="_self">{$Resources}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="techtree.php" accesskey="g" target="_self">{$Technology}</a></div></td>
