@@ -43,7 +43,7 @@ class ShowShipyardPage extends AbstractGamePage
         global $lang, $resource, $dpath, $planetrow, $user;
         includeLang('buildings');
         includeLang('leftmenu');
-        includeLang('fleet');
+        includeLang('infos');
         
         // S'il n'y a pas de Chantier
         if (!isset($planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]]) || $planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]] == 0)
