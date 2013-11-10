@@ -39,11 +39,6 @@ require_once dirname(__FILE__) .'/common.php';
 	$IsWorking = HandleTechnologieBuild ( $planetrow, $user );
 
 	switch ($_GET['mode']) {
-		case 'fleet':
-			// --------------------------------------------------------------------------------------------------
-			FleetBuildingPage ( $planetrow, $user );
-			break;
-
 		case 'defense':
 			// --------------------------------------------------------------------------------------------------
 			DefensesBuildingPage ( $planetrow, $user );

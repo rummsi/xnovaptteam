@@ -36,7 +36,7 @@
                                 <td colspan="2"><div><a href="game.php?page=research" accesskey="r" target="_self">{$Research}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="buildings.php?mode=fleet" accesskey="f" target="_self">{$Shipyard}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=shipyard" accesskey="f" target="_self">{$Shipyard}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="buildings.php?mode=defense" accesskey="d" target="_self">{$Defense}</a></div></td>
