@@ -19,7 +19,7 @@
                                         </a>
                                     </th>
                                     <td class=l>
-                                        <a href=infos.php?gid={$shipId}>{$lang['res']['fleet'][$shipId]}</a>
+                                        <a href=infos.php?gid={$shipId}>{$lang['info'][$shipId]['name']}</a>
                                         {if $planetrow[$resource[$shipId]] > 0}
                                             ({$lang['dispo']}: {pretty_number($planetrow[$resource[$shipId]])})
                                         {/if}<br />
