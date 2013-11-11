@@ -34,11 +34,12 @@ class ShowFleet1Page extends AbstractGamePage
     {
         parent::__construct();
         $this->tplObj->compile_id = 'fleet1';
-        includeLang('fleet');
     }
 
     function show()
     {
+        includeLang('fleet');
+        
         global $user, $planetrow, $lang, $resource, $pricelist, $reslist;
         
 	$maxfleet  = doquery("SELECT COUNT(fleet_owner) AS `actcnt` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."';", 'fleets', true);
@@ -144,6 +145,6 @@ class ShowFleet1Page extends AbstractGamePage
             'planettype'            => $planettype,
             'target_mission'        => $target_mission,
         ));
-        $this->render('fleet.default.tpl');
+        $this->render('fleet1.default.tpl');
     }
 }
