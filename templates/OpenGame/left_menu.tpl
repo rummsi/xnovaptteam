@@ -38,6 +38,8 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="game.php?page=fleet1" accesskey="t" target="{mf}">{Fleet}</a></div></td>
 </tr><tr>
+	<td colspan="2"><div><a href="game.php?page=movement" accesskey="t" target="{mf}">Movimento</a></div></td>
+</tr><tr>
 	<td colspan="2"><div><a href="messages.php" accesskey="c" target="{mf}">{Messages}</a></div></td>
 </tr><tr>
 
