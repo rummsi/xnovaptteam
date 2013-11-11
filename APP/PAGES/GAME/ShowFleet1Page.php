@@ -44,6 +44,7 @@ class ShowFleet1Page extends AbstractGamePage
         
 	$maxfleet  = doquery("SELECT COUNT(fleet_owner) AS `actcnt` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."';", 'fleets', true);
 	$MaxFlyingFleets     = $maxfleet['actcnt'];
+        
         //Compteur de flotte en expéditions et nombre d'expédition maximum
         $MaxExpedition      = $user[$resource[124]];
         $maxexpde  = doquery("SELECT COUNT(fleet_owner) AS `expedi` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."' AND `fleet_mission` = '15';", 'fleets', true);
@@ -63,12 +64,14 @@ class ShowFleet1Page extends AbstractGamePage
             9 => $lang['type_mission'][9],
             15 => $lang['type_mission'][15]
 	);
+        
 	// Histoire de recuperer les infos passées par galaxy
 	$galaxy         = @$_GET['galaxy'];
 	$system         = @$_GET['system'];
 	$planet         = @$_GET['planet'];
 	$planettype     = @$_GET['planettype'];
 	$target_mission = @$_GET['target_mission'];
+        
 	if (!$galaxy)
         {
             $this->tplObj->assign('galaxy', $planetrow['galaxy']);
@@ -85,10 +88,7 @@ class ShowFleet1Page extends AbstractGamePage
         {
             $this->tplObj->assign('planet_type', $planetrow['planet_type']);
 	}
-	if (!$planetrow)
-        {
-            message($lang['fl_noplanetrow'], $lang['fl_error']);
-	}
+        
 	// Prise des coordonnées sur la ligne de commande
 	$galaxy         = intval(@$_GET['galaxy']);
 	$system         = intval(@$_GET['system']);
@@ -99,51 +99,27 @@ class ShowFleet1Page extends AbstractGamePage
         $page = "";
 	foreach ($reslist['fleet'] as $n => $i)
         {
-            if ($planetrow[$resource[$i]] > 0)
-            {
-                $page .= "<tr height=\"20\">";
-		$page .= "<th><a title=\"". $lang['fl_fleetspeed'] . @$CurrentShipSpeed ."\">" . $lang['tech'][$i] . "</a></th>";
-		$page .= "<th>". pretty_number ($planetrow[$resource[$i]]);
-		$ShipData .= "<input type=\"hidden\" name=\"maxship". $i ."\" value=\"". $planetrow[$resource[$i]] ."\" />";
-		$ShipData .= "<input type=\"hidden\" name=\"consumption". $i ."\" value=\"". GetShipConsumption ( $i, $user ) ."\" />";
-		$ShipData .= "<input type=\"hidden\" name=\"speed" .$i ."\" value=\"" . GetFleetMaxSpeed ("", $i, $user) . "\" />";
-		$ShipData .= "<input type=\"hidden\" name=\"capacity". $i ."\" value=\"". $pricelist[$i]['capacity'] ."\" />";
-		$page .= "</th>";
-                $this->tplObj->assign('ShipData', $ShipData);
-		// Satelitte Solaire (eux ne peuvent pas bouger !)
-		if ($i == 212)
-                {
-                    $page .= "<th></th><th></th>";
-		} else {
-                    $page .= "<th><a href=\"javascript:maxShip('ship". $i ."'); shortInfo();\">".$lang['fl_selmax']."</a> </th>";
-                    $page .= "<th><input name=\"ship". $i ."\" size=\"10\" value=\"0\" onfocus=\"javascript:if(this.value == '0') this.value='';\" onblur=\"javascript:if(this.value == '') this.value='0';\" alt=\"". $lang['tech'][$i] . $planetrow[$resource[$i]] ."\" onChange=\"shortInfo()\" onKeyUp=\"shortInfo()\" /></th>";
-		}
-		$page .= "</tr>";
-            }
+            $ShipData .= "<input type=\"hidden\" name=\"maxship". $i ."\" value=\"". $planetrow[$resource[$i]] ."\" />";
+            $ShipData .= "<input type=\"hidden\" name=\"consumption". $i ."\" value=\"". GetShipConsumption ( $i, $user ) ."\" />";
+            $ShipData .= "<input type=\"hidden\" name=\"speed" .$i ."\" value=\"" . GetFleetMaxSpeed ("", $i, $user) . "\" />";
+            $ShipData .= "<input type=\"hidden\" name=\"capacity". $i ."\" value=\"". $pricelist[$i]['capacity'] ."\" />";
             $have_ships = true;
-            $this->tplObj->assign('have_ships', $have_ships);
+            $this->tplObj->assign(array(
+                'have_ships'=> $have_ships,
+                'ShipData'  => $ShipData,
+            ));
 	}
 
         $this->tplObj->assign(array(
             'title'                 => $lang['fl_title'],
-            'fl_title'              => $lang['fl_title'],
             'MaxFlyingFleets'       => $MaxFlyingFleets,
-            'fl_sur'                => $lang['fl_sur'],
             'MaxFlottes'            => $MaxFlottes,
             'ExpeditionEnCours'     => $ExpeditionEnCours,
             'EnvoiMaxExpedition'    => $EnvoiMaxExpedition,
-            'fl_expttl'             => $lang['fl_expttl'],
-            'fl_noslotfree'         => $lang['fl_noslotfree'],
-            'fl_new_miss'           => $lang['fl_new_miss'],
-            'fl_fleet_typ'          => $lang['fl_fleet_typ'],
-            'fl_fleet_disp'         => $lang['fl_fleet_disp'],
-            'page'                  => $page,
-            'fl_noships'            => $lang['fl_noships'],
-            'fl_continue'           => $lang['fl_continue'],
-            'fl_unselectall'        => $lang['fl_unselectall'],
-            'fl_selectall'          => $lang['fl_selectall'],
             'planettype'            => $planettype,
             'target_mission'        => $target_mission,
+            'reslist'               => $reslist,
+            'resource'              => $resource,
         ));
         $this->render('fleet1.default.tpl');
     }
