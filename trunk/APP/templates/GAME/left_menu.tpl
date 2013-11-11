@@ -53,7 +53,7 @@
                                 <td colspan="2" background="{$dpath}img/bg1.gif"><center>{$navig}</center></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="alliance.php" accesskey="a" target="_self">{$Alliance}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=alliance" accesskey="a" target="_self">{$Alliance}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="fleet.php" accesskey="t" target="_self">{$Fleet}</a></div></td>
