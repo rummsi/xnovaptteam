@@ -33,7 +33,7 @@
             </table>
         </center>
             <center>
-                <form action="floten1.php" method="post">
+                <form action="game.php?page=fleet2" method="post">
                     <table width="519" border="0" cellpadding="0" cellspacing="1">
                         <tr height="20">
                             <td colspan="4" class="c">{$fl_new_miss}</td>
