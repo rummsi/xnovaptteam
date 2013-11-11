@@ -72,7 +72,6 @@
                             </tr>
                         {/if}
                     {/foreach}
-                    { $page }
                     <tr height="20">
                         {if !$have_ships}
                                 <th colspan="4">{$lang['fl_noships']}</th>
