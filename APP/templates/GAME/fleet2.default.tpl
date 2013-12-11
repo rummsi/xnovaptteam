@@ -47,7 +47,7 @@
                                 </th>
                             </tr>
                             <tr height="20">
-                                <th>{$$lang['fl_speed']}</th>
+                                <th>{$lang['fl_speed']}</th>
                                 <th>
                                     <select name="speed" onChange="shortInfo()" onKeyUp="shortInfo()">
                                         {foreach $speed as $a => $b}
