@@ -40,7 +40,7 @@ class ShowFleet1Page extends AbstractGamePage
     {
         includeLang('fleet');
         
-        global $user, $planetrow, $lang, $resource, $pricelist, $reslist;
+        global $user, $planetrow, $lang, $resource, $pricelist, $reslist, $CurrentShipSpeed, $speedalls;
         
 	$maxfleet  = doquery("SELECT COUNT(fleet_owner) AS `actcnt` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."';", 'fleets', true);
 	$MaxFlyingFleets     = $maxfleet['actcnt'];
@@ -120,6 +120,9 @@ class ShowFleet1Page extends AbstractGamePage
             'target_mission'        => $target_mission,
             'reslist'               => $reslist,
             'resource'              => $resource,
+            'CurrentShipSpeed'      =>$CurrentShipSpeed,
+            'pricelist'             =>$pricelist,
+            'speedalls'             =>$speedalls,
         ));
         $this->render('fleet1.default.tpl');
     }
