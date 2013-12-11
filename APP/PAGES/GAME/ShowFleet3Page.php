@@ -34,50 +34,39 @@ class ShowFleet3Page extends AbstractGamePage
     {
         parent::__construct();
         $this->tplObj->compile_id = 'fleet3';
-        includeLang('fleet');
     }
 
     function show()
     {
         global $user, $planetrow, $lang, $pricelist, $_POST;
+        
+        includeLang('fleet');
+	
 	$galaxy     = intval($_POST['galaxy']);
 	$system     = intval($_POST['system']);
 	$planet     = intval($_POST['planet']);
 	$planettype = intval($_POST['planettype']);
+
 	// Test d'existance et de proprieté de la planete
 	$YourPlanet = false;
 	$UsedPlanet = false;
 	$select       = doquery("SELECT * FROM {{table}}", "planets");
-	while ($row = mysql_fetch_array($select))
-        {
-            if ($galaxy     == $row['galaxy'] &&
+
+	while ($row = mysql_fetch_array($select)) {
+		if ($galaxy     == $row['galaxy'] &&
 			$system     == $row['system'] &&
 			$planet     == $row['planet'] &&
-			$planettype == $row['planet_type'])
-            {
-                if ($row['id_owner'] == $user['id'])
-                {
-                    $YourPlanet = true;
-                    $UsedPlanet = true;
-		} else {
-                    $UsedPlanet = true;
+			$planettype == $row['planet_type']) {
+			if ($row['id_owner'] == $user['id']) {
+				$YourPlanet = true;
+				$UsedPlanet = true;
+			} else {
+				$UsedPlanet = true;
+			}
+			break;
 		}
-		break;
-            }
 	}
         
-	$missiontype = array(
-            1 => $lang['type_mission'][1],
-            2 => $lang['type_mission'][2],
-            3 => $lang['type_mission'][3],
-            4 => $lang['type_mission'][4],
-            5 => $lang['type_mission'][5],
-            6 => $lang['type_mission'][6],
-            7 => $lang['type_mission'][7],
-            8 => $lang['type_mission'][8],
-            9 => $lang['type_mission'][9],
-            15 => $lang['type_mission'][15]
-	);
 	// Determinons les type de missions possibles par rapport a la planete cible
 	if ($_POST['planettype'] == "2")
         {
@@ -191,51 +180,9 @@ class ShowFleet3Page extends AbstractGamePage
 	} elseif ($_POST['thisplanettype'] == 3) {
             $TableTitle = "". $_POST['thisgalaxy'] .":". $_POST['thissystem'] .":". $_POST['thisplanet'] ." - ". $lang['fl_moon'] ."";
 	}
-	$page1 = "";
-        foreach ($fleetarray as $Ship => $Count) {
-		$page1 .= "<input type=\"hidden\" name=\"ship". $Ship ."\"        value=\"". $Count ."\" />\n";
-		$page1 .= "<input type=\"hidden\" name=\"capacity". $Ship ."\"    value=\"". $pricelist[$Ship]['capacity'] ."\" />\n";
-		$page1 .= "<input type=\"hidden\" name=\"consumption". $Ship ."\" value=\"". GetShipConsumption ( $Ship, $user ) ."\" />\n";
-		$page1 .= "<input type=\"hidden\" name=\"speed". $Ship ."\"       value=\"". GetFleetMaxSpeed ( "", $Ship, $user ) ."\" />\n";
-
-	}
-        $page = "";
-	if ($planet == 16) {
-		$page .= "<tr height=\"20\">";
-		$page .= "<td class=\"c\" colspan=\"3\">". $lang['fl_expe_staytime'] ."</td>";
-		$page .= "</tr>";
-		$page .= "<tr height=\"20\">";
-		$page .= "<th colspan=\"3\">";
-		$page .= "<select name=\"expeditiontime\" >";
-		$page .= "<option value=\"1\">1</option>";
-		$page .= "<option value=\"2\">2</option>";
-		$page .= "</select>";
-		$page .= $lang['fl_expe_hours'];
-		$page .= "</th>";
-		$page .= "</tr>";
-	} elseif (isset($missiontype[5]) != '' ) {
-		$page .= "<tr height=\"20\">";
-		$page .= "<td class=\"c\" colspan=\"3\">". $lang['fl_expe_staytime'] ."</td>";
-		$page .= "</tr>";
-		$page .= "<tr height=\"20\">";
-		$page .= "<th colspan=\"3\">";
-		$page .= "<select name=\"holdingtime\" >";
-		$page .= "<option value=\"0\">0</option>";
-		$page .= "<option value=\"1\">1</option>";
-		$page .= "<option value=\"2\">2</option>";
-		$page .= "<option value=\"4\">4</option>";
-		$page .= "<option value=\"8\">8</option>";
-		$page .= "<option value=\"16\">16</option>";
-		$page .= "<option value=\"32\">32</option>";
-		$page .= "</select>";
-		$page .= $lang['fl_expe_hours'];
-		$page .= "</th>";
-		$page .= "</tr>";
-	}
+        
         $this->tplObj->assign(array(
             'title'             => $lang['fl_title'],
-            'page'              => $page,
-            'page1'             => $page1,
             'pmetal'            => floor($planetrow["metal"]),
             'pcrystal'          => floor($planetrow["crystal"]),
             'pdeuterium'        => floor($planetrow["deuterium"]),
@@ -256,29 +203,17 @@ class ShowFleet3Page extends AbstractGamePage
             'Pmaxepedition'     => $_POST['maxepedition'],
             'Pcurepedition'     => $_POST['curepedition'],
             'TableTitle'        => $TableTitle,
-            'fl_mission'        => $lang['fl_mission'],
             'MissionSelector'   => $MissionSelector,
-            'fl_ressources'     => $lang['fl_ressources'],
-            'Metal'             => $lang['Metal'],
-            'fl_selmax'         => $lang['fl_selmax'],
             'fmetal'            => floor($planetrow['metal']),
-            'Crystal'           => $lang['Crystal'],
             'fcrystal'          => floor($planetrow['crystal']),
-            'Deuterium'         => $lang['Deuterium'],
             'fdeuterium'        => floor($planetrow['deuterium']),
-            'fl_space_left'     => $lang['fl_space_left'],
-            'fl_allressources'  => $lang['fl_allressources'],
-            'fl_continue'       => $lang['fl_continue'],
-            'typemission15'     => $lang['type_mission'][15],
-            'fl_expe_warning'   => $lang['fl_expe_warning'],
             'i'                 => $i,
             'a'                 => $a,
             'mission_cheked'    => ($_POST['target_mission'] == $a ? " checked=\"checked\"":""),
             'b'                 => $b,
             'planet'            => $planet,
-            'fl_bad_mission'    => $lang['fl_bad_mission'],
-            'fl_planet'         => $lang['fl_planet'],
-            'fl_moon'           => $lang['fl_moon'],
+            'fleetarray'        => $fleetarray,
+            'pricelist'=>$pricelist,
             ));
         
         $this->render('fleet3.default.tpl');
