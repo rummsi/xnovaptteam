@@ -315,10 +315,10 @@ class ShowFleet4Page extends AbstractGamePage
 
 	$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '".$user['current_planet']."';", 'planets', true);
 
-	if ($MaxFleetSpeed != $_POST['speedallsmin']) {
+/*	if ($MaxFleetSpeed != $_POST['speedallsmin']) {
 		message ("<font color=\"red\"><b>". $lang['fl_cheat_speed'] ."</b></font>", $lang['fl_error'], "game.php?page=fleet", 2);
 	}
-
+*/
 	if (!$_POST['planettype']) {
 		message ("<font color=\"red\"><b>". $lang['fl_no_planet_type'] ."</b></font>", $lang['fl_error'], "game.php?page=fleet", 2);
 	}
