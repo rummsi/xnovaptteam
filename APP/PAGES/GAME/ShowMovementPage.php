@@ -140,7 +140,7 @@ class ShowMovementPage extends AbstractGamePage
             $page .= "<th>";
             if ($f['fleet_mess'] == 0)
             {
-                $page .= "<form action=\"fleetback.php\" method=\"post\">";
+                $page .= "<form action=\"game.php?page=fleetback\" method=\"post\">";
 		$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
 		$page .= "<input value=\" ".$lang['fl_back_to_ttl']." \" type=\"submit\" name=\"send\">";
 		$page .= "</form>";
