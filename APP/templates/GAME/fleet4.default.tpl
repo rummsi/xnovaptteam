@@ -12,7 +12,7 @@
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_mission']}</th>
-                        <th>{$missiontype[$_POST['mission']]}</th>
+                        <th>{$missiontype[$fleetmission]}</th>
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_dist']}</th>
@@ -20,7 +20,7 @@
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_speed']}</th>
-                        <th>{pretty_number($_POST['speedallsmin'])}</th>
+                        <th>{pretty_number($Pspeedallsmin)}</th>
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_deute_need']}</th>
@@ -28,19 +28,19 @@
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_from']}</th>
-                        <th>{$_POST['thisgalaxy']}:{$_POST['thissystem']}:{$_POST['thisplanet']}</th>
+                        <th>{$Pthisgalaxy}:{$Pthissystem}:{$Pthisplanet}</th>
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_dest']}</th>
-                        <th>{$_POST['galaxy']}:{$_POST['system']}:{$_POST['planet']}</th>
+                        <th>{$Pgalaxy}:{$Psystem}:{$Pplanet}</th>
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_time_go']}</th>
-                        <th>{date("M D d H:i:s", $fleet['start_time'])}</th>
+                        <th>{date("M D d H:i:s", $fleet_start_time)}</th>
                     </tr>
                     <tr height="20">
                         <th>{$lang['fl_time_back']}</th>
-                        <th>{date("M D d H:i:s", $fleet['end_time'])}</th>
+                        <th>{date("M D d H:i:s", $fleet_end_time)}</th>
                     </tr>
                     <tr height="20">
                         <td class="c" colspan="2">{$lang['fl_title']}</td>
