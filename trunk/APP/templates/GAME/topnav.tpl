@@ -60,7 +60,7 @@
                                                                                                     {$energy}
                                                                                                 {/if}/{$energy_max}</font></td>
                                             <td class="header" align="center" width="140"><font>{if $user['new_message'] > 0}
-                                                                                                    <a href="messages.php">[ {$user['new_message']} ]</a>
+                                                                                                    <a href="game.php?page=messages">[ {$user['new_message']} ]</a>
                                                                                                 {else}
                                                                                                     0
                                                                                                 {/if}</font></td>

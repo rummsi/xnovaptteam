@@ -70,6 +70,15 @@ $lang['mess_answer_prefix']  = "Re:";
 
 $lang['Player_say'] = '<font color="#7f7f7f">Le joueur</font> %s <font color="#7f7f7f">envoie le message suivant:</font><br>';
 
+//BBC 
+$lang['bbc_emos'] = "&Eacute;moticones et BBCode :";
+$lang['bbc_use']   = "Vous pouvez utiliser le BBCode et des &eacute;moticones pour embellir vos m&eacute;ssages...";
+$lang['bbc_def']      = "Pour utiliser les &eacute;moticones de base fournis par le staff :";
+$lang['bbc_Texte_en_gras']         = "Texte en gras";
+$lang['bbc_text']           = "Text";
+$lang['mess_Texte_souligne']         = "Texte soulign&eacute;";
+$lang['bbc_Texte_en_italliqiue']           = "Texte en italliqiue";
+$lang['bbc_Une_image']         = "Une image";
 
 
 // Created by Perberos. All rights reversed (C) 2006

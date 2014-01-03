@@ -761,7 +761,7 @@ class Galaxy
             $Result .= "</tr><tr>";
             if ($GalaxyRowUser['id'] != $user['id'])
             {
-		$Result .= "<td><a href=messages.php?mode=write&id=".$GalaxyRowUser['id'].">".$lang['gl_sendmess']."</a></td>";
+		$Result .= "<td><a href=game.php?page=messages&mode=write&id=".$GalaxyRowUser['id'].">".$lang['gl_sendmess']."</a></td>";
 		$Result .= "</tr><tr>";
 		$Result .= "<td><a href=buddy.php?a=2&u=".$GalaxyRowUser['id'].">".$lang['gl_buddyreq']."</a></td>";
 		$Result .= "</tr><tr>";
@@ -887,7 +887,7 @@ class Galaxy
 		}
 		if ($user["settings_wri"] == "1" && $GalaxyRowPlayer['id'])
                 {
-                    $Result .= "<a href=messages.php?mode=write&id=".$GalaxyRowPlayer["id"].">";
+                    $Result .= "<a href=game.php?page=messages&mode=write&id=".$GalaxyRowPlayer["id"].">";
                     $Result .= "<img src=". $dpath ."img/m.gif alt=\"".$lang['gl_sendmess']."\" title=\"".$lang['gl_sendmess']."\" border=0></a>";
                     $Result .= "&nbsp;";
 		}
