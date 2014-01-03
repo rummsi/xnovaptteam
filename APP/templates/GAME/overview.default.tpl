@@ -13,9 +13,9 @@
                     {if $user['new_message'] != 0}
                         <tr>
                             {if $user['new_message'] == 1}
-                                <th colspan=4><a href=messages.php>{$lang['Have_new_message']}</a></th>
+                                <th colspan=4><a href=game.php?page=messages>{$lang['Have_new_message']}</a></th>
                             {elseif $user['new_message'] > 1}
-                                <th colspan=4><a href=messages.php>
+                                <th colspan=4><a href=game.php?page=messages>
                                     {str_replace('%m', pretty_number($user['new_message']), $lang['Have_new_messages'])}
                                 </a></th>
                             {/if}
