@@ -120,7 +120,7 @@
                                 <td colspan="2"><div><a href="add_declare.php" accesskey="1" target="_self">{$multi}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="rules.php"  accesskey="c" target="_self">{$Rules}</a></div></td>
+                                <td colspan="2"><div><a href="index.php?page=rules"  accesskey="c" target="_blank">{$Rules}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="contact.php" accesskey="3" target="_self" >{$Contact}</a></div></td>
