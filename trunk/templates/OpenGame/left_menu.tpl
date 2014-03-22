@@ -74,7 +74,7 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="{forum_url}" accesskey="1" target="{mf}">{Board}</a></div></td>
 </tr><tr>
-	<td colspan="2"><div><a href="add_declare.php" accesskey="1" target="{mf}">{multi}</a></div></td>
+	<td colspan="2"><div><a href="game.php?page=multi" accesskey="1" target="{mf}">{multi}</a></div></td>
 </tr><tr>
 	<td colspan="2"><div><a href="index.php?page=rules"  accesskey="c" target="_blank">{Rules}</a></div></td>
 </tr><tr>
