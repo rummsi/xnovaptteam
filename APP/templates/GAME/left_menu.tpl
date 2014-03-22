@@ -111,7 +111,7 @@
                                 </tr>
                             {/if}
                             <tr>
-                                <td colspan="2"><div><a href="chat.php" accesskey="a" target="_self">{$Chat}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=chat" accesskey="a" target="_self">{$Chat}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="{$game_config['forum_url']}" accesskey="1" target="_self">{$Board}</a></div></td>
