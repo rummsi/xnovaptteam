@@ -96,7 +96,7 @@
                             </tr>
                             {if ($game_config['enable_announces'] == 1)}
                                 <tr>
-                                    <td colspan="2"><div><a href="annonce.php" target="_self">Annonces</a></div></td>
+                                    <td colspan="2"><div><a href="game.php?page=annonce" target="_self">Annonces</a></div></td>
                                 </tr>
                             {/if}
                             <tr>
