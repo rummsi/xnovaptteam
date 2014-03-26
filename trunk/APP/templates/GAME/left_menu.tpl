@@ -77,7 +77,7 @@
                                 <td colspan="2"><div><a href="game.php?page=resources" accesskey="r" target="_self">{$Resources}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="techtree.php" accesskey="g" target="_self">{$Technology}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=techtree" accesskey="g" target="_self">{$Technology}</a></div></td>
                             </tr>
                             <tr>
                                 <td height="1px" colspan="2" style="background-color:#FFFFFF"></td>
