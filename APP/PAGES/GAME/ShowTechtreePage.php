@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Expression package is undefined on line 4, column 19 in file:///C:/UniServerZ/www/xnovaptteam/nbproject/licenseheader.txt.
+ * XNovaPT
  * Copyright (C) 2012
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,17 @@
  * 
  * You should read the GNU General Public License, see <http://www.gnu.org/licenses/>.
  * 
- * Expression package is undefined on line 19, column 19 in file:///C:/UniServerZ/www/xnovaptteam/nbproject/licenseheader.txt.
- * @Rui Silva
+ * XNovaPT
+ * @author XNovaPT Team <xnovaptteam@gmail.com>
  * @ShowTechtreePage.php
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @Expression version is undefined on line 23, column 20 in file:///C:/UniServerZ/www/xnovaptteam/nbproject/licenseheader.txt.  26/Mar/2014 13:57:20
+ * @version 0.01  26/Mar/2014 13:57:20
  */
 
 /**
  * Description of ShowTechtreePage
  *
- * @author Rui Silva
+ * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
 class ShowTechtreePage extends AbstractGamePage
 {
