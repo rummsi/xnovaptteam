@@ -6,11 +6,11 @@
                 var lastType = "";
                 function changeAction(type)
                 {
-                    if (document.formular.Uni.value == '')
+                    if (document.formular.Uni.value === '')
                     {
-                        alert('{$log_univ}');
+                        alert('{$lang['log_univ']}');
                     } else {
-                        if(type == "login" && lastType == "")
+                        if(type === "login" && lastType === "")
                         {
                             var url = "http://" + document.formular.Uni.value + "";
                             document.formular.action = url;
@@ -29,23 +29,23 @@
                                 <tbody>
                                     <tr style="vertical-align: top;">
                                         <td style="padding-right: 4px;">
-                                            {$User_name}<input name="username" value="" type="text">
-                                            {$Password}<input name="password" value="" type="password">
+                                            {$lang['User_name']}<input name="username" value="" type="text">
+                                            {$lang['Password']}<input name="password" value="" type="password">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding-right: 4px;">
-                                            {$Remember_me}
+                                            {$lang['Remember_me']}
                                             <input name="rememberme" type="checkbox">
                                             <script type="text/javascript">
                                                 document.formular.Uni.focus();
                                             </script>
-                                            <input name="submit" value="{$Login}" type="submit">
+                                            <input name="submit" value="{$lang['Login']}" type="submit">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding-right: 4px;">
-                                            <a href="index.php?page=lostpassword">{$PasswordLost}</a>
+                                            <a href="index.php?page=lostpassword">{$lang['PasswordLost']}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -54,34 +54,35 @@
                     </div>
                 </div>
                 <div id="mainmenu" style="margin-top: 20px;">
-                    <a href="index.php?page=register">{$log_reg}</a>
-                    <a href="{$forum_url}" target="_blank">Forum</a>
-                    <a href="index.php?page=contact">Contact</a>
+                    <a href="index.php?page=register">{$lang['log_reg']}</a>
+                    <a href="{$forum_url}" target="_blank">{$lang['log_board']}</a>
+                    <a href="index.php?page=contact">{$lang['log_contact']}</a>
+                    <a href="index.php?page=rules" target="_blank">{$lang['log_rules']}</a>
                 </div>
                 <div id="rightmenu" class="rightmenu">
-                    <div id="title">{$log_welcome} {$servername}</div>
+                    <div id="title">{$lang['log_welcome']} {$servername}</div>
                     <div id="content">
                         <center>
                             <div id="text1">
                                 <div style="text-align: left;">
                                     <strong>{$servername}</strong> 
-                                    {$log_desc} {$servername}.
+                                    {$lang['log_desc']} {$servername}.
                                 </div>
                             </div>
                         <div id="register" class="bigbutton" onclick="document.location.href='index.php?page=register';">
                             <font color="#cc0000">
-                            {$log_toreg}
+                            {$lang['log_toreg']}
                             </font></div>
                         <div id="text2">
                             <div id="text3">
                             <center>
                                 <b>
-                                    <font color="#00cc00">{$log_online}: </font> 
-                                    <font color="#c6c7c6">{$online_users}</font> - 
-                                    <font color="#00cc00">{$log_lastreg}: </font> 
-                                    <font color="#c6c7c6">{$last_user}</font> - 
-                                    <font color="#00cc00">{$log_numbreg}: </font> 
-                                    <font color="#c6c7c6">{$users_amount}</font>
+                                    <font color="#00cc00">{$lang['log_online']}: </font> 
+                                    <font color="#c6c7c6">{$PlayersOnline['onlinenow']}</font> - 
+                                    <font color="#00cc00">{$lang['log_lastreg']}: </font> 
+                                    <font color="#c6c7c6">{$LastPlayer['username']}</font> - 
+                                    <font color="#00cc00">{$lang['log_numbreg']}: </font> 
+                                    <font color="#c6c7c6">{$Count['players']}</font>
                                 </b>
                             </center>
                             </div>

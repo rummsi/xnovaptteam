@@ -45,7 +45,7 @@ $lang [ 'Login_FailUser'] = 'Este utilizador não existe.<br><a href=index.php>R
 
 $lang['log_univ'] = 'Por favor escolha Universo!';
 $lang['log_reg'] = 'Registar';
-$lang['log_cred'] = 'Créditos';
+$lang['log_rules'] = 'Régras';
 $lang['log_desc'] = 'é um jogo de estratégia online.  Só necessitas de um navegador para jogar.  Junta-te agora e descobre o maravilhoso jogo de';
 $lang['log_toreg'] = 'Por favor regista-te';
 $lang['log_online'] = 'Jogadores online';
@@ -55,7 +55,5 @@ $lang['log_welcome'] = 'Bemvindo ao';
 
 $lang['PasswordLost'] = 'Não te lembras da Palavra-passe?';
 
-$lang['Forum'] = 'Fórum';
-$lang['Contact'] = 'Contato';
-
-?>
+$lang['log_board'] = 'Fórum';
+$lang['log_contact'] = 'Contato';

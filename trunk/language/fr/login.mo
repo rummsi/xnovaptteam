@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -27,8 +28,6 @@
  * documentation for further information about customizing XNova.
  *
  */
-
-
 $lang['Login'] = 'Connexion';
 $lang['User_name'] = 'Nom:';
 $lang['Password'] = 'Password:';
@@ -45,7 +44,7 @@ $lang['Login_FailUser'] = 'Ce joueur n\'existe pas.<br><a href=index.php>Retour<
 
 $lang['log_univ'] = 'Merci de selectionner un Univers!';
 $lang['log_reg'] = 'Inscriptions';
-$lang['log_cred'] = 'Credits';
+$lang['log_rules'] = 'Régles';
 $lang['log_desc'] = 'est un <strong>jeu de strat&eacute;gie gratuit</strong> dans l\'espace. Pour jouer, il suffit d\'un navigateur internet. Inscrivez-vous et d&eacute;couvrez le monde fantastique de';
 $lang['log_toreg'] = 'S\'enregistrer maintenant!';
 $lang['log_online'] = 'Joueurs en ligne';
@@ -54,5 +53,5 @@ $lang['log_numbreg'] = 'Joueurs inscris';
 $lang['log_welcome'] = 'Bienvenue sur';
 
 $lang['PasswordLost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
-
-?>
+$lang['log_board'] = 'Forum';
+$lang['log_contact'] = 'Contact';

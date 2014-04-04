@@ -42,70 +42,62 @@ class ShowRegisterPage extends AbstractIndexPage
         
         //on demarre la session qui ne sers ici que pour le code de secu
         includeLang('reg');
-        if ($_POST)
+        if (filter_input_array(INPUT_POST))
         {
             $errors = 0;
             $errorlist = "";
-            //si la secu est active
-            if (@$game_config['secu'] == 1)
-            {
-                echo $_session['secu'];
-                if (!$_POST['secu'] || $_POST['secu'] != $_SESSION['secu'] )
-                {
-                    $errorlist .= $lang['error_secu']; $errors++;
-                }
-            }
-            $_POST['email'] = strip_tags($_POST['email']);
             
-            if (!is_email($_POST['email']))
+ //           filter_input(INPUT_POST, 'rememberme') = strip_tags($_POST['email']);
+            
+            if (!is_email(filter_input(INPUT_POST, 'email')))
             {
-                $errorlist .= "\"" . $_POST['email'] . "\" " . $lang['error_mail'];
+                $errorlist .= "\"" . filter_input(INPUT_POST, 'email') . "\" " . $lang['error_mail'];
                 $errors++;
             }
-            if (!$_POST['planet'])
+            if (!filter_input(INPUT_POST, 'planet'))
             {
                 $errorlist .= $lang['error_planet'];
                 $errors++;
             }
-            if (preg_match("/[^A-z0-9_\-]/", @$_POST['hplanet']) == 1)
+            if (preg_match("/[^A-z0-9_\-]/", filter_input(INPUT_POST, 'hplanet')) == 1)
             {
                 $errorlist .= $lang['error_planetnum'];
                 $errors++;
             }
-            if (!$_POST['character'])
+            if (!filter_input(INPUT_POST, 'character'))
             {
                 $errorlist .= $lang['error_character'];
                 $errors++;
             }
-            if (strlen($_POST['passwrd']) < 4)
+            if (strlen(filter_input(INPUT_POST, 'passwrd')) < 4)
             {
                 $errorlist .= $lang['error_password'];
                 $errors++;
             }
-            if (preg_match("/[^A-z0-9_\-]/", $_POST['character']) == 1) {
+            if (preg_match("/[^A-z0-9_\-]/", filter_input(INPUT_POST, 'character')) == 1) {
                 $errorlist .= $lang['error_charalpha'];
                 $errors++;
             }
-            if ($_POST['rgt'] != 'on')
+            if (filter_input(INPUT_POST, 'rgt') != 'on')
             {
                 $errorlist .= $lang['error_rgt'];
                 $errors++;
             }
             // Le meilleur moyen de voir si un nom d'utilisateur est pris c'est d'essayer de l'appeler !!
-            $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . mysql_real_escape_string($_POST['character']) . "' LIMIT 1;", 'users', true);
+            $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . mysql_real_escape_string(filter_input(INPUT_POST, 'character')) . "' LIMIT 1;", 'users', true);
             if ($ExistUser)
             {
                 $errorlist .= $lang['error_userexist'];
                 $errors++;
             }
             // Si l'on verifiait que l'adresse email n'existe pas encore ???
-            $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . mysql_real_escape_string($_POST['email']) . "' LIMIT 1;", 'users', true);
+            $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . mysql_real_escape_string(filter_input(INPUT_POST, 'email')) . "' LIMIT 1;", 'users', true);
             if ($ExistMail)
             {
                 $errorlist .= $lang['error_emailexist'];
                 $errors++;
             }
-            if ($_POST['sex'] != '' && $_POST['sex'] != 'F' && $_POST['sex'] != 'M')
+            if (filter_input(INPUT_POST, 'sex') != '' && filter_input(INPUT_POST, 'sex') != 'F' && filter_input(INPUT_POST, 'sex') != 'M')
             {
                 $errorlist .= $lang['error_sex'];
                 $errors++;
@@ -114,24 +106,24 @@ class ShowRegisterPage extends AbstractIndexPage
             {
                 ShowErrorPage::message($errorlist, $lang['Register']);
             } else {
-                $newpass = $_POST['passwrd'];
-                $UserName = CheckInputStrings ($_POST['character']);
-                $UserEmail = CheckInputStrings ($_POST['email']);
-                $UserPlanet = CheckInputStrings (addslashes($_POST['planet']));
+                $newpass = filter_input(INPUT_POST, 'passwrd');
+                $UserName = CheckInputStrings (filter_input(INPUT_POST, 'character'));
+                $UserEmail = CheckInputStrings (filter_input(INPUT_POST, 'email'));
+                $UserPlanet = CheckInputStrings (addslashes(filter_input(INPUT_POST, 'planet')));
                 $md5newpass = md5($newpass);
                 // Creation de l'utilisateur
                 $QryInsertUser = "INSERT INTO {{table}} SET ";
                 $QryInsertUser .= "`username` = '" . mysql_real_escape_string(strip_tags($UserName)) . "', ";
                 $QryInsertUser .= "`email` = '" . mysql_real_escape_string($UserEmail) . "', ";
                 $QryInsertUser .= "`email_2` = '" . mysql_real_escape_string($UserEmail) . "', ";
-                $QryInsertUser .= "`sex` = '" . mysql_real_escape_string($_POST['sex']) . "', ";
-                $QryInsertUser .= "`ip_at_reg` = '" . $_SERVER["REMOTE_ADDR"] . "', ";
+                $QryInsertUser .= "`sex` = '" . mysql_real_escape_string(filter_input(INPUT_POST, 'sex')) . "', ";
+                $QryInsertUser .= "`ip_at_reg` = '" . filter_input(INPUT_SERVER, 'REMOTE_ADDR') . "', ";
                 $QryInsertUser .= "`id_planet` = '0', ";
                 $QryInsertUser .= "`register_time` = '" . time() . "', ";
                 $QryInsertUser .= "`password`='" . $md5newpass . "';";
                 doquery($QryInsertUser, 'users');
                 // On cherche le numero d'enregistrement de l'utilisateur fraichement cree
-                $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . mysql_real_escape_string($_POST['character']) . "' LIMIT 1;", 'users', true);
+                $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . mysql_real_escape_string(filter_input(INPUT_POST, 'character')) . "' LIMIT 1;", 'users', true);
                 $iduser = $NewUser['id'];
                 // Recherche d'une place libre !
                 $LastSettedGalaxyPos = $game_config['LastSettedGalaxyPos'];
@@ -218,24 +210,16 @@ class ShowRegisterPage extends AbstractIndexPage
                 // Mise a jour du nombre de joueurs inscripts
                 doquery("UPDATE {{table}} SET `config_value` = `config_value` + '1' WHERE `config_name` = 'users_amount' LIMIT 1;", 'config');
                 $Message = $lang['thanksforregistry'];
-                if ($this->sendpassemail($_POST['email'], "$newpass"))
+                if ($this->sendpassemail(filter_input(INPUT_POST, 'email'), "$newpass"))
                 {
-                    $Message .= " (" . htmlentities($_POST["email"]) . ")";
+                    $Message .= " (" . htmlentities(filter_input(INPUT_POST, 'email')) . ")";
                 } else {
-                    $Message .= " (" . htmlentities($_POST["email"]) . ")";
+                    $Message .= " (" . htmlentities(filter_input(INPUT_POST, 'email')) . ")";
                     $Message .= "<br><br>" . $lang['error_mailsend'] . " <b>" . $newpass . "</b>";
                 }
                 message($Message, $lang['reg_welldone']);
             }
-        } elseif (@$game_config['secu'] === 1 ) {
-            $_SESSION['nombre1']= rand(0,50);
-            $_SESSION['nombre2']= rand(0,50);
-            $_SESSION['secu'] = $_SESSION['nombre1'] + $_SESSION['nombre2'];
-            $this->tplObj->assign(array(
-                'code_secu' => "<th>Securite: </th>",
-                'affiche'   => $_SESSION['nombre1']." + ".$_SESSION['nombre2']." = <input name='secu' size='3' maxlength='3' type='text'>",
-            ));
-	} else {
+        } else {
             // Afficher le formulaire d'enregistrement
             $this->tplObj->assign(array(
                 'code_secu' => "",
@@ -245,7 +229,7 @@ class ShowRegisterPage extends AbstractIndexPage
 
         $this->tplObj->assign(array(
             'title'         => $lang['registry'],
-            'registry'      => $lang['registry'],
+            'lang'      => $lang,
             'form'          => $lang['form'],
             'GameName'      => $lang['GameName'],
             'neededpass'    => $lang['neededpass'],
@@ -298,5 +282,3 @@ class ShowRegisterPage extends AbstractIndexPage
         return mail($to, $title, $body, $head);
     }
 }
-
-?>

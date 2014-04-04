@@ -4,7 +4,7 @@
             <br/><br/>
             <h2>
                 <font size="+3">
-                    {$registry}
+                    {$lang['registry']}
                 </font><br>
                 {$servername1}
             </h2>
@@ -13,68 +13,64 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="c">
-                            <b>{$form}</b>
+                            <b>{$lang['form']}</b>
                         </td>
                     </tr>
                     <tr>
-                        <th width="293">{$GameName}</th>
+                        <th width="293">{$lang['GameName']}</th>
                         <th width="293">
                             <input name="character" size="20" maxlength="20" type="text" onKeypress="
-                                if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
-                                if (event.which==60 || event.which==62) return false;">
+                                if (event.keyCode===60 || event.keyCode===62) event.returnValue = false;
+                                if (event.which===60 || event.which===62) return false;">
                         </th>
                     </tr>
                     <tr>
-                        <th>{$neededpass}</th>
+                        <th>{$lang['neededpass']}</th>
                         <th>
                             <input name="passwrd" size="20" maxlength="20" type="password" onKeypress="
-                                if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
-                                if (event.which==60 || event.which==62) return false;">
+                                if (event.keyCode===60 || event.keyCode===62) event.returnValue = false;
+                                if (event.which===60 || event.which===62) return false;">
                         </th>
                     </tr>
                     <tr>
-                        <th>{$EMail}</th>
+                        <th>{$lang['E-Mail']}</th>
                         <th>
                             <input name="email" size="20" maxlength="40" type="text" onKeypress="
-                                if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
-                                if (event.which==60 || event.which==62) return false;">
+                                if (event.keyCode===60 || event.keyCode===62) event.returnValue = false;
+                                if (event.which===60 || event.which===62) return false;">
                         </th>
                     </tr>
                     <tr>
-                        <th>{$MainPlanet}</th>
+                        <th>{$lang['MainPlanet']}</th>
                         <th>
                             <input name="planet" size="20" maxlength="20" type="text" onKeypress="
-                                if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
-                                if (event.which==60 || event.which==62) return false;">
+                                if (event.keyCode===60 || event.keyCode===62) event.returnValue = false;
+                                if (event.which===60 || event.which===62) return false;">
                         </th>
                     </tr>
                     <tr>
-                        <th>{$Sex}</th>
+                        <th>{$lang['Sex']}</th>
                         <th>
                             <select name="sex">
-                                <option value="">{$Undefined}</option>
-                                <option value="M">{$Male}</option>
-                                <option value="F">{$Female}</option>
+                                <option value="">{$lang['Undefined']}</option>
+                                <option value="M">{$lang['Male']}</option>
+                                <option value="F">{$lang['Female']}</option>
                             </select>
                         </th>
                     </tr>
                     <tr>
-                        {$code_secu}
-                        <th>{$affiche}</th>
-                    </tr>
-                    <tr>
                         <th>
                             <input name="rgt" type="checkbox">
-                            {$accept}
+                            {$lang['accept']}
                         </th>
                         <th>
-                            <input name="submit" type="submit" value="{$signup}">
+                            <input name="submit" type="submit" value="{$lang['signup']}">
                         </th>
                     </tr>
                     <tr>
                         <th colspan="2">
                             <a href="index.php">
-                                Retour a l'accueil
+                                {$lang['reg_go_back']}
                             </a>
                         </th>
                     </tr>

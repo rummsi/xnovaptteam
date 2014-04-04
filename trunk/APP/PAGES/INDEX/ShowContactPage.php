@@ -28,43 +28,27 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowContactPage extends AbstractIndexPage
-{
-    function __construct()
-    {
+class ShowContactPage extends AbstractIndexPage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'contact';
     }
 
-    function show()
-    {
+    function show() {
         global $lang;
         includeLang('contact');
-	$QrySelectUser  = "SELECT `username`, `email`, `authlevel` ";
-	$QrySelectUser .= "FROM {{table}} ";
-	$QrySelectUser .= "WHERE `authlevel` != '0' ORDER BY `authlevel` DESC;";
-	$GameOps = doquery ( $QrySelectUser, 'users');
-        
-	while( $Ops = mysql_fetch_assoc($GameOps) )
-        {
-            $bloc['ctc_data_name']    = $Ops['username'];
-            $bloc['ctc_data_auth']    = $lang['user_level'][$Ops['authlevel']];
-            $bloc['ctc_data_mail']    = "<a href=mailto:".$Ops['email'].">".$Ops['email']."</a>";
-            @$parse['ctc_admin_list'] .= parsetemplate($this->gettemplate('INDEX/contact_body_rows.tpl'), $bloc);
-	}
-        
+        $QrySelectUser = "SELECT `username`, `email`, `authlevel` ";
+        $QrySelectUser .= "FROM {{table}} ";
+        $QrySelectUser .= "WHERE `authlevel` != '0' ORDER BY `authlevel` DESC;";
+
         $this->tplObj->assign(array(
-            'title'             => $lang['ctc_title'],
-            'ctc_title'         => $lang['ctc_title'],
-            'ctc_intro'         => $lang['ctc_intro'],
-            'ctc_name'          => $lang['ctc_name'],
-            'ctc_rank'          => $lang['ctc_rank'],
-            'ctc_mail'          => $lang['ctc_mail'],
-            'ctc_admin_list'    => $parse['ctc_admin_list'],
+            'title' => $lang['ctc_title'],
+            'lang' => $lang,
+            'GameOps' => doquery($QrySelectUser, 'users'),
         ));
-        
+
         $this->render('default.contact.tpl');
     }
-}
 
-?>
+}

@@ -28,25 +28,22 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowIndexPage extends AbstractIndexPage
-{
-    public function __construct()
-    {
+class ShowIndexPage extends AbstractIndexPage {
+
+    public function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'login';
     }
 
-    function show()
-    {
-	global $langInfos, $dpath, $title, $lang, $game_config;
-        
-        if (!empty($_POST))
-        {
+    function show() {
+        global $lang, $game_config;
+
+        if (filter_input_array(INPUT_POST)) {
             $userData = array(
-                'username' => mysql_real_escape_string($_POST['username']),
-                'password' => mysql_real_escape_string($_POST['password'])
+                'username' => mysql_real_escape_string(filter_input(INPUT_POST, 'username')),
+                'password' => mysql_real_escape_string(filter_input(INPUT_POST, 'password'))
             );
-            $sql =<<<EOF
+            $sql = <<<EOF
                 SELECT
                     users.id,
                     users.username,
@@ -58,20 +55,16 @@ class ShowIndexPage extends AbstractIndexPage
                     LIMIT 1
 EOF;
             $login = doquery($sql, '', true);
-            if($login['banaday'] <= time() & $login['banaday'] !='0' )
-            {
-                doquery("UPDATE {{table}} SET `banaday` = '0', `bana` = '0', `urlaubs_modus` ='0'  WHERE `username` = '".$login['username']."' LIMIT 1;", 'users');
-                doquery("DELETE FROM {{table}} WHERE `who` = '".$login['username']."'",'banned');
+            if ($login['banaday'] <= time() & $login['banaday'] != '0') {
+                doquery("UPDATE {{table}} SET `banaday` = '0', `bana` = '0', `urlaubs_modus` ='0'  WHERE `username` = '" . $login['username'] . "' LIMIT 1;", 'users');
+                doquery("DELETE FROM {{table}} WHERE `who` = '" . $login['username'] . "'", 'banned');
             }
-            if ($login)
-            {
-                if (intval($login['login_success']))
-                {
-                    if (isset($_POST["rememberme"]))
-                    {
+            if ($login) {
+                if (intval($login['login_success'])) {
+                    if (filter_input(INPUT_POST, 'rememberme')) {
                         setcookie('nova-cookie', serialize(array('id' => $login['id'], 'key' => $login['login_rememberme'])), time() + 2592000);
                     }
-                    $sql =<<<EOF
+                    $sql = <<<EOF
                         UPDATE {{table}} AS users
                         SET users.onlinetime=UNIX_TIMESTAMP()
                         WHERE users.id={$login['id']}
@@ -87,43 +80,28 @@ EOF;
                 ShowErrorPage::message($lang['Login_FailUser']);
             }
         } else {
-            $PlayersOnline  = doquery("SELECT COUNT(DISTINCT id) AS `onlinenow` FROM {{table}} AS users WHERE `onlinetime` > (UNIX_TIMESTAMP()-900) AND users.authlevel < 3", 'users', true);
-            $LastPlayer     = doquery('SELECT users.`username` FROM {{table}} AS users ORDER BY `register_time` DESC LIMIT 1', 'users', true);
-            $Count          = doquery('SELECT COUNT(DISTINCT users.id) AS `players` FROM {{table}} AS users WHERE users.authlevel < 3', 'users', true);
-            
+
             $this->tplObj->assign(array(
-                'title'         => $lang['Login'],
-                'User_name'     => $lang['User_name'],
-                'Password'      => $lang['Password'],
-                'Remember_me'   => $lang['Remember_me'],
-                'Login'         => $lang['Login'],
-                'PasswordLost'  => $lang['PasswordLost'],
-                'log_reg'       => $lang['log_reg'],
-                'log_welcome'   => $lang['log_welcome'],
-                'log_desc'      => $lang['log_desc'],
-                'log_toreg'     => $lang['log_toreg'],
-                'log_online'    => $lang['log_online'],
-                'log_lastreg'   => $lang['log_lastreg'],
-                'log_numbreg'   => $lang['log_numbreg'],
-                'users_amount'  => $Count['players'],
-                'log_univ'      => $lang['log_univ'],
-                'forum_url'     => $game_config['forum_url'],
-                'online_users'  => $PlayersOnline['onlinenow'],
-                'last_user'     => $LastPlayer['username'],
+                'title' => $lang['Login'],
+                'lang' => $lang,
+                'forum_url' => $game_config['forum_url'],
+                'Count' => doquery('SELECT COUNT(DISTINCT users.id) AS `players` FROM {{table}} AS users WHERE users.authlevel < 3', 'users', true),
+                'PlayersOnline' => doquery("SELECT COUNT(DISTINCT id) AS `onlinenow` FROM {{table}} AS users WHERE `onlinetime` > (UNIX_TIMESTAMP()-900) AND users.authlevel < 3", 'users', true),
+                'LastPlayer' => doquery('SELECT users.`username` FROM {{table}} AS users ORDER BY `register_time` DESC LIMIT 1', 'users', true),
             ));
 
             // Test pour prendre le nombre total de joueur et le nombre de joueurs connectés
-            if (isset($_GET['ucount']) && $_GET['ucount'] == 1)
-            {
-                $page = $PlayersOnline['onlinenow']."/".$Count['players'];
-                die ( $page );
+            if (filter_input(INPUT_GET, 'ucount') !== FALSE && filter_input(INPUT_GET, 'ucount') == 1) {
+                $PlayersOnline = doquery("SELECT COUNT(DISTINCT id) AS `onlinenow` FROM {{table}} AS users WHERE `onlinetime` > (UNIX_TIMESTAMP()-900) AND users.authlevel < 3", 'users', true);
+                $Count = doquery('SELECT COUNT(DISTINCT users.id) AS `players` FROM {{table}} AS users WHERE users.authlevel < 3', 'users', true);
+                $page = $PlayersOnline['onlinenow'] . "/" . $Count['players'];
+                die($page);
             } else {
                 define('LOGIN', true);
-                
+
                 $this->render('default.index.tpl');
             }
         }
     }
-}
 
-?>
+}

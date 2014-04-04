@@ -28,25 +28,24 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowRulesPage extends AbstractIndexPage
-{
-    function __construct()
-    {
+class ShowRulesPage extends AbstractIndexPage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'rules';
     }
 
-    function show()
-    {
-        global $lang, $title, $game_config;
+    function show() {
+        global $lang, $game_config;
         includeLang('rules');
-        
+
         $this->tplObj->assign(array(
-            'title'             => $lang['rules'],
-            'lang'              => $lang,
-            'servername'       => $game_config['game_name'],
+            'title' => $lang['rules'],
+            'lang' => $lang,
+            'servername' => $game_config['game_name'],
         ));
-        
+
         $this->render('default.rules.tpl');
     }
+
 }
