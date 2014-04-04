@@ -73,7 +73,7 @@ $lang['error_emailexist']  = 'E-Mail is already in use.<br />';
 $lang['error_sex']         = 'Error in sex!<br />';
 $lang['error_mailsend']    = 'An error occurred while sending the email! Your password is: ';
 $lang['reg_welldone']      = 'Registration complete!';
+$lang['reg_go_back']       = 'Return to main';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
-?>

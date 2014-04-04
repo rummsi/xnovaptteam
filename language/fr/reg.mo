@@ -73,7 +73,7 @@ $lang['error_emailexist']  = 'Cet e-mail est d&eacute;j&agrave; utilis&eacute; !
 $lang['error_sex']         = 'Erreur dans le sexe !<br />';
 $lang['error_mailsend']    = 'Une erreur s\'est produite lors de l\'envoi du courriel! Votre mot de passe est : ';
 $lang['reg_welldone']      = 'Inscription termin&eacute;e !';
+$lang['reg_go_back']      = 'Retour a l\'accueil';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
-?>

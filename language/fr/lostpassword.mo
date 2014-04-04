@@ -36,5 +36,4 @@ $lang['pseudo']    = "Pseudo";
 $lang['email']    = "e-Mail";
 $lang['ButtonSendPass'] = "Envoyer";
 $lang['PassForm'] = "Formulaire";
-
-?>
+$lang['go_back']      = 'Retour a l\'accueil';

@@ -28,70 +28,62 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowLostpasswordPage extends AbstractIndexPage
-{
-    function __construct()
-    {
+class ShowLostpasswordPage extends AbstractIndexPage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'lostpass';
     }
 
-    function show()
-    {
+    function show() {
         global $lang;
-        
+
         includeLang('lostpassword');
         $mailData = array(
             'recipient' => NULL,
             'sender' => 'no-reply',
             'subject' => 'XNova:Legacies - Changement de mot de passe'
-            );
+        );
         $username = NULL;
-        if (!empty($_POST))
-        {
-            if(isset($_POST['pseudo']) && !empty($_POST['pseudo']))
-            {
-                $username = mysql_real_escape_string($_POST['pseudo']);
-                $sql =<<<EOF
+        if (filter_input_array(INPUT_POST)) {
+            if (filter_input(INPUT_POST, 'pseudo') !== FALSE && filter_input(INPUT_POST, 'pseudo')) {
+                $username = mysql_real_escape_string(filter_input(INPUT_POST, 'pseudo'));
+                $sql = <<<EOF
                     SELECT users.email, users.username
                       FROM {{table}} AS users
                       WHERE users.username="{$username}"
                       LIMIT 1
 EOF;
-                if (!($result = doquery($sql, 'users', true)))
-                {
+                if (!($result = doquery($sql, 'users', true))) {
                     ShowErrorPage::message("Cet utilisateur n'existe pas");
                     die();
                 }
                 list($mailData['recipient'], $username) = $result;
-            } else if(isset($_POST['email']) && !empty($_POST['email'])){
-                $email = mysql_real_escape_string($_POST['email']);
-                $sql =<<<EOF
+            } else if (filter_input(INPUT_POST, 'email') && filter_input(INPUT_POST, 'email') !== FALSE) {
+                $email = mysql_real_escape_string(filter_input(INPUT_POST, 'email'));
+                $sql = <<<EOF
                     SELECT users.email, users.username
                       FROM {{table}} AS users
                       WHERE users.email="{$email}"
                       LIMIT 1
 EOF;
-                if (!($result = doquery($sql, 'users', true)))
-                {
+                if (!($result = doquery($sql, 'users', true))) {
                     ShowErrorPage::message("Cet email n'est utilisé par aucun joueur");
                     die();
                 }
                 list($mailData['recipient'], $username) = $result;
             } else {
-                    ShowErrorPage::message("Veuillez entrer votre login ou votre email.");
+                ShowErrorPage::message("Veuillez entrer votre login ou votre email.");
                 die();
             }
-            if (!is_null($mailData['recipient']))
-            {
+            if (!is_null($mailData['recipient'])) {
                 $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
                 $randomPass = '';
                 $size = rand(8, 10);
-                for ($i = 0; $i < $size; $i++)
-                {
+                for ($i = 0; $i < $size; $i++) {
                     $randomPass .= $characters[rand(0, strlen($characters) - 1)];
                 }
-                $message =<<<EOF
+                $message = <<<EOF
                     Votre mot de passe a été modifié, veuillez trouver ci-dessous vos informations de connexion :
                     login : $username
                     mot de passe : $randomPass
@@ -99,12 +91,12 @@ EOF;
                     A bientôt sur XNova:Legacies
 EOF;
                 $version = VERSION;
-                $headers =<<<EOF
+                $headers = <<<EOF
                     From: {$mailData['sender']}
                     X-Sender: Legacies/{$version}
 EOF;
                 mail($mailData['recipient'], $mailData['subject'], $message, $headers);
-                $sql =<<<EOF
+                $sql = <<<EOF
                     UPDATE {{table}} AS users
                       SET users.password="{$randomPass}"
                       WHERE users.username="$username"
@@ -115,20 +107,13 @@ EOF;
                 die();
             }
         }
-        
+
         $this->tplObj->assign(array(
-            'title'             => $lang['ResetPass'],
-            'ResetPass'         => $lang['ResetPass'],
-            'PassForm'          => $lang['PassForm'],
-            'TextPass1'         => $lang['TextPass1'],
-            'TextPass2'         => $lang['TextPass2'],
-            'pseudo'            => $lang['pseudo'],
-            'email'             => $lang['email'],
-            'ButtonSendPass'    => $lang['ButtonSendPass'],
+            'title' => $lang['ResetPass'],
+            'lang' => $lang,
         ));
-        
+
         $this->render('default.lostpassword.tpl');
     }
-}
 
-?>
+}
