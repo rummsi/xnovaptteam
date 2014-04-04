@@ -28,29 +28,25 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowOverviewPage extends AbstractGamePage
-{
-    function __construct()
-    {
+class ShowOverviewPage extends AbstractGamePage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'overview';
     }
 
-    function show()
-    {
+    function show() {
         global $user, $lang, $game_config, $planetrow, $dpath, $galaxyrow, $flotten;
         includeLang('resources');
         includeLang('overview');
         includeLang('leftmenu');
-        
-        $lunarow = doquery("SELECT * FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true);
+        includeLang('buildings');
+
         //CheckPlanetUsedFields ($lunarow);
-        $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
-        if(isset($_POST['deleteid']))
-        {
-            $_POST['deleteid'] = intval($_POST['deleteid']);
+        if (filter_input(INPUT_POST, 'deleteid') !==FALSE) {
+            $_POST['deleteid'] = intval(filter_input(INPUT_POST, 'deleteid'));
         }
-        $pl = mysql_real_escape_string(isset($_GET['pl']) ? $_GET['pl'] : 0);
+//        $pl = mysql_real_escape_string(isset($_GET['pl']) ? $_GET['pl'] : 0);
 
         if ($user['id'] != '') {
             // -----------------------------------------------------------------------------------------------
@@ -63,10 +59,8 @@ class ShowOverviewPage extends AbstractGamePage
             $LvlUpMinier = $user['lvl_minier'] + 1;
             $LvlUpRaid = $user['lvl_raid'] + 1;
 
-            if (($LvlUpMinier + $LvlUpRaid) <= 100)
-            {
-                if ($XpMinier >= $XpMinierUp)
-                {
+            if (($LvlUpMinier + $LvlUpRaid) <= 100) {
+                if ($XpMinier >= $XpMinierUp) {
                     $QryUpdateUser = "UPDATE {{table}} SET ";
                     $QryUpdateUser .= "`lvl_minier` = '" . $LvlUpMinier . "', ";
                     $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
@@ -74,8 +68,7 @@ class ShowOverviewPage extends AbstractGamePage
                     $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
                     doquery($QryUpdateUser, 'users');
                 }
-                if ($XPRaid >= $XpRaidUp)
-                {
+                if ($XPRaid >= $XpRaidUp) {
                     $QryUpdateUser = "UPDATE {{table}} SET ";
                     $QryUpdateUser .= "`lvl_raid` = '" . $LvlUpRaid . "', ";
                     $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
@@ -89,31 +82,26 @@ class ShowOverviewPage extends AbstractGamePage
             // Toutes de vert vetues
             $OwnFleets = doquery("SELECT * FROM {{table}} WHERE `fleet_owner` = '" . $user['id'] . "';", 'fleets');
             $Record = 0;
-            while ($FleetRow = mysql_fetch_array($OwnFleets))
-            {
+            while ($FleetRow = mysql_fetch_array($OwnFleets)) {
                 $Record++;
                 $StartTime = $FleetRow['fleet_start_time'];
                 $StayTime = $FleetRow['fleet_end_stay'];
                 $EndTime = $FleetRow['fleet_end_time'];
                 // Flotte a l'aller
                 $Label = "fs";
-                if ($StartTime > time())
-                {
-                    $fpage[$StartTime] = BuildFleetEventTable ($FleetRow, 0, true, $Label, $Record);
+                if ($StartTime > time()) {
+                    $fpage[$StartTime] = BuildFleetEventTable($FleetRow, 0, true, $Label, $Record);
                 }
-                if ($FleetRow['fleet_mission'] <> 4)
-                {
+                if ($FleetRow['fleet_mission'] <> 4) {
                     // Flotte en stationnement
                     $Label = "ft";
-                    if ($StayTime > time())
-                    {
-                        $fpage[$StayTime] = BuildFleetEventTable ($FleetRow, 1, true, $Label, $Record);
+                    if ($StayTime > time()) {
+                        $fpage[$StayTime] = BuildFleetEventTable($FleetRow, 1, true, $Label, $Record);
                     }
                     // Flotte au retour
                     $Label = "fe";
-                    if ($EndTime > time())
-                    {
-                        $fpage[$EndTime] = BuildFleetEventTable ($FleetRow, 2, true, $Label, $Record);
+                    if ($EndTime > time()) {
+                        $fpage[$EndTime] = BuildFleetEventTable($FleetRow, 2, true, $Label, $Record);
                     }
                 }
             } // End While
@@ -122,27 +110,21 @@ class ShowOverviewPage extends AbstractGamePage
             // Flotte ennemies (ou amie) mais non personnelles
             $OtherFleets = doquery("SELECT * FROM {{table}} WHERE `fleet_target_owner` = '" . $user['id'] . "';", 'fleets');
             $Record = 2000;
-            while ($FleetRow = mysql_fetch_array($OtherFleets))
-            {
-                if ($FleetRow['fleet_owner'] != $user['id'])
-                {
-                    if ($FleetRow['fleet_mission'] != 8)
-                    {
+            while ($FleetRow = mysql_fetch_array($OtherFleets)) {
+                if ($FleetRow['fleet_owner'] != $user['id']) {
+                    if ($FleetRow['fleet_mission'] != 8) {
                         $Record++;
                         $StartTime = $FleetRow['fleet_start_time'];
                         $StayTime = $FleetRow['fleet_end_stay'];
-                        if ($StartTime > time())
-                        {
+                        if ($StartTime > time()) {
                             $Label = "ofs";
-                            $fpage[$StartTime] = BuildFleetEventTable ($FleetRow, 0, false, $Label, $Record);
+                            $fpage[$StartTime] = BuildFleetEventTable($FleetRow, 0, false, $Label, $Record);
                         }
-                        if ($FleetRow['fleet_mission'] == 5)
-                        {
+                        if ($FleetRow['fleet_mission'] == 5) {
                             // Flotte en stationnement
                             $Label = "oft";
-                            if ($StayTime > time())
-                            {
-                                $fpage[$StayTime] = BuildFleetEventTable ($FleetRow, 1, false, $Label, $Record);
+                            if ($StayTime > time()) {
+                                $fpage[$StayTime] = BuildFleetEventTable($FleetRow, 1, false, $Label, $Record);
                             }
                         }
                     }
@@ -151,51 +133,45 @@ class ShowOverviewPage extends AbstractGamePage
             // -----------------------------------------------------------------------------------------------
             // --- Gestion de la liste des planetes ----------------------------------------------------------
             // Planetes ...
-            $Order = ($user['planet_sort_order'] == 1) ? "DESC" : "ASC" ;
+            $Order = ($user['planet_sort_order'] == 1) ? "DESC" : "ASC";
             $Sort = $user['planet_sort'];
             $QryPlanets = "SELECT * FROM {{table}} WHERE `id_owner` = '" . $user['id'] . "' ORDER BY ";
-            if ($Sort == 0)
-            {
+            if ($Sort == 0) {
                 $QryPlanets .= "`id` " . $Order;
             } elseif ($Sort == 1) {
                 $QryPlanets .= "`galaxy`, `system`, `planet`, `planet_type` " . $Order;
             } elseif ($Sort == 2) {
                 $QryPlanets .= "`name` " . $Order;
             }
-            $planets_query = doquery ($QryPlanets, 'planets');
+            $planets_query = doquery($QryPlanets, 'planets');
             $Colone = 1;
             $AllPlanets = "<tr>";
-            while ($UserPlanet = mysql_fetch_array($planets_query))
-            {
-                PlanetResourceUpdate ($user, $UserPlanet, time());
-                if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3)
-                {
+            while ($UserPlanet = mysql_fetch_array($planets_query)) {
+                PlanetResourceUpdate($user, $UserPlanet, time());
+                if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3) {
                     $AllPlanets .= "<th>" . $UserPlanet['name'] . "<br>";
                     $AllPlanets .= "<a href=\"?page=overview&cp=" . $UserPlanet['id'] . "&re=0\" title=\"" . $UserPlanet['name'] . "\"><img src=\"" . $dpath . "planeten/small/s_" . $UserPlanet['image'] . ".jpg\" height=\"50\" width=\"50\"></a><br>";
                     $AllPlanets .= "<center>";
-                    if ($UserPlanet['b_building'] != 0)
-                    {
-                        UpdatePlanetBatimentQueueList ($UserPlanet, $user);
-                        if ($UserPlanet['b_building'] != 0)
-                        {
+                    if ($UserPlanet['b_building'] != 0) {
+                        UpdatePlanetBatimentQueueList($UserPlanet, $user);
+                        if ($UserPlanet['b_building'] != 0) {
                             $BuildQueue = $UserPlanet['b_building_id'];
-                            $QueueArray = explode (";", $BuildQueue);
-                            $CurrentBuild = explode (",", $QueueArray[0]);
+                            $QueueArray = explode(";", $BuildQueue);
+                            $CurrentBuild = explode(",", $QueueArray[0]);
                             $BuildElement = $CurrentBuild[0];
                             $BuildLevel = $CurrentBuild[1];
                             $BuildRestTime = pretty_time($CurrentBuild[3] - time());
                             $AllPlanets .= '' . $lang['tech'][$BuildElement] . ' (' . $BuildLevel . ')';
                             $AllPlanets .= "<br><font color=\"#7f7f7f\">(" . $BuildRestTime . ")</font>";
                         } else {
-                            CheckPlanetUsedFields ($UserPlanet);
+                            CheckPlanetUsedFields($UserPlanet);
                             $AllPlanets .= $lang['Free'];
                         }
                     } else {
                         $AllPlanets .= $lang['Free'];
                     }
                     $AllPlanets .= "</center></th>";
-                    if ($Colone <= 1)
-                    {
+                    if ($Colone <= 1) {
                         $Colone++;
                     } else {
                         $AllPlanets .= "</tr><tr>";
@@ -207,14 +183,12 @@ class ShowOverviewPage extends AbstractGamePage
             // --- Gestion des attaques missiles -------------------------------------------------------------
             $iraks_query = doquery("SELECT * FROM {{table}} WHERE owner = '" . $user['id'] . "'", 'iraks');
             $Record = 4000;
-            while ($irak = mysql_fetch_array ($iraks_query))
-            {
+            while ($irak = mysql_fetch_array($iraks_query)) {
                 $Record++;
                 $fpage[$irak['zeit']] = '';
-                if ($irak['zeit'] > time())
-                {
+                if ($irak['zeit'] > time()) {
                     $time = $irak['zeit'] - time();
-                    $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, true);
+                    $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet("fm", $Record, $time, true);
                     $planet_start = doquery("SELECT * FROM {{table}} WHERE
 						galaxy = '" . $irak['galaxy'] . "' AND
 						system = '" . $irak['system'] . "' AND
@@ -225,8 +199,7 @@ class ShowOverviewPage extends AbstractGamePage
 						system = '" . $irak['system_angreifer'] . "' AND
 						planet = '" . $irak['planet_angreifer'] . "' AND
 						planet_type = '1'", 'planets', true);
-                    if (mysql_num_rows($planet_start) == 1)
-                    {
+                    if (mysql_num_rows($planet_start) == 1) {
                         $planet = mysql_fetch_array($planet_start);
                     }
                     $fpage[$irak['zeit']] .= "<tr><th><div id=\"bxxfs$i\" class=\"z\"></div><font color=\"lime\">" . gmdate("H:i:s", $irak['zeit'] + 1 * 60 * 60) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">Une attaque de missiles (" . $irak['anzahl'] . ") de " . $user_planet['name'] . " ";
@@ -234,134 +207,66 @@ class ShowOverviewPage extends AbstractGamePage
                     $fpage[$irak['zeit']] .= ' arrive sur la plan&egrave;te' . $planet["name"] . ' ';
                     $fpage[$irak['zeit']] .= '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy"] . '&system=' . $irak["system"] . '&planet=' . $irak["planet"] . '">[' . $irak["galaxy"] . ':' . $irak["system"] . ':' . $irak["planet"] . ']</a>';
                     $fpage[$irak['zeit']] .= '</font>';
-                    $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, false);
+                    $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet("fm", $Record, $time, false);
                     $fpage[$irak['zeit']] .= "</th>";
                 }
             }
-            // --- Gestion de l'affichage d'une lune ---------------------------------------------------------
-            if ($lunarow['id'] <> 0)
-            {
-                if ($planetrow['planet_type'] == 1)
-                {
-                    $lune = doquery ("SELECT * FROM {{table}} WHERE `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `planet` = '" . $planetrow['planet'] . "' AND `planet_type` = '3'", 'planets', true);
-                    $parse['moon_img'] = "<a href=\"?page=overview&cp=" . $lune['id'] . "&re=0\" title=\"" . $lune['name'] . "\"><img src=\"" . $dpath . "planeten/" . $lune['image'] . ".jpg\" height=\"50\" width=\"50\"></a>";
-                    $parse['moon'] = $lune['name'];
-                } else {
-                    $parse['moon_img'] = "";
-                    $parse['moon'] = "";
-                }
-            } else {
-                $parse['moon_img'] = "";
-                $parse['moon'] = "";
-            }
-            // Moon END
+
             $StatRecord = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '" . $user['id'] . "';", 'statpoints', true);
             $ile = $StatRecord['total_old_rank'] - $StatRecord['total_rank'];
-            if ($ile >= 1)
-            {
+            if ($ile >= 1) {
                 $parse['ile'] = "<font color=lime>+" . $ile . "</font>";
             } elseif ($ile < 0) {
                 $parse['ile'] = "<font color=red>-" . $ile . "</font>";
             } elseif ($ile == 0) {
                 $parse['ile'] = "<font color=lightblue>" . $ile . "</font>";
             }
-            if (isset($fpage))
-            {
-                if (count($fpage) > 0)
-                {
+            if (isset($fpage)) {
+                if (count($fpage) > 0) {
                     ksort($fpage);
-                    foreach ($fpage as $time => $content)
-                    {
+                    foreach ($fpage as $time => $content) {
                         $flotten .= $content . "\n";
                     }
                 }
             }
             $parse['energy_used'] = $planetrow["energy_max"] - $planetrow["energy_used"];
-            if ($planetrow['b_building'] != 0)
-            {
-                UpdatePlanetBatimentQueueList ($planetrow, $user);
-                if ($planetrow['b_building'] != 0)
-                {
-                    $BuildQueue = explode (";", $planetrow['b_building_id']);
-                    $CurrBuild = explode (",", $BuildQueue[0]);
-                    $RestTime = $planetrow['b_building'] - time();
-                    $PlanetID = $planetrow['id'];
-                    $Build = InsertBuildListScript ("overview");
-                    $Build .= $lang['tech'][$CurrBuild[0]] . ' (' . ($CurrBuild[1]) . ')';
-                    $Build .= "<br /><div id=\"blc\" class=\"z\">" . pretty_time($RestTime) . "</div>";
-                    $Build .= "\n<script language=\"JavaScript\">";
-                    $Build .= "\n	pp = \"" . $RestTime . "\";\n"; // temps necessaire (a compter de maintenant et sans ajouter time() )
-                    $Build .= "\n	pk = \"" . 1 . "\";\n"; // id index (dans la liste de construction)
-                    $Build .= "\n	pm = \"cancel\";\n"; // mot de controle
-                    $Build .= "\n	pl = \"" . $PlanetID . "\";\n"; // id planete
-                    $Build .= "\n	t();\n";
-                    $Build .= "\n</script>\n";
-                    $parse['building'] = $Build;
-                } else {
-                    $parse['building'] = $lang['Free'];
-                }
-            } else {
-                $parse['building'] = $lang['Free'];
-            }
+
             $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
             $parse['last_user'] = $query['username'];
-            $query = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE onlinetime>" . (time()-900), 'users', true);
+            $query = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE onlinetime>" . (time() - 900), 'users', true);
             $parse['online_users'] = $query[0];
             // $count = doquery(","users",true);
             $parse['users_amount'] = $game_config['users_amount'];
             // Mode Améliorations
             $LvlMinier = $user['lvl_minier'];
             $LvlRaid = $user['lvl_raid'];
-            // Compteur de Membres en ligne
-            $OnlineUsers = doquery("SELECT COUNT(*) FROM {{table}} WHERE onlinetime>='" . (time()-15 * 60) . "'", 'users', 'true');
-        
-            $this->tplObj->assign(array(
-                'title'                 => $lang['Overview'],
-                'planet_name'           => $planetrow['name'],
-                'user_username'         => $user['username'],
-                'NumberMembersOnline'   => $OnlineUsers[0],
-                'fleet_list'            => $flotten,
-                'moon_img'              => $parse['moon_img'],
-                'moon'                  => $parse['moon'],
-                'planet_image'          => $planetrow['image'],
-                'building'              => $parse['building'],
-                'anothers_planets'      => $AllPlanets,
-                'planet_diameter'       => pretty_number($planetrow['diameter']),
-                'planet_field_current'  => $planetrow['field_current'],
-                'planet_field_max'      => CalculateMaxPlanetFields($planetrow),
-                'lvl_minier'            => $user['lvl_minier'],
-                'lvl_raid'              => $user['lvl_raid'],
-                'xpminier'              => $user['xpminier'],
-                'lvl_up_minier'         => $LvlMinier * 5000,
-                'xpraid'                => $user['xpraid'],
-                'lvl_up_raid'           => $LvlRaid * 10,
-                'planet_temp_min'       => $planetrow['temp_min'],
-                'planet_temp_max'       => $planetrow['temp_max'],
-                'galaxy_galaxy'         => $planetrow['galaxy'],
-                'galaxy_system'         => $planetrow['system'],
-                'galaxy_planet'         => $planetrow['planet'],
-                'metal_debris'          => pretty_number($galaxyrow['metal']),
-                'crystal_debris'        => pretty_number($galaxyrow['crystal']),
-                'user_points'           => pretty_number($StatRecord['build_points']),
-                'user_fleet'            => pretty_number($StatRecord['fleet_points']),
-                'player_points_tech'    => pretty_number($StatRecord['tech_points']),
-                'total_points'          => pretty_number($StatRecord['total_points']),
-                'u_user_rank'           => $StatRecord['total_rank'],
-                'user_rank'             => $StatRecord['total_rank'],
-                'raids'                 => $user['raids'],
-                'raidswin'              => $user['raidswin'],
-                'raidsloose'            => $user['raidsloose'],
 
-                'galaxyrow'             => $galaxyrow,
-                'LvlUpMinier'           => $user['lvl_minier'] + 1,
-                'LvlUpRaid'             => $user['lvl_raid'] + 1,
-                'XpMinierUp'            => $user['lvl_minier'] * 5000,
-                'XpRaidUp'              => $user['lvl_raid'] * 10,
-                'XpMinier'              => $user['xpminier'],
-                'XPRaid'                => $user['xpraid'],
+            $BuildQueue = explode(";", $planetrow['b_building_id']);
+
+            $this->tplObj->assign(array(
+                'title' => $lang['Overview'],
+                'OnlineUsers' => doquery("SELECT COUNT(*) FROM {{table}} WHERE onlinetime>='" . (time() - 15 * 60) . "'", 'users', 'true'),
+                'fleet_list' => $flotten,
+                'anothers_planets' => $AllPlanets,
+                'lvl_up_minier' => $LvlMinier * 5000,
+                'lvl_up_raid' => $LvlRaid * 10,
+                'galaxyrow' => $galaxyrow,
+                'LvlUpMinier' => $user['lvl_minier'] + 1,
+                'LvlUpRaid' => $user['lvl_raid'] + 1,
+                'XpMinierUp' => $user['lvl_minier'] * 5000,
+                'XpRaidUp' => $user['lvl_raid'] * 10,
+                'XpMinier' => $user['xpminier'],
+                'XPRaid' => $user['xpraid'],
+                'lune' => doquery("SELECT * FROM {{table}} WHERE `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `planet` = '" . $planetrow['planet'] . "' AND `planet_type` = '3'", 'planets', true),
+                'lunarow' => doquery("SELECT * FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true),
+                'CurrBuild' => explode(",", $BuildQueue[0]),
+                'RestTime' => $planetrow['b_building'] - time(),
+                'PlanetID' => $planetrow['id'],
+                'StatRecord'=>$StatRecord,
             ));
-        
+
             $this->render('overview.default.tpl');
         }
     }
+
 }

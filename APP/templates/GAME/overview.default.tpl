@@ -6,7 +6,9 @@
             <table width="519">
                 <tr>
                     <td class="c" colspan="4">
-                        <a href="game.php?page=renameplanet" title="{$lang['Planet_menu']}">{$lang['Planet']} "{$planet_name}"</a> ({$user_username})
+                        <a href="game.php?page=renameplanet" title="{$lang['Planet_menu']}">
+                            {$lang['Planet']} "{$planetrow['name']}"
+                        </a> ({$user['username']})
                     </td>
 		</tr>
                 {if $user['id'] != ''}
@@ -40,7 +42,7 @@
 		</tr>
 		<tr>
                     <th>{$lang['MembersOnline']}</th>
-                    <th colspan="3">{$NumberMembersOnline}</th>
+                    <th colspan="3">{$OnlineUsers[0]}</th>
 		</tr>
                 {if ($game_config['OverviewNewsFrame'] == '1')}
                     <tr>
@@ -53,8 +55,41 @@
 		</tr>
 		{$fleet_list}
 		<tr>
-                    <th>{$moon_img}<br>{$moon}</th>
-                    <th colspan="2"><img src="{$dpath}planeten/{$planet_image}.jpg" height="200" width="200"><br>{$building}</th>
+                    <th>
+                        {if $lunarow['id'] <> 0}
+                            {if $planetrow['planet_type'] == 1}
+                                <a href="?page=overview&cp={$lune['id']}&re=0" title="{$lune['name']}">
+                                    <img src="{$dpath}planeten/{$lune['image']}.jpg" height="50" width="50">
+                                </a>
+                                <br>
+                                {$lune['name']}
+                            {/if}
+                        {/if}
+                    </th>
+                    <th colspan="2">
+                        <img src="{$dpath}planeten/{$planetrow['image']}.jpg" height="200" width="200">
+                        <br>
+                        {if $planetrow['b_building'] != 0}
+                            {*UpdatePlanetBatimentQueueList($planetrow, $user)*}
+                            {if $planetrow['b_building'] != 0}
+                                {InsertBuildListScript("overview")}
+                                {$lang['tech'][$CurrBuild[0]]} ({$CurrBuild[1]})
+                                <br />
+                                <div id="blc" class="z">{pretty_time($RestTime)}</div>
+                                <!--<script language="JavaScript">
+                                    pp = "{$RestTime}";
+                                    pk = "{1}";
+                                    pm = "cancel";
+                                    pl = "{$PlanetID}";
+                                    t();
+                                </script>-->
+                            {else}
+                                {$lang['Free']}
+                            {/if}
+                        {else}
+                            {$lang['Free']}
+                        {/if}
+                    </th>
                     <th class="s">
                         <table class="s" align="top" border="0">
                             <tr>{$anothers_planets}</tr>
@@ -63,7 +98,12 @@
 		</tr>
 		<tr>
                     <th>{$lang['Diameter']}</th>
-                    <th colspan="3">{$planet_diameter} km (<a title="{$lang['Developed_fields']}">{$planet_field_current}</a> / <a title="{$lang['max_eveloped_fields']}">{$planet_field_max}</a> {$lang['fields']})</th>
+                    <th colspan="3">
+                        {pretty_number($planetrow['diameter'])} km (
+                        <a title="{$lang['Developed_fields']}">{$planetrow['field_current']}</a> / 
+                        <a title="{$lang['max_eveloped_fields']}">{CalculateMaxPlanetFields($planetrow)}</a>
+                        {$lang['fields']})
+                    </th>
 		</tr>
 		<tr>
                     <th>{$lang['Developed_fields']}</th>
@@ -86,8 +126,12 @@
                             <table border="0" width="100%">
                                 <tbody>
                                     <tr>
-					<td align="center" width="50%" style="background-color: transparent;"><b>{$lang['ov_off_mines']} : {$lvl_minier}</b></td>
-					<td align="center" width="50%" style="background-color: transparent;"><b>{$lang['ov_off_raids']} : {$lvl_raid}</b></td>
+					<td align="center" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_off_mines']} : {$user['lvl_minier']}</b>
+                                        </td>
+					<td align="center" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_off_raids']} : {$user['lvl_raid']}</b>
+                                        </td>
                                     </tr>
 				</tbody>
                             </table>
@@ -99,8 +143,12 @@
                             <table border="0" width="100%">
                                 <tbody>
                                     <tr>
-                                        <td align="center" width="50%" style="background-color: transparent;"><b>{$lang['ov_off_mines']} : {$xpminier} / {$lvl_up_minier}</b></td>
-					<td align="center" width="50%" style="background-color: transparent;"><b>{$lang['ov_off_raids']} : {$xpraid} / {$lvl_up_raid}</b></td>
+                                        <td align="center" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_off_mines']} : {$user['xpminier']} / {$lvl_up_minier}</b>
+                                        </td>
+					<td align="center" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_off_raids']} : {$user['xpraid']} / {$lvl_up_raid}</b>
+                                        </td>
                                     </tr>
 				</tbody>
                             </table>
@@ -108,19 +156,20 @@
                     </tr>
                     <tr>
 			<th>{$lang['Temperature']}</th>
-			<th colspan="3">{$lang['ov_temp_from']} {$planet_temp_min}{$lang['ov_temp_unit']} {$lang['ov_temp_to']} {$planet_temp_max}{$lang['ov_temp_unit']}</th>
+			<th colspan="3">
+                            {$lang['ov_temp_from']} {$planetrow['temp_min']}{$lang['ov_temp_unit']} {$lang['ov_temp_to']} {$planetrow['temp_max']}{$lang['ov_temp_unit']}</th>
                     </tr>
                     <tr>
 			<th>{$lang['Position']}</th>
 			<th colspan="3">
-                            <a href="galaxy.php?mode=0&galaxy={$galaxy_galaxy}&system={$galaxy_system}">
-                                [{$galaxy_galaxy}:{$galaxy_system}:{$galaxy_planet}]
+                            <a href="galaxy.php?mode=0&galaxy={$planetrow['galaxy']}&system={$planetrow['system']}">
+                                [{$planetrow['galaxy']}:{$planetrow['system']}:{$planetrow['planet']}]
                             </a>
 			</th>
                     </tr>
                     <tr>
 			<th>{$lang['ov_local_cdr']}</th>
-			<th colspan="3">{$lang['Metal']} : {$metal_debris} / {$lang['Crystal']} : {$crystal_debris}{if (($galaxyrow['metal'] != 0 || $galaxyrow['crystal'] != 0) && $planetrow[$resource[209]] != 0)}
+			<th colspan="3">{$lang['Metal']} : {pretty_number($galaxyrow['metal'])} / {$lang['Crystal']} : {pretty_number($galaxyrow['crystal'])}{if (($galaxyrow['metal'] != 0 || $galaxyrow['crystal'] != 0) && $planetrow[$resource[209]] != 0)}
                                                                                                                      (<a href="quickfleet.php?mode=8&g={$galaxyrow['galaxy']}&s={$galaxyrow['system']}&p={$galaxyrow['planet']}&t=2">{$lang['type_mission'][8]}</a>)
                                                                                                                    {/if}
                         </th>
@@ -131,24 +180,40 @@
                             <table border="0" width="100%">
 				<tbody>
                                     <tr>
-					<td align="right" width="50%" style="background-color: transparent;"><b>{$lang['ov_pts_build']} :</b></td>
-					<td align="left" width="50%" style="background-color: transparent;"><b>{$user_points}</b></td>
+					<td align="right" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_pts_build']} :</b>
+                                        </td>
+					<td align="left" width="50%" style="background-color: transparent;">
+                                            <b>{pretty_number($StatRecord['build_points'])}</b>
+                                        </td>
                                     </tr>
                                     <tr>
-					<td align="right" width="50%" style="background-color: transparent;"><b>{$lang['ov_pts_fleet']} :</b></td>
-					<td align="left" width="50%" style="background-color: transparent;"><b>{$user_fleet}</b></td>
+					<td align="right" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_pts_fleet']} :</b>
+                                        </td>
+					<td align="left" width="50%" style="background-color: transparent;">
+                                            <b>{pretty_number($StatRecord['fleet_points'])}</b>
+                                        </td>
                                     </tr>
                                     <tr>
-					<td align="right" width="50%" style="background-color: transparent;"><b>{$lang['ov_pts_reche']} :</b></td>
-					<td align="left" width="50%" style="background-color: transparent;"><b>{$player_points_tech}</b></td>
+					<td align="right" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_pts_reche']} :</b>
+                                        </td>
+					<td align="left" width="50%" style="background-color: transparent;">
+                                            <b>{pretty_number($StatRecord['tech_points'])}</b>
+                                        </td>
                                     </tr>
                                     <tr>
-					<td align="right" width="50%" style="background-color: transparent;"><b>{$lang['ov_pts_total']} :</b></td>
-					<td align="left" width="50%" style="background-color: transparent;"><b>{$total_points}</b></td>
+					<td align="right" width="50%" style="background-color: transparent;">
+                                            <b>{$lang['ov_pts_total']} :</b>
+                                        </td>
+					<td align="left" width="50%" style="background-color: transparent;">
+                                            <b>{pretty_number($StatRecord['total_points'])}</b>
+                                        </td>
                                     </tr>
                                     <tr>
 					<td colspan="2" align="center" width="100%" style="background-color: transparent;">
-                                            <b>({$lang['Rank']} <a href="stat.php?range={$u_user_rank}">{$user_rank}</a> {$lang['of']} {$game_config['users_amount']})</b>
+                                            <b>({$lang['Rank']} <a href="stat.php?range={$StatRecord['total_rank']}">{$StatRecord['total_rank']}</a> {$lang['of']} {$game_config['users_amount']})</b>
 					</td>
                                     </tr>
 				</tbody>
@@ -160,16 +225,28 @@
 			<table border="0" width="100%">
                             <tbody>
 				<tr>
-                                    <td align="right" width="50%" style="background-color: transparent;"><b>{$lang['NumberOfRaids']} :</b></td>
-                                    <td align="left" width="50%" style="background-color: transparent;"><b>{$raids}</b></td>
+                                    <td align="right" width="50%" style="background-color: transparent;">
+                                        <b>{$lang['NumberOfRaids']} :</b>
+                                    </td>
+                                    <td align="left" width="50%" style="background-color: transparent;">
+                                        <b>{$user['raids']}</b>
+                                    </td>
 				</tr>
 				<tr>
-                                    <td align="right" width="50%" style="background-color: transparent;"><b>{$lang['RaidsWin']} :</b></td>
-                                    <td align="left" width="50%" style="background-color: transparent;"><b>{$raidswin}</b></td>
+                                    <td align="right" width="50%" style="background-color: transparent;">
+                                        <b>{$lang['RaidsWin']} :</b>
+                                    </td>
+                                    <td align="left" width="50%" style="background-color: transparent;">
+                                        <b>{$user['raidswin']}</b>
+                                    </td>
                                 </tr>
 				<tr>
-                                    <td align="right" width="50%" style="background-color: transparent;"><b>{$lang['RaidsLoose']} :</b></td>
-                                    <td align="left" width="50%" style="background-color: transparent;"><b>{$raidsloose}</b></td>
+                                    <td align="right" width="50%" style="background-color: transparent;">
+                                        <b>{$lang['RaidsLoose']} :</b>
+                                    </td>
+                                    <td align="left" width="50%" style="background-color: transparent;">
+                                        <b>{$user['raidsloose']}</b>
+                                    </td>
 				</tr>
                             </tbody>
 			</table>
@@ -177,13 +254,16 @@
                     {if ($game_config['ForumBannerFrame'] == '1')}
                         <tr>
                             <th colspan="4">
-                                <img src="scripts/createbanner.php?id={$user['id']}"><br>{$lang['InfoBanner']}<br>
+                                <img src="scripts/createbanner.php?id={$user['id']}">
+                                <br>{$lang['InfoBanner']}<br>
                                 <input name="bannerlink" type="text" id="bannerlink" value="[img]/scripts/createbanner.php?id={$user['id']}[/img]" size="62">
                             </th>
                         </tr>
                     {/if}
                     {if ($game_config['OverviewExternChat'] == '1')}
-                        <tr><th colspan="4">{stripslashes($game_config['OverviewExternChatCmd'])}</th></tr>
+                        <tr>
+                            <th colspan="4">{stripslashes($game_config['OverviewExternChatCmd'])}</th>
+                        </tr>
                     {/if}
 		</table>
 		<br>
