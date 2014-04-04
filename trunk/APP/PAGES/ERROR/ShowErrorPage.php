@@ -41,5 +41,3 @@ class ShowErrorPage
         Display::login2 ($page, $title, false, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"$time;URL={$dest}\">" : ""), true);
     }
 }
-
-?>

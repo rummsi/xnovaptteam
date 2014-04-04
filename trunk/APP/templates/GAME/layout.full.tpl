@@ -1,5 +1,5 @@
 {include file="main.header.tpl"}
-{include file="topnav.tpl"}
-{include file="left_menu.tpl"}
+{include file="main.topnav.tpl"}
+{include file="main.leftmenu.tpl"}
 {block name="content"}{/block}
 {include file="main.footer.tpl"}
