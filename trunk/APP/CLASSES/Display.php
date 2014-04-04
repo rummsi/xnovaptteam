@@ -28,64 +28,58 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class Display
-{
-    static function login($page, $title = '', $metatags = '')
-    {
-        global $link, $game_config, $debug, $user, $planetrow;
-        
-        $DisplayPage  = self::loginHeader ($title, $metatags);
-        $DisplayPage .= "<center>\n". $page ."\n</center>\n";
-        $DisplayPage .= StdFooter();
-        if (isset($link))
-        {
-            mysql_close($link);
-        }
-        echo $DisplayPage;
-        die();
-    }
-    static function login2($page, $title = '', $metatags = '')
-    {
-        global $link, $game_config, $debug, $user, $planetrow;
-        
-        $DisplayPage  = self::outerHeader ($title, $metatags);
-        $DisplayPage .= "<center>\n". $page ."\n</center>\n";
-        $DisplayPage .= StdFooter();
-        if (isset($link))
-        {
-            mysql_close($link);
-        }
-        echo $DisplayPage;
-        die();
-    }
-    
-    static function loginHeader($title = '', $metatags = '')
-    {
-        global $user, $langInfos;
-        
-        $parse             = $langInfos;
-	$parse['title']    = $title;
-	$parse['dpath']    = "skins/xnova/";
-	$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
-	$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/about.css\">\n";
-	$parse['-meta-']  = ($metatags) ? $metatags : "";
-	$parse['-body-']  = "<body>";
-	return parsetemplate(gettemplate('simple_header'), $parse);
-    }
-    
-    static function outerHeader($title = '', $metatags = '')
-    {
-        global $user, $langInfos;
-        
-        $parse             = $langInfos;
-	$parse['title']    = $title;
-	$parse['dpath']    = DEFAULT_SKINPATH;
-	$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"". DEFAULT_SKINPATH ."/default.css\" />";
-	$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"". DEFAULT_SKINPATH ."/formate.css\" />";
-	$parse['-meta-']  = ($metatags) ? $metatags : "";
-	$parse['-body-']  = "<body>";
-	return parsetemplate(gettemplate('simple_header'), $parse);
-    }
-}
+class Display {
 
-?>
+    static function login($page, $title = '', $metatags = '') {
+        global $link, $game_config, $debug, $user, $planetrow;
+
+        $DisplayPage = self::loginHeader($title, $metatags);
+        $DisplayPage .= "<center>\n" . $page . "\n</center>\n";
+        $DisplayPage .= StdFooter();
+        if (isset($link)) {
+            mysql_close($link);
+        }
+        echo $DisplayPage;
+        die();
+    }
+
+    static function login2($page, $title = '', $metatags = '') {
+        global $link, $game_config, $debug, $user, $planetrow;
+
+        $DisplayPage = self::outerHeader($title, $metatags);
+        $DisplayPage .= "<center>\n" . $page . "\n</center>\n";
+        $DisplayPage .= StdFooter();
+        if (isset($link)) {
+            mysql_close($link);
+        }
+        echo $DisplayPage;
+        die();
+    }
+
+    static function loginHeader($title = '', $metatags = '') {
+        global $user, $langInfos;
+
+        $parse = $langInfos;
+        $parse['title'] = $title;
+        $parse['dpath'] = "skins/xnova/";
+        $parse['-style-'] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
+        $parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/about.css\">\n";
+        $parse['-meta-'] = ($metatags) ? $metatags : "";
+        $parse['-body-'] = "<body>";
+        return parsetemplate(gettemplate('simple_header'), $parse);
+    }
+
+    static function outerHeader($title = '', $metatags = '') {
+        global $user, $langInfos;
+
+        $parse = $langInfos;
+        $parse['title'] = $title;
+        $parse['dpath'] = DEFAULT_SKINPATH;
+        $parse['-style-'] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DEFAULT_SKINPATH . "/default.css\" />";
+        $parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DEFAULT_SKINPATH . "/formate.css\" />";
+        $parse['-meta-'] = ($metatags) ? $metatags : "";
+        $parse['-body-'] = "<body>";
+        return parsetemplate(gettemplate('simple_header'), $parse);
+    }
+
+}

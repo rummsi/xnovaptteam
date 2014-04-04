@@ -30,32 +30,28 @@ require realpath(ROOT_PATH . 'APP/Smarty/libs/Smarty.class.php');
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class Template extends Smarty
-{
-    function __construct()
-    {
+class Template extends Smarty {
+
+    function __construct() {
         parent::__construct();
         $this->SmartySettings();
     }
 
-    function SmartySettings()
-    {
+    function SmartySettings() {
         $this->force_compile = TRUE;
         $this->caching = 0;
         $this->php_handling = Smarty::PHP_REMOVE;
         $this->debugging = TRUE;
-        
+
         $this->setCompileDir('APP/compile/');
         $this->setTemplateDir('APP/templates/');
         $this->setCacheDir('APP/cache/');
         $this->setConfigDir('APP/configs/');
     }
-    
+
 }
 
 $tplObj = new Template();
 $tplObj->debugging = TRUE;
 $tplObj->caching = TRUE;
 $tplObj->cache_lifetime = 0;
-
-?>
