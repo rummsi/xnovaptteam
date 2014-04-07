@@ -5,7 +5,7 @@
             <form action="" method=POST>
                 <table width=519>
                     <tr>
-                        <td class=c colspan=2>{$your_apply}</td>
+                        <td class=c colspan=2>{$lang['your_apply']}</td>
                     </tr>
                     <tr>
                         <th colspan=2>{$request_text}</th>
