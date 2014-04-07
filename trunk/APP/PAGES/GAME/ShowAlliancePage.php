@@ -28,118 +28,93 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
+class ShowAlliancePage extends AbstractGamePage {
 
-ob_start();
-
-class ShowAlliancePage extends AbstractGamePage
-{
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'alliance';
-        
+
+
         includeLang('alliance');
         includeLang('leftmenu');
     }
 
-    function show()
-    {
+    function show() {
         global $user;
-        
-        if(empty($user['id']))
-        {
+
+        if (empty($user['id'])) {
             echo '<script language="javascript">';
             echo 'parent.location="../";';
             echo '</script>';
         }
-        if ($user['ally_id'] == 0)
-        {
+        if ($user['ally_id'] == 0) {
             $this->no_ally();
         } elseif ($user['ally_id'] != 0 && $user['ally_request'] == 0) {
             $this->ally();
         }
     }
-    
-    function no_ally()
-    {
+
+    function no_ally() {
         global $user, $lang, $ally_tag;
-        if ($user['ally_id'] == 0)
-        { // Sin alianza
-            if ($user['ally_request'] != 0)
-            { // Esperando una respuesta
-		// preguntamos por el ally_tag
-		$allyquery = doquery("SELECT ally_tag FROM {{table}} WHERE id='" . intval($user['ally_request']) . "' ORDER BY `id`", "alliance", true);
-		extract($allyquery);
-		if ($_POST['bcancel'])
-                {
+        if ($user['ally_id'] == 0) { // Sin alianza
+            if ($user['ally_request'] != 0) { // Esperando una respuesta
+                // preguntamos por el ally_tag
+                $allyquery = doquery("SELECT ally_tag FROM {{table}} WHERE id='" . intval($user['ally_request']) . "' ORDER BY `id`", "alliance", true);
+                extract($allyquery);
+
+                if (filter_input(INPUT_POST, 'bcancel')) {
                     doquery("UPDATE {{table}} SET `ally_request`=0 WHERE `id`=" . $user['id'], "users");
                     $this->tplObj->assign(array(
-                       'title' => $lang['alliance'],
-                       'your_apply' => $lang['your_apply'],
-                       'request_text' => str_replace('%s', $ally_tag, $lang['Canceled_a_request_text']),
-                       'button_text' => $lang['Ok'],
+                        'title' => $lang['alliance'],
+                        'request_text' => str_replace('%s', $ally_tag, $lang['Canceled_a_request_text']),
+                        'button_text' => $lang['Ok'],
                     ));
-                    
+
                     $this->render('alliance.apply_waitform.tpl');
-		} else {
+                } else {
+
                     $this->tplObj->assign(array(
-                       'title' => $lang['alliance'],
-                       'your_apply' => $lang['your_apply'],
-                       'request_text' => str_replace('%s', $ally_tag, $lang['Waiting_a_request_text']),
-                       'button_text' => $lang['Delete_apply'],
+                        'title' => $lang['alliance'],
+                        'request_text' => str_replace('%s', $ally_tag, $lang['Waiting_a_request_text']),
+                        'button_text' => $lang['Delete_apply'],
                     ));
-                    
+
                     $this->render('alliance.apply_waitform.tpl');
-		}
-		// mysql_real_escape_string(strip_tags());
-            } else { // Vista sin allianza
-                /*
-                  Vista normal de cuando no se tiene ni solicitud ni alianza
-                */
-                $this->tplObj->assign(array(
-                   'title' => $lang['alliance'],
-                   'alliance' => $lang['alliance'],
-                   'make_alliance_owner' => $lang['make_alliance_owner'],
-                   'search_alliance' => $lang['search_alliance'],
-                ));
-                
+                }
+            } else {
+
+                $this->tplObj->assign('title', $lang['alliance']);
+
                 $this->render('alliance.default.tpl');
             }
         }
     }
-    
-    function make()
-    {
+
+    function make() {
         global $user, $lang;
-        
-        $mode     = HTTP::_GP('mode', 'make');
-        $yes      = HTTP::_GP('yes', '');
-        if ($user['ally_id'] == 0)
-        {
-            if ($mode == 'make' && $user['ally_request'] == 0)
-            { // Make alliance
+
+        $mode = HTTP::_GP('mode', 'make');
+        $yes = HTTP::_GP('yes', '');
+        if ($user['ally_id'] == 0) {
+            if ($mode == 'make' && $user['ally_request'] == 0) { // Make alliance
                 /*
                   Aca se crean las alianzas...
-                */
-                if ($yes == 1 && $_POST)
-                {
+                 */
+                if ($yes == 1 && $_POST) {
                     /*
                       Por el momento solo estoy improvisando, luego se perfeccionara el sistema :)
                       Creo que aqui se realiza una query para comprovar el nombre, y luego le pregunta si es el tag correcto...
-                    */
-                    if (!$_POST['atag'])
-                    {
+                     */
+                    if (!$_POST['atag']) {
                         ShowErrorPage::message($lang['have_not_tag'], $lang['make_alliance']);
                     }
-                    if (!$_POST['aname'])
-                    {
+                    if (!$_POST['aname']) {
                         ShowErrorPage::message($lang['have_not_name'], $lang['make_alliance']);
                     }
-                    $_POST['aname']=addslashes($_POST['aname']);
-                    $_POST['atag']=addslashes($_POST['atag']);
+                    $_POST['aname'] = addslashes($_POST['aname']);
+                    $_POST['atag'] = addslashes($_POST['atag']);
                     $tagquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='{$_POST['atag']}'", 'alliance', true);
-                    if ($tagquery)
-                    {
+                    if ($tagquery) {
                         ShowErrorPage::message(str_replace('%s', $_POST['atag'], $lang['always_exist']), $lang['make_alliance']);
                     }
                     doquery("INSERT INTO {{table}} SET
@@ -148,7 +123,7 @@ class ShowAlliancePage extends AbstractGamePage
                             `ally_owner`='{$user['id']}',
                             `ally_owner_range`='Leader',
                             `ally_members`='1',
-                            `ally_register_time`=" . time() , "alliance");
+                            `ally_register_time`=" . time(), "alliance");
                     $allyquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='{$_POST['atag']}'", 'alliance', true);
                     doquery("UPDATE {{table}} SET
                             `ally_id`='{$allyquery['id']}',
@@ -164,7 +139,7 @@ class ShowAlliancePage extends AbstractGamePage
                         'Button' => $lang['Ok'],
                         'yes' => 1,
                     ));
-                    
+
                     $this->render('Message.Form.tpl');
                 } else {
                     $this->tplObj->assign(array(
@@ -175,72 +150,50 @@ class ShowAlliancePage extends AbstractGamePage
                         'allyance_name' => $lang['allyance_name'],
                         'Make' => $lang['Make'],
                     ));
-                    
+
                     $this->render('alliance.make.tpl');
                 }
             }
-	}
+        }
     }
-    
-    function search()
-    {
+
+    function search() {
         global $lang; // Sin alianza
 
-	$lang['searchtext'] = @$_POST['searchtext'];
-	if ($_POST)
-        {
-            // esta parte es igual que el buscador de search.php...
-            // searchtext
-            $search = doquery("SELECT * FROM {{table}} WHERE ally_name LIKE '%{$_POST['searchtext']}%' or ally_tag LIKE '%{$_POST['searchtext']}%' LIMIT 30", "alliance");
-            if (mysql_num_rows($search) != 0)
-            {
-		while ($s = mysql_fetch_array($search))
-                {
-                    $entry = array();
-                    $entry['ally_tag'] = "[<a href=\"game.php?page=alliance&mode=apply&allyid={$s['id']}\">{$s['ally_tag']}</a>]";
-                    $entry['ally_name'] = $s['ally_name'];
-                    $entry['ally_members'] = $s['ally_members'];
-                    $this->tplObj->assign('result', parsetemplate($this->getTemplate('alliance.searchresult_row.tpl'), $entry));
-		}
-            }
-	}
-        
+        $lang['searchtext'] = filter_input(INPUT_POST, 'searchtext');
+        $search = doquery("SELECT * FROM {{table}} WHERE ally_name LIKE '%{$lang['searchtext']}%' or ally_tag LIKE '%{$lang['searchtext']}%' LIMIT 30", "alliance");
+
         $this->tplObj->assign(array(
             'title' => $lang['search_alliance'],
-            'search_alliance' => $lang['search_alliance'],
+            'INPUT_POST' => filter_input_array(INPUT_POST),
             'Search' => $lang['Search'],
             'searchtext' => $lang['searchtext'],
-            'search' => @$search,
+            'search' => $search,
             'searched_alliance_availables' => $lang['searched_alliance_availables'],
         ));
-        
+
         $this->render('alliance.searchform.tpl');
     }
-    
-    function apply()
-    {
-        global $lang, $user, $ally_request, $ally_tag, $_POST;
-        
-        $mode = HTTP::_GP('mode', 'apply');
-        $allyid   = intval(HTTP::_GP('allyid', ''));
-        if ($mode == 'apply' && $user['ally_request'] == 0)
-        {
+
+    function apply() {
+        global $lang, $user, $ally_request, $ally_tag;
+
+        $mode = filter_input(INPUT_GET, 'mode');
+        $allyid = intval(filter_input(INPUT_GET, 'allyid'));
+        if ($mode == 'apply' && $user['ally_request'] == 0) {
             // solicitudes
-            if (!is_numeric($_GET['allyid']) || !$_GET['allyid'] || $user['ally_request'] != 0 || $user['ally_id'] != 0)
-            {
+            if (!is_numeric(filter_input(INPUT_GET, 'allyid')) || !filter_input(INPUT_GET, 'allyid') || $user['ally_request'] != 0 || $user['ally_id'] != 0) {
                 ShowErrorPage::message($lang['it_is_not_posible_to_apply'], $lang['it_is_not_posible_to_apply']);
             }
             // pedimos la info de la alianza
-            $allyrow = doquery("SELECT ally_tag,ally_request FROM {{table}} WHERE id='" . intval($_GET['allyid']) . "'", "alliance", true);
-            if (!$allyrow)
-            {
+            $allyrow = doquery("SELECT ally_tag,ally_request FROM {{table}} WHERE id='" . intval(filter_input(INPUT_GET, 'allyid')) . "'", "alliance", true);
+            if (!$allyrow) {
                 ShowErrorPage::message($lang['it_is_not_posible_to_apply'], $lang['it_is_not_posible_to_apply']);
             }
             extract($allyrow);
-            if ($_POST['further'] == $lang['Send'])
-            {
+            if (filter_input(INPUT_POST, 'further') == $lang['Send']) {
                 // esta parte es igual que el buscador de search.php...
-		doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . mysql_real_escape_string(strip_tags($_POST['text'])) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
+                doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . mysql_real_escape_string(strip_tags(filter_input(INPUT_POST, 'text'))) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
                 // mensaje de cuando se envia correctamente el mensaje
                 ShowErrorPage::message($lang['apply_registered'], $lang['your_apply']);
                 // mensaje de cuando falla el envio
@@ -248,157 +201,113 @@ class ShowAlliancePage extends AbstractGamePage
             } else {
                 $text_apply = ($ally_request) ? $ally_request : $lang['There_is_no_a_text_apply'];
             }
-            
+
             $this->tplObj->assign(array(
                 'title' => $lang['Write_to_alliance'],
-                'Send_Apply' => $lang['Send_Apply'],
-                'allyid' => intval($_GET['allyid']),
-                'Write_to_alliance' => str_replace('%s', $ally_tag, $lang['Write_to_alliance']),
-                'Message' => $lang['Message'],
-                'chars_count' => strlen($text_apply),
-                'characters' => $lang['characters'],
-                'text_apply' => $text_apply,
-                'Help' => $lang['Help'],
-                'Reload' => $lang['Reload'],
                 'lang' => $lang,
+                'allyid' => intval(filter_input(INPUT_GET, 'allyid')),
+                'ally_tag' => $ally_tag,
+                'text_apply' => $text_apply,
+                'ally_request' => $ally_request,
             ));
-            
+
             $this->render('alliance.applyform.tpl');
         }
     }
-    
-    function ally()
-    {
+
+    function ally() {
         global $lang, $mode, $user;
-        
+
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
-	if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
-	}
-        if ($mode == 'exit')
-        {
+        }
+        if ($mode == 'exit') {
             $this->quit();
         }
-        if ($mode == 'memberslist')
-        {
+        if ($mode == 'memberslist') {
             $this->memberslist();
         }
-        if ($mode == 'circular')
-        {
+        if ($mode == 'circular') {
             $this->circular();
-        }
-        {
-            $this->frontpage();
-        }
-    }
-    
-    function frontpage()
-    {
-        global $lang, $user, $ally;
-        $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
-        $ally_ranks = unserialize($ally['ally_ranks']);
-        if (!$ally)
-        {
-            doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
-            ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
-        }
-        // Default *falta revisar...*
-        if ($ally['ally_owner'] != $user['id'])
-        {
+        } {
+            //          global $lang, $user, $ally;
+            //          $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
             $ally_ranks = unserialize($ally['ally_ranks']);
-        }
-        // temporalmente...
-        if ($ally['ally_owner'] == $user['id'])
-        {
-            $range = ($ally['ally_owner_range'] != '')?$lang['Founder']:$ally['ally_owner_range'];
-        } elseif ($user['ally_rank_id'] != 0 && isset($ally_ranks[$user['ally_rank_id']-1]['name'])) {
-            $range = $ally_ranks[$user['ally_rank_id']-1]['name'];
-        } else {
-            $range = $lang['member'];
-        }
-        // El link para ver las solicitudes
-        $lang['requests'] = '';
-        $request = doquery("SELECT id FROM {{table}} WHERE ally_request='{$ally['id']}'", 'users');
-        $request_count = mysql_num_rows($request);
-        // La imagen de logotipo
-        // codigo raro
-        $patterns[] = "#\[fc\]([a-z0-9\#]+)\[/fc\](.*?)\[/f\]#Ssi";
-        $replacements[] = '<font color="\1">\2</font>';
-        $patterns[] = '#\[img\](.*?)\[/img\]#Smi';
-        $replacements[] = '<img src="\1" alt="\1" style="border:0px;" />';
-        $patterns[] = "#\[fc\]([a-z0-9\#\ \[\]]+)\[/fc\]#Ssi";
-        $replacements[] = '<font color="\1">';
-        $patterns[] = "#\[/f\]#Ssi";
-        $replacements[] = '</font>';
-        $ally['ally_description'] = preg_replace($patterns, $replacements, $ally['ally_description']);
-        $ally['ally_text'] = preg_replace($patterns, $replacements, $ally['ally_text']);
+            if (!$ally) {
+                doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
+                ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
+            }
+            // Default *falta revisar...*
+            if ($ally['ally_owner'] != $user['id']) {
+                $ally_ranks = unserialize($ally['ally_ranks']);
+            }
+            // temporalmente...
+            if ($ally['ally_owner'] == $user['id']) {
+                $range = ($ally['ally_owner_range'] != '') ? $lang['Founder'] : $ally['ally_owner_range'];
+            } elseif ($user['ally_rank_id'] != 0 && isset($ally_ranks[$user['ally_rank_id'] - 1]['name'])) {
+                $range = $ally_ranks[$user['ally_rank_id'] - 1]['name'];
+            } else {
+                $range = $lang['member'];
+            }
+            // El link para ver las solicitudes
+            $lang['requests'] = '';
+            $request = doquery("SELECT id FROM {{table}} WHERE ally_request='{$ally['id']}'", 'users');
+            $request_count = mysql_num_rows($request);
+            // La imagen de logotipo
+            // codigo raro
+            $patterns[] = "#\[fc\]([a-z0-9\#]+)\[/fc\](.*?)\[/f\]#Ssi";
+            $replacements[] = '<font color="\1">\2</font>';
+            $patterns[] = '#\[img\](.*?)\[/img\]#Smi';
+            $replacements[] = '<img src="\1" alt="\1" style="border:0px;" />';
+            $patterns[] = "#\[fc\]([a-z0-9\#\ \[\]]+)\[/fc\]#Ssi";
+            $replacements[] = '<font color="\1">';
+            $patterns[] = "#\[/f\]#Ssi";
+            $replacements[] = '</font>';
+            $ally['ally_description'] = preg_replace($patterns, $replacements, $ally['ally_description']);
+            $ally['ally_text'] = preg_replace($patterns, $replacements, $ally['ally_text']);
 
-        $this->tplObj->assign(array(
-                    'title'                 => $lang['your_alliance'],
-                    'your_alliance'         => $lang['your_alliance'],
-                    'ally_image'            => ($ally['ally_image'] != '')?"<tr><th colspan=2><img src=\"{$ally['ally_image']}\"></td></tr>":'',
-                    'Tag'                   => $lang['Tag'],
-                    'ally_tag'              => $ally['ally_tag'],
-                    'Name'                  => $lang['Name'],
-                    'ally_name'             => $ally['ally_name'],
-                    'Members'               => $lang['Members'],
-                    'ally_members'          => $ally['ally_members'],
-                    'Members_list'          => $lang['Members_list'],
-                    'Range'                 => $lang['Range'],
-                    'range'                 => $range,
-                    'Alliance_admin'        => $lang['Alliance_admin'],
-                    'ally_description'      => nl2br($ally['ally_description']),
-                    'Main_Page'             => $lang['Main_Page'],
-                    'ally_web'              => $ally['ally_web'],
-                    'Inner_section'         => $lang['Inner_section'],
-                    'ally_text'             => nl2br($ally['ally_text']),
-                    'ally_owner'            => MessageForm($lang['Exit_of_this_alliance'], "", "?page=alliance&mode=quit", $lang['Continue']),
-                    'ally'                  => $ally,
-                    'user'                  => $user,
-                    'Circular_message'      => $lang['Circular_message'],
-                    'Send_circular_mail'    => $lang['Send_circular_mail'],
-                    'request_count'         => $request_count,
-                    'Requests'              => $lang['Requests'],
-                    'ally_ranks'            => $ally_ranks,
-        ));
+            $this->tplObj->assign(array(
+                'title' => $lang['your_alliance'],
+                'ally_image' => ($ally['ally_image'] != '') ? "<tr><th colspan=2><img src=\"{$ally['ally_image']}\"></td></tr>" : '',
+                'range' => $range,
+                'ally_owner' => MessageForm($lang['Exit_of_this_alliance'], "", "?page=alliance&mode=quit", $lang['Continue']),
+                'ally' => $ally,
+                'user' => $user,
+                'request_count' => $request_count,
+                'ally_ranks' => $ally_ranks,
+            ));
 
-        $this->render('alliance.frontpage.tpl');
-        
+            $this->render('alliance.frontpage.tpl');
+        }
     }
-    
-    function memberslist()
-    {
-        global $lang, $user, $_GET;
-        
-        if ($user['ally_id'] != 0 && $user['ally_request'] == 0)
-        {
+
+    function memberslist() {
+        global $lang, $user;
+
+        if ($user['ally_id'] != 0 && $user['ally_request'] == 0) {
             $sort1 = intval(HTTP::_GP('sort1', '1'));
-            if (empty($sort1))
-            {
+            if (empty($sort1)) {
                 unset($sort1);
             }
             $sort2 = intval(HTTP::_GP('sort2', '2'));
-            if (empty($sort2))
-            {
+            if (empty($sort2)) {
                 unset($sort2);
             }
             $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
             $allianz_raenge = unserialize($ally['ally_ranks']);
-            if ($allianz_raenge[$user['ally_rank_id']]['memberlist'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-		$user_can_watch_memberlist = true;
+            if ($allianz_raenge[$user['ally_rank_id']]['memberlist'] == 1 || $ally['ally_owner'] == $user['id']) {
+                $user_can_watch_memberlist = true;
             } else {
-		$user_can_watch_memberlist = false;
+                $user_can_watch_memberlist = false;
             }
             if ($allianz_raenge[$user['ally_rank_id']]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
-		$user_can_watch_memberlist_status = true;
+                $user_can_watch_memberlist_status = true;
             } else {
-		$user_can_watch_memberlist_status = false;
+                $user_can_watch_memberlist_status = false;
             }
-            if (!$ally)
-            {
+            if (!$ally) {
                 doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
                 ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
             }
@@ -407,154 +316,103 @@ class ShowAlliancePage extends AbstractGamePage
               Por lo que parece solo se hace una query fijandose los usuarios con el mismo ally_id.
               seguido del query del planeta principal de cada uno para sacarle la posicion, pero
               voy a ver si tambien agrego las cordenadas en el id user...
-            */
+             */
             // $user_can_watch_memberlist
             // comprobamos el permiso
-            if ($ally['ally_owner'] != $user['id'] && !$user_can_watch_memberlist)
-            {
+            if ($ally['ally_owner'] != $user['id'] && !$user_can_watch_memberlist) {
                 ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
             }
             // El orden de aparicion
-            if ($sort2)
-            {
+            if ($sort2) {
                 $sort1 = intval(HTTP::_GP('sort1', '1'));
                 $sort2 = intval(HTTP::_GP('sort2', '2'));
-		if ($sort1 == 1)
-                {
+                if ($sort1 == 1) {
                     $sort = " ORDER BY `username`";
-		} elseif ($sort1 == 2) {
+                } elseif ($sort1 == 2) {
                     $sort = " ORDER BY `username`";
-		} elseif ($sort1 == 4) {
+                } elseif ($sort1 == 4) {
                     $sort = " ORDER BY `ally_register_time`";
-		} elseif ($sort1 == 5) {
+                } elseif ($sort1 == 5) {
                     $sort = " ORDER BY `onlinetime`";
-		} else {
+                } else {
                     $sort = " ORDER BY `id`";
-		}
-		if ($sort2 == 1)
-                {
+                }
+                if ($sort2 == 1) {
                     $sort .= " DESC;";
-		} elseif ($sort2 == 2) {
+                } elseif ($sort2 == 2) {
                     $sort .= " ASC;";
-		}
-		$listuser = doquery("SELECT * FROM {{table}} WHERE ally_id='{$user['ally_id']}'{$sort}", 'users');
+                }
+                $listuser = doquery("SELECT * FROM {{table}} WHERE ally_id='{$user['ally_id']}'{$sort}", 'users');
             } else {
-		$listuser = doquery("SELECT * FROM {{table}} WHERE ally_id='{$user['ally_id']}'", 'users');
+                $listuser = doquery("SELECT * FROM {{table}} WHERE ally_id='{$user['ally_id']}'", 'users');
             }
             // contamos la cantidad de usuarios.
             $i = 0;
-            $page_list = '';
-            while ($u = mysql_fetch_array($listuser))
-            {
-                $UserPoints = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '" . $u['id'] . "';", 'statpoints', true);
-		$i++;
-		$u['i'] = $i;
-		if ($u["onlinetime"] + 60 * 10 >= time() && $user_can_watch_memberlist_status)
-                {
-                    $u["onlinetime"] = "lime>{$lang['On']}<";
-		} elseif ($u["onlinetime"] + 60 * 20 >= time() && $user_can_watch_memberlist_status) {
-                    $u["onlinetime"] = "yellow>{$lang['15_min']}<";
-		} elseif ($user_can_watch_memberlist_status) {
-                    $u["onlinetime"] = "red>{$lang['Off']}<";
-		} else {
-                    $u["onlinetime"] = "orange>-<";
-                }
-		// Nombre de rango
-		if ($ally['ally_owner'] == $u['id'])
-                {
-                    $u["ally_range"] = ($ally['ally_owner_range'] == '')?"Leader":$ally['ally_owner_range'];
-		} elseif (isset($allianz_raenge[$u['ally_rank_id']]['name'])) {
-                    $u["ally_range"] = $allianz_raenge[$u['ally_rank_id']]['name'];
-		} else {
-                    $u["ally_range"] = $lang['Novate'];
-		}
-		$u['points'] = "" . pretty_number($UserPoints['total_points']) . "";
-		if ($u['ally_register_time'] > 0)
-                {
-                    $u['ally_register_time'] = date("Y-m-d h:i:s", $u['ally_register_time']);
-                } else {
-                    $u['ally_register_time'] = "-";
-                }
-		$page_list .= parsetemplate($this->getTemplate('alliance.memberslist_row.tpl'), $u);
-            }
+
+            $UserPoints = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '" . $user['id'] . "';", 'statpoints', true);
+
             // para cambiar el link de ordenar.
-            if ($sort2 == 1)
-            {
+            if ($sort2 == 1) {
                 $s = 2;
             } elseif ($sort2 == 2) {
                 $s = 1;
             } else {
                 $s = 1;
             }
-            if ($i != $ally['ally_members'])
-            {
+            if ($i != $ally['ally_members']) {
                 doquery("UPDATE {{table}} SET `ally_members`='{$i}' WHERE `id`='{$ally['id']}'", 'alliance');
             }
 
             $this->tplObj->assign(array(
-                'title'                 => $lang['Members_list'],
-                'Members_list'          => $lang['Members_list'],
-                'Ammount'               => $lang['Ammount'],
-                'i'                     => $i,
-                'Number'                => $lang['Number'],
-                's'                     => $s,
-                'Name'                  => $lang['Name'],
-                'Position'              => $lang['Position'],
-                'Points'                => $lang['Points'],
-                'Coordinated'           => $lang['Coordinated'],
-                'Member_from'           => $lang['Member_from'],
-                'Online'                => $lang['Online'],
-                'list'                  => $page_list,
-                'Return_to_overview'    => $lang['Return_to_overview'],
+                'title' => $lang['Members_list'],
+                'i' => $i,
+                's' => $s,
+                'listuser' => $listuser,
+                'ally' => $ally,
+                'allianz_raenge' => $allianz_raenge,
+                'UserPoints' => $UserPoints,
+                'user_can_watch_memberlist_status' => $user_can_watch_memberlist_status,
             ));
-        
+
             $this->render('alliance.memberslist.tpl');
-            
-	}
+        }
     }
-    
-    function circular()
-    {
+
+    function circular() {
         global $user, $lang;
 
         $sendmail = intval(HTTP::_GP('sendmail', ''));
-        if ($user['ally_id'] != 0 && $user['ally_request'] == 0)
-        { // Con alianza
+        if ($user['ally_id'] != 0 && $user['ally_request'] == 0) { // Con alianza
             $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
             $allianz_raenge = unserialize($ally['ally_ranks']);
-            if ($allianz_raenge[$user['ally_rank_id']]['mails'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
+            if ($allianz_raenge[$user['ally_rank_id']]['mails'] == 1 || $ally['ally_owner'] == $user['id']) {
                 $user_can_send_mails = true;
             } else {
                 $user_can_send_mails = false;
             }
-            if (!$ally)
-            {
+            if (!$ally) {
                 doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
                 ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
             }
             /*
               Mandar un correo circular.
               creo que aqui tendria que ver yo como crear el sistema de mensajes...
-            */
+             */
             // comprobamos el permiso
             if ($ally['ally_owner'] != $user['id'] && !$user_can_send_mails) {
                 ShowErrorPage::message($lang['Denied_access'], $lang['Send_circular_mail']);
             }
-            if ($sendmail == 1)
-            {
-		$_POST['r'] = intval($_POST['r']);
-		$_POST['text'] = mysql_real_escape_string(strip_tags($_POST['text']));
-		if ($_POST['r'] == 0)
-                {
+            if ($sendmail == 1) {
+                $_POST['r'] = intval($_POST['r']);
+                $_POST['text'] = mysql_real_escape_string(strip_tags($_POST['text']));
+                if ($_POST['r'] == 0) {
                     $sq = doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}'", "users");
-		} else {
+                } else {
                     $sq = doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}' AND ally_rank_id='{$_POST['r']}'", "users");
-		}
-		// looooooop
-		$list = '';
-		while ($u = mysql_fetch_array($sq))
-                {
+                }
+                // looooooop
+                $list = '';
+                while ($u = mysql_fetch_array($sq)) {
                     doquery("INSERT INTO {{table}} SET
 				`message_owner`='{$u['id']}',
 				`message_sender`='{$user['id']}' ,
@@ -565,13 +423,13 @@ class ShowAlliancePage extends AbstractGamePage
 				`message_text`='{$_POST['text']}'
 				", "messages");
                     $list .= "<br>{$u['username']} ";
-		}
-		// doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}' ORDER BY `id`","users");
-		doquery("UPDATE {{table}} SET `new_message`=new_message+1 WHERE ally_id='{$user['ally_id']}' AND ally_rank_id='{$_POST['r']}'", "users");
-		doquery("UPDATE {{table}} SET `mnl_alliance`=mnl_alliance+1 WHERE ally_id='{$user['ally_id']}' AND ally_rank_id='{$_POST['r']}'", "users");
-		/*
-		  Aca un mensajito diciendo que a quien se mando.
-		*/
+                }
+                // doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}' ORDER BY `id`","users");
+                doquery("UPDATE {{table}} SET `new_message`=new_message+1 WHERE ally_id='{$user['ally_id']}' AND ally_rank_id='{$_POST['r']}'", "users");
+                doquery("UPDATE {{table}} SET `mnl_alliance`=mnl_alliance+1 WHERE ally_id='{$user['ally_id']}' AND ally_rank_id='{$_POST['r']}'", "users");
+                /*
+                  Aca un mensajito diciendo que a quien se mando.
+                 */
                 $this->tplObj->assign(array(
                     'title' => $lang['Send_circular_mail'],
                     'Goto' => 'game.php?page=alliance',
@@ -583,46 +441,39 @@ class ShowAlliancePage extends AbstractGamePage
                 $this->render('Message.Form.tpl');
             }
             $lang['r_list'] = "<option value=\"0\">{$lang['All_players']}</option>";
-            if ($allianz_raenge)
-            {
-                foreach($allianz_raenge as $id => $array)
-                {
+            if ($allianz_raenge) {
+                foreach ($allianz_raenge as $id => $array) {
                     $lang['r_list'] .= "<option value=\"" . ($id + 1) . "\">" . $array['name'] . "</option>";
-		}
+                }
             }
 
             $this->tplObj->assign(array(
-                'title'                 => $lang['Send_circular_mail'],
-                'Send_circular_mail'    => $lang['Send_circular_mail'],
-                'Destiny'               => $lang['Destiny'],
-                'r_list'                => $lang['r_list'],
-                'Text_mail'             => $lang['Text_mail'],
-                'characters'            => $lang['characters'],
-                'Back'                  => $lang['Back'],
-                'Clear'                 => $lang['Clear'],
-                'Send'                  => $lang['Send'],
+                'title' => $lang['Send_circular_mail'],
+                'Send_circular_mail' => $lang['Send_circular_mail'],
+                'Destiny' => $lang['Destiny'],
+                'r_list' => $lang['r_list'],
+                'Text_mail' => $lang['Text_mail'],
+                'characters' => $lang['characters'],
+                'Back' => $lang['Back'],
+                'Clear' => $lang['Clear'],
+                'Send' => $lang['Send'],
             ));
-        
+
             $this->render('alliance.circular.tpl');
-            
         }
     }
-    
-    function quit()
-    {
+
+    function quit() {
         global $ally_name, $ally, $user, $lang;
-	if ($user['ally_id'] != 0 && $user['ally_request'] == 0)
-        {
-            if ($ally['ally_owner'] == $user['id'])
-            {
-		ShowErrorPage::message($lang['Owner_cant_go_out'], $lang['Alliance']);
+        if ($user['ally_id'] != 0 && $user['ally_request'] == 0) {
+            if ($ally['ally_owner'] == $user['id']) {
+                ShowErrorPage::message($lang['Owner_cant_go_out'], $lang['Alliance']);
             }
             $yes = HTTP::_GP('yes', '');
             // se sale de la alianza
-            if ($yes == 1)
-            {
-		doquery("UPDATE {{table}} SET `ally_id`=0, `ally_name` = '' WHERE `id`='{$user['id']}'", "users");
-		$lang['Go_out_welldone'] = str_replace("%s", $ally_name, $lang['Go_out_welldone']);
+            if ($yes == 1) {
+                doquery("UPDATE {{table}} SET `ally_id`=0, `ally_name` = '' WHERE `id`='{$user['id']}'", "users");
+                $lang['Go_out_welldone'] = str_replace("%s", $ally_name, $lang['Go_out_welldone']);
                 $this->tplObj->assign(array(
                     'Goto' => '?page=alliance',
                     'Title' => $lang['Go_out_welldone'],
@@ -631,10 +482,10 @@ class ShowAlliancePage extends AbstractGamePage
                     'yes' => $_GET['yes'],
                 ));
                 $this->render('Message.Form.tpl');
-		// Se quitan los puntos del user en la alianza
+                // Se quitan los puntos del user en la alianza
             } else {
-		// se pregunta si se quiere salir
-		$lang['Want_go_out'] = str_replace("%s", $ally_name, $lang['Want_go_out']);
+                // se pregunta si se quiere salir
+                $lang['Want_go_out'] = str_replace("%s", $ally_name, $lang['Want_go_out']);
                 $this->tplObj->assign(array(
                     'Goto' => '?page=alliance&mode=quit&yes=1',
                     'Ally_Message' => $lang['Want_go_out'],
@@ -644,86 +495,69 @@ class ShowAlliancePage extends AbstractGamePage
                 ));
                 $this->render('Message.Form.tpl');
             }
-	}
+        }
     }
-    
-    function admin()
-    {
+
+    function admin() {
         $mode = HTTP::_GP('mode', 'admin');
-        if (empty($mode))
-        {
+        if (empty($mode)) {
             unset($mode);
         }
         $edit = HTTP::_GP('edit', 'ally');
-        if (empty($edit))
-        {
+        if (empty($edit)) {
             unset($edit);
         }
-        if ($mode == 'admin' && $edit == 'ally')
-        {
+        if ($mode == 'admin' && $edit == 'ally') {
             $this->admin_ally();
         }
-        if ($mode == 'admin' && $edit == 'rights')
-        {
+        if ($mode == 'admin' && $edit == 'rights') {
             $this->admin_rights();
         }
-        if ($mode == 'admin' && $edit == 'give')
-        {
+        if ($mode == 'admin' && $edit == 'give') {
             $this->admin_give();
         }
-        if ($mode == 'admin' && $edit == 'members')
-        {
+        if ($mode == 'admin' && $edit == 'members') {
             $this->admin_members();
         }
-        if ($mode == 'admin' && $edit == 'requests')
-        {
+        if ($mode == 'admin' && $edit == 'requests') {
             $this->admin_requests();
         }
-        if ($mode == 'admin' && $edit == 'name')
-        {
+        if ($mode == 'admin' && $edit == 'name') {
             $this->admin_name();
         }
-        if ($mode == 'admin' && $edit == 'tag')
-        {
+        if ($mode == 'admin' && $edit == 'tag') {
             $this->admin_tag();
         }
-        if ($mode == 'admin' && $edit == 'exit')
-        {
+        if ($mode == 'admin' && $edit == 'exit') {
             $this->admin_exit();
         }
     }
-    
-    function admin_ally()
-    {
+
+    function admin_ally() {
         global $lang, $ally, $user;
         // Administrar la alianza *pendiente urgente*
-	$ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
+        $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
         $t = HTTP::_GP('t', '');
-        if ($t != 1 && $t != 2 && $t != 3)
-        {
+        if ($t != 1 && $t != 2 && $t != 3) {
             $t = 1;
-	}
-	// post!
-	if ($_POST)
-        {
-            if (!get_magic_quotes_gpc())
-            {
+        }
+        // post!
+        if ($_POST) {
+            if (!get_magic_quotes_gpc()) {
                 $_POST['owner_range'] = stripslashes($_POST['owner_range']);
-		$_POST['web'] = stripslashes($_POST['web']);
-		$_POST['image'] = stripslashes($_POST['image']);
-		$_POST['text'] = stripslashes($_POST['text']);
+                $_POST['web'] = stripslashes($_POST['web']);
+                $_POST['image'] = stripslashes($_POST['image']);
+                $_POST['text'] = stripslashes($_POST['text']);
             }
-	}
-	if (@$_POST['options'])
-        {
+        }
+        if (@$_POST['options']) {
             $ally['ally_owner_range'] = mysql_real_escape_string(htmlspecialchars(strip_tags($_POST['owner_range'])));
             $ally['ally_web'] = mysql_real_escape_string(htmlspecialchars(strip_tags($_POST['web'])));
             $ally['ally_image'] = mysql_real_escape_string(htmlspecialchars(strip_tags($_POST['image'])));
             $ally['ally_request_notallow'] = intval($_POST['request_notallow']);
-            if ($ally['ally_request_notallow'] != 0 && $ally['ally_request_notallow'] != 1)
-            {
+            if ($ally['ally_request_notallow'] != 0 && $ally['ally_request_notallow'] != 1) {
                 ShowErrorPage::message("Aller ï¿½ \"Candidature\" et sur une option dans le formulaire!", "Erreur");
-		exit;
+                exit;
             }
             doquery("UPDATE {{table}} SET
 			`ally_owner_range`='{$ally['ally_owner_range']}',
@@ -731,652 +565,581 @@ class ShowAlliancePage extends AbstractGamePage
 			`ally_web`='{$ally['ally_web']}',
 			`ally_request_notallow`='{$ally['ally_request_notallow']}'
 			WHERE `id`='{$ally['id']}'", "alliance");
-	} elseif (@$_POST['t']) {
-            if ($t == 3)
-            {
+        } elseif (@$_POST['t']) {
+            if ($t == 3) {
                 $ally['ally_request'] = mysql_real_escape_string(strip_tags($_POST['text']));
                 doquery("UPDATE {{table}} SET `ally_request`='{$ally['ally_request']}' WHERE `id`='{$ally['id']}'", "alliance");
             } elseif ($t == 2) {
-		$ally['ally_text'] = mysql_real_escape_string(strip_tags($_POST['text']));
-		doquery("UPDATE {{table}} SET `ally_text`='" . $ally['ally_text'] . "' WHERE `id`='{$ally['id']}'", "alliance");
+                $ally['ally_text'] = mysql_real_escape_string(strip_tags($_POST['text']));
+                doquery("UPDATE {{table}} SET `ally_text`='" . $ally['ally_text'] . "' WHERE `id`='{$ally['id']}'", "alliance");
             } else {
-		$ally['ally_description'] = mysql_real_escape_string(strip_tags(stripslashes($_POST['text'])));
-		doquery("UPDATE {{table}} SET `ally_description`='" . $ally['ally_description'] . "' WHERE `id`='{$ally['id']}'", "alliance");
+                $ally['ally_description'] = mysql_real_escape_string(strip_tags(stripslashes($_POST['text'])));
+                doquery("UPDATE {{table}} SET `ally_description`='" . $ally['ally_description'] . "' WHERE `id`='{$ally['id']}'", "alliance");
             }
-	}
-	/*
+        }
+        /*
           Depende del $t, muestra el formulario para cada tipo de texto.
-        */
-	if ($t == 3)
-        {
+         */
+        if ($t == 3) {
             $lang['request_type'] = $lang['Show_of_request_text'];
             $lang['text'] = $ally['ally_request'];
-	} elseif ($t == 2) {
+        } elseif ($t == 2) {
             $lang['request_type'] = $lang['Internal_text'];
             $lang['text'] = $ally['ally_text'];
-	} else {
+        } else {
             $lang['request_type'] = $lang['External_text'];
             $lang['text'] = $ally['ally_description'];
-	}
-        
+        }
+
         $this->tplObj->assign(array(
-                    'title'                     => $lang['Alliance_admin'],
-                    'Alliance_admin'            => $lang['Alliance_admin'],
-                    'Law_settings'              => $lang['Law_settings'],
-                    'Members_administrate'      => $lang['Members_administrate'],
-                    'Change_the_ally_tag'       => $lang['Change_the_ally_tag'],
-                    'Change_the_ally_name'      => $lang['Change_the_ally_name'],
-                    'Texts'                     => $lang['Texts'],
-                    'External_text'             => $lang['External_text'],
-                    'Internal_text'             => $lang['Internal_text'],
-                    'Show_of_request_text'      => $lang['Show_of_request_text'],
-                    'characters'                => $lang['characters'],
-                    'text'                      => $lang['text'],
-                    'request_type'              => $lang['request_type'],
-                    't'                         => $t,
-                    'Reset'                     => $lang['Reset'],
-                    'Save'                      => $lang['Save'],
-                    'Options'                   => $lang['Options'],
-                    'Main_Page'                 => $lang['Main_Page'],
-                    'ally_web'                  => $ally['ally_web'],
-                    'Alliance_logo'             => $lang['Alliance_logo'],
-                    'ally_image'                => $ally['ally_image'],
-                    'Requests'                  => $lang['Requests'],
-                    'ally_request_notallow_0'   => (($ally['ally_request_notallow'] == 1) ? ' SELECTED' : ''),
-                    'No_allow_request'          => $lang['No_allow_request'],
-                    'ally_request_notallow_1'   => (($ally['ally_request_notallow'] == 0) ? ' SELECTED' : ''),
-                    'Allow_request'             => $lang['Allow_request'],
-                    'Founder_name'              => $lang['Founder_name'],
-                    'ally_owner_range'          => $ally['ally_owner_range'],
-                    'Disolve_alliance'          => MessageForm("Dissoudre L'alliance", "", "?page=alliance&mode=admin&edit=exit", $lang['Continue']),
-                    'Transfer_alliance'         => MessageForm("Abandonner / Transf&eacute;rer L'alliance", "", "?page=alliance&mode=admin&edit=give", $lang['Continue']),
-        'AA' =>$ally['ally_request'],
+            'title' => $lang['Alliance_admin'],
+            'Alliance_admin' => $lang['Alliance_admin'],
+            'Law_settings' => $lang['Law_settings'],
+            'Members_administrate' => $lang['Members_administrate'],
+            'Change_the_ally_tag' => $lang['Change_the_ally_tag'],
+            'Change_the_ally_name' => $lang['Change_the_ally_name'],
+            'Texts' => $lang['Texts'],
+            'External_text' => $lang['External_text'],
+            'Internal_text' => $lang['Internal_text'],
+            'Show_of_request_text' => $lang['Show_of_request_text'],
+            'characters' => $lang['characters'],
+            'text' => $lang['text'],
+            'request_type' => $lang['request_type'],
+            't' => $t,
+            'Reset' => $lang['Reset'],
+            'Save' => $lang['Save'],
+            'Options' => $lang['Options'],
+            'Main_Page' => $lang['Main_Page'],
+            'ally_web' => $ally['ally_web'],
+            'Alliance_logo' => $lang['Alliance_logo'],
+            'ally_image' => $ally['ally_image'],
+            'Requests' => $lang['Requests'],
+            'ally_request_notallow_0' => (($ally['ally_request_notallow'] == 1) ? ' SELECTED' : ''),
+            'No_allow_request' => $lang['No_allow_request'],
+            'ally_request_notallow_1' => (($ally['ally_request_notallow'] == 0) ? ' SELECTED' : ''),
+            'Allow_request' => $lang['Allow_request'],
+            'Founder_name' => $lang['Founder_name'],
+            'ally_owner_range' => $ally['ally_owner_range'],
+            'Disolve_alliance' => MessageForm("Dissoudre L'alliance", "", "?page=alliance&mode=admin&edit=exit", $lang['Continue']),
+            'Transfer_alliance' => MessageForm("Abandonner / Transf&eacute;rer L'alliance", "", "?page=alliance&mode=admin&edit=give", $lang['Continue']),
+            'AA' => $ally['ally_request'],
         ));
-        
-        $this->render('alliance.admin.tpl');        
+
+        $this->render('alliance.admin.tpl');
     }
-    
-    function admin_rights()
-    {
+
+    function admin_rights() {
         global $user, $lang;
-        
+
         $d = HTTP::_GP('d', '');
-        if ((!is_numeric($d)) || (empty($d) && $d != 0))
-	{
+        if ((!is_numeric($d)) || (empty($d) && $d != 0)) {
             unset($d);
         }
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
         $ally_ranks = unserialize($ally['ally_ranks']);
         $allianz_raenge = unserialize($ally['ally_ranks']);
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_edit_rights = true;
         } else {
             $user_can_edit_rights = false;
         }
-       if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
         }
         // Administrar leyes
-	if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights)
-        {
+        if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights) {
             ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
-	} elseif (!empty($_POST['newrangname'])) {
+        } elseif (!empty($_POST['newrangname'])) {
             $name = mysql_real_escape_string(strip_tags($_POST['newrangname']));
             $allianz_raenge[] = array(
-                'name'                  => $name,
-		'mails'                 => 0,
-		'delete'                => 0,
-		'kick'                  => 0,
-		'bewerbungen'           => 0,
-		'administrieren'        => 0,
-		'bewerbungenbearbeiten' => 0,
-		'memberlist'            => 0,
-		'onlinestatus'          => 0,
-		'rechtehand'            => 0
+                'name' => $name,
+                'mails' => 0,
+                'delete' => 0,
+                'kick' => 0,
+                'bewerbungen' => 0,
+                'administrieren' => 0,
+                'bewerbungenbearbeiten' => 0,
+                'memberlist' => 0,
+                'onlinestatus' => 0,
+                'rechtehand' => 0
             );
             $ranks = serialize($allianz_raenge);
             doquery("UPDATE {{table}} SET `ally_ranks`='" . $ranks . "' WHERE `id`=" . $ally['id'], "alliance");
             header("Location: game.php?page=alliance&mode=admin&edit=rights");
             exit();
-	} elseif (@$_POST['id'] != '' && is_array($_POST['id'])) {
+        } elseif (@$_POST['id'] != '' && is_array($_POST['id'])) {
             $ally_ranks_new = array();
-            foreach ($_POST['id'] as $id)
-            {
+            foreach ($_POST['id'] as $id) {
                 $name = $allianz_raenge[$id]['name'];
-		$ally_ranks_new[$id]['name'] = $name;
-		if (isset($_POST['u' . $id . 'r0'])) {
+                $ally_ranks_new[$id]['name'] = $name;
+                if (isset($_POST['u' . $id . 'r0'])) {
                     $ally_ranks_new[$id]['delete'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['delete'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r1']) && $ally['ally_owner'] == $user['id'])
-                {
+                }
+                if (isset($_POST['u' . $id . 'r1']) && $ally['ally_owner'] == $user['id']) {
                     $ally_ranks_new[$id]['kick'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['kick'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r2'])) {
+                }
+                if (isset($_POST['u' . $id . 'r2'])) {
                     $ally_ranks_new[$id]['bewerbungen'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['bewerbungen'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r3'])) {
+                }
+                if (isset($_POST['u' . $id . 'r3'])) {
                     $ally_ranks_new[$id]['memberlist'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['memberlist'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r4']))
-                {
+                }
+                if (isset($_POST['u' . $id . 'r4'])) {
                     $ally_ranks_new[$id]['bewerbungenbearbeiten'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['bewerbungenbearbeiten'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r5'])) {
+                }
+                if (isset($_POST['u' . $id . 'r5'])) {
                     $ally_ranks_new[$id]['administrieren'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['administrieren'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r6'])) {
+                }
+                if (isset($_POST['u' . $id . 'r6'])) {
                     $ally_ranks_new[$id]['onlinestatus'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['onlinestatus'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r7'])) {
+                }
+                if (isset($_POST['u' . $id . 'r7'])) {
                     $ally_ranks_new[$id]['mails'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['mails'] = 0;
-		}
-		if (isset($_POST['u' . $id . 'r8'])) {
+                }
+                if (isset($_POST['u' . $id . 'r8'])) {
                     $ally_ranks_new[$id]['rechtehand'] = 1;
-		} else {
+                } else {
                     $ally_ranks_new[$id]['rechtehand'] = 0;
-		}
+                }
             }
             $ranks = serialize($ally_ranks_new);
             doquery("UPDATE {{table}} SET `ally_ranks`='" . $ranks . "' WHERE `id`=" . $ally['id'], "alliance");
             $goto = $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'];
             header("Location: " . $goto);
             exit();
-	}
-	// borrar una entrada
-	elseif (isset($d) && isset($ally_ranks[$d])) {
+        }
+        // borrar una entrada
+        elseif (isset($d) && isset($ally_ranks[$d])) {
             unset($ally_ranks[$d]);
             $ally['ally_rank'] = serialize($ally_ranks);
             doquery("UPDATE {{table}} SET `ally_ranks`='{$ally['ally_rank']}' WHERE `id`={$ally['id']}", "alliance");
-	}
-        foreach($ally_ranks as $a => $b)
-        {
+        }
+        foreach ($ally_ranks as $a => $b) {
             $this->tplObj->assign(array(
                 'a' => $a,
                 'b' => $b,
             ));
         }
-                
+
         $this->tplObj->assign(array(
-            'title'                         => $lang['Law_settings'],
-            'Configure_laws'                => $lang['Configure_laws'],
-            'Range_make'                    => $lang['Range_make'],
-            'Range_name'                    => $lang['Range_name'],
-            'Make'                          => $lang['Make'],
-            'Law_leyends'                   => $lang['Law_leyends'],
-            'Alliance_dissolve'             => $lang['Alliance_dissolve'],
-            'Expel_users'                   => $lang['Expel_users'],
-            'See_the_requests'              => $lang['See_the_requests'],
-            'See_the_list_members'          => $lang['See_the_list_members'],
-            'Check_the_requests'            => $lang['Check_the_requests'],
-            'Alliance_admin'                => $lang['Alliance_admin'],
-            'See_the_online_list_member'    => $lang['See_the_online_list_member'],
-            'Make_a_circular_message'       => $lang['Make_a_circular_message'],
-            'Left_hand_text'                => $lang['Left_hand_text'],
-            'Return_to_overview'            => $lang['Return_to_overview'],
-            'ally_ranks'                    => $ally_ranks,
-            'There_is_not_range'            => $lang['There_is_not_range'],
-            'Range_name'                    => $lang['Range_name'],
-            'Save'                          => $lang['Save'],
-            'Delete_range'                  => $lang['Delete_range'],
-            'ally'                          => $ally,
-            'user'                          => $user,
+            'title' => $lang['Law_settings'],
+            'Configure_laws' => $lang['Configure_laws'],
+            'Range_make' => $lang['Range_make'],
+            'Range_name' => $lang['Range_name'],
+            'Make' => $lang['Make'],
+            'Law_leyends' => $lang['Law_leyends'],
+            'Alliance_dissolve' => $lang['Alliance_dissolve'],
+            'Expel_users' => $lang['Expel_users'],
+            'See_the_requests' => $lang['See_the_requests'],
+            'See_the_list_members' => $lang['See_the_list_members'],
+            'Check_the_requests' => $lang['Check_the_requests'],
+            'Alliance_admin' => $lang['Alliance_admin'],
+            'See_the_online_list_member' => $lang['See_the_online_list_member'],
+            'Make_a_circular_message' => $lang['Make_a_circular_message'],
+            'Left_hand_text' => $lang['Left_hand_text'],
+            'Return_to_overview' => $lang['Return_to_overview'],
+            'ally_ranks' => $ally_ranks,
+            'There_is_not_range' => $lang['There_is_not_range'],
+            'Range_name' => $lang['Range_name'],
+            'Save' => $lang['Save'],
+            'Delete_range' => $lang['Delete_range'],
+            'ally' => $ally,
+            'user' => $user,
         ));
-        
+
         $this->render('alliance.admin_laws.tpl');
     }
-    
-    function admin_members()
-    {
+
+    function admin_members() {
         global $user, $lang, $rank;
-        
+
         $sort1 = intval(HTTP::_GP('sort1', '1'));
-        if (empty($sort1))
-        {
+        if (empty($sort1)) {
             unset($sort1);
         }
         $sort2 = intval(HTTP::_GP('sort2', '1'));
-        if (empty($sort2))
-        {
+        if (empty($sort2)) {
             unset($sort2);
         }
         $kick = intval(HTTP::_GP('kick', ''));
-        if (empty($kick))
-        {
+        if (empty($kick)) {
             unset($kick);
         }
         $id = intval(HTTP::_GP('id', ''));
-        if (empty($id))
-	{
+        if (empty($id)) {
             unset($id);
         }
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
-            $ally_ranks = unserialize($ally['ally_ranks']);
-            $allianz_raenge = unserialize($ally['ally_ranks']);
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_can_watch_memberlist_status = true;
-            } else {
-                $user_can_watch_memberlist_status = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_can_watch_memberlist = true;
-            } else {
-                $user_can_watch_memberlist = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['mails'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_can_send_mails = true;
-            } else {
-                $user_can_send_mails = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['kick'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_can_kick = true;
-            } else {
-                $user_can_kick = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_can_edit_rights = true;
-            } else {
-                $user_can_edit_rights = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['delete'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_can_exit_alliance = true;
-            } else {
-                $user_can_exit_alliance = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_bewerbungen_einsehen = true;
-            } else {
-                $user_bewerbungen_einsehen = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_bewerbungen_bearbeiten = true;
-            } else{
-                $user_bewerbungen_bearbeiten = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_admin = true;
-            } else {
-                $user_admin = false;
-            }
-            if (@$allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-            {
-                $user_onlinestatus = true;
-            } else {
-                $user_onlinestatus = false;
-            }
-            if (!$ally)
-            {
-                doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
-                ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
-            }
-            // Administrar a los miembros
-            /*
-              En la administrar a los miembros se pueden establecer los rangos
-              para dar los diferentes derechos "Leyes"
-            */
-            // comprobamos el permiso
-            if ($ally['ally_owner'] != $user['id'] && !$user_can_kick)
-            {
+        $ally_ranks = unserialize($ally['ally_ranks']);
+        $allianz_raenge = unserialize($ally['ally_ranks']);
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_can_watch_memberlist_status = true;
+        } else {
+            $user_can_watch_memberlist_status = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_can_watch_memberlist = true;
+        } else {
+            $user_can_watch_memberlist = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['mails'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_can_send_mails = true;
+        } else {
+            $user_can_send_mails = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['kick'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_can_kick = true;
+        } else {
+            $user_can_kick = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_can_edit_rights = true;
+        } else {
+            $user_can_edit_rights = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['delete'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_can_exit_alliance = true;
+        } else {
+            $user_can_exit_alliance = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_bewerbungen_einsehen = true;
+        } else {
+            $user_bewerbungen_einsehen = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_bewerbungen_bearbeiten = true;
+        } else {
+            $user_bewerbungen_bearbeiten = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_admin = true;
+        } else {
+            $user_admin = false;
+        }
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
+            $user_onlinestatus = true;
+        } else {
+            $user_onlinestatus = false;
+        }
+        if (!$ally) {
+            doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
+            ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
+        }
+        // Administrar a los miembros
+        /*
+          En la administrar a los miembros se pueden establecer los rangos
+          para dar los diferentes derechos "Leyes"
+         */
+        // comprobamos el permiso
+        if ($ally['ally_owner'] != $user['id'] && !$user_can_kick) {
+            ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
+        }
+        /*
+          Kickear usuarios requiere el permiso numero 1
+         */
+        if (isset($kick)) {
+            if ($ally['ally_owner'] != $user['id'] && !$user_can_kick) {
                 ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
             }
-            /*
-              Kickear usuarios requiere el permiso numero 1
-            */
-            if (isset($kick))
-            {
-                if ($ally['ally_owner'] != $user['id'] && !$user_can_kick)
-                {
-                    ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
-                }
-                $u = doquery("SELECT * FROM {{table}} WHERE id='{$kick}' LIMIT 1", 'users', true);
-                // kickeamos!
-                if ($u['ally_id'] == $ally['id'] && $u['id'] != $ally['ally_owner'])
-                {
-                    doquery("UPDATE {{table}} SET `ally_id`='0' ,`ally_name` = '' WHERE `id`='{$u['id']}'", 'users');
-                }
-            } elseif (isset($_POST['newrang'])) {
-                $q = doquery("SELECT * FROM {{table}} WHERE id='{$u}' LIMIT 1", 'users', true);
-                if ((isset($ally_ranks[$_POST['newrang']-1]) || $_POST['newrang'] == 0) && $q['id'] != $ally['ally_owner'])
-                {
-                    doquery("UPDATE {{table}} SET `ally_rank_id`='" . mysql_real_escape_string(strip_tags($_POST['newrang'])) . "' WHERE `id`='" . intval($id) . "'", 'users');
-                }
+            $u = doquery("SELECT * FROM {{table}} WHERE id='{$kick}' LIMIT 1", 'users', true);
+            // kickeamos!
+            if ($u['ally_id'] == $ally['id'] && $u['id'] != $ally['ally_owner']) {
+                doquery("UPDATE {{table}} SET `ally_id`='0' ,`ally_name` = '' WHERE `id`='{$u['id']}'", 'users');
             }
-            // obtenemos las template row
-            // El orden de aparicion
-            if ($sort2)
-            {
-                // agregar el =0 para las coordenadas...
-                if ($sort1 == 1)
-                {
-                    $sort = " ORDER BY `username`";
-                } elseif ($sort1 == 2) {
-                    $sort = " ORDER BY `username`";
-                } elseif ($sort1 == 4) {
-                    $sort = " ORDER BY `ally_register_time`";
-                } elseif ($sort1 == 5) {
-                    $sort = " ORDER BY `onlinetime`";
-                } else {
-                    $sort = " ORDER BY `id`";
-                }
-                if ($sort2 == 1)
-                {
-                    $sort .= " DESC;";
-                } elseif ($sort2 == 2) {
-                    $sort .= " ASC;";
-                }
-                $listuser = doquery("SELECT * FROM {{table}} WHERE ally_id='{$user['ally_id']}'{$sort}", 'users');
+        } elseif (isset($_POST['newrang'])) {
+            $q = doquery("SELECT * FROM {{table}} WHERE id='{$u}' LIMIT 1", 'users', true);
+            if ((isset($ally_ranks[$_POST['newrang'] - 1]) || $_POST['newrang'] == 0) && $q['id'] != $ally['ally_owner']) {
+                doquery("UPDATE {{table}} SET `ally_rank_id`='" . mysql_real_escape_string(strip_tags($_POST['newrang'])) . "' WHERE `id`='" . intval($id) . "'", 'users');
+            }
+        }
+        // obtenemos las template row
+        // El orden de aparicion
+        if ($sort2) {
+            // agregar el =0 para las coordenadas...
+            if ($sort1 == 1) {
+                $sort = " ORDER BY `username`";
+            } elseif ($sort1 == 2) {
+                $sort = " ORDER BY `username`";
+            } elseif ($sort1 == 4) {
+                $sort = " ORDER BY `ally_register_time`";
+            } elseif ($sort1 == 5) {
+                $sort = " ORDER BY `onlinetime`";
             } else {
-                $listuser = doquery("SELECT * FROM {{table}} WHERE ally_id={$user['ally_id']}", 'users');
+                $sort = " ORDER BY `id`";
             }
-            // contamos la cantidad de usuarios.
-            $i = 0;
-            // Como es costumbre. un row template
-            $page_list = '';
-            $lang['memberzahl'] = mysql_num_rows($listuser);
-            while ($u = mysql_fetch_array($listuser))
-            {
-                $UserPoints = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '" . $u['id'] . "';", 'statpoints', true);
-                $i++;
-                $u['i'] = $i;
-                // Dias de inactivos
-                $u['points'] = "" . pretty_number($UserPoints['total_points']) . "";
-                $days = floor(round(time() - $u["onlinetime"]) / 3600 % 24);
-                $u["onlinetime"] = str_replace("%s", $days, "%s d");
-                // Nombre de rango
-                if ($ally['ally_owner'] == $u['id'])
-                {
-                    $ally_range = ($ally['ally_owner_range'] == '')?$lang['Founder']:$ally['ally_owner_range'];
-                } elseif ($u['ally_rank_id'] == 0 || !isset($ally_ranks[$u['ally_rank_id']-1]['name'])) {
-                    $ally_range = $lang['Novate'];
-                } else {
-                    $ally_range = $ally_ranks[$u['ally_rank_id']-1]['name'];
-                }
-                /*
-                  Aca viene la parte jodida...
-                */
-                if ($ally['ally_owner'] == $u['id'] || $rank == $u['id'])
-                {
-                    $u["functions"] = '';
-                } elseif ($ally_ranks[$user['ally_rank_id']-1][5] == 1 || $ally['ally_owner'] == $user['id']) {
-                    $f['Expel_user'] = $lang['Expel_user'];
-                    $f['Set_range'] = $lang['Set_range'];
-                    $f['You_are_sure_want_kick_to'] = str_replace("%s", $u['username'], $lang['You_are_sure_want_kick_to']);
-                    $f['id'] = $u['id'];
-                    $u["functions"] = parsetemplate($this->getTemplate('alliance.admin_members_function.tpl'), $f);
-                } else {
-                    $u["functions"] = '';
-                }
-                // por el formulario...
-                if ($rank != $u['id'])
-                {
-                    $u['ally_range'] = $ally_range;
-                } else {
-                    $u['ally_range'] = '';
-                }
-                $u['ally_register_time'] = date("Y-m-d h:i:s", $u['ally_register_time']);
-                $page_list .= parsetemplate($this->getTemplate('alliance.admin_members_row.tpl'), $u);
-                if ($rank == $u['id'])
-                {
-                    $r['Rank_for'] = str_replace("%s", $u['username'], $lang['Rank_for']);
-                    $r['options'] .= "<option value=\"0\">{$lang['Novate']}</option>";
-                    foreach($ally_ranks as $a => $b)
-                    {
-                        $r['options'] .= "<option value=\"" . ($a + 1) . "\"";
-                        if ($u['ally_rank_id']-1 == $a)
-                        {
-                            $r['options'] .= ' selected=selected';
-                        }
-                        $r['options'] .= ">{$b['name']}</option>";
-                    }
-                    $r['id'] = $u['id'];
-                    $r['Save'] = $lang['Save'];
-                    $page_list .= parsetemplate($this->getTemplate('alliance.admin_members_row_edit.tpl'), $r);
-                }
-            }
-            // para cambiar el link de ordenar.
-            if ($sort2 == 1)
-            {
-                $s = 2;
+            if ($sort2 == 1) {
+                $sort .= " DESC;";
             } elseif ($sort2 == 2) {
-                $s = 1;
+                $sort .= " ASC;";
+            }
+            $listuser = doquery("SELECT * FROM {{table}} WHERE ally_id='{$user['ally_id']}'{$sort}", 'users');
+        } else {
+            $listuser = doquery("SELECT * FROM {{table}} WHERE ally_id={$user['ally_id']}", 'users');
+        }
+        // contamos la cantidad de usuarios.
+        $i = 0;
+        // Como es costumbre. un row template
+        $page_list = '';
+        $lang['memberzahl'] = mysql_num_rows($listuser);
+        while ($u = mysql_fetch_array($listuser)) {
+            $UserPoints = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '" . $u['id'] . "';", 'statpoints', true);
+            $i++;
+            $u['i'] = $i;
+            // Dias de inactivos
+            $u['points'] = "" . pretty_number($UserPoints['total_points']) . "";
+            $days = floor(round(time() - $u["onlinetime"]) / 3600 % 24);
+            $u["onlinetime"] = str_replace("%s", $days, "%s d");
+            // Nombre de rango
+            if ($ally['ally_owner'] == $u['id']) {
+                $ally_range = ($ally['ally_owner_range'] == '') ? $lang['Founder'] : $ally['ally_owner_range'];
+            } elseif ($u['ally_rank_id'] == 0 || !isset($ally_ranks[$u['ally_rank_id'] - 1]['name'])) {
+                $ally_range = $lang['Novate'];
             } else {
-                $s = 1;
+                $ally_range = $ally_ranks[$u['ally_rank_id'] - 1]['name'];
             }
-            if ($i != $ally['ally_members'])
-            {
-                doquery("UPDATE {{table}} SET `ally_members`='{$i}' WHERE `id`='{$ally['id']}'", 'alliance');
+            /*
+              Aca viene la parte jodida...
+             */
+            if ($ally['ally_owner'] == $u['id'] || $rank == $u['id']) {
+                $u["functions"] = '';
+            } elseif ($ally_ranks[$user['ally_rank_id'] - 1][5] == 1 || $ally['ally_owner'] == $user['id']) {
+                $f['Expel_user'] = $lang['Expel_user'];
+                $f['Set_range'] = $lang['Set_range'];
+                $f['You_are_sure_want_kick_to'] = str_replace("%s", $u['username'], $lang['You_are_sure_want_kick_to']);
+                $f['id'] = $u['id'];
+                $u["functions"] = parsetemplate($this->getTemplate('alliance.admin_members_function.tpl'), $f);
+            } else {
+                $u["functions"] = '';
             }
-            // a=9 es para cambiar la etiqueta de la etiqueta.
-            // a=10 es para cambiarle el nombre de la alianza
+            // por el formulario...
+            if ($rank != $u['id']) {
+                $u['ally_range'] = $ally_range;
+            } else {
+                $u['ally_range'] = '';
+            }
+            $u['ally_register_time'] = date("Y-m-d h:i:s", $u['ally_register_time']);
+            $page_list .= parsetemplate($this->getTemplate('alliance.admin_members_row.tpl'), $u);
+            if ($rank == $u['id']) {
+                $r['Rank_for'] = str_replace("%s", $u['username'], $lang['Rank_for']);
+                $r['options'] .= "<option value=\"0\">{$lang['Novate']}</option>";
+                foreach ($ally_ranks as $a => $b) {
+                    $r['options'] .= "<option value=\"" . ($a + 1) . "\"";
+                    if ($u['ally_rank_id'] - 1 == $a) {
+                        $r['options'] .= ' selected=selected';
+                    }
+                    $r['options'] .= ">{$b['name']}</option>";
+                }
+                $r['id'] = $u['id'];
+                $r['Save'] = $lang['Save'];
+                $page_list .= parsetemplate($this->getTemplate('alliance.admin_members_row_edit.tpl'), $r);
+            }
+        }
+        // para cambiar el link de ordenar.
+        if ($sort2 == 1) {
+            $s = 2;
+        } elseif ($sort2 == 2) {
+            $s = 1;
+        } else {
+            $s = 1;
+        }
+        if ($i != $ally['ally_members']) {
+            doquery("UPDATE {{table}} SET `ally_members`='{$i}' WHERE `id`='{$ally['id']}'", 'alliance');
+        }
+        // a=9 es para cambiar la etiqueta de la etiqueta.
+        // a=10 es para cambiarle el nombre de la alianza
 
-            $this->tplObj->assign(array(
-                'title'                 => $lang['Members_administrate'],
-                'Members_list'          => $lang['Members_list'],
-                'Ammount'               => $lang['Ammount'],
-                'memberzahl'            => $lang['memberzahl'],
-                'Number'                => $lang['Number'],
-                's'                     => $s,
-                'Name'                  => $lang['Name'],
-                'Position'              => $lang['Position'],
-                'Points'                => $lang['Points'],
-                'Coordinated'           => $lang['Coordinated'],
-                'Member_from'           => $lang['Member_from'],
-                'memberslist'           => $page_list,
-                'Return_to_overview'    => $lang['Return_to_overview'],
-            ));
+        $this->tplObj->assign(array(
+            'title' => $lang['Members_administrate'],
+            'Members_list' => $lang['Members_list'],
+            'Ammount' => $lang['Ammount'],
+            'memberzahl' => $lang['memberzahl'],
+            'Number' => $lang['Number'],
+            's' => $s,
+            'Name' => $lang['Name'],
+            'Position' => $lang['Position'],
+            'Points' => $lang['Points'],
+            'Coordinated' => $lang['Coordinated'],
+            'Member_from' => $lang['Member_from'],
+            'memberslist' => $page_list,
+            'Return_to_overview' => $lang['Return_to_overview'],
+        ));
 
-            $this->render('alliance.admin_members.tpl');
+        $this->render('alliance.admin_members.tpl');
     }
-    
-    function admin_tag()
-    {
+
+    function admin_tag() {
         global $user, $lang, $ally, $user_admin;
-        
+
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
-        if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
         }
         // Changer le TAG l'alliance
         // Bon si on verifiait les autorisation ?
-        if ($ally['ally_owner'] != $user['id'] && !$user_admin)
-        {
+        if ($ally['ally_owner'] != $user['id'] && !$user_admin) {
             ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
         }
-        if (@$_POST['newtag'])
-        {
+        if (@$_POST['newtag']) {
             // Y a le nouveau TAG
             $ally['ally_tag'] = mysql_real_escape_string(strip_tags($_POST['newtag']));
-            doquery("UPDATE {{table}} SET `ally_tag` = '". $ally['ally_tag'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
+            doquery("UPDATE {{table}} SET `ally_tag` = '" . $ally['ally_tag'] . "' WHERE `id` = '" . $user['ally_id'] . "';", 'alliance');
         }
-                
+
         $this->tplObj->assign(array(
-            'title'                 => $lang['Alliance_admin'],
-            'question'              => str_replace('%s', "ally_tag", $lang['How_you_will_call_the_alliance_in_the_future']),
-            'New_name'              => $lang['New_tag'],
-            'Change'                => $lang['Change'],
-            'Return_to_overview'    => $lang['Return_to_overview'],
+            'title' => $lang['Alliance_admin'],
+            'question' => str_replace('%s', "ally_tag", $lang['How_you_will_call_the_alliance_in_the_future']),
+            'New_name' => $lang['New_tag'],
+            'Change' => $lang['Change'],
+            'Return_to_overview' => $lang['Return_to_overview'],
         ));
 
         $this->render('alliance.admin_rename_tag.tpl');
     }
-    
-    function admin_name()
-    {
+
+    function admin_name() {
         global $user, $lang, $ally, $user_admin;
-        
+
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
-        if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
         }
         // Changer le nom de l'alliance
         // comprobamos el permiso
-        if ($ally['ally_owner'] != $user['id'] && !$user_admin)
-        {
+        if ($ally['ally_owner'] != $user['id'] && !$user_admin) {
             ShowErrorPage::message($lang['Denied_access'], $lang['Members_list']);
         }
-        if (@$_POST['newname'])
-        {
+        if (@$_POST['newname']) {
             // Y a le nouveau Nom
             $ally['ally_name'] = mysql_real_escape_string(strip_tags($_POST['newname']));
-            doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
-            doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `ally_id` = '". $ally['id'] ."';", 'users');
+            doquery("UPDATE {{table}} SET `ally_name` = '" . $ally['ally_name'] . "' WHERE `id` = '" . $user['ally_id'] . "';", 'alliance');
+            doquery("UPDATE {{table}} SET `ally_name` = '" . $ally['ally_name'] . "' WHERE `ally_id` = '" . $ally['id'] . "';", 'users');
         }
-                
+
         $this->tplObj->assign(array(
-            'title'                 => $lang['Alliance_admin'],
-            'question'              => str_replace('%s', $ally['ally_name'], $lang['How_you_will_call_the_alliance_in_the_future']),
-            'New_name'              => $lang['New_name'],
-            'Change'                => $lang['Change'],
-            'Return_to_overview'    => $lang['Return_to_overview'],
+            'title' => $lang['Alliance_admin'],
+            'question' => str_replace('%s', $ally['ally_name'], $lang['How_you_will_call_the_alliance_in_the_future']),
+            'New_name' => $lang['New_name'],
+            'Change' => $lang['Change'],
+            'Return_to_overview' => $lang['Return_to_overview'],
         ));
 
         $this->render('alliance.admin_rename_name.tpl');
     }
-    
-    function admin_give()
-    {
+
+    function admin_give() {
         global $user, $lang;
-        
+
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
         $allianz_raenge = unserialize($ally['ally_ranks']);
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_watch_memberlist_status = true;
         } else {
             $user_can_watch_memberlist_status = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_watch_memberlist = true;
         } else {
             $user_can_watch_memberlist = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['mails'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['mails'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_send_mails = true;
         } else {
             $user_can_send_mails = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['kick'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['kick'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_kick = true;
         } else {
             $user_can_kick = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_edit_rights = true;
         } else {
             $user_can_edit_rights = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['delete'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['delete'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_exit_alliance = true;
         } else {
             $user_can_exit_alliance = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_bewerbungen_einsehen = true;
         } else {
             $user_bewerbungen_einsehen = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_bewerbungen_bearbeiten = true;
-        } else{
+        } else {
             $user_bewerbungen_bearbeiten = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_admin = true;
         } else {
             $user_admin = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_onlinestatus = true;
         } else {
             $user_onlinestatus = false;
         }
-        if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
         }
-        if ($_POST["id"])
-        {
-            doquery("update {{table}} set `ally_owner`='".$_POST["id"]."' where `id`='".$user['ally_id']."'",'alliance');
+        if ($_POST["id"]) {
+            doquery("update {{table}} set `ally_owner`='" . $_POST["id"] . "' where `id`='" . $user['ally_id'] . "'", 'alliance');
         } else {
-            $selection=doquery("SELECT * FROM {{table}} where ally_id='".$user['ally_id']."'",'users');
-            $select='';
-            while($data=mysql_fetch_array($selection))
-            {
-                $select.='<OPTION VALUE="'.$data['id'].'">'.$data['username'];
+            $selection = doquery("SELECT * FROM {{table}} where ally_id='" . $user['ally_id'] . "'", 'users');
+            $select = '';
+            while ($data = mysql_fetch_array($selection)) {
+                $select.='<OPTION VALUE="' . $data['id'] . '">' . $data['username'];
             }
-            
+
             $this->tplObj->assign('select', $select);
-            
+
             $this->render('alliance.give.tpl');
         }
     }
-    
-    function admin_requests()
-    {
+
+    function admin_requests() {
         global $user, $lang, $ally;
-        
-        $show     = intval(HTTP::_GP('show', ''));
+
+        $show = intval(HTTP::_GP('show', ''));
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
         $allianz_raenge = unserialize($ally['ally_ranks']);
-	if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id'])
-	{
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_bewerbungen_bearbeiten = true;
-        } else{
+        } else {
             $user_bewerbungen_bearbeiten = false;
         }
-        if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
         }
         // Administrar solicitudes
-	if ($ally['ally_owner'] != $user['id'] && !$user_bewerbungen_bearbeiten)
-        {
+        if ($ally['ally_owner'] != $user['id'] && !$user_bewerbungen_bearbeiten) {
             ShowErrorPage::message($lang['Denied_access'], $lang['Check_the_requests']);
-	}
-	if (@$_POST['action'] == "Accepter")
-        {
+        }
+        if (@$_POST['action'] == "Accepter") {
             $_POST['text'] = mysql_real_escape_string(strip_tags($_POST['text']));
             $u = doquery("SELECT * FROM {{table}} WHERE id=$show", 'users', true);
             // agrega los puntos al unirse el user a la alianza
@@ -1402,7 +1165,7 @@ class ShowAlliancePage extends AbstractGamePage
                 `message_text`='Hi!<br>L\'Alliance <b>" . $ally['ally_name'] . "</b> a acceptee votre candidature!<br>Charte:<br>" . $_POST['text'] . "'", "messages");
             header('Location:game.php?page=alliance&mode=admin&edit=requests');
             die();
-	} elseif (@$_POST['action'] == "Refuser" && $_POST['action'] != '') {
+        } elseif (@$_POST['action'] == "Refuser" && $_POST['action'] != '') {
             $_POST['text'] = mysql_real_escape_string(strip_tags($_POST['text']));
             doquery("UPDATE {{table}} SET ally_request_text='',ally_request='0',ally_id='0',new_message=new_message+1, mnl_alliance=mnl_alliance+1 WHERE id='{$show}'", 'users');
             // Se envia un mensaje avizando...
@@ -1416,41 +1179,37 @@ class ShowAlliancePage extends AbstractGamePage
                 `message_text`='Hi!<br>L\'Alliance <b>" . $ally['ally_name'] . "</b> a refusee votre candidature!<br>Begr&uuml;ndung/Text:<br>" . $_POST['text'] . "'", "messages");
             header('Location:game.php?page=alliance&mode=admin&edit=requests');
             die();
-	}
-	$i = 0;
-	$parse = $lang;
-	$query = doquery("SELECT id,username,ally_request_text,ally_register_time FROM {{table}} WHERE ally_request='{$ally['id']}'", 'users');
-	while ($r = mysql_fetch_array($query))
-        {
+        }
+        $i = 0;
+        $parse = $lang;
+        $query = doquery("SELECT id,username,ally_request_text,ally_register_time FROM {{table}} WHERE ally_request='{$ally['id']}'", 'users');
+        while ($r = mysql_fetch_array($query)) {
             // recolectamos los datos del que se eligio.
-            if (isset($show) && $r['id'] == $show)
-            {
-		$s['username'] = $r['username'];
-		$s['ally_request_text'] = nl2br($r['ally_request_text']);
-		$s['id'] = $r['id'];
+            if (isset($show) && $r['id'] == $show) {
+                $s['username'] = $r['username'];
+                $s['ally_request_text'] = nl2br($r['ally_request_text']);
+                $s['id'] = $r['id'];
             }
             // la fecha de cuando se envio la solicitud
             $r['time'] = date("Y-m-d h:i:s", $r['ally_register_time']);
             @$parse['list'] .= parsetemplate($this->getTemplate('alliance.admin_request_row.tpl'), $r);
             $i++;
-	}
-	if ($parse['list'] == '')
-        {
+        }
+        if ($parse['list'] == '') {
             $parse['list'] = '<tr><th colspan=2>Il ne reste plus aucune candidature</th></tr>';
-	}
-	// Con $show
-	if (isset($show) && $show != 0 && $parse['list'] != '')
-        {
+        }
+        // Con $show
+        if (isset($show) && $show != 0 && $parse['list'] != '') {
             // Los datos de la solicitud
             @$s['Request_from'] = str_replace('%s', $s['username'], $lang['Request_from']);
             // el formulario
             $parse['request'] = parsetemplate($this->getTemplate('alliance.admin_request_form.tpl'), $s);
             $parse['request'] = parsetemplate($parse['request'], $lang);
-	} else {
+        } else {
             $parse['request'] = '';
-	}
+        }
         $parse['There_is_hanging_request'] = str_replace('%n', $i, @$lang['There_is_hanging_request']);
-	// $parse['list'] = $lang['Return_to_overview'];
+        // $parse['list'] = $lang['Return_to_overview'];
 //	$page = parsetemplate(gettemplate('alliance_admin_request_table'), $parse);
 //	display($page, $lang['Check_the_requests']);
         $this->tplObj->assign(array(
@@ -1464,78 +1223,66 @@ class ShowAlliancePage extends AbstractGamePage
             'list' => $parse['list'],
             'Back' => $lang['Back'],
         ));
-        
+
         $this->render('alliance.admin_request.tpl');
     }
-    
-    function admin_exit()
-    {
+
+    function admin_exit() {
         global $user, $lang;
-        
+
         $ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
         $allianz_raenge = unserialize($ally['ally_ranks']);
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_watch_memberlist_status = true;
         } else {
             $user_can_watch_memberlist_status = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_watch_memberlist = true;
         } else {
             $user_can_watch_memberlist = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['mails'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['mails'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_send_mails = true;
         } else {
             $user_can_send_mails = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['kick'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['kick'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_kick = true;
         } else {
             $user_can_kick = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_edit_rights = true;
         } else {
             $user_can_edit_rights = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['delete'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['delete'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_can_exit_alliance = true;
         } else {
             $user_can_exit_alliance = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_bewerbungen_einsehen = true;
         } else {
             $user_bewerbungen_einsehen = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_bewerbungen_bearbeiten = true;
-        } else{
+        } else {
             $user_bewerbungen_bearbeiten = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_admin = true;
         } else {
             $user_admin = false;
         }
-        if (@$allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-        {
+        if (@$allianz_raenge[$user['ally_rank_id'] - 1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
             $user_onlinestatus = true;
         } else {
             $user_onlinestatus = false;
         }
-        if (!$ally)
-        {
+        if (!$ally) {
             doquery("UPDATE {{table}} SET `ally_name`='',`ally_id`=0 WHERE `id`='{$user['id']}'", "users");
             ShowErrorPage::message($lang['ally_notexist'], $lang['your_alliance'], 'game.php?page=alliance');
         }
@@ -1548,12 +1295,11 @@ class ShowAlliancePage extends AbstractGamePage
         /*
           Si bien, se tendria que confirmar, no tengo animos para hacerlo mas detallado...
           sorry :(
-        */
+         */
         doquery("UPDATE {{table}} SET `ally_id`='0', `ally_name` = '' WHERE `id`='{$user['id']}'", 'users');
         doquery("DELETE FROM {{table}} WHERE id='{$ally['id']}'", "alliance");
         header('Location: game.php?page=alliance');
         exit;
     }
-}
 
-ob_flush();
+}
