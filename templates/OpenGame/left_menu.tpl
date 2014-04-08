@@ -80,7 +80,7 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="index.php?page=contact" accesskey="3" target="{mf}" >{Contact}</a></div></td>
 </tr><tr>
-	<td colspan="2"><div><a href="options.php" accesskey="o" target="{mf}">{Options}</a></div></td>
+	<td colspan="2"><div><a href="game.php?page=overview" accesskey="o" target="{mf}">{Options}</a></div></td>
 </tr>
 	{ADMIN_LINK}
 <tr>
