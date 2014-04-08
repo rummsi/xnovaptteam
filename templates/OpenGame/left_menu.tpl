@@ -62,7 +62,7 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="search.php" accesskey="b" target="{mf}">{Search}</a></div></td>
 </tr><tr>
-	<td colspan="2"><div><a href="banned.php" accesskey="3" target="{mf}">{blocked}</a></div></td>
+	<td colspan="2"><div><a href="game.php?page=banned" accesskey="3" target="{mf}">{blocked}</a></div></td>
 </tr>{announce_link}<tr>
 
 
@@ -78,7 +78,7 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="index.php?page=rules"  accesskey="c" target="_blank">{Rules}</a></div></td>
 </tr><tr>
-	<td colspan="2"><div><a href="contact.php" accesskey="3" target="{mf}" >{Contact}</a></div></td>
+	<td colspan="2"><div><a href="index.php?page=contact" accesskey="3" target="{mf}" >{Contact}</a></div></td>
 </tr><tr>
 	<td colspan="2"><div><a href="options.php" accesskey="o" target="{mf}">{Options}</a></div></td>
 </tr>

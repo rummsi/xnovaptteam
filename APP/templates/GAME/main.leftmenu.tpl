@@ -92,7 +92,7 @@
                                 <td colspan="2"><div><a href="search.php" accesskey="b" target="_self">{$Search}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="banned.php" accesskey="3" target="_self">{$blocked}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=banned" accesskey="3" target="_self">{$blocked}</a></div></td>
                             </tr>
                             {if ($game_config['enable_announces'] == 1)}
                                 <tr>
@@ -123,7 +123,7 @@
                                 <td colspan="2"><div><a href="index.php?page=rules"  accesskey="c" target="_blank">{$Rules}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="contact.php" accesskey="3" target="_self" >{$Contact}</a></div></td>
+                                <td colspan="2"><div><a href="index.php?page=contact" accesskey="3" target="_self" >{$Contact}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="options.php" accesskey="o" target="_self">{$Options}</a></div></td>
