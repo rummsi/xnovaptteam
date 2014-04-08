@@ -126,7 +126,7 @@
                                 <td colspan="2"><div><a href="index.php?page=contact" accesskey="3" target="_self" >{$Contact}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="options.php" accesskey="o" target="_self">{$Options}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=overview" accesskey="o" target="_self">{$Options}</a></div></td>
                             </tr>
                             {if ($user['authlevel'] > 0)}
                                 <tr>
