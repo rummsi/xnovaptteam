@@ -35,8 +35,12 @@ abstract class AbstractGamePage {
     public $defaultWindow = 'full';
 
     function __construct() {
-        $this->setWindow($this->defaultWindow);
-        $this->initTemplate();
+        if (!AJAX_REQUEST) {
+            $this->setWindow($this->defaultWindow);
+            $this->initTemplate();
+        } else {
+            $this->setWindow('ajax');
+        }
     }
 
     protected function setWindow($window) {
