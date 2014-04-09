@@ -28,89 +28,79 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowOfficierPage extends AbstractGamePage
-{
-    function __construct()
-    {
+class ShowOfficierPage extends AbstractGamePage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'officier';
     }
 
-    function show()
-    {
-        global $user, $title, $lang, $_GET, $Officier, $resource, $reslist;
-        
+    function show() {
+        global $user, $lang, $resource;
+
         includeLang('officier');
-        includeLang('leftmenu');
 
-	// Vérification que le joueur n'a pas un nombre de points négatif
-	if ($user['rpg_points'] < 0)
-        {
-		doquery("UPDATE {{table}} SET `rpg_points` = '0' WHERE `id` = '". $user['id'] ."';", 'users');
-	}
+        // Vérification que le joueur n'a pas un nombre de points négatif
+        if ($user['rpg_points'] < 0) {
+            doquery("UPDATE {{table}} SET `rpg_points` = '0' WHERE `id` = '" . $user['id'] . "';", 'users');
+        }
 
-	// Si recrutement d'un officier
-        if (isset($_GET['mode']))
-        {
-            if ($_GET['mode'] == 'hire')
-            {
+        // Si recrutement d'un officier
+        if (filter_input(INPUT_GET, 'mode') !== FALSE) {
+            if (filter_input(INPUT_GET, 'mode') == 'hire') {
                 $this->hire();
             }
         }
-        
-        $this->tplObj->assign(array(
-            'title' => $lang['Officiers'],
-            'resource' => $resource,
-        ));
-        
-        $this->render('officiers.default.tpl');
-    }
-    
-    function hire()
-    {
-        global $user, $lang, $reslist, $resource;
-        
-        includeLang('officier');
-        
-        if ($user['rpg_points'] > 0)
-            {
-                $Selected    = HTTP::_GP('offi', '');
-		if (in_array($Selected, $reslist['officier']))
-                {
-                    $Result = IsOfficierAccessible ( $user, $Selected );
-                    if ($Result == 1)
-                    {
-                        $user[$resource[$Selected]] += 1;
-			$user['rpg_points']         -= 1;
-			if ($Selected == 610)
-                        {
-                            $user['spy_tech']      += 5;
-			} elseif ($Selected == 611) {
-                            $user['computer_tech'] += 3;
-			}
-                        $QryUpdateUser  = "UPDATE {{table}} SET ";
-			$QryUpdateUser .= "`rpg_points` = '". $user['rpg_points'] ."', ";
-			$QryUpdateUser .= "`spy_tech` = '". $user['spy_tech'] ."', ";
-			$QryUpdateUser .= "`computer_tech` = '". $user['computer_tech'] ."', ";
-			$QryUpdateUser .= "`".$resource[$Selected]."` = '". $user[$resource[$Selected]] ."' ";
-			$QryUpdateUser .= "WHERE ";
-			$QryUpdateUser .= "`id` = '". $user['id'] ."';";
-			doquery( $QryUpdateUser, 'users' );
-			$Message = $lang['OffiRecrute'];
-                    } elseif ( $Result == -1 ) {
-			$Message = $lang['Maxlvl'];
-                    } elseif ( $Result == 0 ) {
-			$Message = $lang['Noob'];
-                    }
-		}
-            } else {
-                $Message = $lang['NoPoints'];
-            }
+
         $this->tplObj->assign(array(
             'title' => $lang['Officier'],
-            'mes'   => $Message,
+            'resource' => $resource,
         ));
-            
-        ShowErrorPage::message($Message, $lang['Officier']/*, 'game.php?page=officier'*/);
+
+        $this->render('officiers.default.tpl');
     }
+
+    function hire() {
+        global $user, $lang, $reslist, $resource;
+
+        includeLang('officier');
+
+        if ($user['rpg_points'] > 0) {
+            $Selected = HTTP::_GP('offi', '');
+            if (in_array($Selected, $reslist['officier'])) {
+                $Result = IsOfficierAccessible($user, $Selected);
+                if ($Result == 1) {
+                    $user[$resource[$Selected]] += 1;
+                    $user['rpg_points'] -= 1;
+                    if ($Selected == 610) {
+                        $user['spy_tech'] += 5;
+                    } elseif ($Selected == 611) {
+                        $user['computer_tech'] += 3;
+                    }
+                    $QryUpdateUser = "UPDATE {{table}} SET ";
+                    $QryUpdateUser .= "`rpg_points` = '" . $user['rpg_points'] . "', ";
+                    $QryUpdateUser .= "`spy_tech` = '" . $user['spy_tech'] . "', ";
+                    $QryUpdateUser .= "`computer_tech` = '" . $user['computer_tech'] . "', ";
+                    $QryUpdateUser .= "`" . $resource[$Selected] . "` = '" . $user[$resource[$Selected]] . "' ";
+                    $QryUpdateUser .= "WHERE ";
+                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
+                    doquery($QryUpdateUser, 'users');
+                    $Message = $lang['OffiRecrute'];
+                } elseif ($Result == -1) {
+                    $Message = $lang['Maxlvl'];
+                } elseif ($Result == 0) {
+                    $Message = $lang['Noob'];
+                }
+            }
+        } else {
+            $Message = $lang['NoPoints'];
+        }
+        $this->tplObj->assign(array(
+            'title' => $lang['Officier'],
+            'mes' => $Message,
+        ));
+
+        ShowErrorPage::message($Message, $lang['Officier'], header("Refresh: 3;url=game.php?page=officier"));
+    }
+
 }
