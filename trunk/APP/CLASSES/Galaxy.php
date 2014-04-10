@@ -763,7 +763,7 @@ class Galaxy
             {
 		$Result .= "<td><a href=game.php?page=messages&mode=write&id=".$GalaxyRowUser['id'].">".$lang['gl_sendmess']."</a></td>";
 		$Result .= "</tr><tr>";
-		$Result .= "<td><a href=buddy.php?a=2&u=".$GalaxyRowUser['id'].">".$lang['gl_buddyreq']."</a></td>";
+		$Result .= "<td><a href=game.php?page=buddy&a=2&u=".$GalaxyRowUser['id'].">".$lang['gl_buddyreq']."</a></td>";
 		$Result .= "</tr><tr>";
             }
             $Result .= "<td><a href=stat.php?who=player&start=".$Systemtart.">".$lang['gl_stats']."</a></td>";
@@ -893,7 +893,7 @@ class Galaxy
 		}
 		if ($user["settings_bud"] == "1" && $GalaxyRowPlayer['id'])
                 {
-                    $Result .= "<a href=buddy.php?a=2&amp;u=".$GalaxyRowPlayer['id']." >";
+                    $Result .= "<a href=game.php?page=buddy&a=2&amp;u=".$GalaxyRowPlayer['id']." >";
                     $Result .= "<img src=". $dpath ."img/b.gif alt=\"".$lang['gl_buddyreq']."\" title=\"".$lang['gl_buddyreq']."\" border=0></a>";
                     $Result .= "&nbsp;";
 		}
