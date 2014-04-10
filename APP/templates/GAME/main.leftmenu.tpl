@@ -107,7 +107,7 @@
                             </tr>
                             {if ($game_config['enable_notes'] == 1)}
                                 <tr>
-                                    <td colspan="2"><div><a href="#" onClick="f('notes.php', 'Report');" accesskey="n">Notes</a></div></td>
+                                    <td colspan="2"><div><a href="#" onClick="f('game.php?page=notes', 'Report');" accesskey="n">Notes</a></div></td>
                                 </tr>
                             {/if}
                             <tr>
