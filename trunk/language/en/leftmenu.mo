@@ -127,4 +127,6 @@ $lang['lm_ifo_game']  = "Jogo";
 $lang['lm_ifo_fleet'] = "Frota";
 $lang['lm_ifo_queue'] = "Filas";
 
+$lang['movement']     = 'Movimento';
+
 ?>

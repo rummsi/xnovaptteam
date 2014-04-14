@@ -58,7 +58,7 @@ abstract class AbstractGamePage {
     }
 
     protected function render($file) {
-        global $langInfos, $game_config, $user, $planetrow;
+        global $langInfos, $user, $planetrow;
 
         if ($this->getWindow() !== 'ajax') {
             $this->ShowLeftMenu($user, $planetrow);
@@ -66,11 +66,7 @@ abstract class AbstractGamePage {
 
         $this->tplObj->assign(array(
             'dpath' => DEFAULT_SKINPATH,
-            'style' => "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DEFAULT_SKINPATH . "/default.css\" />
-                                <link rel=\"stylesheet\" type=\"text/css\" href=\"" . DEFAULT_SKINPATH . "/formate.css\" />",
-            'ENCODING' => $langInfos['ENCODING'],
-            'body' => "<body>",
-            'servername' => $game_config['game_name'],
+            'encoding' => $langInfos['ENCODING'],
         ));
 
         $this->tplObj->display('extends:layout.' . $this->getWindow() . '.tpl|' . $file);
@@ -102,7 +98,6 @@ abstract class AbstractGamePage {
         $this->ShowTopNavigationBar();
 
         $rank = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_code` = '1' AND `stat_type` = '1' AND `id_owner` = '" . $user['id'] . "';", 'statpoints', true);
-        $Level = $user['authlevel'];
         $this->tplObj->assign(array(
             'XNovaRelease' => VERSION,
             'user_rank' => $rank['total_rank'],
@@ -113,46 +108,11 @@ abstract class AbstractGamePage {
             'lang' => $lang,
             'game_config' => $game_config,
             'lm_tx_queue' => MAX_FLEET_OR_DEFS_PER_ROW,
-            'devlp' => $lang['devlp'],
-            'Overview' => $lang['Overview'],
-            'Buildings' => $lang['Buildings'],
-            'Research' => $lang['Research'],
-            'Shipyard' => $lang['Shipyard'],
-            'Defense' => $lang['Defense'],
-            'Officiers' => $lang['Officiers'],
-            'navig' => $lang['navig'],
-            'Alliance' => $lang['Alliance'],
-            'Fleet' => $lang['Fleet'],
-            'Messages' => $lang['Messages'],
-            'observ' => $lang['observ'],
-            'Galaxy' => $lang['Galaxy'],
-            'Imperium' => $lang['Imperium'],
-            'Resources' => $lang['Resources'],
-            'Technology' => $lang['Technology'],
-            'Records' => $lang['Records'],
-            'Statistics' => $lang['Statistics'],
-            'Search' => $lang['Search'],
-            'blocked' => $lang['blocked'],
-            'commun' => $lang['commun'],
-            'Buddylist' => $lang['Buddylist'],
-            'Chat' => $lang['Chat'],
-            'Board' => $lang['Board'],
-            'multi' => $lang['multi'],
-            'Rules' => $lang['Rules'],
-            'Contact' => $lang['Contact'],
-            'Options' => $lang['Options'],
-            'Logout' => $lang['Logout'],
-            'infog' => $lang['infog'],
-            'lm_ifo_game' => $lang['lm_ifo_game'],
-            'lm_ifo_fleet' => $lang['lm_ifo_fleet'],
-            'lm_ifo_serv' => $lang['lm_ifo_serv'],
-            'lm_ifo_queue' => $lang['lm_ifo_queue'],
-            'Admin_Level' => $lang['user_level'][$Level],
         ));
     }
 
     function ShowTopNavigationBar() {
-        global $user, $planetrow, $lang;
+        global $user, $planetrow;
 
         includeLang('topnav');
 
@@ -160,45 +120,12 @@ abstract class AbstractGamePage {
             if (!$planetrow) {
                 $planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '" . $user['current_planet'] . "';", 'planets', true);
             }
-            // Actualisation des ressources de la planete
-            $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
-            // Genearation de la combo des planetes du joueur
-            $parse['planetlist'] = '';
-            $ThisUsersPlanets = SortUserPlanets($user);
-            while ($CurPlanet = mysql_fetch_array($ThisUsersPlanets)) {
-                if ($planetrow["destruyed"] == 0) {
-                    $parse['planetlist'] .= "\n<option ";
-                    if ($CurPlanet['id'] == $user['current_planet']) {
-                        // Bon puisque deja on s'y trouve autant le marquer
-                        $parse['planetlist'] .= "selected=\"selected\" ";
-                    }
-                    $parse['planetlist'] .= "value=\"?page=" . filter_input(INPUT_GET, 'page') . "&cp=" . $CurPlanet['id'] . "";
-                    $parse['planetlist'] .= "&amp;mode=" . HTTP::_GP('mode', '');
-                    $parse['planetlist'] .= "&amp;re=0\">";
-                    // Nom et coordonnées de la planete
-                    $parse['planetlist'] .= "" . $CurPlanet['name'];
-                    $parse['planetlist'] .= "&nbsp;[" . $CurPlanet['galaxy'] . ":";
-                    $parse['planetlist'] .= "" . $CurPlanet['system'] . ":";
-                    $parse['planetlist'] .= "" . $CurPlanet['planet'];
-                    $parse['planetlist'] .= "]&nbsp;&nbsp;</option>";
-                }
-            }
 
             $this->tplObj->assign(array(
-                'image' => $planetrow['image'],
-                'planetlist' => $parse['planetlist'],
-                'metal' => pretty_number($planetrow["metal"]),
-                'crystal' => pretty_number($planetrow["crystal"]),
-                'deuterium' => pretty_number($planetrow["deuterium"]),
-                'energy' => pretty_number($planetrow["energy_used"]),
-                'energy_max' => pretty_number($planetrow["energy_max"]),
                 'planetrow' => $planetrow,
-                'dpath' => $dpath,
-                'Metal' => $lang['Metal'],
-                'Crystal' => $lang['Crystal'],
-                'Deuterium' => $lang['Deuterium'],
-                'Energy' => $lang['Energy'],
-                'Message' => $lang['Message'],
+                'ThisUsersPlanets' => SortUserPlanets($user),
+                'page'=>filter_input(INPUT_GET, 'page'),
+                'mode'=>HTTP::_GP('mode', ''),
             ));
         }
     }

@@ -9,11 +9,14 @@
                                         <tbody>
                                             <tr class="header">
                                                 <td class="header">
-                                                    <img src="{$dpath}planeten/small/s_{$image}.jpg" height="50" width="50">
+                                                    <img src="{$dpath}planeten/small/s_{$planetrow['image']}.jpg" height="50" width="50">
                                                 </td>
                                                 <td  class="header" valign="middle">
-                                                    <select size="1" onChange="eval('location=\''+this.options[this.selectedIndex].value+'\'');">
-                                                        {$planetlist}
+                                                    <select size="1" onChange="eval('location=\''+this.options[this.selectedIndex].value+'\'');">{while $CurPlanet = mysql_fetch_array($ThisUsersPlanets)}{if ($planetrow["destruyed"] == 0)}
+                                                        <option {if $CurPlanet['id'] == $user['current_planet']}selected="selected" {/if}value="?page={$page}&cp={$CurPlanet['id']}&mode={$mode}&re=0">
+                                                            {$CurPlanet['name']}&nbsp;[{$CurPlanet['galaxy']}:{$CurPlanet['system']}:{$CurPlanet['planet']}]&nbsp;&nbsp;
+                                                        </option>{/if}{/while}
+                                                        {*$planetlist*}
                                                     </select>
                                                 </td>
                                             </tr>
@@ -32,33 +35,33 @@
                                             <td class="header" align="center" width="140"><img src="{$dpath}images/message.gif" border="0" height="22" width="42"></td>
                                         </tr>
                                         <tr class="header">
-                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$Metal}</font></b></i></td>
-                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$Crystal}</font></b></i></td>
-                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$Deuterium}</font></b></i></td>
-                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$Energy}</font></b></i></td>
-                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$Message}</font></b></i></td>
+                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$lang['Metal']}</font></b></i></td>
+                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$lang['Crystal']}</font></b></i></td>
+                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$lang['Deuterium']}</font></b></i></td>
+                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$lang['Energy']}</font></b></i></td>
+                                            <td class="header" align="center" width="140"><i><b><font color="#ffffff">{$lang['Message']}</font></b></i></td>
                                         </tr>
                                         <tr class="header">
                                             <td class="header" align="center" width="140"><font>{if $planetrow["metal"] > $planetrow["metal_max"]}
-                                                                                                    {colorRed($metal)}
+                                                                                                    {colorRed(pretty_number($planetrow["metal"]))}
                                                                                                 {else}
-                                                                                                    {$metal}
+                                                                                                    {pretty_number($planetrow["metal"])}
                                                                                                 {/if}</font></td>
                                             <td class="header" align="center" width="140"><font>{if $planetrow["crystal"] > $planetrow["crystal_max"]}
-                                                                                                    {colorRed($crystal)}
+                                                                                                    {colorRed(pretty_number($planetrow["crystal"]))}
                                                                                                 {else}
-                                                                                                    {$crystal}
+                                                                                                    {pretty_number($planetrow["crystal"])}
                                                                                                 {/if}</font></td>
                                             <td class="header" align="center" width="140"><font>{if $planetrow["deuterium"] > $planetrow["deuterium_max"]}
-                                                                                                    {colorRed($deuterium)}
+                                                                                                    {colorRed(pretty_number($planetrow["deuterium"]))}
                                                                                                 {else}
-                                                                                                    {$deuterium}
+                                                                                                    {pretty_number($planetrow["deuterium"])}
                                                                                                 {/if}</font></td>
                                             <td class="header" align="center" width="140"><font>{if $planetrow["energy_max"] > $planetrow["energy_used"]}
-                                                                                                    {colorRed($energy)}
+                                                                                                    {colorRed(pretty_number($planetrow["energy_used"]))}
                                                                                                 {else}
-                                                                                                    {$energy}
-                                                                                                {/if}/{$energy_max}</font></td>
+                                                                                                    {pretty_number($planetrow["energy_used"])}
+                                                                                                {/if}/{pretty_number($planetrow["energy_max"])}</font></td>
                                             <td class="header" align="center" width="140"><font>{if $user['new_message'] > 0}
                                                                                                     <a href="game.php?page=messages">[ {$user['new_message']} ]</a>
                                                                                                 {else}
