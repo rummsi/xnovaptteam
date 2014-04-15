@@ -28,9 +28,14 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['ban_title']    = "List of banned player's";
+$lang['ban_name']     = "Name";
+$lang['ban_reason']   = "Reason for ban";
+$lang['ban_from']     = "From";
+$lang['ban_to']       = "To";
+$lang['ban_by']       = "By";
+$lang['ban_no']       = "There are no players banned";
+$lang['ban_thereare'] = "There is";
+$lang['ban_players']  = "player(s) banned";
+
+?>

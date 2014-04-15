@@ -28,9 +28,17 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+
+$lang['mod_ma_title'] = "Call a merchant";
+$lang['mod_ma_typer'] = "Call a merchant who buys";
+$lang['mod_ma_rates'] = "The exchange rate is 2/1/0.5";
+$lang['mod_ma_buton'] = "Call Merchant";
+$lang['mod_ma_noten'] = "Not Enough";
+$lang['mod_ma_done']  = "The exchange was completed succesfully!";
+$lang['mod_ma_error'] = "Error";
+$lang['mod_ma_donet'] = "Trade Ok";
+$lang['mod_ma_excha'] = "Exchange";
+$lang['mod_ma_cours'] = "Course Exchange";
+$lang['mod_ma_nbre']  = "A number !!!";
+
+?>

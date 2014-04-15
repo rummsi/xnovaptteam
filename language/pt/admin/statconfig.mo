@@ -28,9 +28,11 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['adm_delay_actu_stats'] 	= "Duration of treatment :";
+$lang['adm_mem_start']			= "Memory consumed at start :";
+$lang['adm_peak_mem']			= "Peak Memory :";
+$lang['adm_mem_finish']			= "Memory consumed at finish :";
+$lang['adm_units']				= "KB";
+$lang['adm_new_line']			= "<br />";
+
+?>

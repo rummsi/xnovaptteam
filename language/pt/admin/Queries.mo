@@ -28,9 +28,12 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['Qry_title']  = "Execute SQL Command";
+$lang['qry_title'] = "SQL Command";
+$lang['qry_succesful']    = "Command executed successfully!";
+$lang['exec_check']    = "Actually execute command ?";
+$lang['qry_unsuccesful']    = "A problem occurred when ordering, please double-check the syntax";
+
+$lang['md5_doit']   = "[ execute ]";
+
+?>

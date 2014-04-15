@@ -28,9 +28,8 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['cookies']['Error1'] = 'Error cookies! There are several uses of the name! <a href=index.php> Login </ a> Please delete your cookies. In case of problems contact the admin';
+$lang['cookies']['Error2'] = 'Error cookies! Your cookie does not match with the user! <a href=index.php> Login </ a> Please delete your cookies. In case of problems contact the admin';
+$lang['cookies']['Error3'] = 'Error cookies! Session error, you must reconnect! <a href=index.php> Login </ a> Please delete your cookies. In case of problems contact the admin';
+
+?>

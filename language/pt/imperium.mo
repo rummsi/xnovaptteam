@@ -28,9 +28,19 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['imperium_vision'] = "General oversight of the empire";
+$lang['name'] = "Name";
+$lang['coordinates'] = "Coordinates";
+$lang['fields'] = "Fields";
+$lang['resources'] = "Resources";
+$lang['metal'] = "Metal";
+$lang['crystal'] = "Crystal";
+$lang['deuterium'] = "Deuterium";
+$lang['energy'] = "Energy";
+$lang['buildings'] = "Buildings";
+$lang['investigation'] = "Laboratory";
+$lang['ships'] = "Fleet";
+$lang['defense'] = "Defense";
+
+// Created by Perberos. All rights reserved (C) 2006 
+?>

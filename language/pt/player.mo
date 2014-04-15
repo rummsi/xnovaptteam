@@ -28,9 +28,10 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+
+//Player search
+$lang['SearchPlayer'] = "Enter the player's name";
+
+// Created by Perberos. All rights reversed (C) 2006
+// Complet by XNova. All rights reversed (C) 2008
+?>

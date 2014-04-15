@@ -28,9 +28,22 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+
+$lang['Production_of_resources_in_the_planet'] = 'Production of raw materials on the planet "%s"';
+$lang['Production_level'] = 'Level of production';
+$lang['Basic_income'] = 'Basic Income';
+$lang['quantity'] = 'Quantity';
+$lang['level'] = 'Level';
+$lang['Stores_capacity'] = 'Storage Capacity';
+$lang['Widespread_production'] = 'Production range';
+$lang['Daily'] = 'Daily';
+$lang['Weekly'] = 'Weekly';
+$lang['Monthly'] = 'Monthly';
+$lang['Storage_state'] = 'Storage State';
+$lang['Calcule'] = 'Calculate';
+$lang['o/o'] = '%';
+$lang['k'] = 'k';
+
+// Created by Perberos. All rights reserved (C) 2006 
+// Complet by XNova Team. All rights reversed (C) 2008
+?>

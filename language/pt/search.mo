@@ -28,9 +28,28 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['Position'] = 'Position';
+$lang['Player'] = 'Player';
+$lang['Name'] = 'Name';
+$lang['Player_name'] = 'Player Name';
+$lang['Planet'] = 'Planet';
+$lang['Planet_name'] = 'Planet Name';
+$lang['Alliance'] = 'Alliance';
+$lang['Alliance_name'] = 'Alliance Name';
+$lang['Tag'] = 'Tag';
+$lang['Alliance_tag'] = 'Alliance Tag';
+$lang['Members'] = 'Members';
+$lang['Points'] = 'Points';
+$lang['PerMember'] = 'Per membres';
+$lang['Coordinated'] = 'Coordinates';
+$lang['Position'] = 'Position';
+$lang['Search'] = 'Search';
+$lang['Search_in_all_game'] = "Search the server";
+$lang['Back'] = 'Back';
+$lang['Search'] = 'Search';
+$lang['write_a_messege'] = 'Write a message';
+$lang['buddy_request'] = 'Request to be friend';
+
+// Created by Perberos. All rights reversed (C) 2006
+// Complet by XNova Team. All rights reversed (C) 2008
+?>
