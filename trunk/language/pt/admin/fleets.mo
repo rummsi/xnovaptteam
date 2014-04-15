@@ -28,9 +28,16 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['flt_id']       = "ID";
+$lang['flt_fleet']    = "Fleete";
+$lang['flt_mission']  = "Mission";
+$lang['flt_owner']    = "Owner";
+$lang['flt_planet']   = "Planet";
+$lang['flt_time_st']  = "Depart";
+$lang['flt_e_owner']  = "Arrive";
+$lang['flt_time_en']  = "F. Arrive";
+$lang['flt_staying']  = "Stat.";
+$lang['flt_action']   = "Action";
+$lang['flt_title']    = "Fleet in flight";
+
+?>

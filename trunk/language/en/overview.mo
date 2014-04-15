@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * This file is part of XNova:Legacies
  *
@@ -30,103 +30,103 @@
 
 
 // General
-$lang['cancel']                  = "cancelar";
-$lang['Planet_menu']             = "Menu de Planeta";
-$lang['Planet']                  = "Planeta";
-$lang['Have_new_message']        = "Tens 1 nova mensagem";
-$lang['Have_new_messages']       = "Tens %m novas mensagens";
-$lang['Have_new_level_mineur']   = "Ganhaste 1 nível de Mineiro!";
-$lang['Have_new_level_raid']     = "Ganhaste 1 Nível de Raider!";
-$lang['Server_time']             = "Hora";
-$lang['Events']                  = "Eventos";
-$lang['Free']                    = "livre";
-$lang['Diameter']                = "Diâmetro";
-$lang['fields']                  = "Campos";
-$lang['Developed_fields']        = "Campos ocupados";
-$lang['max_eveloped_fields']     = "Nùmero máximo de Campos usados";
-$lang['Temperature']             = "Temperatura";
-$lang['approx']                  = "aprox.";
+$lang['cancel']                  = "cancel";
+$lang['Planet_menu']             = "Planet Menu";
+$lang['Planet']                  = "Planet";
+$lang['Have_new_message']        = "You have 1 new message";
+$lang['Have_new_messages']       = "you have %m new messages";
+$lang['Have_new_level_mineur']   = "You have gained 1 miner level!";
+$lang['Have_new_level_raid']     = "You have gained 1 raider level!";
+$lang['Server_time']             = "Time";
+$lang['Events']                  = "Events";
+$lang['Free']                    = "free";
+$lang['Diameter']                = "Diameter";
+$lang['fields']                  = "Fields";
+$lang['Developed_fields']        = "Fields occupied";
+$lang['max_eveloped_fields']     = "Maximum number of usable fields";
+$lang['Temperature']             = "Temperature";
+$lang['approx']                  = "env.";
 $lang['to']                      = "To";
 $lang['Centigrade']              = "C";
-$lang['Position']                = "Coordenadas";
-$lang['Points']                  = "Pontos";
-$lang['Rank']                    = "Classificação";
-$lang['of']                      = "de";
-$lang['banner']                  = "O teu banner";
-$lang['InfoBanner']              = "Utiliza o teu banner:";
+$lang['Position']                = "Position";
+$lang['Points']                  = "Points";
+$lang['Rank']                    = "Rank";
+$lang['of']                      = "of";
+$lang['banner']                  = "Your banner";
+$lang['InfoBanner']              = "Use your own banner:";
 
-$lang['ov_off_expe']             = "Experiência";
-$lang['ov_off_level']            = "Nível";
-$lang['ov_off_mines']            = "Mineiro";
+$lang['ov_off_expe']             = "Experience";
+$lang['ov_off_level']            = "Level";
+$lang['ov_off_mines']            = "Miner";
 $lang['ov_off_raids']            = "Raider";
 
 $lang['ov_temp_from']            = "";
 $lang['ov_temp_unit']            = "&deg;C";
 $lang['ov_temp_to']              = "-";
 
-$lang['ov_local_cdr']            = "Campo de Destroços";
-$lang['ov_pts_build']            = "Edifícios";
-$lang['ov_pts_fleet']            = "Frota";
-$lang['ov_pts_reche']            = "Pesquisas";
+$lang['ov_local_cdr']            = "Debris Field";
+$lang['ov_pts_build']            = "Buildings";
+$lang['ov_pts_fleet']            = "Fleet";
+$lang['ov_pts_reche']            = "Research";
 $lang['ov_pts_total']            = "Total";
 
 
 // Colony
-$lang['colony_abandon']          = "Abandonar Colónia";
-$lang['ov_rena_dele']            = "Renomear / Eliminar Planeta";
-$lang['functions']               = "Função";
-$lang['coords']                  = "Coordenadas";
-$lang['your_planet']             = "O teu Planeta";
-$lang['colony_abandon']          = "Abandonar Colónia";
-$lang['deleteplanet']            = "eliminar Planeta!";
-$lang['security_query']          = "Segurança de Jogador";
-$lang['name']                    = "Nome";
-$lang['namer']                   = "Renomear";
-$lang['password']                = "Palavra-Passe";
-$lang['confirm_planet_delete']   = "Confirma a Eliminação do Planeta";
-$lang['confirmed_with_password'] = ", confirma digitando a tua Palavra-Passe em baixo!";
+$lang['colony_abandon']          = "Abandon Colony";
+$lang['ov_rena_dele']            = "Rename / Delete the planet";
+$lang['functions']               = "Function";
+$lang['coords']                  = "Coordinates";
+$lang['your_planet']             = "Your planet";
+$lang['colony_abandon']          = "Abandon Colony";
+$lang['deleteplanet']            = "Delete Planet!";
+$lang['security_query']          = "Player Security";
+$lang['name']                    = "Name";
+$lang['namer']                   = "Rename";
+$lang['password']                = "Password";
+$lang['confirm_planet_delete']   = "Confirm the deletion of the planet";
+$lang['confirmed_with_password'] = ", please confirm by entering your password below!";
 
 
 // Rename planet
-$lang['deletemessage_ok']    = "A Colónia foi Abandonada.";
-$lang['deletemessage_wrong'] = "O Planeta Principal não pode ser Abandonado!";
-$lang['deletemessage_fail']  = "Palavra-Passe ncorrecta!";
+$lang['deletemessage_ok']    = "The colony was abandoned.";
+$lang['deletemessage_wrong'] = "The mother planet may not be deleted!";
+$lang['deletemessage_fail']  = "Incorrect password!";
 
 // Divers
-$lang['MembersOnline']       = "Membros online";
-$lang['ov_news_title']       = "Notícias";
+$lang['MembersOnline']       = "Member's online";
+$lang['ov_news_title']       = "News";
 $lang['Raids']               = "Raids";
-$lang['NumberOfRaids']       = "Número de Raids:";
-$lang['RaidsWin']            = "Rains Ganhos:";
-$lang['RaidsLoose']          = "Raids Perdidos";
+$lang['NumberOfRaids']       = "Number of Raids:";
+$lang['RaidsWin']            = "Rains Won:";
+$lang['RaidsLoose']          = "Raids Lost";
 
 // Gestion des flottes
-$lang['ov_fleet']            = "frota";
-$lang['ov_une']              = "Uma das tuas ";
-$lang['ov_vennant']          = " de ";
-$lang['ov_planet_to']        = "para o Planeta ";
-$lang['ov_moon_to']          = "para a Lua ";
-$lang['ov_atteint']          = " alcançou ";
-$lang['ov_planet_to_target'] = "para o Planeta ";
-$lang['ov_moon_to_target']   = "para a Lua ";
-$lang['ov_debris_to_target'] = "para o Campo de Destroços ";
-$lang['ov_explo_to_target']  = "para as Coordenadas ";
-$lang['ov_mission']          = ". com a missão : ";
+$lang['ov_fleet']            = "fleet";
+$lang['ov_une']              = "One of your ";
+$lang['ov_vennant']          = " from ";
+$lang['ov_planet_to']        = "to planet ";
+$lang['ov_moon_to']          = "to moon ";
+$lang['ov_atteint']          = " reached ";
+$lang['ov_planet_to_target'] = "to planet ";
+$lang['ov_moon_to_target']   = "to moon ";
+$lang['ov_debris_to_target'] = "to the debris ";
+$lang['ov_explo_to_target']  = "to position ";
+$lang['ov_mission']          = ". to the mission : ";
 
-$lang['ov_explo_stay']       = " explorar ";
-$lang['ov_explo_mission']    = ". Com a missão : ";
+$lang['ov_explo_stay']       = " explore ";
+$lang['ov_explo_mission']    = ". To the mission : ";
 
-$lang['ov_rentrant']         = " regressa ";
-$lang['ov_planet_from']      = "do Planeta ";
-$lang['ov_moon_from']        = "da Lua ";
-$lang['ov_debris_from']      = "do Campo de Destroços ";
-$lang['ov_explo_from']       = "das Coordenadas ";
-$lang['ov_back_planet']      = " o Planeta ";
-$lang['ov_back_moon']        = " a Lua ";
+$lang['ov_rentrant']         = " returns ";
+$lang['ov_planet_from']      = "from planet ";
+$lang['ov_moon_from']        = "from moon ";
+$lang['ov_debris_from']      = "from the debris ";
+$lang['ov_explo_from']       = "from position ";
+$lang['ov_back_planet']      = " the planet ";
+$lang['ov_back_moon']        = " the moon ";
 
 $lang['ov_une_hostile']      = "A ";
-$lang['ov_hostile']          = " hostil ";
-$lang['ov_message']          = "Enviar mensagem";
+$lang['ov_hostile']          = " hostile ";
+$lang['ov_message']          = "Send a message";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

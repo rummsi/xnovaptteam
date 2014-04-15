@@ -28,9 +28,11 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['Intergalactic_merchant'] = 'Intergalactic Trader';
+$lang['Merchant_text_decript'] = 'A intergalatic trader is by.  You may sell him espionage probe\'s for 1k crystal.';
+$lang['How_much_want_exchange'] = 'How many probes do you exchange';
+$lang['Merchant_give_you'] = 'The trader offer\'s you %n crystal';
+$lang['Spionagesonde'] = 'Espionage Probe';
+$lang['Exchange'] = 'Exchange';
+
+?>

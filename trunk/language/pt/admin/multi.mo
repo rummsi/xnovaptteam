@@ -28,9 +28,10 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['adm_mt_title']  = "Decleration of multi-player's";
+$lang['adm_mt_list']   = "List";
+$lang['adm_mt_player'] = "Player";
+$lang['adm_mt_text']   = "Text";
+$lang['adm_mt_multi']  = "multi-account's total...";
+
+?>

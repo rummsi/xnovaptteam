@@ -28,9 +28,27 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['stat_title']    = "Statistics";
+$lang['stat_show']     = "Rankings";
+$lang['stat_by']       = "by";
+$lang['stat_range']    = "Place";
+
+$lang['stat_player']   = "Players";
+$lang['stat_allys']    = "Alliances";
+$lang['stat_main']     = "General";
+$lang['stat_fleet']    = "Fleet";
+$lang['stat_research'] = "Research";
+$lang['stat_building'] = "Building";
+$lang['stat_defenses'] = "Defense";
+
+$lang['Position']      = "Place";
+$lang['Difference']    = "Diff.";
+$lang['Player']        = "Player";
+$lang['Alliance']      = "Alliance";
+$lang['Points']        = "Points";
+$lang['Members']       = "Members";
+$lang['PerMember']     = "Per Membres";
+$lang['Ecrire']        = "Write a message";
+
+// Created by Chlorel (XNova Team). All rights reversed (C) 2008
+?>

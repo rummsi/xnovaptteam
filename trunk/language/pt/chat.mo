@@ -28,9 +28,12 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['Chat']  = "Chat";
+$lang['chat_loading']  = "Loading...";
+$lang['chat_disc']     = "Chat Live";
+$lang['chat_message']  = "Message";
+$lang['chat_short']    = "Shortcuts";
+$lang['chat_text']     = "Text";
+$lang['chat_send']     = "Send";
+
+?>

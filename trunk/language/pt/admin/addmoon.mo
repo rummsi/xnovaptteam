@@ -28,9 +28,14 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['addm_title']    = "Add a Moon";
+$lang['addm_addform']  = "Add form";
+$lang['addm_playerid'] = "Homeworld ID";
+$lang['addm_moonname'] = "Moon Name";
+$lang['addm_moongala'] = "Choose a Galaxy";
+$lang['addm_moonsyst'] = "Choose a System";
+$lang['addm_moonplan'] = "Choose a Position";
+$lang['addm_moondoit'] = "Add";
+$lang['addm_done']     = "Add OK";
+
+?>

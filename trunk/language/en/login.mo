@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * This file is part of XNova:Legacies
  *
@@ -29,31 +29,31 @@
  */
 
  
-$lang['Login'] = 'Login';
-$lang['User_name'] = 'Utilizador:';
-$lang['Password'] = 'Palavra-passe:';
-$lang['Please_Login'] = 'Para continuar <a href="index.php" target="_main">login...</a>';
-$lang['Please_Wait'] = 'Por favor aguarde';
-$lang['Remember_me'] = 'Lembrar-me';
-$lang['Register'] = 'Registar';
-$lang['Login_Error'] = 'Erro';
-$lang['PleaseWait'] = 'Por favor aguarde';
+$lang['Login'] = 'Connect';
+$lang['User_name'] = 'Username:';
+$lang['Password'] = 'Password:';
+$lang['Please_Login'] = 'To continue <a href="login.php" target="_main">login...</a>';
+$lang['Please_Wait'] = 'Please wait';
+$lang['Remember_me'] = 'Remember me';
+$lang['Register'] = 'Register';
+$lang['Login_Error'] = 'Error';
+$lang['PleaseWait'] = 'Please wait';
 
-$lang [ 'Login_Ok'] = 'Login bem sucedido, <a href="./"><blink>redirecionando ...</blink></a><br><center><img src = "images/progressbar.gif"></center> ';
-$lang [ 'Login_FailPassword'] = 'Palavra-passe incorreta<br/><a href="index.php" target="_top">Regressar</ a>';
-$lang [ 'Login_FailUser'] = 'Este utilizador não existe.<br><a href=index.php>Regressar</ a> ';
+$lang [ 'Login_Ok'] = 'Login successful, <a href="./"><blink>redirecting ...</blink></a><br><center><img src = "images/progressbar.gif"></center> ';
+$lang [ 'Login_FailPassword'] = 'Incorrect password<br/><a href="login.php" target="_top">Back</ a>';
+$lang [ 'Login_FailUser'] = 'This player does not exist.<br><a href=login.php>Back</ a> ';
 
-$lang['log_univ'] = 'Por favor escolha Universo!';
-$lang['log_reg'] = 'Registar';
-$lang['log_rules'] = 'Régras';
-$lang['log_desc'] = 'é um jogo de estratégia online.  Só necessitas de um navegador para jogar.  Junta-te agora e descobre o maravilhoso jogo de';
-$lang['log_toreg'] = 'Por favor regista-te';
-$lang['log_online'] = 'Jogadores online';
-$lang['log_lastreg'] = 'Últinmo registado';
-$lang['log_numbreg'] = 'Jogadores registados';
-$lang['log_welcome'] = 'Bemvindo ao';
+$lang['log_univ'] = 'Please select a universe!';
+$lang['log_reg'] = 'Register';
+$lang['log_rules'] = 'Rules';
+$lang['log_desc'] = 'is an online strategy game.  All you need to play is a browser.  Join now and discover the awesome game of';
+$lang['log_toreg'] = 'Please register';
+$lang['log_online'] = 'Player\'s online';
+$lang['log_lastreg'] = 'Last registered';
+$lang['log_numbreg'] = 'Total registered';
+$lang['log_welcome'] = 'Welcome to';
 
-$lang['PasswordLost'] = 'Não te lembras da Palavra-passe?';
+$lang['PasswordLost'] = 'Have you forgot your password?';
 
-$lang['log_board'] = 'Fórum';
-$lang['log_contact'] = 'Contato';
+$lang['log_board'] = 'Board';
+$lang['log_contact'] = 'Contact';

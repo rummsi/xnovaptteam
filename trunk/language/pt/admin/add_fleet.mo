@@ -28,9 +28,22 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+
+	
+$lang['Id'] = "ID of the planet";
+$lang['cle'] = "Light Fighter";
+$lang['clourd'] = "Heavy Fighter";
+$lang['pt'] = "Small Cargo";
+$lang['gt'] = "Large Cargo";
+$lang['cruise'] = "Cruiser";
+$lang['vb'] = "Battleship";
+$lang['colo'] = "Colony Ship";
+$lang['rc'] = "Recycler";
+$lang['spy'] = "Espionage Probe's";
+$lang['bomb'] = "Bombarder";
+$lang['solar'] = "Solar Satellite";
+$lang['from'] = "Destroyer";
+$lang['rip'] = "Death Star";
+$lang['traq'] = "Tracker";
+
+?>

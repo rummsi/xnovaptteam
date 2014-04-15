@@ -28,9 +28,34 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['Request_sent'] = 'Request send.';
+$lang['Buddy_request'] = 'Friend Request';
+$lang['A_request_exists_already_for_this_user'] = 'A friend request already exists for that user.';
+$lang['You_cannot_ask_yourself_for_a_request'] = 'You are not allowed to send yourself a buddy request...';
+$lang['Buddy_list'] = 'Friend List';
+$lang['There_is_no_request'] = 'No requests';
+$lang['Request_text'] = 'Text of query';
+$lang['characters'] = 'characters';
+$lang['Back'] = 'Back';
+$lang['Send'] = 'Send';
+$lang['Delete_request'] = 'Remove request';
+$lang['Ok'] = 'Accept';
+$lang['Reject'] = 'Reject';
+$lang['Delete'] = 'Remove';
+$lang['On'] = 'Onlince';
+$lang['15_min'] = '15 min';
+$lang['Off'] = 'Offline';
+$lang['Player'] = 'Player';
+
+$lang['Name'] = 'Number';
+$lang['User'] = 'User';
+$lang['Alliance'] = 'Alliance';
+$lang['Coordinates'] = 'Coordinates';
+$lang['Position'] = 'Position';
+$lang['Text'] = 'Text';
+$lang['Requests'] = 'Requests';
+$lang['My_requests'] = 'My requests';
+$lang['Anothers_requests'] = 'Other requests';
+
+// Created by Perberos. All rights reversed (C) 2006
+?>

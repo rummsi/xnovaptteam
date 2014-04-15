@@ -28,9 +28,11 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['md5_title']  = "Change the pass of a player";
+$lang['md5_pswcyp'] = "Change the pass to the player";
+$lang['md5_psw']    = "Password";
+
+$lang['md5_doit']   = "[ Change Password ]";
+$lang['user_to_change']   = "What kind ?";
+
+?>

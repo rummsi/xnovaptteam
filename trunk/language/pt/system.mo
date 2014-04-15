@@ -32,7 +32,7 @@ $lang['user_level'] = array (
 	'0' => 'Player',
 	'1' => 'Moderater',
 	'2' => 'Operator',
-	'3' => 'Administrator',
+	'3' => 'Administrador',
 );
 
 $lang['sys_phalanx'] = "Phalanx";

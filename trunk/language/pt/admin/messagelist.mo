@@ -28,9 +28,30 @@
  *
  */
 
-$lang['ctc_title'] = "Contact";
-$lang['ctc_intro'] = "Here you will find the addresses to contact the operators";
-$lang['ctc_name']  = "Name";
-$lang['ctc_rank']  = "Rank";
-$lang['ctc_mail']  = "E-Mail";
-$lang['ctc_go_back']      = 'Return to main';
+$lang['mlst_title']       = "Message List";
+$lang['mlst_mess_del']    = "Delete Message";
+$lang['mlst_hdr_page']    = "Page";
+$lang['mlst_hdr_title']   = " ) messages :";
+$lang['mlst_hdr_prev']    = "[ &lt;- ]";
+$lang['mlst_hdr_next']    = "[ -&gt; ]";
+$lang['mlst_hdr_id']      = "ID";
+$lang['mlst_hdr_type']    = "Type";
+$lang['mlst_hdr_time']    = "Time";
+$lang['mlst_hdr_from']    = "From";
+$lang['mlst_hdr_to']      = "To";
+$lang['mlst_hdr_text']    = "Content";
+$lang['mlst_hdr_action']  = "Sel.";
+$lang['mlst_del_mess']    = "Clear";
+$lang['mlst_bt_delsel']   = "Clear Selection";
+$lang['mlst_bt_deldate']  = "Remove From";
+$lang['mlst_hdr_delfrom'] = "Remove From";
+$lang['mlst_mess_typ__0'] = "Espionnage";
+$lang['mlst_mess_typ__1'] = "Player";
+$lang['mlst_mess_typ__2'] = "Alliance";
+$lang['mlst_mess_typ__3'] = "Attack";
+$lang['mlst_mess_typ__4'] = "Exploritation";
+$lang['mlst_mess_typ__5'] = "Transport";
+$lang['mlst_mess_typ_15'] = "Expedition's";
+$lang['mlst_mess_typ_99'] = "Building List";
+
+?>
