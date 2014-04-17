@@ -40,12 +40,12 @@ function f(target_url,win_name) {
 </tr><tr>
 	<td colspan="2"><div><a href="game.php?page=movement" accesskey="t" target="{mf}">Movimento</a></div></td>
 </tr><tr>
-	<td colspan="2"><div><a href="messages.php" accesskey="c" target="{mf}">{Messages}</a></div></td>
+	<td colspan="2"><div><a href="game.php?page=messages" accesskey="c" target="{mf}">{Messages}</a></div></td>
 </tr><tr>
 
 	<td colspan="2" background="{dpath}img/bg1.gif"><center>{observ}</center></td>
 </tr><tr>
-	<td colspan="2"><div><a href="galaxy.php?mode=0" accesskey="s" target="{mf}">{Galaxy}</a></div></td>
+	<td colspan="2"><div><a href="game.php?page=galaxy&action=0" accesskey="s" target="{mf}">{Galaxy}</a></div></td>
 </tr><tr>
 	<td colspan="2"><div><a href="imperium.php" accesskey="i" target="{mf}">{Imperium}</a></div></td>
 </tr><tr>

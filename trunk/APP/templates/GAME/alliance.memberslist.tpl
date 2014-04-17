@@ -36,7 +36,7 @@
                         </th>
                         <th>{pretty_number($UserPoints['total_points'])}</th>
                         <th>
-                            <a href="galaxy.php?mode=0&galaxy={$u['galaxy']}&system={$u['system']}">
+                            <a href="game.php?page=galaxy&action=0&galaxy={$u['galaxy']}&system={$u['system']}">
                                 {$u['galaxy']}:{$u['system']}:{$u['planet']}
                             </a>
                         </th>

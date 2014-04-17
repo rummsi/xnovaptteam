@@ -50,7 +50,7 @@
                         </th>
                         <th>{if $u["ally_id"] != 0}<a href=game.php?page=alliance&mode=ainfo&a={$u["id"]}>{$u["ally_name"]}</a>{/if}</th>
                         <th>
-                            <a href="galaxy.php?mode=3&galaxy={$u["galaxy"]}&system={$u["system"]}">{$u["galaxy"]}:{$u["system"]}:{$u["planet"]}</a>
+                            <a href="game.php?page=galaxy&action=3&galaxy={$u["galaxy"]}&system={$u["system"]}">{$u["galaxy"]}:{$u["system"]}:{$u["planet"]}</a>
                         </th>
                         <th>
                             {if isset($a)}

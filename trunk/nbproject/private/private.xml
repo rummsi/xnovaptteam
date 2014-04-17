@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/UniServerZ/www/xnovaptteam/APP/templates/GAME/galaxy.footer.tpl</file>
+            <file>file:/C:/UniServerZ/www/xnovaptteam/galaxy.php</file>
+            <file>file:/C:/UniServerZ/www/xnovaptteam/APP/templates/GAME/galaxy.default.tpl</file>
+            <file>file:/C:/UniServerZ/www/xnovaptteam/APP/PAGES/GAME/ShowGalaxyPage.php</file>
+            <file>file:/C:/UniServerZ/www/xnovaptteam/APP/CLASSES/Galaxy.php</file>
+        </group>
     </open-files>
 </project-private>
