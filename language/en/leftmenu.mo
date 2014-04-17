@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -27,106 +28,94 @@
  * documentation for further information about customizing XNova.
  *
  */
-
+// User menu titles
+$lang['lft_devlp'] = 'Development';
+$lang['lft_navig'] = 'Navigation';
+$lang['lft_observ'] = 'Observatory';
+$lang['lft_commun'] = 'Community';
+$lang['lft_infog'] = 'Information';
 
 // User menu links
-$lang['qry']   = 'Execute SQL command';
+$lang['lft_Overview'] = 'Overview';
+$lang['lft_Buildings'] = 'Buildings';
+$lang['lft_Research'] = 'Research';
+$lang['lft_Shipyard'] = 'Shipyard';
+$lang['lft_Defense'] = 'Defense';
+$lang['lft_Officiers'] = 'Officers';
+$lang['lft_Marchand'] = 'Merchant';
 
+$lang['lft_Alliance'] = 'Alliance';
+$lang['lft_Fleet'] = 'Fleet';
+$lang['lft_movement'] = 'Movement';
+$lang['lft_Messages'] = 'Messages';
 
-$lang['Multiverse']   = '<b>XNova</b> Uni';
+$lang['lft_Galaxy'] = 'Galaxy';
+$lang['lft_Imperium'] = 'Empire';
+$lang['lft_Resources'] = 'Resources';
+$lang['lft_Technology'] = 'Technology';
+$lang['lft_Records'] = 'Records';
+$lang['lft_Statistics'] = 'Statistics';
+$lang['lft_Search'] = 'Search';
+$lang['lft_blocked'] = 'Pillories';
+$lang['lft_Annonces'] = 'Classified Ad\'';
 
-$lang['Overview']     = 'Overview';
-$lang['Officiers']    = 'Officers';
+$lang['lft_Buddylist'] = 'Buddy List';
+$lang['lft_Notes'] = 'Notes';
+$lang['lft_Chat'] = 'Chat';
+$lang['lft_Board'] = 'Board';
+$lang['lft_multi'] = 'Declaration of multi';
+$lang['lft_Rules'] = 'Rules';
+$lang['lft_Contact'] = 'Contact';
+$lang['lft_Options'] = 'Options';
+$lang['lft_Logout'] = 'Logout';
 
-$lang['Buildings']    = 'Buildings';
-$lang['Research']     = 'Research';
-$lang['Shipyard']     = 'Shipyard';
-$lang['Defense']      = 'Defense';
-
-$lang['multi']      = 'Declaration of multi';
-
-$lang['Resources']    = 'Resources';
-$lang['Imperium']     = 'Empire';
-$lang['Marchand']     = 'Merchant';
-$lang['Annonces']     = 'Classified Ad\'';
-$lang['Technology']   = 'Technology';
-
-$lang['Galaxy']       = 'Galaxy';
-$lang['Fleet']        = 'Fleet';
-
-$lang['Alliance']     = 'Alliance';
-$lang['Chat']         = 'Chat';
-$lang['Statistics']   = 'Statistics';
-$lang['Search']       = 'Search';
-$lang['blocked']      = 'Pillories';
-$lang['Records']      = 'Records';
-
-$lang['Messages']     = 'Messages';
-$lang['Notes']        = 'Notes';
-$lang['Buddylist']    = 'Buddy List';
-
-$lang['Board']        = 'Forum';
-$lang['Contact']      = 'Contact';
-$lang['Options']      = 'Options';
-
-$lang['Logout']       = 'Logout';
-
-$lang['Help']         = 'Help';
-$lang['Rules']        = 'Rules';
-
-// User menu titles
-$lang['devlp']        = 'Development';
-$lang['navig']        = 'Navigation';
-$lang['observ']       = 'Observatory';
-$lang['commun']       = 'Community';
-$lang['infog']        = 'Information';
-
-// Administrator menu links
-$lang['adm_over']     = 'Overview';
-$lang['adm_conf']     = 'Configuration';
-$lang['adm_reset']    = 'Reset';
-$lang['adm_extcopy']  = 'Copyright extensive';
-
-$lang['adm_multi']    = 'Multi-accounts List';
-$lang['multis_declared']    = 'MCC declared';
-
-$lang['adm_plrlst']   = 'Players List';
-$lang['adm_plrsch']   = 'Search for player\'s';
-$lang['adm_addres']   = 'Add resources';
-
-$lang['adm_pltlst']   = 'List of planet\'s';
-$lang['adm_actplt']   = 'Active planet\'s';
-
-$lang['adm_moonlst']  = 'List of moon\'s';
-$lang['adm_addmoon']  = 'Add a moon';
-
-$lang['adm_fleet']    = 'Fleet in flight';
-
-$lang['adm_ban']      = 'Ban';
-$lang['adm_unban']    = 'Unban';
-
-$lang['adm_chat']     = 'Administration chat';
-$lang['adm_updpt']    = 'Points Update';
-$lang['adm_msg']      = 'Message List';
-$lang['adm_md5']      = 'Encryption Tool';
-$lang['adm_build']    = 'Queue production';
-
-$lang['adm_error']    = 'Error\'s';
-$lang['change_pass']  = 'Change player\'s pass';
-$lang['adm_help']     = 'Forum Help';
-$lang['adm_back']     = 'Back';
-
-// Administrator menu titles
-$lang['admin']        = 'Administration';
-$lang['player']       = 'Player\'s';
-$lang['tool']         = 'Tool\'s';
+$lang['lft_Help'] = 'Help';
 
 // Informations serveur
-$lang['lm_ifo_serv']  = "Resources";
-$lang['lm_ifo_game']  = "Game";
-$lang['lm_ifo_fleet'] = "Fleet";
-$lang['lm_ifo_queue'] = "Queues";
+$lang['lft_lm_ifo_serv'] = "Resources";
+$lang['lft_lm_ifo_game'] = "Game";
+$lang['lft_lm_ifo_fleet'] = "Fleet";
+$lang['lft_lm_ifo_queue'] = "Queues";
 
-$lang['movement']     = 'Movement';
+// Administrator menu links
+$lang['adm_over'] = 'Overview';
+$lang['adm_conf'] = 'Configuration';
+$lang['adm_reset'] = 'Reset';
+$lang['adm_extcopy'] = 'Copyright extensive';
 
-?>
+$lang['adm_multi'] = 'Multi-accounts List';
+$lang['multis_declared'] = 'MCC declared';
+
+$lang['adm_plrlst'] = 'Players List';
+$lang['adm_plrsch'] = 'Search for player\'s';
+$lang['adm_addres'] = 'Add resources';
+
+$lang['adm_pltlst'] = 'List of planet\'s';
+$lang['adm_actplt'] = 'Active planet\'s';
+
+$lang['adm_moonlst'] = 'List of moon\'s';
+$lang['adm_addmoon'] = 'Add a moon';
+
+$lang['adm_fleet'] = 'Fleet in flight';
+
+$lang['adm_ban'] = 'Ban';
+$lang['adm_unban'] = 'Unban';
+
+$lang['adm_chat'] = 'Administration chat';
+$lang['adm_updpt'] = 'Points Update';
+$lang['adm_msg'] = 'Message List';
+$lang['adm_md5'] = 'Encryption Tool';
+$lang['adm_build'] = 'Queue production';
+
+$lang['adm_error'] = 'Error\'s';
+$lang['change_pass'] = 'Change player\'s pass';
+$lang['adm_help'] = 'Forum Help';
+$lang['adm_back'] = 'Back';
+
+// Administrator menu titles
+$lang['admin'] = 'Administration';
+$lang['player'] = 'Player\'s';
+$lang['tool'] = 'Tool\'s';
+$lang['qry'] = 'Execute SQL command';
+
+$lang['Multiverse'] = '<b>XNova</b> Uni';
