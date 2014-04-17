@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -29,27 +30,27 @@
  */
 
 $lang['respectrules'] = 'Ces r&egrave;gles sont &agrave; respecter, tout infraction &agrave; ces r&egrave;gles se vera d\'un bannissement temporaire ou d&eacute;finitif !';
-$lang['rules']        = 'R&egrave;glement';
+$lang['rules'] = 'R&egrave;glement';
 
-$lang['Account']      = 'I.    Comptes';
+$lang['Account'] = 'I.    Comptes';
 $lang['MultiAccount'] = 'II.   Multicomptes';
-$lang['Sitting']      = 'III.  Surveillance du compte d\'autrui (Sitting)';
-$lang['Trade']        = 'IV.   Echange de comptes';
-$lang['Bash']         = 'V.    Bash';
-$lang['Push']         = 'VI.   Push';
-$lang['Bugusing']     = 'VII.  Bugusing';
-$lang['MailIngame']   = 'VIII. Abus de la fonction de signalement de messages ingame';
-$lang['OutXnova']     = 'IX.   Menaces sortant du cadre du serveur';
-$lang['Spam']         = 'X.    Spam, insultes et contenus offensants';
+$lang['Sitting'] = 'III.  Surveillance du compte d\'autrui (Sitting)';
+$lang['Trade'] = 'IV.   Echange de comptes';
+$lang['Bash'] = 'V.    Bash';
+$lang['Push'] = 'VI.   Push';
+$lang['Bugusing'] = 'VII.  Bugusing';
+$lang['MailIngame'] = 'VIII. Abus de la fonction de signalement de messages ingame';
+$lang['OutXnova'] = 'IX.   Menaces sortant du cadre du serveur';
+$lang['Spam'] = 'X.    Spam, insultes et contenus offensants';
 
-$lang['AccountText']  = 'Un joueur a le droit de jouer sur un seul compte par univers.';
+$lang['AccountText'] = 'Un joueur a le droit de jouer sur un seul compte par univers.';
 $lang['AccountText2'] = 'Un compte n\'a le droit d\'&ecirc;tre jou&eacute; que par une seule personne.';
 
-$lang['MultiAccountText']  = 'Jouer plus d\'un compte par univers est strictement interdit.';
+$lang['MultiAccountText'] = 'Jouer plus d\'un compte par univers est strictement interdit.';
 $lang['MultiAccountText2'] = 'Si 2 joueurs ou plus se partagent la m&ecirc;me adresse IP (membres d\'une m&ecirc;me famille, couples, &eacute;coles etc), il ne doit y avoir aucun autre point commun entre ces comptes (faire partie de la m&ecirc;me alliance est tol&eacute;r&eacute;), ceci pouvant &ecirc;tre consid&eacute;r&eacute; comme du multi compte et &eacute;tant passible d\'un blocage.';
 $lang['MultiAccountText3'] = 'Toute interaction entre comptes sur la m&ecirc;me IP est interdite.';
 
-$lang['SittingText']  = 'Le sitting de compte est assujetti au respect des r&egrave;gles suivantes:';
+$lang['SittingText'] = 'Le sitting de compte est assujetti au respect des r&egrave;gles suivantes:';
 $lang['SittingText2'] = 'Un compte ne peut &ecirc;tre sitt&eacute; que pour 12 heures cons&eacute;cutives.';
 $lang['SittingText3'] = 'L\'op&eacute;rateur de l\'univers doit imp&eacute;rativement &ecirc;tre inform&eacute; par mail de ce sitting.';
 $lang['SittingText4'] = 'Lorsque le compte est sitt&eacute;, le surveillant a le droit d\'activer des constructions de b&acirc;timents ou de lancer des recherches avec les ressources pr&eacute;sentes sur la plan&egrave;te. Le transfert de ressources depuis d\'autres plan&egrave;tes ou lunes du compte est strictement interdit.';
@@ -97,10 +98,8 @@ $lang['BugusingText4'] = 'Toute m&eacute;thode de jeu visant &agrave; rendre le 
 
 $lang['MailIngameText'] = 'Utiliser le bouton Signaler pour signaler un message qui ne contient pas d\'insultes ou qui n\'enfreint pas les r&egrave;gles du jeu est interdit.';
 
-$lang['OutText']        = 'Il est interdit de menacer quelqu\'un de cons&eacute;quences dans la vie r&eacute;elle, ceci &eacute;tant valable pour le jeu, le forum et l\'IRC.';
+$lang['OutText'] = 'Il est interdit de menacer quelqu\'un de cons&eacute;quences dans la vie r&eacute;elle, ceci &eacute;tant valable pour le jeu, le forum et l\'IRC.';
 
-$lang['SpamText']       = 'Le spam, les insultes et les messages &agrave; contenus offensants sont interdits, de m&ecirc;me que tout contenu x&eacute;nophobe, antis&eacute;mite ou raciste.';
+$lang['SpamText'] = 'Le spam, les insultes et les messages &agrave; contenus offensants sont interdits, de m&ecirc;me que tout contenu x&eacute;nophobe, antis&eacute;mite ou raciste.';
 
 //Text & design by XxmangaxX
-
-?>

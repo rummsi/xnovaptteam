@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -30,7 +31,7 @@
 
 $lang['ctc_title'] = "Contact";
 $lang['ctc_intro'] = "Ici vous trouverez les adresses pour contacter les op&eacute;rateurs";
-$lang['ctc_name']  = "Nom";
-$lang['ctc_rank']  = "Rang";
-$lang['ctc_mail']  = "eMail";
-$lang['ctc_go_back']  = 'Retour a l\'accueil';
+$lang['ctc_name'] = "Nom";
+$lang['ctc_rank'] = "Rang";
+$lang['ctc_mail'] = "eMail";
+$lang['ctc_go_back'] = 'Retour a l\'accueil';

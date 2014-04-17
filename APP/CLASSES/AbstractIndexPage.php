@@ -58,21 +58,16 @@ abstract class AbstractIndexPage {
         if (defined('LOGIN')) {
             $this->tplObj->assign(array(
                 'dpath' => "skins/xnova/",
-                'style' => "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">
-                                    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/about.css\">",
             ));
         } else {
             $this->tplObj->assign(array(
                 'dpath' => DEFAULT_SKINPATH,
-                'style' => "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DEFAULT_SKINPATH . "/default.css\" />
-                                    <link rel=\"stylesheet\" type=\"text/css\" href=\"" . DEFAULT_SKINPATH . "/formate.css\" />",
             ));
         }
 
         $this->tplObj->assign(array(
-            'ENCODING' => $langInfos['ENCODING'],
-            'body' => "<body>",
-            'servername' => $game_config['game_name'],
+            'encoding' => $langInfos['ENCODING'],
+            'game_config' => $game_config,
         ));
 
         $this->tplObj->display('extends:layout.' . $this->getWindow() . '.tpl|' . $file);

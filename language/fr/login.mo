@@ -28,6 +28,7 @@
  * documentation for further information about customizing XNova.
  *
  */
+
 $lang['Login'] = 'Connexion';
 $lang['User_name'] = 'Nom:';
 $lang['Password'] = 'Password:';
@@ -53,5 +54,6 @@ $lang['log_numbreg'] = 'Joueurs inscris';
 $lang['log_welcome'] = 'Bienvenue sur';
 
 $lang['PasswordLost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
+
 $lang['log_board'] = 'Forum';
 $lang['log_contact'] = 'Contact';

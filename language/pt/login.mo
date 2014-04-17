@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -28,20 +29,19 @@
  *
  */
 
- 
-$lang['Login'] = 'Login';
+$lang['Login'] = 'Entrar';
 $lang['User_name'] = 'Utilizador:';
 $lang['Password'] = 'Palavra-passe:';
-$lang['Please_Login'] = 'Para continuar <a href="index.php" target="_main">login...</a>';
+$lang['Please_Login'] = 'Para continuar <a href="index.php" target="_main">entrar...</a>';
 $lang['Please_Wait'] = 'Por favor aguarde';
 $lang['Remember_me'] = 'Lembrar-me';
 $lang['Register'] = 'Registar';
 $lang['Login_Error'] = 'Erro';
 $lang['PleaseWait'] = 'Por favor aguarde';
 
-$lang [ 'Login_Ok'] = 'Login bem sucedido, <a href="./"><blink>redirecionando ...</blink></a><br><center><img src = "images/progressbar.gif"></center> ';
-$lang [ 'Login_FailPassword'] = 'Palavra-passe incorreta<br/><a href="index.php" target="_top">Regressar</ a>';
-$lang [ 'Login_FailUser'] = 'Este utilizador não existe.<br><a href=index.php>Regressar</ a> ';
+$lang ['Login_Ok'] = 'Login bem sucedido, <a href="./"><blink>redirecionando ...</blink></a><br><center><img src = "images/progressbar.gif"></center> ';
+$lang ['Login_FailPassword'] = 'Palavra-passe incorreta<br/><a href="index.php" target="_top">Regressar</ a>';
+$lang ['Login_FailUser'] = 'Este utilizador não existe.<br><a href=index.php>Regressar</ a> ';
 
 $lang['log_univ'] = 'Por favor escolha Universo!';
 $lang['log_reg'] = 'Registar';

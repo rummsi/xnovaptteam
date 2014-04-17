@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -28,8 +29,5 @@
  *
  */
 
-
 $lang['see_you'] = 'En esp&eacute;rant vous revoir tr&egrave;s bientot. Le staff.';
 $lang['session_closed'] = "Session termin&eacute;e.";
-
-?>
