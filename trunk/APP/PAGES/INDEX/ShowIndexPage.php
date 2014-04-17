@@ -84,7 +84,6 @@ EOF;
             $this->tplObj->assign(array(
                 'title' => $lang['Login'],
                 'lang' => $lang,
-                'forum_url' => $game_config['forum_url'],
                 'Count' => doquery('SELECT COUNT(DISTINCT users.id) AS `players` FROM {{table}} AS users WHERE users.authlevel < 3', 'users', true),
                 'PlayersOnline' => doquery("SELECT COUNT(DISTINCT id) AS `onlinenow` FROM {{table}} AS users WHERE `onlinetime` > (UNIX_TIMESTAMP()-900) AND users.authlevel < 3", 'users', true),
                 'LastPlayer' => doquery('SELECT users.`username` FROM {{table}} AS users ORDER BY `register_time` DESC LIMIT 1', 'users', true),

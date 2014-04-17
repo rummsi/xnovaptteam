@@ -29,11 +29,11 @@
  */
 
 
-$lang['ResetPass'] = "Reset the password";
-$lang['TextPass1'] = "Please enter the email address of your account";
-$lang['TextPass2'] = "informed as to your options. It is also the one you used for registration. If you press 'Submit', a password is created when you receive it by e-mail to the address indicated.";
+$lang['ResetPass']                      = "Recupera&ccedil;&atilde;o da password";
+$lang['TextPass1']                      = "Indique a sua conta de e-mail";
+$lang['TextPass2']                      = " conforme tem na sua conta. Ser&aacute; criada e enviada uma nova password para o endere&ccedil;o de email introduzido.";
 $lang['pseudo']    = "Nickname";
-$lang['email']    = "E-Mail";
-$lang['ButtonSendPass'] = "Send";
-$lang['PassForm'] = "Form";
+$lang['email']                          = "e-Mail";
+$lang['ButtonSendPass']                 = "Enviar";
+$lang['PassForm']                       = "Formul&aacute;rio";
 $lang['go_back']      = 'Return to main';

@@ -29,6 +29,4 @@
  */
 
 
-$lang['NoFrames'] = "Your browser does not support frames.";
-
-?>
+$lang['NoFrames'] = "O teu navegador não suporta frames.";

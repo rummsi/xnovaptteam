@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -28,52 +29,51 @@
  *
  */
 
-
 if (!defined('INSIDE')) {
-	die("attemp hacking");
+    die("attemp hacking");
 }
 
 // Registration form
-$lang['registry']          = 'Register';
-$lang['form']              = 'Registration Form';
-$lang['Register']          = 'SteadGame Registration';
-$lang['Undefined']         = '- Undefined -';
-$lang['Male']              = 'Male';
-$lang['Female']            = 'Female';
-$lang['Multiverse']        = 'XNova';
-$lang['E-Mail']            = 'E-Mail address';
-$lang['MainPlanet']        = 'Main planet\'s name';
-$lang['GameName']          = 'In-Game Name';
-$lang['Sex']               = 'Sex';
-$lang['accept']            = 'I accept the agreement';
-$lang['signup']            = ' Signup ';
-$lang['neededpass']        = 'Password';
-$lang['code_secu']          = 'Security';
+$lang['registry'] = 'Inscri&ccedil;&atilde;o';
+$lang['form'] = 'Formul&aacute;rio';
+$lang['Register'] = 'Inscri&ccedil;&atilde;o no XNova';
+$lang['Undefined'] = '- Indefinido -';
+$lang['Male'] = 'Homem';
+$lang['Female'] = 'Mulher';
+$lang['Multiverse'] = 'XNova';
+$lang['E-Mail'] = 'Endere&ccedil;o e-Mail';
+$lang['MainPlanet'] = 'Nome do planeta principal';
+$lang['GameName'] = 'Nick';
+$lang['Sex'] = 'Sexo';
+$lang['accept'] = 'Aceito as condi&ccedil;&otilde;es';
+$lang['signup'] = ' Registar-se ';
+$lang['neededpass'] = 'Precisa de password';
+$lang['code_secu'] = 'Segurança';
 
 // Send
-$lang['mail_welcome']      = 'Thank you for registering at SteadGame({gameurl}) \nYour password is: {password}\n\nHave fun!\n{gameurl}';
-$lang['mail_title']        = 'Registration';
-$lang['thanksforregistry'] = 'Thank you for signing up! You will receive an email with your password.';
+$lang['mail_welcome'] = 'Obrigado pela sua inscri&ccedil;&atilde;o no nosso jogo ({gameurl}) <br >A sua password &eacute;: {password}<br><br>Bom divertimento no {gameurl} !';
+$lang['mail_title'] = 'Registo';
+$lang['thanksforregistry'] = 'Obrigado pelo seu registo! Ir&aacute; receber um e-mail com os dados da sua conta.';
 $lang['sender_message_ig'] = 'Admin';
-$lang['subject_message_ig']= 'Welcome';
-$lang['text_message_ig']   = 'Welcome to SteadGame, we wish you all the best and goodluck!';
+$lang['subject_message_ig'] = 'Bem-vindo';
+$lang['text_message_ig'] = 'Bem-vindo ao Universo 1 do XNovaPT, desejamos-te bom jogo e boa sorte !';
 
 
 // Errors
-$lang['error_secu']        = 'Security code invalid!<br />';
-$lang['error_mail']        = 'E-mail invalid!<br />';
-$lang['error_planet']      = 'Error in planet name!<br />';
-$lang['error_hplanetnum']  = 'You must use alphanumeric characters to name your planet!<br />';
-$lang['error_character']   = 'Error in your name!<br />';
-$lang['error_charalpha']   = 'The username must be alphanumeric characters!<br />';
-$lang['error_password']    = 'Your password must be 4 character\'s minimum!<br />';
-$lang['error_rgt']         = 'You must accept the Terms of Usage.<<br />';
-$lang['error_userexist']   = 'Player name already exists.<br />';
-$lang['error_emailexist']  = 'E-Mail is already in use.<br />';
-$lang['error_sex']         = 'Error in sex!<br />';
-$lang['error_mailsend']    = 'An error occurred while sending the email! Your password is: ';
-$lang['reg_welldone']      = 'Registration complete!';
-$lang['reg_go_back']       = 'Return to main';
+$lang['error_secu'] = 'Código de segurança inválido!<br />';
+$lang['error_mail'] = 'E-mail inv&aacute;lido!<br />';
+$lang['error_planet'] = 'Erro na escolha do nome do planeta!.<br />';
+$lang['error_hplanetnum'] = 'Apenas deve utilizar caracteres alfanum&eacute;ricos no nome do seu planeta!<br />';
+$lang['error_character'] = 'Erro no nome do jogador!<br />';
+$lang['error_charalpha'] = 'O nome apenas deve conter caracteres alfanum&eacute;ricos!<br />';
+$lang['error_password'] = 'A password deve conter um m&iacute;nimo de 4 caracteres!<br />';
+$lang['error_rgt'] = 'Deve aceitar as condi&ccedil;&otilde;es do registo.<<br />';
+$lang['error_userexist'] = 'J&aacute; existe um jogador com esse nome!<br />';
+$lang['error_emailexist'] = 'Esse e-mail j&aacute; est&aacute; registado!<br />';
+$lang['error_sex'] = 'Erro na escolha do sexo!<br />';
+$lang['error_mailsend'] = 'Ocorreu um erro no envio do e-mail. A sua password &eacute;: ';
+$lang['reg_welldone'] = 'Inscri&ccedil;&atilde;o conclu&iacute;da!';
+$lang['reg_go_back'] = 'Regressar ao principal';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

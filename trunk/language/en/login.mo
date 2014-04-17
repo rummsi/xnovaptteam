@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of XNova:Legacies
  *
@@ -28,7 +29,6 @@
  *
  */
 
- 
 $lang['Login'] = 'Connect';
 $lang['User_name'] = 'Username:';
 $lang['Password'] = 'Password:';
@@ -39,9 +39,9 @@ $lang['Register'] = 'Register';
 $lang['Login_Error'] = 'Error';
 $lang['PleaseWait'] = 'Please wait';
 
-$lang [ 'Login_Ok'] = 'Login successful, <a href="./"><blink>redirecting ...</blink></a><br><center><img src = "images/progressbar.gif"></center> ';
-$lang [ 'Login_FailPassword'] = 'Incorrect password<br/><a href="login.php" target="_top">Back</ a>';
-$lang [ 'Login_FailUser'] = 'This player does not exist.<br><a href=login.php>Back</ a> ';
+$lang ['Login_Ok'] = 'Login successful, <a href="./"><blink>redirecting ...</blink></a><br><center><img src = "images/progressbar.gif"></center> ';
+$lang ['Login_FailPassword'] = 'Incorrect password<br/><a href="login.php" target="_top">Back</ a>';
+$lang ['Login_FailUser'] = 'This player does not exist.<br><a href=login.php>Back</ a> ';
 
 $lang['log_univ'] = 'Please select a universe!';
 $lang['log_reg'] = 'Register';

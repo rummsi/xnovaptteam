@@ -55,18 +55,18 @@
                 </div>
                 <div id="mainmenu" style="margin-top: 20px;">
                     <a href="index.php?page=register">{$lang['log_reg']}</a>
-                    <a href="{$forum_url}" target="_blank">{$lang['log_board']}</a>
+                    <a href="{$game_config['forum_url']}" target="_blank">{$lang['log_board']}</a>
                     <a href="index.php?page=contact">{$lang['log_contact']}</a>
                     <a href="index.php?page=rules" target="_blank">{$lang['log_rules']}</a>
                 </div>
                 <div id="rightmenu" class="rightmenu">
-                    <div id="title">{$lang['log_welcome']} {$servername}</div>
+                    <div id="title">{$lang['log_welcome']} {$game_config['game_name']}</div>
                     <div id="content">
                         <center>
                             <div id="text1">
                                 <div style="text-align: left;">
-                                    <strong>{$servername}</strong> 
-                                    {$lang['log_desc']} {$servername}.
+                                    <strong>{$game_config['game_name']}</strong> 
+                                    {$lang['log_desc']} {$game_config['game_name']}.
                                 </div>
                             </div>
                         <div id="register" class="bigbutton" onclick="document.location.href='index.php?page=register';">
