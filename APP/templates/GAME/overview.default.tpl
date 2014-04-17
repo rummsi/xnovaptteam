@@ -162,7 +162,7 @@
                     <tr>
 			<th>{$lang['Position']}</th>
 			<th colspan="3">
-                            <a href="galaxy.php?mode=0&galaxy={$planetrow['galaxy']}&system={$planetrow['system']}">
+                            <a href="game.php?page=galaxy&action=0&galaxy={$planetrow['galaxy']}&system={$planetrow['system']}">
                                 [{$planetrow['galaxy']}:{$planetrow['system']}:{$planetrow['planet']}]
                             </a>
 			</th>

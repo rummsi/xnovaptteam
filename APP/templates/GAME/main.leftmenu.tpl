@@ -71,7 +71,7 @@
                                 <td colspan="2" background="{$dpath}img/bg1.gif"><center>{$lang['observ']}</center></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="galaxy.php?mode=0" accesskey="s" target="_self">{$lang['Galaxy']}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=galaxy&action=0" accesskey="s" target="_self">{$lang['Galaxy']}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="imperium.php" accesskey="i" target="_self">{$lang['Imperium']}</a></div></td>
