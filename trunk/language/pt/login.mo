@@ -49,7 +49,7 @@ $lang['log_rules'] = 'Régras';
 $lang['log_desc'] = 'é um jogo de estratégia online.  Só necessitas de um navegador para jogar.  Junta-te agora e descobre o maravilhoso jogo de';
 $lang['log_toreg'] = 'Por favor regista-te';
 $lang['log_online'] = 'Jogadores online';
-$lang['log_lastreg'] = 'Últinmo registado';
+$lang['log_lastreg'] = 'Último registado';
 $lang['log_numbreg'] = 'Jogadores registados';
 $lang['log_welcome'] = 'Bemvindo ao';
 
