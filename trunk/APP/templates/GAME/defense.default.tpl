@@ -14,12 +14,12 @@
                                         {$BuildOneElementTime = $shipyard->getBuildTime($shipId, 1)}
                                         <tr>
                                             <th class=l>
-                                                <a href=infos.php?gid={$shipId}>
+                                                <a href=game.php?page=infos&gid={$shipId}>
                                                     <img border=0 src="{$dpath}gebaeude/{$shipId}.gif" align=top width=120 height=120>
                                                 </a>
                                             </th>
                                             <td class=l>
-                                                <a href=infos.php?gid={$shipId}>{$lang['info'][$shipId]['name']}</a>
+                                                <a href=game.php?page=infos&gid={$shipId}>{$lang['info'][$shipId]['name']}</a>
                                                 {if $planetrow[$resource[$shipId]] > 0}
                                                     ({$lang['dispo']}: {pretty_number($planetrow[$resource[$shipId]])})
                                                 {/if}<br />
