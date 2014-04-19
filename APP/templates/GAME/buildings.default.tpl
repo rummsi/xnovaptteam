@@ -22,12 +22,12 @@
                         {if IsTechnologieAccessible($user, $planetrow, $Element)}
                     <tr>
                         <td class="l">
-                            <a href="infos.php?gid={$Element}">
+                            <a href="game.php?page=infos&gid={$Element}">
                             <img border="0" src="{$dpath}gebaeude/{$Element}.gif" align="top" width="120" height="120">
                             </a>
                         </td>
                         <td class="l">
-                            <a href="infos.php?gid={$Element}">{$ElementName}</a>{if $planetrow[$resource[$Element]] > 0}({$lang['level']}{$planetrow[$resource[$Element]]}){/if}<br>
+                            <a href="game.php?page=infos&gid={$Element}">{$ElementName}</a>{if $planetrow[$resource[$Element]] > 0}({$lang['level']}{$planetrow[$resource[$Element]]}){/if}<br>
                             {$lang['res']['descriptions'][$Element]}<br>
                             {GetElementPrice($user, $planetrow, $Element)}
                             {ShowBuildTime(GetBuildingTime($user, $planetrow, $Element))}

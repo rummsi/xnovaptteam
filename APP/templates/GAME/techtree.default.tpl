@@ -15,7 +15,7 @@
                                 <table width="100%">
                                     <tr>
                                         <td style="background-color: transparent;" align="left">
-                                            <a href="infos.php?gid={$Element}">{$ElementName}</a>
+                                            <a href="game.php?page=infos&gid={$Element}">{$ElementName}</a>
                                         </td>
                                         <td style="background-color: transparent;" align="right">
                                             <a href="techdetails.php?techid={$Element}">{$lang['treeinfo']}</a>
