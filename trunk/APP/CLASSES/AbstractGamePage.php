@@ -61,7 +61,7 @@ abstract class AbstractGamePage {
         global $langInfos, $user, $planetrow;
 
         if ($this->getWindow() !== 'ajax') {
-            $this->ShowLeftMenu($user, $planetrow);
+            $this->ShowNavigationMenus($user, $planetrow);
         }
 
         $this->tplObj->assign(array(
@@ -90,12 +90,11 @@ abstract class AbstractGamePage {
         return http_build_query($queryString);
     }
 
-    function ShowLeftMenu() {
-        global $lang, $user, $game_config;
+    function ShowNavigationMenus() {
+        global $lang, $user, $game_config, $planetrow;
 
         includeLang('leftmenu');
-
-        $this->ShowTopNavigationBar();
+        includeLang('topnav');
 
         $rank = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_code` = '1' AND `stat_type` = '1' AND `id_owner` = '" . $user['id'] . "';", 'statpoints', true);
         $this->tplObj->assign(array(
@@ -109,12 +108,6 @@ abstract class AbstractGamePage {
             'game_config' => $game_config,
             'lm_tx_queue' => MAX_FLEET_OR_DEFS_PER_ROW,
         ));
-    }
-
-    function ShowTopNavigationBar() {
-        global $user, $planetrow;
-
-        includeLang('topnav');
 
         if ($user) {
             if (!$planetrow) {

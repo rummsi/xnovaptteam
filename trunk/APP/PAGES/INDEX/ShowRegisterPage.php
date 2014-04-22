@@ -38,7 +38,7 @@ class ShowRegisterPage extends AbstractIndexPage
     
     function show()
     {
-        global $lang, $game_config, $_session, $newpos_checked, $Time;
+        global $lang, $game_config, $newpos_checked, $Time;
         
         //on demarre la session qui ne sers ici que pour le code de secu
         includeLang('reg');

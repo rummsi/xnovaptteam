@@ -23,31 +23,28 @@
  * @version 0.01  22/Set/2013 10:43:01
  */
 
-define('INSIDE' , true);
-define('INSTALL' , false);
+define('INSIDE', true);
+define('INSTALL', false);
 define('DISABLE_IDENTITY_CHECK', true);
-require_once dirname(__FILE__) .'/common.php';
+require_once dirname(__FILE__) . '/common.php';
 include 'APP/CLASSES/AbstractIndexPage.php';
 include 'APP/PAGES/ERROR/ShowErrorPage.php';
 
-$page 		= HTTP::_GP('page', 'index');
-$mode 		= HTTP::_GP('mode', 'show');
-$mode		= str_replace(array('_', '\\', '/', '.', "\0"), '', $mode);
+$page = HTTP::_GP('page', 'index');
+$mode = HTTP::_GP('mode', 'show');
+$mode = str_replace(array('_', '\\', '/', '.', "\0"), '', $mode);
 
-$pageClass	= 'Show'.ucwords($page).'Page';
+$pageClass = 'Show' . ucwords($page) . 'Page';
 
 includeLang('login');
 
-if(!file_exists('APP/PAGES/INDEX/'.$pageClass.'.php'))
-{
+if (!file_exists('APP/PAGES/INDEX/' . $pageClass . '.php')) {
     ShowErrorPage::message('A página ' . ucwords($page) . ' não existe', $lang['Login_Error']);
 }
 
 // Added Autoload in feature Versions
-require(ROOT_PATH . 'APP/PAGES/INDEX/'.$pageClass.'.php');
+require(ROOT_PATH . 'APP/PAGES/INDEX/' . $pageClass . '.php');
 
-$pageObj	= new $pageClass;
+$pageObj = new $pageClass;
 
 $pageObj->{$mode}();
-
-?>
