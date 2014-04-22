@@ -23,30 +23,27 @@
  * @version 0.01  22/Set/2013 13:54:02
  */
 
-define('INSIDE' , true);
-define('INSTALL' , false);
-require_once dirname(__FILE__) .'/common.php';
+define('INSIDE', true);
+define('INSTALL', false);
+require_once dirname(__FILE__) . '/common.php';
 include 'APP/CLASSES/AbstractGamePage.php';
 include 'APP/PAGES/ERROR/ShowErrorPage.php';
 
-$page 		= HTTP::_GP('page', 'index');
-$mode 		= HTTP::_GP('mode', 'show');
-$mode		= str_replace(array('_', '\\', '/', '.', "\0"), '', $mode);
+$page = HTTP::_GP('page', 'index');
+$mode = HTTP::_GP('mode', 'show');
+$mode = str_replace(array('_', '\\', '/', '.', "\0"), '', $mode);
 
-$pageClass	= 'Show'.ucwords($page).'Page';
+$pageClass = 'Show' . ucwords($page) . 'Page';
 
 includeLang('login');
 
-if(!file_exists('APP/PAGES/GAME/'.$pageClass.'.php'))
-{
+if (!file_exists('APP/PAGES/GAME/' . $pageClass . '.php')) {
     ShowErrorPage::message('A página ' . ucwords($page) . ' não existe', $lang['Login_Error']);
 }
 
 // Added Autoload in feature Versions
-require(ROOT_PATH . 'APP/PAGES/GAME/'.$pageClass.'.php');
+require(ROOT_PATH . 'APP/PAGES/GAME/' . $pageClass . '.php');
 
-$pageObj	= new $pageClass;
+$pageObj = new $pageClass;
 
 $pageObj->{$mode}();
-
-?>

@@ -36,7 +36,7 @@ class ShowIndexPage extends AbstractIndexPage {
     }
 
     function show() {
-        global $lang, $game_config;
+        global $lang;
 
         if (filter_input_array(INPUT_POST)) {
             $userData = array(
