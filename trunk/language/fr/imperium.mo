@@ -41,6 +41,7 @@ $lang['buildings'] = "B&agrave;timents";
 $lang['investigation'] = "Laboratoire";
 $lang['ships'] = "Flotte";
 $lang['defense'] = "D&eacute;fense";
+$lang['Imperium'] = "Imperium";
 
 // Created by Perberos. All rights reserved (C) 2006 
 ?>
