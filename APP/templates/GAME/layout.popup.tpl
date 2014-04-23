@@ -1,3 +1,3 @@
 {include file="main.header.tpl" bodyclass="popup"}
-<div id="content">{block name="content"}{/block}</div>
+{block name="content"}{/block}
 {include file="main.footer.tpl" nocache}
