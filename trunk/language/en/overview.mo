@@ -28,7 +28,7 @@
  *
  */
 
-
+$lang['Overview'] = 'Overview';
 // General
 $lang['cancel']                  = "cancel";
 $lang['Planet_menu']             = "Planet Menu";
@@ -70,7 +70,6 @@ $lang['ov_pts_fleet']            = "Fleet";
 $lang['ov_pts_reche']            = "Research";
 $lang['ov_pts_total']            = "Total";
 
-
 // Colony
 $lang['colony_abandon']          = "Abandon Colony";
 $lang['ov_rena_dele']            = "Rename / Delete the planet";
@@ -85,7 +84,6 @@ $lang['namer']                   = "Rename";
 $lang['password']                = "Password";
 $lang['confirm_planet_delete']   = "Confirm the deletion of the planet";
 $lang['confirmed_with_password'] = ", please confirm by entering your password below!";
-
 
 // Rename planet
 $lang['deletemessage_ok']    = "The colony was abandoned.";
@@ -130,4 +128,3 @@ $lang['ov_message']          = "Send a message";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
-?>

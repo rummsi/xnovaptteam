@@ -39,14 +39,13 @@ class ShowOverviewPage extends AbstractGamePage {
         global $user, $lang, $game_config, $planetrow, $dpath, $galaxyrow, $flotten;
         includeLang('resources');
         includeLang('overview');
-        includeLang('leftmenu');
         includeLang('buildings');
 
+        $deleteid = filter_input(INPUT_POST, 'deleteid');
         //CheckPlanetUsedFields ($lunarow);
-        if (filter_input(INPUT_POST, 'deleteid') !==FALSE) {
-            $_POST['deleteid'] = intval(filter_input(INPUT_POST, 'deleteid'));
+        if ($deleteid !== FALSE) {
+            $deleteid = intval($deleteid);
         }
-//        $pl = mysql_real_escape_string(isset($_GET['pl']) ? $_GET['pl'] : 0);
 
         if ($user['id'] != '') {
             // -----------------------------------------------------------------------------------------------
@@ -262,7 +261,7 @@ class ShowOverviewPage extends AbstractGamePage {
                 'CurrBuild' => explode(",", $BuildQueue[0]),
                 'RestTime' => $planetrow['b_building'] - time(),
                 'PlanetID' => $planetrow['id'],
-                'StatRecord'=>$StatRecord,
+                'StatRecord' => $StatRecord,
             ));
 
             $this->render('overview.default.tpl');
