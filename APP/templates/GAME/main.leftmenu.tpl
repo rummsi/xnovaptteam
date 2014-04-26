@@ -89,7 +89,7 @@
                                 <td colspan="2"><div><a href="game.php?page=records" accesskey="3" target="_self">{$lang['lft_Records']}</a></div></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><div><a href="stat.php?range={$user_rank}" accesskey="k" target="_self">{$lang['lft_Statistics']}</a></div></td>
+                                <td colspan="2"><div><a href="game.php?page=statistics&range={$user_rank}" accesskey="k" target="_self">{$lang['lft_Statistics']}</a></div></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div><a href="search.php" accesskey="b" target="_self">{$lang['lft_Search']}</a></div></td>
