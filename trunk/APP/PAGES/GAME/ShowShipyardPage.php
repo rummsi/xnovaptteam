@@ -30,77 +30,68 @@ require_once ROOT_PATH . 'includes/classes/Legacies/Empire/Shipyard.php';
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowShipyardPage extends AbstractGamePage
-{
-    function __construct()
-    {
+class ShowShipyardPage extends AbstractGamePage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'shipyard';
     }
 
-    function show()
-    {
-        global $lang, $resource, $dpath, $planetrow, $user;
+    function show() {
+        global $lang, $resource, $planetrow, $user;
+
         includeLang('buildings');
-        includeLang('leftmenu');
         includeLang('infos');
-        
+
         // S'il n'y a pas de Chantier
-        if (!isset($planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]]) || $planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]] == 0)
-        {
+        if (!isset($planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]]) || $planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]] == 0) {
             message($lang['need_hangar'], $lang['tech'][Legacies_Empire::ID_BUILDING_SHIPYARD]);
             return;
         }
-        
+
         $shipyard = Legacies_Empire_Shipyard::factory($planetrow, $user);
-        if (isset($_POST['fmenge']) && is_array($_POST['fmenge']))
-        {
-            foreach ($_POST['fmenge'] as $shipId => $count)
-            {
+        if (isset($_POST['fmenge']) && is_array($_POST['fmenge'])) {
+            foreach ($_POST['fmenge'] as $shipId => $count) {
                 $shipId = intval($shipId);
-                if (in_array($shipId, $resource))
-                {
+                if (in_array($shipId, $resource)) {
                     continue;
                 }
                 $count = intval($count);
-                if ($count <= 0)
-                {
+                if ($count <= 0) {
                     continue;
                 }
 
-                if ($shipId == Legacies_Empire::ID_SHIP_DEATH_STAR && $user['rpg_destructeur'] == 1)
-                { // FIXME: Officers
+                if ($shipId == Legacies_Empire::ID_SHIP_DEATH_STAR && $user['rpg_destructeur'] == 1) { // FIXME: Officers
                     $count = $count * 2;
                 }
                 $shipyard->appendQueue($shipId, $count);
             }
             $planetrow = $shipyard->save();
         }
-        
+
         $types = include ROOT_PATH . 'includes/data/types.php';
         $shipId = $types[Legacies_Empire::TYPE_SHIP];
-        
+
         $data = array();
-        foreach ($shipyard->getQueue() as $item)
-        {
+        foreach ($shipyard->getQueue() as $item) {
             $data[] = array_merge($item, array(
                 'label' => $lang['tech'][$item['ship_id']],
                 'speed' => $shipyard->getBuildTime($item['ship_id'], 1)
-                ));
+            ));
         }
         $parse = array(
             'data' => json_encode($data)
         );
         $BuildQueue = parsetemplate(gettemplate('buildings_script'), $parse);
-        
+
         $this->tplObj->assign(array(
-            'title'             => $lang['Shipyard'],
-            'types'             => $types,
-            'shipyard'          => $shipyard,
-            'resource'          => $resource,
-            'buildinglist'      => $BuildQueue,
+            'title' => $lang['Shipyard'],
+            'types' => $types,
+            'shipyard' => $shipyard,
+            'resource' => $resource,
+            'buildinglist' => $BuildQueue,
         ));
-        
+
         $this->render('shipyard.default.tpl');
     }
 

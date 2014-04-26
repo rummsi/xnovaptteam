@@ -30,21 +30,19 @@ require_once ROOT_PATH . 'includes/classes/Legacies/Empire/Shipyard.php';
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowDefensePage  extends AbstractGamePage
-{
-    function __construct()
-    {
+class ShowDefensePage extends AbstractGamePage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'defense';
     }
 
-    function show()
-    {
-        global $lang, $resource, $dpath, $planetrow, $user;
+    function show() {
+        global $lang, $resource, $planetrow, $user;
         includeLang('buildings');
         includeLang('leftmenu');
         includeLang('infos');
-        
+
         // S'il n'y a pas de Chantier
         if (!isset($planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]]) || $planetrow[$resource[Legacies_Empire::ID_BUILDING_SHIPYARD]] == 0) {
             message($lang['need_hangar'], $lang['tech'][Legacies_Empire::ID_BUILDING_SHIPYARD]);
@@ -64,30 +62,30 @@ class ShowDefensePage  extends AbstractGamePage
             }
             $planetrow = $shipyard->save();
         }
-    
+
         $types = include ROOT_PATH . 'includes/data/types.php';
-        
+
         $data = array();
-        foreach ($shipyard->getQueue() as $item)
-        {
+        foreach ($shipyard->getQueue() as $item) {
             $data[] = array_merge($item, array(
                 'label' => $lang['tech'][$item['ship_id']],
                 'speed' => $shipyard->getBuildTime($item['ship_id'], 1)
-                ));
+            ));
         }
         $parse = array(
             'data' => json_encode($data)
         );
         $BuildQueue = parsetemplate(gettemplate('buildings_script'), $parse);
-        
+
         $this->tplObj->assign(array(
-            'title'             => $lang['Defense'],
-            'types'             => $types,
-            'shipyard'          => $shipyard,
-            'resource'          => $resource,
-            'buildinglist'      => $BuildQueue,
+            'title' => $lang['Defense'],
+            'types' => $types,
+            'shipyard' => $shipyard,
+            'resource' => $resource,
+            'buildinglist' => $BuildQueue,
         ));
-        
+
         $this->render('defense.default.tpl');
     }
+
 }

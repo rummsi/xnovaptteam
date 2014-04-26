@@ -38,14 +38,14 @@ class ShowFleet3Page extends AbstractGamePage
 
     function show()
     {
-        global $user, $planetrow, $lang, $pricelist, $_POST;
+        global $user, $planetrow, $lang, $pricelist;
         
         includeLang('fleet');
 	
-	$galaxy     = intval($_POST['galaxy']);
-	$system     = intval($_POST['system']);
-	$planet     = intval($_POST['planet']);
-	$planettype = intval($_POST['planettype']);
+	$galaxy     = intval(filter_input(INPUT_POST, 'galaxy'));
+	$system     = intval(filter_input(INPUT_POST, 'system'));
+	$planet     = intval(filter_input(INPUT_POST, 'planet'));
+	$planettype = intval(filter_input(INPUT_POST, 'planettype'));
 
 	// Test d'existance et de proprieté de la planete
 	$YourPlanet = false;
@@ -68,9 +68,9 @@ class ShowFleet3Page extends AbstractGamePage
 	}
         
 	// Determinons les type de missions possibles par rapport a la planete cible
-	if ($_POST['planettype'] == "2")
+	if (filter_input(INPUT_POST, 'planettype') == "2")
         {
-            if ($_POST['ship209'] >= 1)
+            if (filter_input(INPUT_POST, 'ship209') >= 1)
             {
                 $missiontype = array(8 => $lang['type_mission'][8]);
                 $this->tplObj->assign('missiontype', $missiontype);
@@ -78,27 +78,27 @@ class ShowFleet3Page extends AbstractGamePage
 		$missiontype = array();
                 $this->tplObj->assign('missiontype', $missiontype);
             }
-	} elseif ($_POST['planettype'] == "1" || $_POST['planettype'] == "3") {
-            if ($_POST['ship208'] >= 1 && !$UsedPlanet)
+	} elseif (filter_input(INPUT_POST, 'planettype') == "1" || filter_input(INPUT_POST, 'planettype') == "3") {
+            if (filter_input(INPUT_POST, 'ship208') >= 1 && !$UsedPlanet)
             {
                 $missiontype = array(7 => $lang['type_mission'][7]);
                 $this->tplObj->assign('missiontype', $missiontype);
-            } elseif (@$_POST['ship210'] >= 1 && !$YourPlanet) {
+            } elseif (filter_input(INPUT_POST, 'ship210') >= 1 && !$YourPlanet) {
 		$missiontype = array(6 => $lang['type_mission'][6]);
                 $this->tplObj->assign('missiontype', $missiontype);
             }
-            if ($_POST['ship202'] >= 1 ||
-			$_POST['ship203'] >= 1 ||
-			$_POST['ship204'] >= 1 ||
-			$_POST['ship205'] >= 1 ||
-			$_POST['ship206'] >= 1 ||
-			$_POST['ship207'] >= 1 ||
-			$_POST['ship210'] >= 1 ||
-			$_POST['ship211'] >= 1 ||
-			$_POST['ship213'] >= 1 ||
-			$_POST['ship214'] >= 1 ||
-			$_POST['ship215'] >= 1 ||
-			$_POST['ship216'] >= 1)
+            if (filter_input(INPUT_POST, 'ship202') >= 1 ||
+			filter_input(INPUT_POST, 'ship203') >= 1 ||
+			filter_input(INPUT_POST, 'ship204') >= 1 ||
+			filter_input(INPUT_POST, 'ship205') >= 1 ||
+			filter_input(INPUT_POST, 'ship206') >= 1 ||
+			filter_input(INPUT_POST, 'ship207') >= 1 ||
+			filter_input(INPUT_POST, 'ship210') >= 1 ||
+			filter_input(INPUT_POST, 'ship211') >= 1 ||
+			filter_input(INPUT_POST, 'ship213') >= 1 ||
+			filter_input(INPUT_POST, 'ship214') >= 1 ||
+			filter_input(INPUT_POST, 'ship215') >= 1 ||
+			filter_input(INPUT_POST, 'ship216') >= 1)
             {
                 if (!$YourPlanet)
                 {
@@ -109,37 +109,37 @@ class ShowFleet3Page extends AbstractGamePage
 		$missiontype[3] = $lang['type_mission'][3];
                 $this->tplObj->assign('missiontype', $missiontype);
             }
-	} elseif ($_POST['ship209'] >= 1 || $_POST['ship208'] >= 1) {
+	} elseif (filter_input(INPUT_POST, 'ship209') >= 1 || filter_input(INPUT_POST, 'ship208') >= 1) {
             $missiontype[3] = $lang['type_mission'][3];
             $this->tplObj->assign('missiontype', $missiontype);
 	}
-	if ($YourPlanet)
+	if ($YourPlanet){
 		$missiontype[4] = $lang['type_mission'][4];
-        $this->tplObj->assign('missiontype', $missiontype);
-	if ( $_POST['planettype'] == 3 &&
-		($_POST['ship214']         ||
-		 $_POST['ship213'])        &&
+        $this->tplObj->assign('missiontype', $missiontype);}
+	if ( filter_input(INPUT_POST, 'planettype') == 3 &&
+		(filter_input(INPUT_POST, 'ship214')         ||
+		 filter_input(INPUT_POST, 'ship213'))        &&
 		 !$YourPlanet              &&
 		 $UsedPlanet)
         {
 		$missiontype[2] = $lang['type_mission'][2];
                 $this->tplObj->assign('missiontype', $missiontype);
 	}
-	if ( $_POST['planettype'] == 3 &&
-            ($_POST['ship214'] >= 1 || $_POST['ship216'] >= 1) &&
+	if ( filter_input(INPUT_POST, 'planettype') == 3 &&
+            (filter_input(INPUT_POST, 'ship214') >= 1 || filter_input(INPUT_POST, 'ship216') >= 1) &&
             !$YourPlanet            &&
             $UsedPlanet)
         {
             $missiontype[9] = $lang['type_mission'][9];
             $this->tplObj->assign('missiontype', $missiontype);
         }
-	$fleetarray    = unserialize(base64_decode(str_rot13($_POST["usedfleet"])));
-	$mission       = $_POST['target_mission'];
-	$SpeedFactor   = $_POST['speedfactor'];
+	$fleetarray    = unserialize(base64_decode(str_rot13(filter_input(INPUT_POST, 'usedfleet'))));
+	$mission       = filter_input(INPUT_POST, 'target_mission');
+	$SpeedFactor   = filter_input(INPUT_POST, 'speedfactor');
 	$AllFleetSpeed = GetFleetMaxSpeed ($fleetarray, 0, $user);
-	$GenFleetSpeed = $_POST['speed'];
+	$GenFleetSpeed = filter_input(INPUT_POST, 'speed');
 	$MaxFleetSpeed = min($AllFleetSpeed);
-	$distance      = GetTargetDistance ( $_POST['thisgalaxy'], $_POST['galaxy'], $_POST['thissystem'], $_POST['system'], $_POST['thisplanet'], $_POST['planet'] );
+	$distance      = GetTargetDistance ( filter_input(INPUT_POST, 'thisgalaxy'), filter_input(INPUT_POST, 'galaxy'), filter_input(INPUT_POST, 'thissytem'), filter_input(INPUT_POST, 'system'), filter_input(INPUT_POST, 'thisplanet'), filter_input(INPUT_POST, 'planet') );
 	$duration      = GetMissionDuration ( $GenFleetSpeed, $MaxFleetSpeed, $distance, $SpeedFactor );
 	$consumption   = GetFleetConsumption ( $fleetarray, $SpeedFactor, $duration, $distance, $MaxFleetSpeed, $user );
 	$MissionSelector  = "";
@@ -174,11 +174,11 @@ class ShowFleet3Page extends AbstractGamePage
             $MissionSelector .= "</th>";
             $MissionSelector .= "</tr>";
 	}
-	if ($_POST['thisplanettype'] == 1)
+	if (filter_input(INPUT_POST, 'thisplanettype') == 1)
         {
-            $TableTitle = "". $_POST['thisgalaxy'] .":". $_POST['thissystem'] .":". $_POST['thisplanet'] ." - ". $lang['fl_planet'] ."";
+            $TableTitle = "". filter_input(INPUT_POST, 'thisgalaxy') .":". filter_input(INPUT_POST, 'thissystem') .":". filter_input(INPUT_POST, 'thisplanet') ." - ". $lang['fl_planet'] ."";
 	} elseif ($_POST['thisplanettype'] == 3) {
-            $TableTitle = "". $_POST['thisgalaxy'] .":". $_POST['thissystem'] .":". $_POST['thisplanet'] ." - ". $lang['fl_moon'] ."";
+            $TableTitle = "". filter_input(INPUT_POST, 'thisgalaxy') .":". filter_input(INPUT_POST, 'thissystem') .":". filter_input(INPUT_POST, 'thisplanet') ." - ". $lang['fl_moon'] ."";
 	}
         
         $this->tplObj->assign(array(
@@ -188,20 +188,20 @@ class ShowFleet3Page extends AbstractGamePage
             'pdeuterium'        => floor($planetrow["deuterium"]),
             'consumption'       => $consumption,
             'distance'          => $distance,
-            'Pspeedfactor'      => $_POST['speedfactor'],
-            'Pthisgalaxy'       => $_POST['thisgalaxy'],
-            'Pthissystem'       => $_POST['thissystem'],
-            'Pthisplanet'       => $_POST['thisplanet'],
-            'Pgalaxy'           => $_POST['galaxy'],
-            'Psystem'           => $_POST['system'],
-            'Pplanet'           => $_POST['planet'],
-            'Pthisplanettype'   => $_POST['thisplanettype'],
-            'Pplanettype'       => $_POST['planettype'],
-            'Pspeedallsmin'     => $_POST['speedallsmin'],
-            'Pspeed'            => $_POST['speed'],
-            'Pusedfleet'        => $_POST['usedfleet'],
-            'Pmaxepedition'     => $_POST['maxepedition'],
-            'Pcurepedition'     => $_POST['curepedition'],
+            'Pspeedfactor'      => filter_input(INPUT_POST, 'speedfactor'),
+            'Pthisgalaxy'       => filter_input(INPUT_POST, 'thisgalaxy'),
+            'Pthissystem'       => filter_input(INPUT_POST, 'thissystem'),
+            'Pthisplanet'       => filter_input(INPUT_POST, 'thisplanet'),
+            'Pgalaxy'           => filter_input(INPUT_POST, 'galaxy'),
+            'Psystem'           => filter_input(INPUT_POST, 'system'),
+            'Pplanet'           => filter_input(INPUT_POST, 'planet'),
+            'Pthisplanettype'   => filter_input(INPUT_POST, 'thisplanettype'),
+            'Pplanettype'       => filter_input(INPUT_POST, 'planettype'),
+            'Pspeedallsmin'     => filter_input(INPUT_POST, 'speedallsmin'),
+            'Pspeed'            => filter_input(INPUT_POST, 'speed'),
+            'Pusedfleet'        => filter_input(INPUT_POST, 'usedfleet'),
+            'Pmaxepedition'     => filter_input(INPUT_POST, 'maxepedition'),
+            'Pcurepedition'     => filter_input(INPUT_POST, 'curepedition'),
             'TableTitle'        => $TableTitle,
             'MissionSelector'   => $MissionSelector,
             'fmetal'            => floor($planetrow['metal']),
@@ -209,7 +209,7 @@ class ShowFleet3Page extends AbstractGamePage
             'fdeuterium'        => floor($planetrow['deuterium']),
             'i'                 => $i,
             'a'                 => $a,
-            'mission_cheked'    => ($_POST['target_mission'] == $a ? " checked=\"checked\"":""),
+            'mission_cheked'    => (filter_input(INPUT_POST, 'target_mission') == $a ? " checked=\"checked\"":""),
             'b'                 => $b,
             'planet'            => $planet,
             'fleetarray'        => $fleetarray,
