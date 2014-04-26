@@ -28,148 +28,132 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowMarchandPage extends AbstractGamePage
-{
-    function __construct()
-    {
+class ShowMarchandPage extends AbstractGamePage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'marchand';
     }
 
-    function show()
-    {
-        global $lang, $_POST, $user, $planetrow;
+    function show() {
+        global $lang, $user, $planetrow;
         includeLang('marchand');
-        
-	if ($_POST['ress'] != '')
-        {
-            $Error     = false;
-            $CheatTry  = false;
-            $Metal     = $_POST['metal'];
-            $Crystal   = $_POST['cristal'];
+
+        if (filter_input(INPUT_POST, 'ress') != '') {
+            $Error = false;
+            $CheatTry = false;
+            $Metal = $_POST['metal'];
+            $Crystal = $_POST['cristal'];
             $Deuterium = $_POST['deut'];
-            if ($Metal < 0)
-            {
-		$Metal     *= -1;
-		$CheatTry   = true;
+            if ($Metal < 0) {
+                $Metal *= -1;
+                $CheatTry = true;
             }
-            if ($Crystal < 0)
-            {
-		$Crystal   *= -1;
-		$CheatTry   = true;
+            if ($Crystal < 0) {
+                $Crystal *= -1;
+                $CheatTry = true;
             }
-            if ($Deuterium < 0)
-            {
-		$Deuterium *= -1;
-		$CheatTry   = true;
+            if ($Deuterium < 0) {
+                $Deuterium *= -1;
+                $CheatTry = true;
             }
-            if ($CheatTry  == false)
-            {
-		switch ($_POST['ress'])
-                {
+            if ($CheatTry == false) {
+                switch ($_POST['ress']) {
                     case 'metal':
-			$Necessaire   = (( $Crystal * 2) + ( $Deuterium * 4));
-			if ($planetrow['metal'] > $Necessaire)
-                        {
+                        $Necessaire = (( $Crystal * 2) + ( $Deuterium * 4));
+                        if ($planetrow['metal'] > $Necessaire) {
                             $planetrow['metal'] -= $Necessaire;
-			} else {
-                            $Message = $lang['mod_ma_noten'] ." ". $lang['Metal'] ."! ";
-                            $Error   = true;
-			}
-                    break;
+                        } else {
+                            $Message = $lang['mod_ma_noten'] . " " . $lang['Metal'] . "! ";
+                            $Error = true;
+                        }
+                        break;
                     case 'cristal':
-			$Necessaire   = (( $Metal * 0.5) + ( $Deuterium * 2));
-			if ($planetrow['crystal'] > $Necessaire)
-                        {
+                        $Necessaire = (( $Metal * 0.5) + ( $Deuterium * 2));
+                        if ($planetrow['crystal'] > $Necessaire) {
                             $planetrow['crystal'] -= $Necessaire;
-			} else {
-                            $Message = $lang['mod_ma_noten'] ." ". $lang['Crystal'] ."! ";
-                            $Error   = true;
-			}
-                    break;
+                        } else {
+                            $Message = $lang['mod_ma_noten'] . " " . $lang['Crystal'] . "! ";
+                            $Error = true;
+                        }
+                        break;
                     case 'deuterium':
-			$Necessaire   = (( $Metal * 0.25) + ( $Crystal * 0.5));
-			if ($planetrow['deuterium'] > $Necessaire)
-                        {
+                        $Necessaire = (( $Metal * 0.25) + ( $Crystal * 0.5));
+                        if ($planetrow['deuterium'] > $Necessaire) {
                             $planetrow['deuterium'] -= $Necessaire;
-			} else {
-                            $Message = $lang['mod_ma_noten'] ." ". $lang['Deuterium'] ."! ";
-                            $Error   = true;
-			}
-                    break;
-		}
+                        } else {
+                            $Message = $lang['mod_ma_noten'] . " " . $lang['Deuterium'] . "! ";
+                            $Error = true;
+                        }
+                        break;
+                }
             }
-            if ($Error == false)
-            {
-		if ($CheatTry == true)
-                {
-                    $planetrow['metal']      = 0;
-                    $planetrow['crystal']    = 0;
-                    $planetrow['deuterium']  = 0;
-		} else {
-                    $planetrow['metal']     += $Metal;
-                    $planetrow['crystal']   += $Crystal;
+            if ($Error == false) {
+                if ($CheatTry == true) {
+                    $planetrow['metal'] = 0;
+                    $planetrow['crystal'] = 0;
+                    $planetrow['deuterium'] = 0;
+                } else {
+                    $planetrow['metal'] += $Metal;
+                    $planetrow['crystal'] += $Crystal;
                     $planetrow['deuterium'] += $Deuterium;
-		}
-		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-		$QryUpdatePlanet .= "`metal` = '".     $planetrow['metal']     ."', ";
-		$QryUpdatePlanet .= "`crystal` = '".   $planetrow['crystal']   ."', ";
-		$QryUpdatePlanet .= "`deuterium` = '". $planetrow['deuterium'] ."' ";
-		$QryUpdatePlanet .= "WHERE ";
-		$QryUpdatePlanet .= "`id` = '".        $planetrow['id']        ."';";
-		doquery ( $QryUpdatePlanet , 'planets');
-		$Message = $lang['mod_ma_done'];
+                }
+                $QryUpdatePlanet = "UPDATE {{table}} SET ";
+                $QryUpdatePlanet .= "`metal` = '" . $planetrow['metal'] . "', ";
+                $QryUpdatePlanet .= "`crystal` = '" . $planetrow['crystal'] . "', ";
+                $QryUpdatePlanet .= "`deuterium` = '" . $planetrow['deuterium'] . "' ";
+                $QryUpdatePlanet .= "WHERE ";
+                $QryUpdatePlanet .= "`id` = '" . $planetrow['id'] . "';";
+                doquery($QryUpdatePlanet, 'planets');
+                $Message = $lang['mod_ma_done'];
             }
-            if ($Error == true)
-            {
-		$parse['title'] = $lang['mod_ma_error'];
+            if ($Error == true) {
+                $parse['title'] = $lang['mod_ma_error'];
             } else {
-		$parse['title'] = $lang['mod_ma_donet'];
+                $parse['title'] = $lang['mod_ma_donet'];
             }
-            $parse['mes']   = $Message;
+            $parse['mes'] = $Message;
             $page = ShowErrorPage::message($parse['mes'], $parse['title']);
         } else {
-            if ($_POST['action'] != 2)
-            {
-		$PageTPL = 'marchand.default.tpl';
+            if (filter_input(INPUT_POST, 'action') != 2) {
+                $PageTPL = 'marchand.default.tpl';
             } else {
-		$mod_ma_res   = "1";
-		switch ($_POST['choix'])
-                {
+                $mod_ma_res = "1";
+                switch ($_POST['choix']) {
                     case 'metal':
-			$PageTPL = 'marchand.metal.tpl';
+                        $PageTPL = 'marchand.metal.tpl';
                         $this->tplObj->assign(array(
-                            'mod_ma_res'        => "1",
-                            'mod_ma_res_a'      => "2",
-                            'mod_ma_res_b'      => "4",
+                            'mod_ma_res' => "1",
+                            'mod_ma_res_a' => "2",
+                            'mod_ma_res_b' => "4",
                         ));
-                    break;
+                        break;
                     case 'cristal':
-			$PageTPL = 'marchand.cristal.tpl';
+                        $PageTPL = 'marchand.cristal.tpl';
                         $this->tplObj->assign(array(
-                            'mod_ma_res'        => "1",
-                            'mod_ma_res_a'      => "0.5",
-                            'mod_ma_res_b'      => "2",
+                            'mod_ma_res' => "1",
+                            'mod_ma_res_a' => "0.5",
+                            'mod_ma_res_b' => "2",
                         ));
-                    break;
+                        break;
                     case 'deut':
-			$PageTPL = 'marchand.deuterium.tpl';
+                        $PageTPL = 'marchand.deuterium.tpl';
                         $this->tplObj->assign(array(
-                            'mod_ma_res'        => "1",
-                            'mod_ma_res_a'      => "0.25",
-                            'mod_ma_res_b'      => "0.5",
+                            'mod_ma_res' => "1",
+                            'mod_ma_res_a' => "0.25",
+                            'mod_ma_res_b' => "0.5",
                         ));
-                    break;
-		}
+                        break;
+                }
             }
 
             $this->tplObj->assign(array(
-                'title'             => $lang['mod_marchand'],
-
+                'title' => $lang['mod_marchand'],
             ));
 
             $this->render($PageTPL);
         }
         return $page;
     }
+
 }
