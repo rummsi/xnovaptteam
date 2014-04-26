@@ -27,12 +27,12 @@
                 {if ($LvlUpMinier + $LvlUpRaid) <= 100}
                     {if $XpMinier >= $XpMinierUp}
                         <tr>
-                            <th colspan=4><a href=officier.php>{$lang['Have_new_level_mineur']}</a></th>
+                            <th colspan=4><a href=game.php?page=officier>{$lang['Have_new_level_mineur']}</a></th>
                         </tr>
                     {/if}
                     {if $XPRaid >= $XpRaidUp}
                         <tr>
-                            <th colspan=4><a href=officier.php>{$lang['Have_new_level_raid']}</a></th>
+                            <th colspan=4><a href=game.php?page=officier>{$lang['Have_new_level_raid']}</a></th>
                         </tr>
                     {/if}
                 {/if}
@@ -44,7 +44,7 @@
                     <th>{$lang['MembersOnline']}</th>
                     <th colspan="3">{$OnlineUsers[0]}</th>
 		</tr>
-                {if ($game_config['OverviewNewsFrame'] == '1')}
+                {if $game_config['OverviewNewsFrame'] == '1'}
                     <tr>
                         <th>{$lang['ov_news_title']}</th>
                         <th colspan="3">{stripslashes($game_config['OverviewNewsText'])}</th>
@@ -169,9 +169,13 @@
                     </tr>
                     <tr>
 			<th>{$lang['ov_local_cdr']}</th>
-			<th colspan="3">{$lang['Metal']} : {pretty_number($galaxyrow['metal'])} / {$lang['Crystal']} : {pretty_number($galaxyrow['crystal'])}{if (($galaxyrow['metal'] != 0 || $galaxyrow['crystal'] != 0) && $planetrow[$resource[209]] != 0)}
-                                                                                                                     (<a href="quickfleet.php?mode=8&g={$galaxyrow['galaxy']}&s={$galaxyrow['system']}&p={$galaxyrow['planet']}&t=2">{$lang['type_mission'][8]}</a>)
-                                                                                                                   {/if}
+			<th colspan="3">
+                            {$lang['Metal']} : {pretty_number($galaxyrow['metal'])} / {$lang['Crystal']} : {pretty_number($galaxyrow['crystal'])}
+                            {if ($galaxyrow['metal'] != 0 || $galaxyrow['crystal'] != 0) && $planetrow[$resource[209]] != 0}
+                                (<a href="quickfleet.php?mode=8&g={$galaxyrow['galaxy']}&s={$galaxyrow['system']}&p={$galaxyrow['planet']}&t=2">
+                                    {$lang['type_mission'][8]}
+                                </a>)
+                            {/if}
                         </th>
                     </tr>
                     <tr>
@@ -213,7 +217,11 @@
                                     </tr>
                                     <tr>
 					<td colspan="2" align="center" width="100%" style="background-color: transparent;">
-                                            <b>({$lang['Rank']} <a href="stat.php?range={$StatRecord['total_rank']}">{$StatRecord['total_rank']}</a> {$lang['of']} {$game_config['users_amount']})</b>
+                                            <b>({$lang['Rank']} 
+                                                <a href="game.php?page=statistics&range={$StatRecord['total_rank']}">
+                                                    {$StatRecord['total_rank']}
+                                                </a> {$lang['of']} {$game_config['users_amount']})
+                                            </b>
 					</td>
                                     </tr>
 				</tbody>
@@ -251,7 +259,7 @@
                             </tbody>
 			</table>
                     </th>
-                    {if ($game_config['ForumBannerFrame'] == '1')}
+                    {if $game_config['ForumBannerFrame'] == '1'}
                         <tr>
                             <th colspan="4">
                                 <img src="scripts/createbanner.php?id={$user['id']}">
@@ -260,14 +268,14 @@
                             </th>
                         </tr>
                     {/if}
-                    {if ($game_config['OverviewExternChat'] == '1')}
+                    {if $game_config['OverviewExternChat'] == '1'}
                         <tr>
                             <th colspan="4">{stripslashes($game_config['OverviewExternChatCmd'])}</th>
                         </tr>
                     {/if}
 		</table>
 		<br>
-		{if ($game_config['OverviewClickBanner'] != '')}
+		{if $game_config['OverviewClickBanner'] != ''}
                     {stripslashes($game_config['OverviewClickBanner'])}
                 {/if}
 		<br>
