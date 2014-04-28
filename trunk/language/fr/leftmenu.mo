@@ -29,11 +29,7 @@
  *
  */
 // User menu titles
-$lang['lft_devlp'] = 'D&eacute;veloppement';
-$lang['lft_navig'] = 'Navigation';
-$lang['lft_observ'] = 'Observatoire';
-$lang['lft_commun'] = 'Communaut&eacute;';
-$lang['lft_infog'] = 'Informations';
+$lang['tpm_playername'] = 'Jouer';
 
 // User menu links
 $lang['lft_Overview'] = 'Vue g&eacute;n&eacute;rale';
