@@ -1,7 +1,6 @@
 {block name="title" prepend}{/block}
 {block name="content"}
         <center>
-            <script language="JavaScript" type="text/javascript" src="scripts/time.js"></script>
             <br>
             <table width="519">
                 <tr>
@@ -11,19 +10,6 @@
                         </a> ({$user['username']})
                     </td>
 		</tr>
-                {if $user['id'] != ''}
-                    {if $user['new_message'] != 0}
-                        <tr>
-                            {if $user['new_message'] == 1}
-                                <th colspan=4><a href=game.php?page=messages>{$lang['Have_new_message']}</a></th>
-                            {elseif $user['new_message'] > 1}
-                                <th colspan=4><a href=game.php?page=messages>
-                                    {str_replace('%m', pretty_number($user['new_message']), $lang['Have_new_messages'])}
-                                </a></th>
-                            {/if}
-                        </tr>
-                    {/if}
-                {/if}
                 {if ($LvlUpMinier + $LvlUpRaid) <= 100}
                     {if $XpMinier >= $XpMinierUp}
                         <tr>
@@ -36,10 +22,6 @@
                         </tr>
                     {/if}
                 {/if}
-		<tr>
-                    <th>{$lang['Server_time']}</th>
-                    <th colspan="3"><div id="dateheure"></div></th>
-		</tr>
 		<tr>
                     <th>{$lang['MembersOnline']}</th>
                     <th colspan="3">{$OnlineUsers[0]}</th>
