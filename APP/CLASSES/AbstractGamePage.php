@@ -117,8 +117,65 @@ abstract class AbstractGamePage {
             $this->tplObj->assign(array(
                 'planetrow' => $planetrow,
                 'ThisUsersPlanets' => SortUserPlanets($user),
-                'page'=>filter_input(INPUT_GET, 'page'),
-                'mode'=>HTTP::_GP('mode', ''),
+                'page' => filter_input(INPUT_GET, 'page'),
+                'mode' => HTTP::_GP('mode', ''),
+            ));
+        }
+
+        if ($user['id'] != '') {
+            // -----------------------------------------------------------------------------------------------
+            // --- Gestion de la liste des planetes ----------------------------------------------------------
+            // Planetes ...
+            $Order = ($user['planet_sort_order'] == 1) ? "DESC" : "ASC";
+            $Sort = $user['planet_sort'];
+            $QryPlanets = "SELECT * FROM {{table}} WHERE `id_owner` = '" . $user['id'] . "' ORDER BY ";
+            if ($Sort == 0) {
+                $QryPlanets .= "`id` " . $Order;
+            } elseif ($Sort == 1) {
+                $QryPlanets .= "`galaxy`, `system`, `planet`, `planet_type` " . $Order;
+            } elseif ($Sort == 2) {
+                $QryPlanets .= "`name` " . $Order;
+            }
+            $planets_query = doquery($QryPlanets, 'planets');
+            $Colone = 1;
+            $AllPlanets = "<tr>";
+            while ($UserPlanet = mysql_fetch_array($planets_query)) {
+                PlanetResourceUpdate($user, $UserPlanet, time());
+                if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3) {
+                    $AllPlanets .= "<th>" . $UserPlanet['name'] . "<br>";
+                    @$AllPlanets .= "<a href=\"?page=overview&cp=" . $UserPlanet['id'] . "&re=0\" title=\"" . $UserPlanet['name'] . "\"><img src=\"" . $dpath . "planeten/small/s_" . $UserPlanet['image'] . ".jpg\" height=\"50\" width=\"50\"></a><br>";
+                    $AllPlanets .= "<center>";
+                    if ($UserPlanet['b_building'] != 0) {
+                        UpdatePlanetBatimentQueueList($UserPlanet, $user);
+                        if ($UserPlanet['b_building'] != 0) {
+                            $BuildQueue = $UserPlanet['b_building_id'];
+                            $QueueArray = explode(";", $BuildQueue);
+                            $CurrentBuild = explode(",", $QueueArray[0]);
+                            $BuildElement = $CurrentBuild[0];
+                            $BuildLevel = $CurrentBuild[1];
+                            $BuildRestTime = pretty_time($CurrentBuild[3] - time());
+                            $AllPlanets .= '' . $lang['tech'][$BuildElement] . ' (' . $BuildLevel . ')';
+                            $AllPlanets .= "<br><font color=\"#7f7f7f\">(" . $BuildRestTime . ")</font>";
+                        } else {
+                            CheckPlanetUsedFields($UserPlanet);
+                            $AllPlanets .= $lang['Free'];
+                        }
+                    } else {
+                        $AllPlanets .= $lang['Free'];
+                    }
+                    $AllPlanets .= "</center></th>";
+                    if ($Colone <= 1) {
+                        $Colone++;
+                    } else {
+                        $AllPlanets .= "</tr><tr>";
+                        $Colone = 1;
+                    }
+                }
+            }
+            $getcoords = ($UserPlanet['galaxy']&&$UserPlanet['system']&&$UserPlanet['planet']);
+            $this->tplObj->assign(array(
+                'planets_query' => doquery($QryPlanets, 'planets'),
+                'getcoords'=> $getcoords,
             ));
         }
     }

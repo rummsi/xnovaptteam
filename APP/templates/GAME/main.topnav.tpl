@@ -33,7 +33,7 @@
                             </li>
                             </li>
                         </ul>
-                        <div id="officers" class="one">
+         {*               <div id="officers" class="one">
                             <table class="header">
                                 <tbody>
                                     <tr class="header">
@@ -52,7 +52,7 @@
                             </table>
                         </div>
                                 
-      {*  <div id="header_top">
+        <div id="header_top">
             <center>
                 <table class="header">
                     <tbody>
