@@ -16,12 +16,12 @@
                                     <span class="textBeefy">{$user['username']}</span>
                                 </li>
                                 <li>
-                                    <a class="overlay" accesskey="" href="game.php?page=buddy&action=9&ajax=1" data-overlay-title="Buddy list" data-overlay-class="buddies">
+                                    <a class="overlay" accesskey="" href="game.php?page=buddy&action=9&ajax=1" data-overlay-title="Lista de Amigos" data-overlay-class="buddies" >
                                         {$lang['lft_Buddylist']}
                                     </a>
                                 </li>{if $game_config['enable_notes'] == 1}
                                 <li>
-                                    <a href="game.php?page=notes" class="overlay" data-overlay-title="My notes" data-overlay-class="notices" data-overlay-popup-width="750" data-overlay-popup-height="480" accesskey="">
+                                    <a href="game.php?page=notes" class="overlay" data-overlay-title="As minhas notas" data-overlay-class="notices" data-overlay-popup-width="750" data-overlay-popup-height="480" accesskey="">
                                         {$lang['lft_Notes']}
                                     </a>
                                 </li>{/if}
@@ -30,7 +30,7 @@
                                     ({$user_rank})
                                 </li>
                                 <li>
-                                    <a class="overlay" href="game.php?page=search&ajax=1" data-overlay-title="Search Universe" accesskey="">
+                                    <a class="overlay" href="game.php?page=search&ajax=1" data-overlay-title="Procurar no Universo" data-overlay-close="__default closeSearch" accesskey="">
                                         {$lang['lft_Search']}
                                     </a>
                                 </li>

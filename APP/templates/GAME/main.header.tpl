@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html> 
     <head>
         <title>{block name="title"}{$title} - {$game_config['game_name']}{/block}</title>
         <link rel="shortcut icon" href="favicon.ico">
@@ -10,7 +11,7 @@
         <script type="text/javascript" src="scripts/redesign.js"></script>
         <script type="text/javascript" src="scripts/overlib.js"></script>
     </head>
-    <body id="{$smarty.get.page}" class="no-touch">
+    <body id="{$smarty.get.page}" class="ogame lang-pt no-touch">
         <div class="contentBoxBody">
             <div id="ie_message">
                 <p><img src="{$dpath}img/info.gif" height="16" width="16">
