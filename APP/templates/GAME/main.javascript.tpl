@@ -1,7 +1,9 @@
 
                     <!-- JAVASCRIPT -->
-                    <script type='text/javascript' src='http://gf3.geo.gfsrv.net/cdnef/56996a817665f19c0402f4f3c32c00.js'></script>            <script type="text/javascript">
-                var session = "3fac132d0d5bf86180b422c1a5ce678a73bf0dbd";
+                    <script type="text/javascript" src="scripts/overlib.js"></script>
+                    <script type="text/javascript" src="scripts/redesign.js"></script>
+                    <script type="text/javascript">
+                var session = "{session_id()}";
                 var vacation = 0;
                 var timerHandler = new TimerHandler();
                 function redirectPremium()
@@ -17,19 +19,19 @@
                 var isRTLEnabled = 0;
                 var activateToken = "167addb58433e00cf5302df2559d804f";
                 var miniFleetToken = "6d8fbcca869cb8ff0be763f7acd85c65";
-                var currentPage = "overview";
+                var currentPage = "{ucfirst($smarty.get.page)}";
                 var bbcodePreviewUrl = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=bbcodePreview";
                 var popupWindows = [];
                 var honorScore = 9558;
                 var darkMatter = 4158;
-       //         var serverTime = new Date(2014, 4, 6, 15, 23, 59);
-       //         var localTime = new Date();
-       //         var timeDiff = serverTime - localTime;
-       //         localTS = localTime.getTime();
-       //         var startServerTime = localTime.getTime() - (3600000) - localTime.getTimezoneOffset() * 60 * 1000;
-       //         var LocalizationStrings = { "timeunits": { "short": { "year": "a", "month": "m", "week": "s", "day": "d", "hour": "h", "minute": "m", "second": "s" } }, "status": { "ready": "Conclu\u00eddo" }, "decimalPoint": ",", "thousandSeperator": ".", "unitMega": "M", "unitKilo": "K", "unitMilliard": "kM", "question": "Quest\u00e3o", "error": "Erro", "loading": "A carregar...", "yes": "sim", "no": "N\u00e3o", "ok": "Ok", "attention": "Cuidado", "outlawWarning": "Est\u00e1s prestes a atacar um jogador mais forte. Se o fizeres as tuas defesas de ataque ser\u00e3o desligadas por 7 dias e todos os jogadores te poder\u00e3o atacar sem serem punidos. Tens a certeza que queres continuar?", "lastSlotWarningMoon": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande a tua Base Lunar para receberes mais espa\u00e7o. Tens a certeza que pretendes construir este edif\u00edcio?", "lastSlotWarningPlanet": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande o teu Terra-Formador ou compra um item Campo de Planeta para receberes mais espa\u00e7os. Tens a certeza que pretendes construir este edif\u00edcio?", "forcedVacationWarning": "Algumas funcionalidades do jogo n\u00e3o est\u00e3o dispon\u00edveis at\u00e9 validares a tua conta.", "moreDetails": "Mais detalhes", "lessDetails": "Menos detalhes", "planetOrder": { "lock": "Bloquear ordena\u00e7\u00e3o", "unlock": "Desbloquear ordena\u00e7\u00e3o" }, "darkMatter": "Mat\u00e9ria Negra", "activateItem": { "upgradeItemQuestion": "Gostarias de substituir o item existente? O b\u00f3nus antigo ser\u00e1 perdido no processo.", "upgradeItemQuestionHeader": "Substituir item?" } };
+                var serverTime = new Date();
+                var localTime = new Date();
+                var timeDiff = serverTime - localTime;
+                localTS = localTime.getTime();
+                var startServerTime = localTime.getTime() - (3600000) - localTime.getTimezoneOffset() * 60 * 1000;
+                var LocalizationStrings = { "timeunits": { "short": { "year": "a", "month": "m", "week": "s", "day": "d", "hour": "h", "minute": "m", "second": "s" } }, "status": { "ready": "Conclu\u00eddo" }, "decimalPoint": ",", "thousandSeperator": ".", "unitMega": "M", "unitKilo": "K", "unitMilliard": "kM", "question": "Quest\u00e3o", "error": "Erro", "loading": "A carregar...", "yes": "sim", "no": "N\u00e3o", "ok": "Ok", "attention": "Cuidado", "outlawWarning": "Est\u00e1s prestes a atacar um jogador mais forte. Se o fizeres as tuas defesas de ataque ser\u00e3o desligadas por 7 dias e todos os jogadores te poder\u00e3o atacar sem serem punidos. Tens a certeza que queres continuar?", "lastSlotWarningMoon": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande a tua Base Lunar para receberes mais espa\u00e7o. Tens a certeza que pretendes construir este edif\u00edcio?", "lastSlotWarningPlanet": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande o teu Terra-Formador ou compra um item Campo de Planeta para receberes mais espa\u00e7os. Tens a certeza que pretendes construir este edif\u00edcio?", "forcedVacationWarning": "Algumas funcionalidades do jogo n\u00e3o est\u00e3o dispon\u00edveis at\u00e9 validares a tua conta.", "moreDetails": "Mais detalhes", "lessDetails": "Menos detalhes", "planetOrder": { "lock": "Bloquear ordena\u00e7\u00e3o", "unlock": "Desbloquear ordena\u00e7\u00e3o" }, "darkMatter": "Mat\u00e9ria Negra", "activateItem": { "upgradeItemQuestion": "Gostarias de substituir o item existente? O b\u00f3nus antigo ser\u00e1 perdido no processo.", "upgradeItemQuestionHeader": "Substituir item?" } };
                 var constants = { "espionage": 6, "missleattack": 10, "language": "pt", "name": "114" };
-                var userData = { "id": "110684" };
+                var userData = { "id": "{$user['id']}" };
                 var missleAttackLink = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=missileattacklayer&width=669&height=250";
                 var showOutlawWarning = true;
                 var miniFleetLink = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=minifleet&ajax=1";
@@ -48,7 +50,28 @@
                     reloadEventbox({ "hostile": 0, "neutral": 0, "friendly": 0 });
                 }
                 function initAjaxResourcebox() { 
-                    reloadResources({ "metal": { "resources": { "actualFormat": "7.573.482", "actual": 7573482, "max": 2920000, "production": 5.5427410118342 }, "tooltip": "Metal|<table class=\"resourceTooltip\">\n            <tr>\n                <th>Dispon\u00edvel:<\/th>\n                <td><span class=\"overmark\">7.573.482<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Capacidade de Armazenamento:<\/th>\n                <td><span class=\"overmark\">2.920.000<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Produ\u00e7\u00e3o actual:<\/th>\n                <td><span class=\"overmark\">0<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Capacidade Den:<\/th>\n                <td><span class=\"overermark\">0<\/span><\/td>\n            <\/tr>\n        <\/table>", "class": "overmark" }, "crystal": { "resources": { "actualFormat": "2.207.837", "actual": 2207837, "max": 2920000, "production": 2.7561571365935 }, "tooltip": "Cristal|<table class=\"resourceTooltip\">\n            <tr>\n                <th>Dispon\u00edvel:<\/th>\n                <td><span class=\"\">2.207.837<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Capacidade de Armazenamento:<\/th>\n                <td><span class=\"\">2.920.000<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Produ\u00e7\u00e3o actual:<\/th>\n                <td><span class=\"undermark\">+9.922<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Capacidade Den:<\/th>\n                <td><span class=\"overermark\">0<\/span><\/td>\n            <\/tr>\n        <\/table>", "class": "" }, "deuterium": { "resources": { "actualFormat": "1.102.616", "actual": 1102616, "max": 1590000, "production": 0.80647290424809 }, "tooltip": "Deut\u00e9rio|<table class=\"resourceTooltip\">\n            <tr>\n                <th>Dispon\u00edvel:<\/th>\n                <td><span class=\"\">1.102.616<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Capacidade de Armazenamento:<\/th>\n                <td><span class=\"\">1.590.000<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Produ\u00e7\u00e3o actual:<\/th>\n                <td><span class=\"undermark\">+2.903<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Capacidade Den:<\/th>\n                <td><span class=\"overermark\">0<\/span><\/td>\n            <\/tr>\n        <\/table>", "class": "" }, "energy": { "resources": { "actual": -2644, "actualFormat": "-2.644" }, "tooltip": "Energia|<table class=\"resourceTooltip\">\n            <tr>\n                <th>Dispon\u00edvel:<\/th>\n                <td><span class=\"overmark\">-2.644<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Produ\u00e7\u00e3o actual:<\/th>\n                <td><span class=\"undermark\">+8.075<\/span><\/td>\n            <\/tr>\n            <tr>\n                <th>Consumo:<\/th>\n                <td><span class=\"overmark\">-10.719<\/span><\/td>\n            <\/tr>\n        <\/table>", "class": "overmark" }, "darkmatter": { "resources": { "actual": 4158, "actualFormat": "4.158" }, "string": "4.158 Mat\u00e9ria Negra", "tooltip": "Mat\u00e9ria Negra|<table class=\"resourceTooltip\">\n                <tr>\n                    <th>Dispon\u00edvel:<\/th>\n                    <td><span class=\"\">4.158<\/span><\/td>\n                <\/tr>\n                <tr>\n                    <th>Comprado:<\/th>\n                    <td><span class=\"\">500<\/span><\/td>\n                <\/tr>\n                <tr>\n                    <th>Encontrado:<\/th>\n                    <td><span class=\"\">3.658<\/span><\/td>\n                <\/tr>\n            <\/table>", "class": "" }, "honorScore": 9558 });
+                    reloadResources({
+                        "metal": {
+                            "resources": {
+                                "actualFormat": "{pretty_number($planetrow["metal"])}", "actual": {$planetrow["metal"]}, "max": {$planetrow["metal_max"]}, "production": 2500 
+                            },"tooltip": "{$lang['Metal']}|<table class=\"resourceTooltip\">\n        <tr>\n  <th>Dispon\u00edvel:<\/th>\n    <td><span class=\"{if $planetrow["metal"] > $planetrow["metal_max"]}overmark{/if}\">{pretty_number($planetrow["metal"])}<\/span><\/td>\n  <\/tr>\n    <tr>\n  <th>Capacidade de Armazenamento:<\/th>\n    <td><span class=\"{if $planetrow["metal"] > $planetrow["metal_max"]}overmark{/if}\">{pretty_number($planetrow["metal_max"])}<\/span><\/td>\n  <\/tr>\n    <\/table>", "class": "{if $planetrow["metal"] > $planetrow["metal_max"]}overmark{/if}" },
+                        "crystal": {
+                            "resources": {
+                                "actualFormat": "{pretty_number($planetrow["crystal"])}", "actual": {$planetrow["crystal"]}, "max": {$planetrow["crystal_max"]}, "production": 32 
+                            },"tooltip": "{$lang['Crystal']}|<table class=\"resourceTooltip\">\n        <tr>\n  <th>Dispon\u00edvel:<\/th>\n    <td><span class=\"{if $planetrow["crystal"] > $planetrow["crystal_max"]}overmark{/if}\">{pretty_number($planetrow["crystal"])}<\/span><\/td>\n  <\/tr>\n    <tr>\n  <th>Capacidade de Armazenamento:<\/th>\n    <td><span class=\"{if $planetrow["crystal"] > $planetrow["crystal_max"]}overmark{/if}\">{pretty_number($planetrow["crystal_max"])}<\/span><\/td>\n  <\/tr>\n    <\/table>", "class": "{if $planetrow["crystal"] > $planetrow["crystal_max"]}overmark{/if}" },
+                        "deuterium": {
+                            "resources": {
+                                "actualFormat": "{pretty_number($planetrow["deuterium"])}", "actual": {$planetrow["deuterium"]}, "max": {$planetrow["deuterium_max"]}, "production": 32 
+                            },"tooltip": "{$lang['Deuterium']}|<table class=\"resourceTooltip\">\n        <tr>\n  <th>Dispon\u00edvel:<\/th>\n    <td><span class=\"{if $planetrow["deuterium"] > $planetrow["deuterium_max"]}overmark{/if}\">{pretty_number($planetrow["deuterium"])}<\/span><\/td>\n  <\/tr>\n    <tr>\n  <th>Capacidade de Armazenamento:<\/th>\n    <td><span class=\"{if $planetrow["deuterium"] > $planetrow["deuterium_max"]}overmark{/if}\">{pretty_number($planetrow["deuterium_max"])}<\/span><\/td>\n  <\/tr>\n    <\/table>", "class": "{if $planetrow["deuterium"] > $planetrow["deuterium_max"]}overmark{/if}" },
+                        "energy": {
+                            "resources": {
+                                "actual": {$planetrow["energy_used"]}, "actualFormat": "{pretty_number($planetrow["energy_used"])}"
+                            },"tooltip": "{$lang['Energy']}|<table class=\"resourceTooltip\">\n       <tr>\n  <th>Dispon\u00edvel:<\/th>\n    <td><span class=\"\">{pretty_number($planetrow["energy_used"] + $planetrow["energy_max"])}<\/span><\/td>\n     <\/tr>\n    <tr>\n  <th>Produ\u00e7\u00e3o actual:<\/th>\n      <td><span class=\"\">{pretty_number($planetrow["energy_max"])}<\/span><\/td>\n    <\/tr>\n    <tr>\n  <th>Consumo:<\/th>\n                    <td><span class=\"\">{pretty_number($planetrow["energy_used"])}<\/span><\/td>\n    <\/tr>\n    <\/table>", "class": "{if $planetrow["energy_max"] > $planetrow["energy_used"]}overmark{else}undermark{/if}" },
+                        "darkmatter": {
+                            "resources": {
+                                "actual": {$user['rpg_points']}, "actualFormat": "{$user['rpg_points']}" 
+                            }, "string": "4.158 Mat\u00e9ria Negra",
+                            "tooltip": "{$lang['Message']}|<table class=\"resourceTooltip\">\n      <tr>\n  <th>Dispon\u00edvel:<\/th>\n    <td><span class=\"\">{$user['rpg_points']}<\/span><\/td>\n              <\/tr>\n    <\/table>", "class": "" }});
                 }
                 function getAjaxEventbox() { 
                     $.get("http://s114-pt.ogame.gameforge.com/game/index.php?page=fetchEventbox&ajax=1", reloadEventbox, "text");
@@ -219,7 +242,7 @@
                     $(document).ready(function() { 
                         initIndex();
                         initAjaxEventbox();
-                        initOverview();
+                        init{ucfirst($smarty.get.page)}();
                         initBuffBar();
                         initType();
                         tabletInitOverviewAdvice();

@@ -6,6 +6,7 @@
                     <!-- CONTENT AREA -->
                     <div id="contentWrapper">
 {block name="content"}{/block}
+                        <div id="detailWrapper"></div>
                     </div>
                     <!-- END CONTENT AREA -->
 {include file="main.rightmenu.tpl"}
