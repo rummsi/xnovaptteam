@@ -7,9 +7,6 @@
         <link rel="stylesheet" type="text/css" href="{$dpath}/formate.css" />
         <link rel="stylesheet" type="text/css" href="{$dpath}/redesign.css" />
         <meta http-equiv="content-type" content="text/html; charset={$encoding}" />
-        <script language="JavaScript" type="text/javascript" src="scripts/time.js"></script>
-        <script type="text/javascript" src="scripts/redesign.js"></script>
-        <script type="text/javascript" src="scripts/overlib.js"></script>
     </head>
     <body id="{$smarty.get.page}" class="ogame lang-pt no-touch">
         <div class="contentBoxBody">

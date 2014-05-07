@@ -38,6 +38,6 @@
                                 {if $game_config['enable_announces'] == 1}<li><a href="game.php?page=annonce" target="_blank">{$lang['lft_Annonces']}</a></li>{/if}
                                 <li><a href="game.php?page=chat" target="_blank">{$lang['lft_Chat']}</a></li>
                                 <li><a href="javascript:top.location.href='index.php?page=logout'">{$lang['lft_Logout']}</a></li>
-                                <li class="OGameClock"><div id="dateheure"></div></li>
+                                <li class="OGameClock"></li>
                             </ul>
                         </div>
