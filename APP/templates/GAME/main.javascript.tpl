@@ -1,6 +1,15 @@
 
                     <!-- JAVASCRIPT -->
                     <script type="text/javascript" src="scripts/overlib.js"></script>
+                    <script type="text/javascript" src="scripts/jQuery_v1.9.1.js"></script>
+                    <script type="text/javascript" src="scripts/jQueryUI_v1.10.3.js"></script>
+                    <script type="text/javascript" src="scripts/AnythingSlider_v1.8.6.js"></script>
+                    <script type="text/javascript" src="scripts/jQueryBBQ_v1.4pre.js"></script>
+                    <script type="text/javascript" src="scripts/jQuery_hashchange_event_v1.3.js"></script>
+                    <script type="text/javascript" src="scripts/jQueryCookiePlugin_v1.3.1.js"></script>
+                    <script type="text/javascript" src="scripts/javascript-mouse-wheel_v3.0.6.js"></script>
+                    <script type="text/javascript" src="scripts/Spinners_v3.0.0.js"></script>
+                    <script type="text/javascript" src="scripts/jQueryTooltip_v3.1.8.js"></script>
                     <script type="text/javascript" src="scripts/redesign.js"></script>
                     <script type="text/javascript">
                 var session = "{session_id()}";
