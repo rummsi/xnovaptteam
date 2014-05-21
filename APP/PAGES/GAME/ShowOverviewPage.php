@@ -36,7 +36,7 @@ class ShowOverviewPage extends AbstractGamePage {
     }
 
     function show() {
-        global $user, $lang, $game_config, $planetrow, $dpath, $galaxyrow, $flotten;
+        global $user, $lang, $game_config, $planetrow, $dpath, $galaxyrow;
         includeLang('resources');
         includeLang('overview');
         includeLang('buildings');
@@ -48,35 +48,6 @@ class ShowOverviewPage extends AbstractGamePage {
         }
 
         if ($user['id'] != '') {
-            // -----------------------------------------------------------------------------------------------
-            // --- Gestion Officiers -------------------------------------------------------------------------
-            // Passage au niveau suivant, ajout du point de compétence et affichage du passage au nouveau level
-            $XpMinierUp = $user['lvl_minier'] * 5000;
-            $XpRaidUp = $user['lvl_raid'] * 10;
-            $XpMinier = $user['xpminier'];
-            $XPRaid = $user['xpraid'];
-            $LvlUpMinier = $user['lvl_minier'] + 1;
-            $LvlUpRaid = $user['lvl_raid'] + 1;
-
-            if (($LvlUpMinier + $LvlUpRaid) <= 100) {
-                if ($XpMinier >= $XpMinierUp) {
-                    $QryUpdateUser = "UPDATE {{table}} SET ";
-                    $QryUpdateUser .= "`lvl_minier` = '" . $LvlUpMinier . "', ";
-                    $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
-                    $QryUpdateUser .= "WHERE ";
-                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
-                    doquery($QryUpdateUser, 'users');
-                }
-                if ($XPRaid >= $XpRaidUp) {
-                    $QryUpdateUser = "UPDATE {{table}} SET ";
-                    $QryUpdateUser .= "`lvl_raid` = '" . $LvlUpRaid . "', ";
-                    $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
-                    $QryUpdateUser .= "WHERE ";
-                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
-                    doquery($QryUpdateUser, 'users');
-                }
-            }
-
             // -----------------------------------------------------------------------------------------------
             // --- Gestion de la liste des planetes ----------------------------------------------------------
             // Planetes ...
@@ -139,8 +110,8 @@ class ShowOverviewPage extends AbstractGamePage {
 
             $parse['energy_used'] = $planetrow["energy_max"] - $planetrow["energy_used"];
 
-            $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
-            $parse['last_user'] = $query['username'];
+            $query1 = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
+            $parse['last_user'] = $query1['username'];
             $query = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE onlinetime>" . (time() - 900), 'users', true);
             $parse['online_users'] = $query[0];
             // $count = doquery(","users",true);

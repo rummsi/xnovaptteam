@@ -77,9 +77,22 @@
                                 <div id="eventboxLoading" class="textCenter textBeefy" style="display: block;">
                                     <img height="16" width="16" src="http://gf3.geo.gfsrv.net/cdne3/3f9884806436537bdec305aa26fc60.gif" />A carregar...
                                 </div>*}
-                                <div id="eventboxBlank" class="textCenter" style="">
-                                    Sem movimentos de frota
-                                </div>
+                                {if $game_config['OverviewNewsFrame'] == '1'}
+                                    <div id="eventboxBlank" class="textCenter" style="">
+                                        {stripslashes($game_config['OverviewNewsText'])}
+                                    </div>
+                                {elseif ($LvlUpMinier + $LvlUpRaid) <= 100}
+                                    {if $XpMinier >= $XpMinierUp}
+                                        <div id="eventboxBlank" class="textCenter" style="">
+                                            <a href=game.php?page=officier>{$lang['Have_new_level_mineur']}</a>
+                                        </div>
+                                    {/if}
+                                    {if $XPRaid >= $XpRaidUp}
+                                        <div id="eventboxBlank" class="textCenter" style="">
+                                            <a href=game.php?page=officier>{$lang['Have_new_level_raid']}</a>
+                                        </div>
+                                    {/if}
+                                {/if}
                             </div>
                             <div id="attack_alert" class="tooltip eventToggle noAttack" title="Ataque!">
                                 <a href="game.php?page=eventList"></a>

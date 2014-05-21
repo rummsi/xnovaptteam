@@ -3,8 +3,11 @@
                     <div id="links">
                         <ul id="menuTable" class="leftmenu">
                             <li>
-                                <span class="menu_icon">
-                                    <div class="menuImage overview highlighted"></div>
+                                <span class="menu_icon">{if count($fleet_list) == 0}
+                                    <div class="menuImage overview highlighted"></div>{else}
+                                    <a href="" class="eventToggle tooltipRight js_hideTipOnMobile" target="_self" title="{$lang['Events']}">
+                                        <div class="menuImage overview active"></div>
+                                    </a>{/if}
                                 </span>
                                 <a class="menubutton  selected" href="game.php?page=overview" accesskey="" target="_self">
                                     <span class="textlabel">{$lang['lft_Overview']}</span>

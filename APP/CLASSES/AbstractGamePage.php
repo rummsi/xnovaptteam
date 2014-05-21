@@ -125,6 +125,34 @@ abstract class AbstractGamePage {
 
         if ($user['id'] != '') {
             // -----------------------------------------------------------------------------------------------
+            // --- Gestion Officiers -------------------------------------------------------------------------
+            // Passage au niveau suivant, ajout du point de compétence et affichage du passage au nouveau level
+            $XpMinierUp = $user['lvl_minier'] * 5000;
+            $XpRaidUp = $user['lvl_raid'] * 10;
+            $XpMinier = $user['xpminier'];
+            $XPRaid = $user['xpraid'];
+            $LvlUpMinier = $user['lvl_minier'] + 1;
+            $LvlUpRaid = $user['lvl_raid'] + 1;
+
+            if (($LvlUpMinier + $LvlUpRaid) <= 100) {
+                if ($XpMinier >= $XpMinierUp) {
+                    $QryUpdateUser = "UPDATE {{table}} SET ";
+                    $QryUpdateUser .= "`lvl_minier` = '" . $LvlUpMinier . "', ";
+                    $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
+                    $QryUpdateUser .= "WHERE ";
+                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
+                    doquery($QryUpdateUser, 'users');
+                }
+                if ($XPRaid >= $XpRaidUp) {
+                    $QryUpdateUser = "UPDATE {{table}} SET ";
+                    $QryUpdateUser .= "`lvl_raid` = '" . $LvlUpRaid . "', ";
+                    $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
+                    $QryUpdateUser .= "WHERE ";
+                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
+                    doquery($QryUpdateUser, 'users');
+                }
+            }
+            // -----------------------------------------------------------------------------------------------
             // --- Gestion de la liste des planetes ----------------------------------------------------------
             // Planetes ...
             $Order = ($user['planet_sort_order'] == 1) ? "DESC" : "ASC";
@@ -445,7 +473,7 @@ abstract class AbstractGamePage {
             'fleet_time' => date("H:i:s", $Time),
             'fleet_descr' => $EventString,
             'fleet_javas' => InsertJavaScriptChronoApplet($Label, $Record, $Rest, false),
-            'fleets' =>$_fleets,
+            'fleets' => $_fleets,
         ));
 
         return $this->tplObj->fetch('event.fleet.tpl');
