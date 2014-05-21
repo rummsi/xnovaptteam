@@ -10,28 +10,10 @@
                         </a> ({$user['username']})
                     </td>
 		</tr>
-                {if ($LvlUpMinier + $LvlUpRaid) <= 100}
-                    {if $XpMinier >= $XpMinierUp}
-                        <tr>
-                            <th colspan=4><a href=game.php?page=officier>{$lang['Have_new_level_mineur']}</a></th>
-                        </tr>
-                    {/if}
-                    {if $XPRaid >= $XpRaidUp}
-                        <tr>
-                            <th colspan=4><a href=game.php?page=officier>{$lang['Have_new_level_raid']}</a></th>
-                        </tr>
-                    {/if}
-                {/if}
 		<tr>
                     <th>{$lang['MembersOnline']}</th>
                     <th colspan="3">{$OnlineUsers[0]}</th>
 		</tr>
-                {if $game_config['OverviewNewsFrame'] == '1'}
-                    <tr>
-                        <th>{$lang['ov_news_title']}</th>
-                        <th colspan="3">{stripslashes($game_config['OverviewNewsText'])}</th>
-                    </tr>
-                {/if}
 		<tr>
                     <th>
                         {if $lunarow['id'] <> 0}
