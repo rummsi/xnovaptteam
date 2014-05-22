@@ -315,16 +315,14 @@ function CreateFleetPopupedFleetLink ( $FleetRow, $Texte, $FleetType ) {
     global $lang;
 
     $FleetRec     = explode(";", $FleetRow['fleet_array']);
-    $FleetPopup   = "<a href='#' onmouseover=\"return overlib('";
-    $FleetPopup  .= "<table width=200>";
+    $FleetPopup   = "<tr><th colspan='2'>Naves:</th></tr>";
     foreach($FleetRec as $Item => $Group) {
         if ($Group  != '') {
             $Ship    = explode(",", $Group);
-            $FleetPopup .= "<tr><td width=50% align=left><font color=white>". $lang['tech'][$Ship[0]] .":<font></td><td width=50% align=right><font color=white>". pretty_number($Ship[1]) ."<font></td></tr>";
+            $FleetPopup .= "<tr><td>". $lang['tech'][$Ship[0]] .":</td><td class='value'>". pretty_number($Ship[1]) ."</td></tr>";
         }
     }
-    $FleetPopup  .= "</table>";
-    $FleetPopup  .= "');\" onmouseout=\"return nd();\" class=\"". $FleetType ."\">". $Texte ."</a>";
+    $FleetPopup  .= "";
 
     return $FleetPopup;
 
@@ -333,25 +331,22 @@ function CreateFleetPopupedFleetLink ( $FleetRow, $Texte, $FleetType ) {
 // ----------------------------------------------------------------------------------------------------------------
 //
 // Céation du lien avec popup pour le type de mission avec ou non les ressources si disponibles
-function CreateFleetPopupedMissionLink ( $FleetRow, $Texte, $FleetType ) {
+function CreateFleetPopupedMissionLink ($FleetRow) {
     global $lang;
 
     $FleetTotalC  = $FleetRow['fleet_resource_metal'] + $FleetRow['fleet_resource_crystal'] + $FleetRow['fleet_resource_deuterium'];
     if ($FleetTotalC <> 0) {
-        $FRessource   = "<table width=200>";
-        $FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['Metal'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_metal']) ."<font></td></tr>";
-        $FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['Crystal'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_crystal']) ."<font></td></tr>";
-        $FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['Deuterium'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_deuterium']) ."<font></td></tr>";
-        $FRessource  .= "</table>";
+        $FRessource   = "<tr><td>". $lang['Metal'] ."</td><td class='value'>". pretty_number($FleetRow['fleet_resource_metal']) ."</td></tr>";
+        $FRessource  .= "<tr><td>". $lang['Crystal'] ."</td><td class='value'>". pretty_number($FleetRow['fleet_resource_crystal']) ."</td></tr>";
+        $FRessource  .= "<tr><td>". $lang['Deuterium'] ."</td><td class='value'>". pretty_number($FleetRow['fleet_resource_deuterium']) ."</td></tr>";
     } else {
         $FRessource   = "";
     }
 
     if ($FRessource <> "") {
-        $MissionPopup  = "<a href='#' onmouseover=\"return overlib('". $FRessource ."');";
-        $MissionPopup .= "\" onmouseout=\"return nd();\" class=\"". $FleetType ."\">" . $Texte ."</a>";
+        $MissionPopup  = "<tr><th colspan='2'>Carregamento:</th></tr>". $FRessource;
     } else {
-        $MissionPopup  = $Texte ."";
+        $MissionPopup  = "";
     }
 
     return $MissionPopup;
