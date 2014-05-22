@@ -474,6 +474,16 @@ abstract class AbstractGamePage {
             'fleet_descr' => $EventString,
             'fleet_javas' => InsertJavaScriptChronoApplet($Label, $Record, $Rest, false),
             'fleets' => $_fleets,
+            'MissionType' => $MissionType,
+            'FleetStyle' => $FleetStyle,
+            'StartType' => $StartType,
+            'TargetType'=>$TargetType,
+            'StartPlanet' => $StartPlanet,
+            'TargetPlanet'=>$TargetPlanet,
+            'FleetRow' => $FleetRow,
+            'Status' => $Status,
+            'FleetContent' => $FleetContent,
+            'FleetCapacity'=>$FleetCapacity,
         ));
 
         return $this->tplObj->fetch('event.fleet.tpl');
