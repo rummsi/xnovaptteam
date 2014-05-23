@@ -255,6 +255,7 @@
                         initBuffBar();
                         initType();
                         tabletInitOverviewAdvice();
+                        initChangelog();
                     });
                     </script>     
                     <!-- END JAVASCRIPT -->

@@ -217,7 +217,7 @@ class ShowRegisterPage extends AbstractIndexPage
                     $Message .= " (" . htmlentities(filter_input(INPUT_POST, 'email')) . ")";
                     $Message .= "<br><br>" . $lang['error_mailsend'] . " <b>" . $newpass . "</b>";
                 }
-                message($Message, $lang['reg_welldone']);
+                ShowErrorPage::message($Message, $lang['reg_welldone']);
             }
         } else {
             // Afficher le formulaire d'enregistrement
