@@ -38,7 +38,7 @@
                                         <div class="menuImage traderOverview"></div>
                                     </a>
                                 </span>
-                                <a class="menubutton premiumHighligt" href="game.php?page=marchand" accesskey="" target="_self">
+                                <a class="menubutton officierHighligt" href="game.php?page=marchand" accesskey="" target="_self">
                                     <span class="textlabel">{$lang['lft_Marchand']}</span>
                                 </a>
                             </li>
@@ -108,9 +108,9 @@
 
                             <li>
                                 <span class="menu_icon">
-                                    <div class="menuImage premium"></div>
+                                    <div class="menuImage officier"></div>
                                 </span>
-                                <a class="menubutton premiumHighligt officers" href="game.php?page=officier" accesskey="" target="_self">
+                                <a class="menubutton officierHighligt officers" href="game.php?page=officier" accesskey="" target="_self">
                                     <span class="textlabel">{$lang['lft_Officiers']}</span>
                                 </a>
                             </li>
@@ -121,14 +121,14 @@
                                         <div class="menuImage shop"></div>
                                     </a>
                                 </span>
-                                <a class="menubutton premiumHighligt" href="{$game_config['link_url']}" accesskey="" target="_self">
+                                <a class="menubutton officierHighligt" href="{$game_config['link_url']}" accesskey="" target="_self">
                                     <span class="textlabel">{stripslashes($game_config['link_name'])}</span>
                                 </a>
                             </li>
                             {/if}
                             {if $user['authlevel'] > 0}
                             <li>
-                                <a class="menubutton premiumHighligt" href="admin/overview.php" accesskey="" target="_self">
+                                <a class="menubutton officierHighligt" href="admin/overview.php" accesskey="" target="_self">
                                     <span class="textlabel"><font color="lime">{$lang['user_level'][$user['authlevel']]}</font></span>
                                 </a>
                             </li>

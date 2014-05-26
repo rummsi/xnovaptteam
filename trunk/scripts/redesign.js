@@ -394,7 +394,7 @@ function initBuyResourceOverlay(f, e, d) {
     $(".close_buyResourceOverlay").on("click", function() {
         $("#buyResourceOverlayBody").closest(".ui-dialog").find(".ui-icon-closethick").click()
     });
-    $("#premiumConfirmButton").on("click", function(a) {
+    $("#officierConfirmButton").on("click", function(a) {
         a.preventDefault();
         if (f && e) {
             errorBoxDecision(d.allNetworkAttention, d.slotWarning, d.allYes, d.allNo, sendDMAcceptanceForm)
@@ -404,7 +404,7 @@ function initBuyResourceOverlay(f, e, d) {
     })
 }
 function sendDMAcceptanceForm() {
-    $("#premiumAcceptForm").submit();
+    $("#officierAcceptForm").submit();
     return
 }
 function openBuyResourceDialog(b) {
@@ -417,28 +417,28 @@ function abortBuyResource() {
 }
 function initBuyResources() {
     refreshBars("bar_container", "filllevel_bar");
-    $(".fill_resource").on("click", ".fillup", onChangeToPremium).on("click", ".btn_premium", submitBuyRequest)
+    $(".fill_resource").on("click", ".fillup", onChangeToOfficier).on("click", ".btn_officier", submitBuyRequest)
 }
-function onChangeToPremium(g) {
-    var f = $(g.currentTarget).find(".btn_blue"), h = f.closest(".fillup"), e = f.closest(".fill_resource_ctn").find(".premium_bar");
-    $(".fillup").removeClass("premium").parent().find(".current_stock span").removeClass("premium_txt").each(function() {
+function onChangeToOfficier(g) {
+    var f = $(g.currentTarget).find(".btn_blue"), h = f.closest(".fillup"), e = f.closest(".fill_resource_ctn").find(".officier_bar");
+    $(".fillup").removeClass("officier").parent().find(".current_stock span").removeClass("officier_txt").each(function() {
         var a = $(this);
         a.text(a.data("currentAmount"))
     });
-    $(".fill_resource .btn_premium").html(loca.fillUpResource).attr("class", "btn_blue");
-    $(".premium_bar").css("width", "0%").data("premiumPercent", 0);
+    $(".fill_resource .btn_officier").html(loca.fillUpResource).attr("class", "btn_blue");
+    $(".officier_bar").css("width", "0%").data("officierPercent", 0);
     if (f.attr("disabled") == "disabled") {
         return
     }
-    f.html(loca.buyNow).attr("class", "btn_premium small");
-    h.addClass("premium");
-    h.parent().find(".current_stock span").addClass("premium_txt").text(f.data("newValueFormatted"));
-    e.data("premiumPercent", f.data("premiumPercent"));
-    changeTooltip(e, "+" + f.data("premiumValue"));
-    refreshBars("bar_container", "filllevel_bar", "premium_bar")
+    f.html(loca.buyNow).attr("class", "btn_officier small");
+    h.addClass("officier");
+    h.parent().find(".current_stock span").addClass("officier_txt").text(f.data("newValueFormatted"));
+    e.data("officierPercent", f.data("officierPercent"));
+    changeTooltip(e, "+" + f.data("officierValue"));
+    refreshBars("bar_container", "filllevel_bar", "officier_bar")
 }
 function submitBuyRequest(l) {
-    var n = $(l.currentTarget), m = n.data("resource"), e = n.data("premiumCosts"), k = n.data("packageType"), h = n.data("traderBuyResource");
+    var n = $(l.currentTarget), m = n.data("resource"), e = n.data("officierCosts"), k = n.data("packageType"), h = n.data("traderBuyResource");
     $.ajax({url: "index.php?page=traderOverview", data: {buyResource: m, buyPackage: k, costs: e, token: h, ajax: 1}, type: "POST", dataType: "json", success: function(a) {
             refreshToken = function(b) {
                 $(".btn_blue").each(function() {
@@ -468,11 +468,11 @@ function submitBuyRequest(l) {
                     c.attr("disabled", "disabled");
                     c.addClass("disabled")
                 }
-                d.data("premiumCosts", a.possiblePackages[g][b]["costs"]);
-                d.data("premiumValue", a.possiblePackages[g][b]["resources"]);
+                d.data("officierCosts", a.possiblePackages[g][b]["costs"]);
+                d.data("officierValue", a.possiblePackages[g][b]["resources"]);
                 d.data("newValueFormatted", a.possiblePackages[g][b]["newValueFormatted"]);
                 if (a.possiblePackages[g][b]["displayCosts"]) {
-                    c.find(".fillup_cost .premium_txt").html(a.possiblePackages[g][b]["formattedCosts"])
+                    c.find(".fillup_cost .officier_txt").html(a.possiblePackages[g][b]["formattedCosts"])
                 } else {
                     c.find(".fillup_cost").addClass("overmark").html("-")
                 }
@@ -3069,22 +3069,22 @@ function changeSetting(l, k, h, f, g) {
 }
 function getOverlayText(b) {
     if (b.hasClass("building") && b.children().hasClass("build-faster-img")) {
-        return locaPremium.buildingHalfOverlay
+        return locaOfficier.buildingHalfOverlay
     } else {
         if (b.hasClass("building") && b.children().hasClass("build-finish-img")) {
-            return locaPremium.buildingFullOverlay
+            return locaOfficier.buildingFullOverlay
         } else {
             if (b.hasClass("ships") && b.children().hasClass("build-faster-img")) {
-                return locaPremium.shipsHalfOverlay
+                return locaOfficier.shipsHalfOverlay
             } else {
                 if (b.hasClass("ships") && b.children().hasClass("build-finish-img")) {
-                    return locaPremium.shipsFullOverlay
+                    return locaOfficier.shipsFullOverlay
                 } else {
                     if (b.hasClass("research") && b.children().hasClass("build-faster-img")) {
-                        return locaPremium.researchHalfOverlay
+                        return locaOfficier.researchHalfOverlay
                     } else {
                         if (b.hasClass("research") && b.children().hasClass("build-finish-img")) {
-                            return locaPremium.researchFullOverlay
+                            return locaOfficier.researchFullOverlay
                         }
                     }
                 }
@@ -3183,7 +3183,7 @@ function initIndex() {
     }).undelegate("a.build-faster", "click").delegate("a.build-faster", "click", function() {
         var c = $(this);
         if (darkMatter < getFastBuildPrice(c)) {
-            errorBoxDecision(LocalizationStrings.error, loca.errorNotEnoughDM, LocalizationStrings.yes, LocalizationStrings.no, redirectPremium);
+            errorBoxDecision(LocalizationStrings.error, loca.errorNotEnoughDM, LocalizationStrings.yes, LocalizationStrings.no, redirectOfficier);
             return
         }
         var d = $.deparam.querystring().page;
@@ -4673,7 +4673,7 @@ function callTrader(h) {
         e = true
     }
     if (darkMatter < traderCosts) {
-        errorBoxDecision(LocalizationStrings.error, loca.errorNotEnoughDM, LocalizationStrings.yes, LocalizationStrings.no, redirectPremium);
+        errorBoxDecision(LocalizationStrings.error, loca.errorNotEnoughDM, LocalizationStrings.yes, LocalizationStrings.no, redirectOfficier);
         return
     }
     function f() {
@@ -5119,7 +5119,7 @@ var inventoryObj = {currentPage: null, currentItems: null, currentItem: null, cu
         $("#js_shopSliderBox").show();
         $(".to_inventory").removeClass("active");
         $(".to_shop").addClass("active");
-        $("#buttonz h2").text(loca.LOCA_PREMIUM_SHOP);
+        $("#buttonz h2").text(loca.LOCA_OFFICIER_SHOP);
         if (isMobile) {
             $(".js_shopCurrentPage").html(loca.shopText)
         }
@@ -5523,10 +5523,10 @@ function initRetinaImages() {
     }
 }
 function setupOverlay(e, d, f) {
-    $(".build-it_premium").addClass("overlay");
-    $(".build-it_premium").attr("href", e);
-    $(".build-it_premium").data("overlay-title", d);
-    $(".build-it_premium").data("techid", f)
+    $(".build-it_officier").addClass("overlay");
+    $(".build-it_officier").attr("href", e);
+    $(".build-it_officier").data("overlay-title", d);
+    $(".build-it_officier").data("techid", f)
 }
 function setupBuildinglistForBuildItButton(e, f, d) {
     new baulisteCountdown(document.getElementById("possibleInTime"), buildableAt, pageToReload)
@@ -5570,7 +5570,7 @@ function initializeBuildItButton() {
             $errorCount = 99
         }
         if ((error == null || error == 0) && $errorCount == 0) {
-            $(".build-it_premium").on("click", function() {
+            $(".build-it_officier").on("click", function() {
                 var c = $("#number").val();
                 if (typeof c == "undefined") {
                     c = 1
@@ -5585,7 +5585,7 @@ function initializeBuildItButton() {
             return
         }
         c.stopPropagation();
-        var d = $(".build-it_premium");
+        var d = $(".build-it_officier");
         if (d.length) {
             d.trigger("click")
         } else {
@@ -5597,7 +5597,7 @@ function showErrors() {
     var b = {allYes: loca.allYes, allNo: loca.allNo, allOk: loca.allOk};
     if (isBuildlistNeeded) {
         if (!hasCommander && !(isShip || isRocket)) {
-            drawErrorbox("decision", loca.infoBuildlist, loca.allError, b, links.decisionCommander, "build-it_premium");
+            drawErrorbox("decision", loca.infoBuildlist, loca.allError, b, links.decisionCommander, "build-it_officier");
             return 1
         }
         if (isRocketAndStorageNotFree) {
@@ -5606,8 +5606,8 @@ function showErrors() {
         }
     } else {
         if (error !== null && error !== 0) {
-            if (premiumerror) {
-                if (showErrorOnPremiumbutton) {
+            if (officiererror) {
+                if (showErrorOnOfficierbutton) {
                     drawErrorbox("decision", errorlist[error], loca.allError, b, links[error], buttonClass);
                     return 1
                 } else {
@@ -6161,7 +6161,7 @@ function refreshBars(f, h, e) {
             }
         }
         if (e) {
-            var c = a.find("." + e), d = c.data("premiumPercent");
+            var c = a.find("." + e), d = c.data("officierPercent");
             if ((n + d) > 100) {
                 d = 100 - n
             }
@@ -6193,8 +6193,8 @@ function getTooltipOptions(d) {
     if (window.location.href.indexOf("galaxy") !== -1) {
         e.maxWidth = 400
     }
-    if (f.hasClass("tooltipPremium")) {
-        e.skin = "premium"
+    if (f.hasClass("tooltipOfficier")) {
+        e.skin = "officier"
     }
     if (f.hasClass("tooltipLeft")) {
         e.hook = {target: "leftmiddle", tooltip: "righttop"}
@@ -6236,7 +6236,7 @@ function getTooltipOptions(d) {
     return e
 }
 function getTooltipSelector(e) {
-    var f = ".tooltipPremium, .tooltip, .tooltipRight, .tooltipLeft, .tooltipBottom, .tooltipClose, .tooltipHTML, .tooltipRel, .tooltipAJAX, .tooltipCustom, .markItUpButton a";
+    var f = ".tooltipOfficier, .tooltip, .tooltipRight, .tooltipLeft, .tooltipBottom, .tooltipClose, .tooltipHTML, .tooltipRel, .tooltipAJAX, .tooltipCustom, .markItUpButton a";
     if (typeof (e) == "undefined") {
         e = f
     } else {
@@ -6336,7 +6336,7 @@ function initTooltips(d) {
     }
 }
 function initTooltipSkins() {
-    jQuery.extend(Tipped.Skins, {cloud: {border: {size: 1, color: [{position: 0, color: "#44576b"}, {position: 1, color: "#2f3b47"}]}, background: {color: [{position: 0, color: "#303a46"}, {position: 0.49, color: "#242d38"}, {position: 0.81, color: "#10181f"}, {position: 1, color: "#0d1014"}]}, offset: {x: 0, y: -1, mouse: {x: -12, y: -12}}, stem: {height: 6, width: 11, offset: {x: 5, y: 5}, spacing: 0}}, premium: {border: {size: 1, color: [{position: 0, color: "#000"}, {position: 1, color: "#000"}]}, background: {color: [{position: 0, color: "#a3e4f0"}, {position: 0.15, color: "#1cbad7"}, {position: 1, color: "#0f78b1"}]}, offset: {x: 0, y: -1, mouse: {x: -12, y: -12}}, stem: {height: 6, width: 11, offset: {x: 5, y: 5}, spacing: 0}}})
+    jQuery.extend(Tipped.Skins, {cloud: {border: {size: 1, color: [{position: 0, color: "#44576b"}, {position: 1, color: "#2f3b47"}]}, background: {color: [{position: 0, color: "#303a46"}, {position: 0.49, color: "#242d38"}, {position: 0.81, color: "#10181f"}, {position: 1, color: "#0d1014"}]}, offset: {x: 0, y: -1, mouse: {x: -12, y: -12}}, stem: {height: 6, width: 11, offset: {x: 5, y: 5}, spacing: 0}}, officier: {border: {size: 1, color: [{position: 0, color: "#000"}, {position: 1, color: "#000"}]}, background: {color: [{position: 0, color: "#a3e4f0"}, {position: 0.15, color: "#1cbad7"}, {position: 1, color: "#0f78b1"}]}, offset: {x: 0, y: -1, mouse: {x: -12, y: -12}}, stem: {height: 6, width: 11, offset: {x: 5, y: 5}, spacing: 0}}})
 }
 function initTrader() {
     var d = false;
@@ -6674,7 +6674,7 @@ function initTrader() {
         }, changeImportItem: function() {
             if ($(traderObj.traderId + " .import_bargain.change").hasClass("disabled")) {
                 if (darkMatter < importChangeCost) {
-                    errorBoxDecision(LocalizationStrings.error, loca.errorNotEnoughDM, LocalizationStrings.yes, LocalizationStrings.no, redirectPremium)
+                    errorBoxDecision(LocalizationStrings.error, loca.errorNotEnoughDM, LocalizationStrings.yes, LocalizationStrings.no, redirectOfficier)
                 }
             } else {
                 $(traderObj.traderId + " .import_bargain.change").addClass("disabled");

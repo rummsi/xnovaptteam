@@ -15,9 +15,9 @@
                 var session = "{session_id()}";
                 var vacation = 0;
                 var timerHandler = new TimerHandler();
-                function redirectPremium()
+                function redirectOfficier()
                 { 
-                    location.href = "http://s114-pt.ogame.gameforge.com/game/index.php?page=premium&showDarkMatter=1";
+                    location.href = "game.php?page=officier";
                 }
                 var isMobile = false;
                 var isMobileApp = false;
@@ -131,7 +131,7 @@
                 var currentIndex = 0;
                 var currentChar = 0;
                 var linetwo = 0;
-                var locaPremium = { "buildingHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?", "buildingFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?", "shipsHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?", "shipsFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?", "researchHalfOverlay": "Queres reduzir o tempo de pesquisa em 50% do tempo total de pesquisa () por <b>750 Mat\u00e9ria Negra<\/b>?", "researchFullOverlay": "Queres concluir imediatamente a pesquisa por <b>750 Mat\u00e9ria Negra<\/b>?" };
+                var locaOfficier = { "buildingHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?", "buildingFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?", "shipsHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?", "shipsFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?", "researchHalfOverlay": "Queres reduzir o tempo de pesquisa em 50% do tempo total de pesquisa () por <b>750 Mat\u00e9ria Negra<\/b>?", "researchFullOverlay": "Queres concluir imediatamente a pesquisa por <b>750 Mat\u00e9ria Negra<\/b>?" };
                 var priceBuilding = 750;
                 var priceResearch = 750;
                 var priceShips = 750;
@@ -161,8 +161,8 @@
                 var buildUrl;
                 function loadDetails(type)
                 { 
-                    url = "http://s114-pt.ogame.gameforge.com/game/index.php?page=overview&ajax=1";
-                    if (typeof (detailUrl) != 'undefined') { 
+                    url = "game.php?page={ucfirst($smarty.get.page)}&ajax=1";
+                    if (typeof (detailUrl) !== 'undefined') { 
                         url = detailUrl;
                      }
                     $.get(url, { type: type }, function(data) { 
@@ -223,6 +223,11 @@
                 { 
                     window.location.replace("http://s114-pt.ogame.gameforge.com/game/index.php?page=overview&modus=3&token=805ba7c7e01b099a87deaa2d17b3d252&type=" + demolish_id);
                 }
+                function initOfficier() {
+                    var load_done = 1;
+                    gfSlider = new GFSlider(getElementByIdWithCache('planet'));
+                    gfSlider.duration = 1;
+                }
                 gfSlider = new GFSlider(getElementByIdWithCache('detailWrapper'));
                 gfSlider.duration = 1;
                 var detailUrl = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=buffActivation&ajax=1";
@@ -256,6 +261,7 @@
                         initType();
                         tabletInitOverviewAdvice();
                         initChangelog();
+                        initOfficier();
                     });
                     </script>     
                     <!-- END JAVASCRIPT -->

@@ -283,7 +283,7 @@ a:link,a:visited,.no-touch a:hover,a:active {
     color: #6f9fc8;
 }
 
-.premium_txt {
+.officier_txt {
     color: #2cbef2;
 }
 
@@ -383,7 +383,7 @@ em {
     text-shadow: 0 0 1px #000;
 }
 
-.btn_premium {
+.btn_officier {
     background: transparent url("http://gf1.geo.gfsrv.net/cdnfc/35658d707df040ae66b71215d187c1.png") no-repeat 0 0;
     color: #fff;
     cursor: pointer;
@@ -403,17 +403,17 @@ em {
     box-sizing: border-box;
 }
 
-a.btn_premium:active {
+a.btn_officier:active {
     background-position: 0 -52px;
     color: #fff;
 }
 
-.btn_premium[disabled]:active,.btn_premium[disabled] {
+.btn_officier[disabled]:active,.btn_officier[disabled] {
     background-position: 0 -104px;
     cursor: default;
 }
 
-.btn_premium.small {
+.btn_officier.small {
     background-position: 0 -156px;
     font-size: 13px;
     height: 40px;
@@ -496,7 +496,7 @@ a.btn {
     width: 148px;
 }
 
-.buy_resources .premium .btn_wrap {
+.buy_resources .officier .btn_wrap {
     margin: 0 0 0 10px;
     position: relative;
     width: 152px;
@@ -538,7 +538,7 @@ a.btn {
     background-position: -10px -190px;
 }
 
-.buy_resources .fillup .btn_premium {
+.buy_resources .fillup .btn_officier {
     color: #fff!important;
     text-align: center;
 }
@@ -2109,7 +2109,7 @@ a:hover img.queuePic {
     z-index: 2;
 }
 
-#premium #buttonz ul#building {
+#officier #buttonz ul#building {
     height: 130px;
 }
 
@@ -2150,7 +2150,7 @@ a:hover img.queuePic {
     top: auto;
 }
 
-#premium #buttonz ul#building li a.detail_button:link,#premium #buttonz ul#building li a.detail_button:visited {
+#officier #buttonz ul#building li a.detail_button:link,#officier #buttonz ul#building li a.detail_button:visited {
     display: block;
     height: 100px;
     width: 100px;
@@ -2158,13 +2158,13 @@ a:hover img.queuePic {
     text-decoration: none;
 }
 
-.no-touch #premium #box #buttonz ul#building li a.detail_button:hover,#premium #box #buttonz ul#building li a.active {
+.no-touch #officier #box #buttonz ul#building li a.detail_button:hover,#officier #box #buttonz ul#building li a.active {
     background: url("http://gf3.geo.gfsrv.net/cdn53/ce2e012805bae16d3bc0967600eb58.gif") no-repeat;
     color: #ff9600;
     text-decoration: none;
 }
 
-#premium ul#building span.ecke {
+#officier ul#building span.ecke {
     position: relative;
     float: left;
     top: 85px;
@@ -2606,7 +2606,7 @@ a.build-it_disabled {
     background-position: 0 -108px;
 }
 
-.premium_info {
+.officier_info {
     color: #848484;
     font-size: 11px;
     height: 14px;
@@ -2614,11 +2614,11 @@ a.build-it_disabled {
     width: 204px;
 }
 
-.premium_info_placeholder {
+.officier_info_placeholder {
     height: 28px;
 }
 
-a.build-it_premium {
+a.build-it_officier {
     background: transparent url("http://gf1.geo.gfsrv.net/cdnfc/35658d707df040ae66b71215d187c1.png") 0 0 no-repeat;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2636,7 +2636,7 @@ a.build-it_premium {
     width: 204px;
 }
 
-a.build-it_premium:hover,a.build-it_premium:active {
+a.build-it_officier:hover,a.build-it_officier:active {
     background-position: 0 -52px;
     color: #fff;
 }
@@ -3415,7 +3415,7 @@ table#eventz {
     margin-bottom: 3px;
 }
 
-#preferences .c-left,#preferences .c-right,#ticket .c-left,#ticket .c-right,#premium .c-left,#premium .c-right {
+#preferences .c-left,#preferences .c-right,#ticket .c-left,#ticket .c-right,#officier .c-left,#officier .c-right {
     height: 39px;
     width: 28px;
     position: absolute;
@@ -3682,13 +3682,13 @@ body#phalanx {
     padding: 5px;
 }
 
-#premium div#planet,#ticket div#planet {
+#officier div#planet,#ticket div#planet {
     background: url("http://gf3.geo.gfsrv.net/cdn29/7191f6cbf907558acffdb210b21656.jpg") no-repeat;
     height: 250px;
 }
 
 .officers100 {
-    background: url("http://gf2.geo.gfsrv.net/cdn41/a22e8a59e7cfd08f0997cf491c2ca1.png") no-repeat;
+    background: url("images/officersall1.jpg") no-repeat;
     position: relative;
     width: 100px;
     height: 100px;
@@ -3698,28 +3698,64 @@ body#phalanx {
     background-image: url("http://gf3.geo.gfsrv.net/cdnbe/573e9fe7841ca98c945a16f00138fb.png");
 }
 
-.officers100.darkMatter {
+.officers100.officer601 {
     background-position: 0 0;
 }
 
-.officers100.commander {
+.officers100.officer602 {
     background-position: -100px 0;
 }
 
-.officers100.admiral {
+.officers100.officer603 {
     background-position: -200px 0;
 }
 
-.officers100.engineer {
+.officers100.officer604 {
     background-position: -300px 0;
 }
 
-.officers100.geologist {
+.officers100.officer605 {
     background-position: -400px 0;
 }
 
-.officers100.technocrat {
+.officers100.officer606 {
     background-position: -500px 0;
+}
+
+.officers100.officer607 {
+    background-position: -600px 0;
+}
+
+.officers100.officer608 {
+    background-position: -700px 0;
+}
+
+.officers100.officer609 {
+    background-position: -800px 0;
+}
+
+.officers100.officer610 {
+    background-position: -900px 0;
+}
+
+.officers100.officer611 {
+    background-position: -1000px 0;
+}
+
+.officers100.officer612 {
+    background-position: -1100px 0;
+}
+
+.officers100.officer613 {
+    background-position: -1200px 0;
+}
+
+.officers100.officer614 {
+    background-position: -1300px 0;
+}
+
+.officers100.officer615 {
+    background-position: -1400px 0;
 }
 
 .officers100.allOfficers {
@@ -3739,28 +3775,64 @@ body#phalanx {
     background-image: url("http://gf3.geo.gfsrv.net/cdn86/81042ef7416a72e636d6ff8ae70505.jpg");
 }
 
-.officers200.darkMatter {
+.officers200.officer601 {
     background-position: 0 0;
 }
 
-.officers200.commander {
+.officers200.officer602 {
     background-position: -200px 0;
 }
 
-.officers200.admiral {
+.officers200.officer603 {
     background-position: -400px 0;
 }
 
-.officers200.engineer {
+.officers200.officer604 {
     background-position: -600px 0;
 }
 
-.officers200.geologist {
+.officers200.officer605 {
     background-position: -800px 0;
 }
 
-.officers200.technocrat {
+.officers200.officer606 {
     background-position: -1000px 0;
+}
+
+.officers200.officer607 {
+    background-position: -1200px 0;
+}
+
+.officers200.officer608 {
+    background-position: -1400px 0;
+}
+
+.officers200.officer609 {
+    background-position: -1600px 0;
+}
+
+.officers200.officer610 {
+    background-position: -1800px 0;
+}
+
+.officers200.officer611 {
+    background-position: -2000px 0;
+}
+
+.officers200.officer612 {
+    background-position: -2200px 0;
+}
+
+.officers200.officer613 {
+    background-position: -2400px 0;
+}
+
+.officers200.officer614 {
+    background-position: -2600px 0;
+}
+
+.officers200.officer615 {
+    background-position: -2800px 0;
 }
 
 .officers200.allOfficers {
@@ -3771,7 +3843,7 @@ body#phalanx {
     border-color: #d43635;
 }
 
-#shop div#detail div#pic1,#premium div#detail div.image {
+#shop div#detail div#pic1,#officier div#detail div.image {
     float: left;
     height: 200px;
     margin-left: 2px;
@@ -3779,7 +3851,7 @@ body#phalanx {
     width: 200px;
 }
 
-#premium li.allOfficers span,#inhalt.officers .detail_screen div#description span {
+#officier li.allOfficers span,#inhalt.officers .detail_screen div#description span {
     float: left;
     background: url("http://gf3.geo.gfsrv.net/cdn89/b1c7ef5b1164eba44e55b7f6d25d35.gif") no-repeat 100% 70%;
     color: #6f9fc8;
@@ -3791,29 +3863,29 @@ body#phalanx {
     margin-right: 25px;
 }
 
-#premium li.allOfficers.off span {
+#officier li.allOfficers.off span {
     background-image: url("http://gf3.geo.gfsrv.net/cdnbc/aa2ad16d1e00956f7dc8af8be3ca52.gif");
 }
 
-#premium li.allOfficers span {
+#officier li.allOfficers span {
     margin-top: 30px;
     margin-left: 15px;
 }
 
-#premium li.allOfficers,.detail_screen div#description .benefitlist,.detail_screen div#description .benefits {
+#officier li.allOfficers,.detail_screen div#description .benefitlist,.detail_screen div#description .benefits {
     float: left;
     color: #6f9fc8;
     font-weight: 700;
     padding: 0;
 }
 
-#premium li.allOfficers,.detail_screen div#description .benefitlist {
+#officier li.allOfficers,.detail_screen div#description .benefitlist {
     width: 530px;
     white-space: normal;
     line-height: 15px;
 }
 
-#premium.no-touch .benefits .help {
+#officier.no-touch .benefits .help {
     float: none;
 }
 
@@ -3858,11 +3930,11 @@ p.stimulus {
     height: 165px;
 }
 
-#premium ul#building {
+#officier ul#building {
     margin-top: 10px;
 }
 
-#premium .timer {
+#officier .timer {
     font-size: 10px;
     height: 25px;
     padding: 8px;
@@ -3872,19 +3944,19 @@ p.stimulus {
     color: #55788f;
 }
 
-#premium .timeLink {
+#officier .timeLink {
     background: transparent none repeat scroll 0 0;
     cursor: pointer;
     display: inline;
     text-decoration: none;
 }
 
-#premium span.time {
+#officier span.time {
     opacity: .67;
     filter: alpha(opacity=67);
 }
 
-#premium ul#building li {
+#officier ul#building li {
     overflow: hidden;
 }
 
@@ -3900,7 +3972,7 @@ p.stimulus {
     padding: 0 6px 2px;
 }
 
-#premium #buttonz ul#building li {
+#officier #buttonz ul#building li {
     background-repeat: no-repeat;
     height: 130px;
     position: relative;
@@ -3908,7 +3980,7 @@ p.stimulus {
     margin: 0 6px 0 0;
 }
 
-#premium #buttonz ul#building li.allOfficers {
+#officier #buttonz ul#building li.allOfficers {
     width: 520px;
     border: 2px solid black;
     height: 122px;
@@ -3919,7 +3991,7 @@ p.stimulus {
     background-color: #10181f;
 }
 
-#premium #buttonz ul#building .buildingimg {
+#officier #buttonz ul#building .buildingimg {
     height: 100px;
 }
 
@@ -4874,7 +4946,7 @@ a.fastBuild,ul#den li a.fastBuild:link,ul#storage li a.fastBuild:link {
     top: 35%;
 }
 
-#trader .fadeBox,#research .fadeBox,#shipyard .fadeBox,#defense .fadeBox,#empire .fadeBox,#premium .fadeBox {
+#trader .fadeBox,#research .fadeBox,#shipyard .fadeBox,#defense .fadeBox,#empire .fadeBox,#officier .fadeBox {
     top: 32%;
 }
 
@@ -4926,7 +4998,7 @@ div#banner_skyscraper a {
     display: block;
 }
 
-.premiumHighligt span {
+.officierHighligt span {
     color: #ffd700;
 }
 
@@ -5158,7 +5230,7 @@ div#announcement {
     z-index: 10;
 }
 
-.premium .buildingimg .event_active_hint {
+.officier .buildingimg .event_active_hint {
     bottom: 26px;
     left: -2px;
 }
@@ -5361,15 +5433,15 @@ body.ogame.showOldDropdowns select {
     width: 26px;
 }
 
-.smallOfficer.admiral {
+.smallOfficer.officer603 {
     background-position: -25px 0;
 }
 
-.smallOfficer.engineer {
+.smallOfficer.officer604 {
     background-position: -50px 0;
 }
 
-.smallOfficer.geologe {
+.smallOfficer.officer606 {
     background-position: -75px 0;
 }
 
@@ -5379,25 +5451,25 @@ body.ogame.showOldDropdowns select {
     width: 20px;
 }
 
-.officer20.admiral {
+.officer20.officer603 {
     background-position: -20px 0;
 }
 
 .officer32 {
-    background: transparent url("http://gf1.geo.gfsrv.net/cdn69/f593aa158c734df9e6223f00721981.jpg") 0 0 no-repeat;
+    background: transparent url("images/officersall.jpg") 0 0 no-repeat;
     height: 32px;
     width: 32px;
 }
 
-.officer32.admiral {
+.officer32.officer603 {
     background-position: -32px 0;
 }
 
-.officer32.engineer {
+.officer32.officer604 {
     background-position: -64px 0;
 }
 
-.officer32.geologe {
+.officer32.officer605 {
     background-position: -96px 0;
 }
 
@@ -7570,7 +7642,7 @@ td#fleetstatusrow div {
     background-position: -342px -198px;
 }
 
-.bar_container,.filllevel_bar,.filllevel_undermark,.filllevel_middlemark,.filllevel_overmark,.premium_bar {
+.bar_container,.filllevel_bar,.filllevel_undermark,.filllevel_middlemark,.filllevel_overmark,.officier_bar {
     background-image: url(http://gf3.geo.gfsrv.net/cdn52/fbe2638880f7c292a43439c0f328ad.png);
     background-repeat: repeat-x;
 }
@@ -7592,7 +7664,7 @@ td#fleetstatusrow div {
     width: 0;
 }
 
-.premium_bar {
+.officier_bar {
     background-position: 0 -32px;
     height: 100%;
     float: left;
@@ -17880,7 +17952,7 @@ div#buddyinvitereward {
     float: right;
 }
 
-div#buddyinvitereward_premium {
+div#buddyinvitereward_officier {
     float: right;
 }
 
@@ -17900,7 +17972,7 @@ div#buddyinvitelink code {
     width: 50%!important;
 }
 
-.messagebox div#buddypointsconvert,.messagebox div#buddypremiumconvert {
+.messagebox div#buddypointsconvert,.messagebox div#buddyofficierconvert {
     margin-top: 3em;
 }
 
@@ -17935,7 +18007,7 @@ div#buddyinvitelink code {
     padding: 5px;
 }
 
-.t_Content_premium {
+.t_Content_officier {
     color: #000;
     font-size: 11px;
     font-weight: bold;
@@ -19258,7 +19330,7 @@ div#buddyinvitelink code {
     width: 170px;
 }
 
-.buy_resources .fillup.premium {
+.buy_resources .fillup.officier {
     color: #bebebe;
     cursor: default;
     background-position: -95px -48px;
@@ -19426,7 +19498,7 @@ div#buddyinvitelink code {
     background-position: -160px 0;
 }
 
-#div_traderResources .selected_premium {
+#div_traderResources .selected_officier {
     background-image: url(http://gf3.geo.gfsrv.net/cdn5f/332ef677bcc98906442a947614deb1.png);
     height: 90px;
     left: -5px;
@@ -19436,12 +19508,12 @@ div#buddyinvitelink code {
     width: 90px;
 }
 
-#div_traderResources .active .selected_premium {
+#div_traderResources .active .selected_officier {
     background-position: 0 0;
     visibility: visible;
 }
 
-#div_traderResources .resource_link.oldTraderActive:active .selected_premium,#div_traderResources .oldTraderActive .selected_premium {
+#div_traderResources .resource_link.oldTraderActive:active .selected_officier,#div_traderResources .oldTraderActive .selected_officier {
     background-position: -90px 0;
     visibility: visible;
 }
@@ -20365,17 +20437,17 @@ div.values .equipment .item_img a.timeLink span.time {
     margin: 2px 0 0 4px;
 }
 
-a.btn_premium:hover {
+a.btn_officier:hover {
     background-position: 0 -52px;
     color: #fff;
 }
 
-.btn_premium[disabled]:hover {
+.btn_officier[disabled]:hover {
     background-position: 0 -104px;
     cursor: default;
 }
 
-.btn_premium.small:hover {
+.btn_officier.small:hover {
     background-position: 0 -196px;
 }
 
@@ -20470,7 +20542,7 @@ a.btn:hover {
     background-position: -0px 0;
 }
 
-.menu_icon .menuImage.premium {
+.menu_icon .menuImage.officier {
     background-position: -189px 0;
 }
 
@@ -20554,7 +20626,7 @@ a.btn:hover {
     background-position: -0px -27px;
 }
 
-.menu_icon .menuImage.highlighted.premium {
+.menu_icon .menuImage.highlighted.officier {
     background-position: -189px -27px;
 }
 
@@ -20731,7 +20803,7 @@ a#message_alert_box.emptyMessage:hover,a#message_alert_box_default:hover,a#messa
 }
 
 .officer32,#officers a {
-    background: url("http://gf1.geo.gfsrv.net/cdn69/f593aa158c734df9e6223f00721981.jpg") no-repeat;
+    background: url("images/officersall.jpg") no-repeat;
 }
 
 body.halloween .officer32,#officers a.halloween {
@@ -20744,44 +20816,124 @@ body.halloween .officer32,#officers a.halloween {
     border-radius: 2px;
 }
 
-#officers a.commander {
+#officers a.officer601 {
     background-position: 0 -32px;
 }
 
-#officers a.admiral {
+#officers a.officer602 {
     background-position: -32px -32px;
 }
 
-#officers a.engineer {
+#officers a.officer603 {
     background-position: -64px -32px;
 }
 
-#officers a.geologist {
+#officers a.officer604 {
     background-position: -96px -32px;
 }
 
-#officers a.technocrat {
+#officers a.officer605 {
     background-position: -128px -32px;
 }
 
-.officer32.commander,#officers a.commander.on {
+#officers a.officer606 {
+    background-position: -160px -32px;
+}
+
+#officers a.officer607 {
+    background-position: -192px -32px;
+}
+
+#officers a.officer608 {
+    background-position: -224px -32px;
+}
+
+#officers a.officer609 {
+    background-position: -256px -32px;
+}
+
+#officers a.officer610 {
+    background-position: -288px -32px;
+}
+
+#officers a.officer611 {
+    background-position: -320px -32px;
+}
+
+#officers a.officer612 {
+    background-position: -352px -32px;
+}
+
+#officers a.officer613 {
+    background-position: -384px -32px;
+}
+
+#officers a.officer614 {
+    background-position: -416px -32px;
+}
+
+#officers a.officer615 {
+    background-position: -448px -32px;
+}
+
+.officer32.officer601,#officers a.officer601.on {
     background-position: 0 0;
 }
 
-.officer32.admiral,#officers a.admiral.on {
+.officer32.officer602,#officers a.officer602.on {
     background-position: -32px 0;
 }
 
-.officer32.engineer,#officers a.engineer.on {
+.officer32.officer603,#officers a.officer603.on {
     background-position: -64px 0;
 }
 
-.officer32.geologist,#officers a.geologist.on {
+.officer32.officer604,#officers a.officer604.on {
     background-position: -96px 0;
 }
 
-.officer32.technocrat,#officers a.technocrat.on {
+.officer32.officer605,#officers a.officer605.on {
     background-position: -128px 0;
+}
+
+.officer32.officer606,#officers a.officer606.on {
+    background-position: -160px 0;
+}
+
+.officer32.officer607,#officers a.officer607.on {
+    background-position: -192px 0;
+}
+
+.officer32.officer608,#officers a.officer608.on {
+    background-position: -224px 0;
+}
+
+.officer32.officer609,#officers a.officer609.on {
+    background-position: -256px 0;
+}
+
+.officer32.officer610,#officers a.officer610.on {
+    background-position: -288px 0;
+}
+
+.officer32.officer611,#officers a.officer611.on {
+    background-position: -320px 0;
+}
+
+.officer32.officer612,#officers a.officer612.on {
+    background-position: -352px 0;
+}
+
+.officer32.officer613,#officers a.officer613.on {
+    background-position: -384px 0;
+}
+
+.officer32.officer614,#officers a.officer614.on {
+    background-position: -416px 0;
+}
+
+.officer32.officer615,#officers a.officer615.on {
+    background-position: -448px 0;
 }
 
 #resources #box ul#building li a.fastBuild:hover,ul#storage li a.fastBuild:hover,#research #buttonz li a.fastBuild:hover,#station #box #inhalt #buttonz ul#stationbuilding li a.fastBuild:hover,#station-moon #box #inhalt #buttonz ul#stationbuilding li a.fastBuild:hover {
@@ -20821,12 +20973,12 @@ body.halloween .officer32,#officers a.halloween {
     background-position: -160px -80px;
 }
 
-#div_traderResources .resource_link:hover .selected_premium {
+#div_traderResources .resource_link:hover .selected_officier {
     background-position: 0 0;
     visibility: visible;
 }
 
-#div_traderResources .resource_link.oldTraderActive:hover .selected_premium {
+#div_traderResources .resource_link.oldTraderActive:hover .selected_officier {
     background-position: -90px 0;
     visibility: visible;
 }
