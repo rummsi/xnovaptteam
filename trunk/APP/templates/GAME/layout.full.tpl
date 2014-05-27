@@ -21,8 +21,8 @@
                                 <div id="eventFooter"></div>
                             </div>
                         </div>
-{block name="content"}{/block}
-                        <div id="detailWrapper"></div>
+{block name="content"}{/block}{if $smarty.get.page != 'overview'}
+                        <div id="detailWrapper"></div>{/if}
                     </div>
                     <!-- END CONTENT AREA -->
 {include file="main.rightmenu.tpl"}
