@@ -29,7 +29,7 @@
                 var activateToken = "167addb58433e00cf5302df2559d804f";
                 var miniFleetToken = "6d8fbcca869cb8ff0be763f7acd85c65";
                 var currentPage = "{ucfirst($smarty.get.page)}";
-                var bbcodePreviewUrl = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=bbcodePreview";
+                var bbcodePreviewUrl = "game.php?page=bbcodePreview";
                 var popupWindows = [];
                 var honorScore = 9558;
                 var darkMatter = 4158;
@@ -41,18 +41,18 @@
                 var LocalizationStrings = { "timeunits": { "short": { "year": "a", "month": "m", "week": "s", "day": "d", "hour": "h", "minute": "m", "second": "s" } }, "status": { "ready": "Conclu\u00eddo" }, "decimalPoint": ",", "thousandSeperator": ".", "unitMega": "M", "unitKilo": "K", "unitMilliard": "kM", "question": "Quest\u00e3o", "error": "Erro", "loading": "A carregar...", "yes": "sim", "no": "N\u00e3o", "ok": "Ok", "attention": "Cuidado", "outlawWarning": "Est\u00e1s prestes a atacar um jogador mais forte. Se o fizeres as tuas defesas de ataque ser\u00e3o desligadas por 7 dias e todos os jogadores te poder\u00e3o atacar sem serem punidos. Tens a certeza que queres continuar?", "lastSlotWarningMoon": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande a tua Base Lunar para receberes mais espa\u00e7o. Tens a certeza que pretendes construir este edif\u00edcio?", "lastSlotWarningPlanet": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande o teu Terra-Formador ou compra um item Campo de Planeta para receberes mais espa\u00e7os. Tens a certeza que pretendes construir este edif\u00edcio?", "forcedVacationWarning": "Algumas funcionalidades do jogo n\u00e3o est\u00e3o dispon\u00edveis at\u00e9 validares a tua conta.", "moreDetails": "Mais detalhes", "lessDetails": "Menos detalhes", "planetOrder": { "lock": "Bloquear ordena\u00e7\u00e3o", "unlock": "Desbloquear ordena\u00e7\u00e3o" }, "darkMatter": "Mat\u00e9ria Negra", "activateItem": { "upgradeItemQuestion": "Gostarias de substituir o item existente? O b\u00f3nus antigo ser\u00e1 perdido no processo.", "upgradeItemQuestionHeader": "Substituir item?" } };
                 var constants = { "espionage": 6, "missleattack": 10, "language": "pt", "name": "114" };
                 var userData = { "id": "{$user['id']}" };
-                var missleAttackLink = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=missileattacklayer&width=669&height=250";
+                var missleAttackLink = "game.php?page=missileattacklayer&width=669&height=250";
                 var showOutlawWarning = true;
-                var miniFleetLink = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=minifleet&ajax=1";
+                var miniFleetLink = "game.php?page=minifleet&ajax=1";
                 var ogameUrl = "http:\/\/s114-pt.ogame.gameforge.com";
                 var startpageUrl = "http:\/\/pt.ogame.gameforge.com";
                 OGConfig = new Array();
                 OGConfig.sliderOn = 1;
                 function redirectLogout() { 
-                    location.href = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=logout";
+                    location.href = "index.php?page=logout";
                  }
                 function redirectOverview() { 
-                    location.href = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=overview";
+                    location.href = "game.php?page=overview";
                  }
                 function initAjaxEventbox()
                 { 
@@ -83,28 +83,38 @@
                             "tooltip": "{$lang['Message']}|<table class=\"resourceTooltip\">\n      <tr>\n  <th>Dispon\u00edvel:<\/th>\n    <td><span class=\"\">{$user['rpg_points']}<\/span><\/td>\n              <\/tr>\n    <\/table>", "class": "" }});
                 }
                 function getAjaxEventbox() { 
-                    $.get("http://s114-pt.ogame.gameforge.com/game/index.php?page=fetchEventbox&ajax=1", reloadEventbox, "text");
+                    $.get("game.php?page=fetchEventbox&ajax=1", reloadEventbox, "text");
                 }
                 function getAjaxResourcebox(callback) { 
-                    $.get("http://s114-pt.ogame.gameforge.com/game/index.php?page=fetchResources&ajax=1", function(data) { 
+                    $.get("game.php?page=fetchResources&ajax=1", function(data) { 
                         reloadResources(data, callback);
                     }, "text");
                 }
-                var changeSettingsLink = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=changeSettings";
+                var changeSettingsLink = "game.php?page=changeSettings";
                 var changeSettingsToken = "b6d1955ee1e296ef5d854139b9a9b50a";
-                var eventlistLink = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=eventList&ajax=1";
+                var eventlistLink = "game.php?page=eventList&ajax=1";
                 function openAnnouncement() { 
-                    openOverlay("http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=announcement&ajax=1", { 'class': 'announcement', zIndex: 4000 });
+                    openOverlay("game.php?page=announcement&ajax=1", { 'class': 'announcement', zIndex: 4000 });
                 }
                 var timeDelta = 1399386239000 - (new Date()).getTime();
                 var LocalizationStrings = { "timeunits": { "short": { "year": "a", "month": "m", "week": "s", "day": "d", "hour": "h", "minute": "m", "second": "s" } }, "status": { "ready": "Conclu\u00eddo" }, "decimalPoint": ",", "thousandSeperator": ".", "unitMega": "M", "unitKilo": "K", "unitMilliard": "kM", "question": "Quest\u00e3o", "error": "Erro", "loading": "A carregar...", "yes": "sim", "no": "N\u00e3o", "ok": "Ok", "attention": "Cuidado", "outlawWarning": "Est\u00e1s prestes a atacar um jogador mais forte. Se o fizeres as tuas defesas de ataque ser\u00e3o desligadas por 7 dias e todos os jogadores te poder\u00e3o atacar sem serem punidos. Tens a certeza que queres continuar?", "lastSlotWarningMoon": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande a tua Base Lunar para receberes mais espa\u00e7o. Tens a certeza que pretendes construir este edif\u00edcio?", "lastSlotWarningPlanet": "Este edif\u00edcio ira usar o \u00faltimo espa\u00e7o de constru\u00e7\u00e3o dispon\u00edvel. Expande o teu Terra-Formador ou compra um item Campo de Planeta para receberes mais espa\u00e7os. Tens a certeza que pretendes construir este edif\u00edcio?", "forcedVacationWarning": "Algumas funcionalidades do jogo n\u00e3o est\u00e3o dispon\u00edveis at\u00e9 validares a tua conta.", "moreDetails": "Mais detalhes", "lessDetails": "Menos detalhes", "planetOrder": { "lock": "Bloquear ordena\u00e7\u00e3o", "unlock": "Desbloquear ordena\u00e7\u00e3o" }, "darkMatter": "Mat\u00e9ria Negra", "activateItem": { "upgradeItemQuestion": "Gostarias de substituir o item existente? O b\u00f3nus antigo ser\u00e1 perdido no processo.", "upgradeItemQuestionHeader": "Substituir item?" } };
                 $(document).ready(function() { 
                     initEventTable();
                 });
-                var planetMoveLoca = { "askTitle": "Relocalizar o planeta", "askCancel": "Tem a certeza que quer cancelar esta recoloca\u00e7\u00e3o do planeta? O tempo normal de espera ir\u00e1 continuar o mesmo.", "yes": "sim", "no": "N\u00e3o", "success": "A recoloca\u00e7\u00e3o do planeta foi cancelada com sucesso.", "error": "Erro" };
+                var planetMoveLoca = {
+                    "askTitle": "Relocalizar o planeta",
+                    "askCancel": "Tem a certeza que quer cancelar esta recoloca\u00e7\u00e3o do planeta? O tempo normal de espera ir\u00e1 continuar o mesmo.",
+                    "yes": "sim",
+                    "no": "N\u00e3o",
+                    "success": "A recoloca\u00e7\u00e3o do planeta foi cancelada com sucesso.",
+                    "error": "Erro"
+                };
                 function openPlanetRenameGiveupBox()
                 { 
-                    openOverlay("http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=planetlayer", { title: "Abandonar\/Renomear SPIRIT", 'class': "planetRenameOverlay" });
+                    openOverlay("game.php?page=planetlayer", {
+                        title: "Abandonar\/Renomear SPIRIT",
+                        'class': "planetRenameOverlay"
+                    });
                 }
                 var textContent = [];
                 textContent[0] = "Di\u00e2metro:";
@@ -112,9 +122,9 @@
                 textContent[2] = "Temperatura";
                 textContent[3] = "51 \u00b0C para 91\u00b0C";
                 textContent[4] = "Coordenadas:";
-                textContent[5] = "<a  href=\"http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=galaxy&galaxy=5&system=132&position=4\" >[5:132:4]<\/a>";
+                textContent[5] = "<a  href=\"game.php?page=galaxy&galaxy=5&system=132&position=4\" >[5:132:4]<\/a>";
                 textContent[6] = "Pontos:";
-                textContent[7] = "<a href='http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=highscore'>534.497 (Posi\u00e7\u00e3o 274 de 1.021)<\/a>";
+                textContent[7] = "<a href='game.php?page=highscore'>534.497 (Posi\u00e7\u00e3o 274 de 1.021)<\/a>";
                 textContent[8] = "Pontos de Honra:";
                 textContent[9] = "9.558";
                 var textDestination = [];
@@ -131,12 +141,26 @@
                 var currentIndex = 0;
                 var currentChar = 0;
                 var linetwo = 0;
-                var locaOfficier = { "buildingHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?", "buildingFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?", "shipsHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?", "shipsFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?", "researchHalfOverlay": "Queres reduzir o tempo de pesquisa em 50% do tempo total de pesquisa () por <b>750 Mat\u00e9ria Negra<\/b>?", "researchFullOverlay": "Queres concluir imediatamente a pesquisa por <b>750 Mat\u00e9ria Negra<\/b>?" };
+                var locaOfficier = {
+                    "buildingHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?",
+                    "buildingFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?",
+                    "shipsHalfOverlay": "Queres reduzir o tempo de constru\u00e7\u00e3o em 50% do tempo total de constru\u00e7\u00e3o () por <b>750 Mat\u00e9ria Negra<\/b>?",
+                    "shipsFullOverlay": "Queres concluir imediatamente a constru\u00e7\u00e3o por <b>750 Mat\u00e9ria Negra<\/b>?",
+                    "researchHalfOverlay": "Queres reduzir o tempo de pesquisa em 50% do tempo total de pesquisa () por <b>750 Mat\u00e9ria Negra<\/b>?",
+                    "researchFullOverlay": "Queres concluir imediatamente a pesquisa por <b>750 Mat\u00e9ria Negra<\/b>?"
+                };
                 var priceBuilding = 750;
                 var priceResearch = 750;
                 var priceShips = 750;
                 var loca = loca || {  };
-                loca = $.extend({  }, loca, { "error": "Erro", "errorNotEnoughDM": "N\u00e3o tens Mat\u00e9ria Negra suficiente! Queres comprar alguma agora?", "notice": "Refer\u00eancia", "planetGiveupQuestion": "Tens a certeza que pretendes abandonar o planeta %planetName% %planetCoordinates%?", "moonGiveupQuestion": "Tens a certeza que pretendes abandonar a lua %planetName% %planetCoordinates%?" });
+                loca = $.extend({ },
+                loca, {
+                    "error": "Erro",
+                    "errorNotEnoughDM": "N\u00e3o tens Mat\u00e9ria Negra suficiente! Queres comprar alguma agora?",
+                    "notice": "Refer\u00eancia",
+                    "planetGiveupQuestion": "Tens a certeza que pretendes abandonar o planeta %planetName% %planetCoordinates%?",
+                    "moonGiveupQuestion": "Tens a certeza que pretendes abandonar a lua %planetName% %planetCoordinates%?"
+                });
                 function type()
                 { 
                     for (var i = 0; i < textDestination.length; i++) { 
@@ -148,14 +172,14 @@
                     var data = $.parseJSON(data);
                     if (data["status"]) { 
                         $("#planetNameHeader").html(data["newName"]);
-                        reloadRightmenu("http://s114-pt.ogame.gameforge.com/game/index.php?page=rightmenu&renamed=1&pageToLink=overview");
+                        reloadRightmenu("game.php?page=rightmenu&renamed=1&pageToLink=overview");
                         $(".overlayDiv.planetRenameOverlay").dialog('close');
                      }
                     errorBoxAsArray(data["errorbox"]);
                 }
                 function reloadPage()
                 { 
-                    location.href = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=overview";
+                    location.href = "game.php?page=overview";
                 }
                 var demolish_id;
                 var buildUrl;
@@ -221,7 +245,7 @@
                 }
                 function demolishStart()
                 { 
-                    window.location.replace("http://s114-pt.ogame.gameforge.com/game/index.php?page=overview&modus=3&token=805ba7c7e01b099a87deaa2d17b3d252&type=" + demolish_id);
+                    window.location.replace("game.php?page=overview&modus=3&token=805ba7c7e01b099a87deaa2d17b3d252&type=" + demolish_id);
                 }
                 function initOfficier() {
                     var load_done = 1;
@@ -230,7 +254,7 @@
                 }
                 gfSlider = new GFSlider(getElementByIdWithCache('detailWrapper'));
                 gfSlider.duration = 1;
-                var detailUrl = "http:\/\/s114-pt.ogame.gameforge.com\/game\/index.php?page=buffActivation&ajax=1";
+                var detailUrl = "game.php?page=buffActivation&ajax=1";
                 var cancelProduction_id;
                 var production_listid;
                 function cancelProduction(id, listid, question)
@@ -241,7 +265,7 @@
                 }
                 function cancelProductionStart()
                 { 
-                    window.location.replace("http://s114-pt.ogame.gameforge.com/game/index.php?page=overview&modus=2&token=f6f13d597dd295d9dc0ef96ef9f5c99b&techid=" + cancelProduction_id + "&listid=" + production_listid);
+                    window.location.replace("game.php?page=overview&modus=2&token=f6f13d597dd295d9dc0ef96ef9f5c99b&techid=" + cancelProduction_id + "&listid=" + production_listid);
                 }
                 function initType() { 
                     type();
