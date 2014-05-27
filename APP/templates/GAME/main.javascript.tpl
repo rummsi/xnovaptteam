@@ -112,21 +112,19 @@
                 function openPlanetRenameGiveupBox()
                 { 
                     openOverlay("game.php?page=planetlayer", {
-                        title: "Abandonar\/Renomear SPIRIT",
+                        title: "{$lang['Planet_menu']}",
                         'class': "planetRenameOverlay"
                     });
                 }
                 var textContent = [];
-                textContent[0] = "Di\u00e2metro:";
-                textContent[1] = "13.832km (<span>171<\/span>\/<span>191<\/span>)";
-                textContent[2] = "Temperatura";
-                textContent[3] = "51 \u00b0C para 91\u00b0C";
-                textContent[4] = "Coordenadas:";
-                textContent[5] = "<a  href=\"game.php?page=galaxy&galaxy=5&system=132&position=4\" >[5:132:4]<\/a>";
-                textContent[6] = "Pontos:";
-                textContent[7] = "<a href='game.php?page=highscore'>534.497 (Posi\u00e7\u00e3o 274 de 1.021)<\/a>";
-                textContent[8] = "Pontos de Honra:";
-                textContent[9] = "9.558";
+                textContent[0] = "{$lang['Diameter']}:";
+                textContent[1] = "{pretty_number($planetrow['diameter'])}km (<span>{$planetrow['field_current']}<\/span>\/<span>{CalculateMaxPlanetFields($planetrow)}<\/span>)";
+                textContent[2] = "{$lang['Temperature']}";
+                textContent[3] = "{$planetrow['temp_min']}{$lang['ov_temp_unit']} {$lang['ov_temp_to']} {$planetrow['temp_max']}{$lang['ov_temp_unit']}";
+                textContent[4] = "{$lang['Position']}:";
+                textContent[5] = "<a href=\"game.php?page=galaxy&action=0&galaxy={$planetrow['galaxy']}&system={$planetrow['system']}\">[{$planetrow['galaxy']}:{$planetrow['system']}:{$planetrow['planet']}]<\/a>";
+                textContent[6] = "{$lang['Points']}:";
+                textContent[7] = "<a href='game.php?page=statistics&range={$StatRecord['total_rank']}'>{pretty_number($StatRecord['total_points'])} ({$StatRecord['total_rank']})<\/a>";
                 var textDestination = [];
                 textDestination[0] = "diameterField";
                 textDestination[1] = "diameterContentField";
@@ -136,8 +134,6 @@
                 textDestination[5] = "positionContentField";
                 textDestination[6] = "scoreField";
                 textDestination[7] = "scoreContentField";
-                textDestination[8] = "honorField";
-                textDestination[9] = "honorContentField";
                 var currentIndex = 0;
                 var currentChar = 0;
                 var linetwo = 0;
