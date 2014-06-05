@@ -28,49 +28,41 @@
  *
  * @author author XNovaPT Team <xnovaptteam@gmail.com>
  */
-class ShowRegisterPage extends AbstractIndexPage
-{
-    function __construct()
-    {
+class ShowRegisterPage extends AbstractIndexPage {
+
+    function __construct() {
         parent::__construct();
         $this->tplObj->compile_id = 'register';
     }
-    
-    function show()
-    {
+
+    function show() {
         global $lang, $game_config, $newpos_checked, $Time;
-        
+
         //on demarre la session qui ne sers ici que pour le code de secu
         includeLang('reg');
-        if (filter_input_array(INPUT_POST))
-        {
+        if (filter_input_array(INPUT_POST)) {
             $errors = 0;
             $errorlist = "";
-            
- //           filter_input(INPUT_POST, 'rememberme') = strip_tags($_POST['email']);
-            
-            if (!is_email(filter_input(INPUT_POST, 'email')))
-            {
+
+            //           filter_input(INPUT_POST, 'rememberme') = strip_tags($_POST['email']);
+
+            if (!is_email(filter_input(INPUT_POST, 'email'))) {
                 $errorlist .= "\"" . filter_input(INPUT_POST, 'email') . "\" " . $lang['error_mail'];
                 $errors++;
             }
-            if (!filter_input(INPUT_POST, 'planet'))
-            {
+            if (!filter_input(INPUT_POST, 'planet')) {
                 $errorlist .= $lang['error_planet'];
                 $errors++;
             }
-            if (preg_match("/[^A-z0-9_\-]/", filter_input(INPUT_POST, 'hplanet')) == 1)
-            {
+            if (preg_match("/[^A-z0-9_\-]/", filter_input(INPUT_POST, 'hplanet')) == 1) {
                 $errorlist .= $lang['error_planetnum'];
                 $errors++;
             }
-            if (!filter_input(INPUT_POST, 'character'))
-            {
+            if (!filter_input(INPUT_POST, 'character')) {
                 $errorlist .= $lang['error_character'];
                 $errors++;
             }
-            if (strlen(filter_input(INPUT_POST, 'passwrd')) < 4)
-            {
+            if (strlen(filter_input(INPUT_POST, 'passwrd')) < 4) {
                 $errorlist .= $lang['error_password'];
                 $errors++;
             }
@@ -78,38 +70,33 @@ class ShowRegisterPage extends AbstractIndexPage
                 $errorlist .= $lang['error_charalpha'];
                 $errors++;
             }
-            if (filter_input(INPUT_POST, 'rgt') != 'on')
-            {
+            if (filter_input(INPUT_POST, 'rgt') != 'on') {
                 $errorlist .= $lang['error_rgt'];
                 $errors++;
             }
             // Le meilleur moyen de voir si un nom d'utilisateur est pris c'est d'essayer de l'appeler !!
             $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . mysql_real_escape_string(filter_input(INPUT_POST, 'character')) . "' LIMIT 1;", 'users', true);
-            if ($ExistUser)
-            {
+            if ($ExistUser) {
                 $errorlist .= $lang['error_userexist'];
                 $errors++;
             }
             // Si l'on verifiait que l'adresse email n'existe pas encore ???
             $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . mysql_real_escape_string(filter_input(INPUT_POST, 'email')) . "' LIMIT 1;", 'users', true);
-            if ($ExistMail)
-            {
+            if ($ExistMail) {
                 $errorlist .= $lang['error_emailexist'];
                 $errors++;
             }
-            if (filter_input(INPUT_POST, 'sex') != '' && filter_input(INPUT_POST, 'sex') != 'F' && filter_input(INPUT_POST, 'sex') != 'M')
-            {
+            if (filter_input(INPUT_POST, 'sex') != '' && filter_input(INPUT_POST, 'sex') != 'F' && filter_input(INPUT_POST, 'sex') != 'M') {
                 $errorlist .= $lang['error_sex'];
                 $errors++;
             }
-            if ($errors != 0)
-            {
-                ShowErrorPage::message($errorlist, $lang['Register']);
+            if ($errors != 0) {
+                self::errorPage($errorlist, $lang['Register']);
             } else {
                 $newpass = filter_input(INPUT_POST, 'passwrd');
-                $UserName = CheckInputStrings (filter_input(INPUT_POST, 'character'));
-                $UserEmail = CheckInputStrings (filter_input(INPUT_POST, 'email'));
-                $UserPlanet = CheckInputStrings (addslashes(filter_input(INPUT_POST, 'planet')));
+                $UserName = CheckInputStrings(filter_input(INPUT_POST, 'character'));
+                $UserEmail = CheckInputStrings(filter_input(INPUT_POST, 'email'));
+                $UserPlanet = CheckInputStrings(addslashes(filter_input(INPUT_POST, 'planet')));
                 $md5newpass = md5($newpass);
                 // Creation de l'utilisateur
                 $QryInsertUser = "INSERT INTO {{table}} SET ";
@@ -129,17 +116,12 @@ class ShowRegisterPage extends AbstractIndexPage
                 $LastSettedGalaxyPos = $game_config['LastSettedGalaxyPos'];
                 $LastSettedSystemPos = $game_config['LastSettedSystemPos'];
                 $LastSettedPlanetPos = $game_config['LastSettedPlanetPos'];
-                while (!isset($newpos_checked))
-                {
-                    for ($Galaxy = $LastSettedGalaxyPos; $Galaxy <= MAX_GALAXY_IN_WORLD; $Galaxy++)
-                    {
-                        for ($System = $LastSettedSystemPos; $System <= MAX_SYSTEM_IN_GALAXY; $System++)
-                        {
-                            for ($Posit = $LastSettedPlanetPos; $Posit <= 4; $Posit++)
-                            {
-                                $Planet = round (rand (4, 12));
-                                switch ($LastSettedPlanetPos)
-                                {
+                while (!isset($newpos_checked)) {
+                    for ($Galaxy = $LastSettedGalaxyPos; $Galaxy <= MAX_GALAXY_IN_WORLD; $Galaxy++) {
+                        for ($System = $LastSettedSystemPos; $System <= MAX_SYSTEM_IN_GALAXY; $System++) {
+                            for ($Posit = $LastSettedPlanetPos; $Posit <= 4; $Posit++) {
+                                $Planet = round(rand(4, 12));
+                                switch ($LastSettedPlanetPos) {
                                     case 1:
                                         $LastSettedPlanetPos += 1;
                                         break;
@@ -147,8 +129,7 @@ class ShowRegisterPage extends AbstractIndexPage
                                         $LastSettedPlanetPos += 1;
                                         break;
                                     case 3:
-                                        if ($LastSettedSystemPos == MAX_SYSTEM_IN_GALAXY)
-                                        {
+                                        if ($LastSettedSystemPos == MAX_SYSTEM_IN_GALAXY) {
                                             $LastSettedGalaxyPos += 1;
                                             $LastSettedSystemPos = 1;
                                             $LastSettedPlanetPos = 1;
@@ -173,13 +154,11 @@ class ShowRegisterPage extends AbstractIndexPage
                     $QrySelectGalaxy .= "`planet` = '" . $Planet . "' ";
                     $QrySelectGalaxy .= "LIMIT 1;";
                     $GalaxyRow = doquery($QrySelectGalaxy, 'galaxy', true);
-                    if ($GalaxyRow["id_planet"] == "0")
-                    {
+                    if ($GalaxyRow["id_planet"] == "0") {
                         $newpos_checked = true;
                     }
-                    if (!$GalaxyRow)
-                    {
-                        CreateOnePlanetRecord ($Galaxy, $System, $Planet, $NewUser['id'], $UserPlanet, true);
+                    if (!$GalaxyRow) {
+                        CreateOnePlanetRecord($Galaxy, $System, $Planet, $NewUser['id'], $UserPlanet, true);
                         $newpos_checked = true;
                     }
                     if ($newpos_checked) {
@@ -210,45 +189,43 @@ class ShowRegisterPage extends AbstractIndexPage
                 // Mise a jour du nombre de joueurs inscripts
                 doquery("UPDATE {{table}} SET `config_value` = `config_value` + '1' WHERE `config_name` = 'users_amount' LIMIT 1;", 'config');
                 $Message = $lang['thanksforregistry'];
-                if ($this->sendpassemail(filter_input(INPUT_POST, 'email'), "$newpass"))
-                {
+                if ($this->sendpassemail(filter_input(INPUT_POST, 'email'), "$newpass")) {
                     $Message .= " (" . htmlentities(filter_input(INPUT_POST, 'email')) . ")";
                 } else {
                     $Message .= " (" . htmlentities(filter_input(INPUT_POST, 'email')) . ")";
                     $Message .= "<br><br>" . $lang['error_mailsend'] . " <b>" . $newpass . "</b>";
                 }
-                ShowErrorPage::message($Message, $lang['reg_welldone']);
+                self::errorPage($Message, $lang['reg_welldone']);
             }
         } else {
             // Afficher le formulaire d'enregistrement
             $this->tplObj->assign(array(
                 'code_secu' => "",
-                'affiche'   => "",
+                'affiche' => "",
             ));
         }
 
         $this->tplObj->assign(array(
-            'title'         => $lang['registry'],
-            'lang'      => $lang,
-            'form'          => $lang['form'],
-            'GameName'      => $lang['GameName'],
-            'neededpass'    => $lang['neededpass'],
-            'EMail'         => $lang['E-Mail'],
-            'MainPlanet'    => $lang['MainPlanet'],
-            'Sex'           => $lang['Sex'],
-            'Undefined'     => $lang['Undefined'],
-            'Male'          => $lang['Male'],
-            'Female'        => $lang['Female'],
-            'accept'        => $lang['accept'],
-            'signup'        => $lang['signup'],
-            'servername1'   => '<img src="images/xnova.png" align="top" border="0" >',
+            'title' => $lang['registry'],
+            'lang' => $lang,
+            'form' => $lang['form'],
+            'GameName' => $lang['GameName'],
+            'neededpass' => $lang['neededpass'],
+            'EMail' => $lang['E-Mail'],
+            'MainPlanet' => $lang['MainPlanet'],
+            'Sex' => $lang['Sex'],
+            'Undefined' => $lang['Undefined'],
+            'Male' => $lang['Male'],
+            'Female' => $lang['Female'],
+            'accept' => $lang['accept'],
+            'signup' => $lang['signup'],
+            'servername1' => '<img src="images/xnova.png" align="top" border="0" >',
         ));
 
         $this->render('default.register.tpl');
     }
- 
-    function sendpassemail($emailaddress, $password)
-    {
+
+    function sendpassemail($emailaddress, $password) {
         global $lang;
 
         $parse['gameurl'] = GAMEURL;
@@ -258,12 +235,10 @@ class ShowRegisterPage extends AbstractIndexPage
         return $status;
     }
 
-    function mymail($to, $title, $body, $from = '')
-    {
+    function mymail($to, $title, $body, $from = '') {
         global $org, $body;
         $from = trim($from);
-        if (!$from)
-        {
+        if (!$from) {
             $from = ADMINEMAIL;
         }
         $rp = ADMINEMAIL;
@@ -281,4 +256,16 @@ class ShowRegisterPage extends AbstractIndexPage
         $body = str_replace("\n", "\r\n", $body);
         return mail($to, $title, $body, $head);
     }
+
+    function errorPage($mes, $title = 'Error', $color = 'orange') {
+        global $lang;
+
+        $this->tplObj->assign(array(
+            'color' => $color,
+            'title' => $title,
+            'mes' => $mes,
+        ));
+        $this->render('default.error.tpl');
+    }
+
 }

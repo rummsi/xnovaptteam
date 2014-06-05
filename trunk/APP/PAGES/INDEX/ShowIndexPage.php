@@ -74,10 +74,10 @@ EOF;
                     header("Location: game.php?page=overview");
                     exit(0);
                 } else {
-                    ShowErrorPage::message($lang['Login_FailPassword']);
+                    self::errorPage($lang['Login_FailPassword']);
                 }
             } else {
-                ShowErrorPage::message($lang['Login_FailUser']);
+                self::errorPage($lang['Login_FailUser']);
             }
         } else {
 
@@ -101,6 +101,17 @@ EOF;
                 $this->render('default.index.tpl');
             }
         }
+    }
+
+    function errorPage($mes, $title = 'Error', $color = 'orange') {
+        global $lang;
+
+        $this->tplObj->assign(array(
+            'color' => $color,
+            'title' => $title,
+            'mes' => $mes,
+        ));
+        $this->render('default.error.tpl');
     }
 
 }
