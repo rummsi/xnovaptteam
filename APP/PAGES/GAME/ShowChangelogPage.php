@@ -36,7 +36,7 @@ class ShowChangelogPage extends AbstractGamePage {
     }
 
     function show() {
-        global $lang;
+        global $lang, $title;
         includeLang('changelog');
 
         $this->tplObj->assign(array(

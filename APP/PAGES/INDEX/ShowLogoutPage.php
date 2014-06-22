@@ -43,18 +43,7 @@ class ShowLogoutPage extends AbstractIndexPage {
         session_destroy();
         setcookie('nova-cookie', NULL, 0);
 
-        self::errorPage($lang['see_you'], $lang['session_closed'], header("Refresh: 3;url=index.php"));
-    }
-
-    function errorPage($mes, $title = 'Error', $color = 'orange') {
-        global $lang;
-
-        $this->tplObj->assign(array(
-            'color' => $color,
-            'title' => $title,
-            'mes' => $mes,
-        ));
-        $this->render('default.error.tpl');
+        ShowErrorPage::message($lang['see_you'], $lang['session_closed'], header("Refresh: 3;url=index.php"));
     }
 
 }

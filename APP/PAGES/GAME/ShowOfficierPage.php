@@ -55,7 +55,6 @@ class ShowOfficierPage extends AbstractGamePage {
         $this->tplObj->assign(array(
             'title' => $lang['Officier'],
             'resource' => $resource,
-            'desc'=>HTTP::_GP('desc', ''),
         ));
 
         $this->render('officiers.default.tpl');
@@ -102,22 +101,6 @@ class ShowOfficierPage extends AbstractGamePage {
         ));
 
         ShowErrorPage::message($Message, $lang['Officier'], header("Refresh: 3;url=game.php?page=officier"));
-    }
-
-    function desc() {
-        global $user, $lang, $reslist, $resource;
-
-        includeLang('officier');
-
-        $this->tplObj->assign(array(
-            'title' => $lang['Officier'],
-            'resource' => $resource,
-        ));
-
-        $this->render('officiers.default.tpl');
-    }
-    function ajax() {
-        
     }
 
 }

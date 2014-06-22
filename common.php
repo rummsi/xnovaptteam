@@ -41,7 +41,7 @@ define('PHPEXT', require 'extension.inc');
 
 define('VERSION', '2009.4');
 
-if (0 === filesize(ROOT_PATH . 'APP/configs/config.php')) {
+if (0 === filesize(ROOT_PATH . 'config.php')) {
     header('Location: install/');
     die();
 }

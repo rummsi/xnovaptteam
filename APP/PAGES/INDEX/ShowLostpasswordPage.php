@@ -55,7 +55,7 @@ class ShowLostpasswordPage extends AbstractIndexPage {
                       LIMIT 1
 EOF;
                 if (!($result = doquery($sql, 'users', true))) {
-                    self::errorPage("Cet utilisateur n'existe pas");
+                    ShowErrorPage::message("Cet utilisateur n'existe pas");
                     die();
                 }
                 list($mailData['recipient'], $username) = $result;
@@ -68,12 +68,12 @@ EOF;
                       LIMIT 1
 EOF;
                 if (!($result = doquery($sql, 'users', true))) {
-                    self::errorPage("Cet email n'est utilisé par aucun joueur");
+                    ShowErrorPage::message("Cet email n'est utilisé par aucun joueur");
                     die();
                 }
                 list($mailData['recipient'], $username) = $result;
             } else {
-                self::errorPage("Veuillez entrer votre login ou votre email.");
+                ShowErrorPage::message("Veuillez entrer votre login ou votre email.");
                 die();
             }
             if (!is_null($mailData['recipient'])) {
@@ -103,7 +103,7 @@ EOF;
 EOF;
                 doquery($sql, 'users');
                 $this->tplObj->assign('Nouveau mot de passe');
-                self::errorPage('Mot de passe envoyé ! Veuillez regarder votre boite e-mail ou dans vos spam.');
+                ShowErrorPage::message('Mot de passe envoyé ! Veuillez regarder votre boite e-mail ou dans vos spam.');
                 die();
             }
         }
@@ -114,17 +114,6 @@ EOF;
         ));
 
         $this->render('default.lostpassword.tpl');
-    }
-
-    function errorPage($mes, $title = 'Error', $color = 'orange') {
-        global $lang;
-
-        $this->tplObj->assign(array(
-            'color' => $color,
-            'title' => $title,
-            'mes' => $mes,
-        ));
-        $this->render('default.error.tpl');
     }
 
 }

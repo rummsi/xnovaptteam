@@ -103,7 +103,7 @@ switch ($mode) {
                 exit();
             }
 
-            $dz = fopen("../APP/configs/config.php", "w");
+            $dz = fopen("../config.php", "w");
             if (!$dz) {
 	            header("Location: ?mode=ins&page=1&error=2");
 	            exit();
@@ -187,7 +187,7 @@ EOF;
                 exit();
             }
 
-            $config = include(ROOT_PATH . 'APP/configs/config.php');
+            $config = include(ROOT_PATH . 'config.php');
             $db_host   = $config['global']['database']['options']['hostname'];
             $db_user   = $config['global']['database']['options']['username'];
             $db_pass   = $config['global']['database']['options']['password'];
@@ -300,7 +300,7 @@ EOF;
                 exit();
             }
 
-            $dz = fopen("../APP/configs/config.php", "w");
+            $dz = fopen("../config.php", "w");
             if (!$dz) {
                 header("Location: ?mode=ins&page=1&error=2");
                 exit();
