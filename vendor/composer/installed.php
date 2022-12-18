@@ -3,7 +3,7 @@
         'name' => 'vendor/ptgamespt2022',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '80d54c0a31be310f803ae912b915ab09e4bf79f9',
+        'reference' => '0787368954558a584af534f4c18a40cf0d3b5453',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'vendor/ptgamespt2022' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '80d54c0a31be310f803ae912b915ab09e4bf79f9',
+            'reference' => '0787368954558a584af534f4c18a40cf0d3b5453',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
