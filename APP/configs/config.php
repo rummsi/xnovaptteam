@@ -4,9 +4,9 @@
             'engine' => 'mysql',
             'options' => array(
                 'hostname' => 'localhost',
-                'username' => 'supernova',
-                'password' => 'supernova',
-                'database' => 'supernova'
+                'username' => 'ptgamespontopt',
+                'password' => 'ptgamespontopt',
+                'database' => 'ptgamespontopt'
                 ),
             'table_prefix' => 'game_',
             )

@@ -38,7 +38,7 @@ class Template extends Smarty {
     function SmartySettings() {
         $this->force_compile = TRUE;
         $this->caching = 0;
-        $this->php_handling = Smarty::PHP_REMOVE;
+    //    $this->php_handling = Smarty::PHP_REMOVE;
         $this->debugging = TRUE;
 
         $this->setCompileDir('APP/compile/');

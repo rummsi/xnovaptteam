@@ -1,0 +1,9 @@
+# Directory (contents) ignores
+vendor/bin/
+vendor/composer/*
+APP/compile/*
+
+
+# Specific keeps
+!.gitkeep
+!.gitignore
