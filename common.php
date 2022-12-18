@@ -58,6 +58,7 @@ define('DEFAULT_LANG', 'pt');
 
 include(ROOT_PATH . 'includes/debug.class.' . PHPEXT);
 $debug = new Debug();
+require(ROOT_PATH . 'vendor/autoload.' . PHPEXT);
 
 include(ROOT_PATH . 'includes/constants.' . PHPEXT);
 include(ROOT_PATH . 'includes/functions.' . PHPEXT);
