@@ -2,7 +2,7 @@
 ${licenseFirst}
 </#if>
 ${licensePrefix}${package_xnovapt}
-${licensePrefix}Copyright (C) 2012
+${licensePrefix}Copyright (C) 2023
 ${licensePrefix}
 ${licensePrefix}This program is free software: you can redistribute it and/or modify
 ${licensePrefix}it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ ${licensePrefix}${package_xnovapt}
 ${licensePrefix}@${user_xnovapt}
 ${licensePrefix}@${nameAndExt}
 ${licensePrefix}@license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
-${licensePrefix}@${version_xnovapt}  ${date} ${time}
+${licensePrefix}@version ${version_xnovapt}  ${date} ${time}
 <#if licenseLast??>
 ${licenseLast}
 </#if>
